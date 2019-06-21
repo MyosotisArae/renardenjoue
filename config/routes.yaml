@@ -1,0 +1,12 @@
+main:
+    path: /main
+    controller: App\Controller\MainController::main
+accueil:
+    path: /accueil
+    controller: App\Controller\AccueilController::main
+jeux:
+    path: /jeux
+    controller: App\Controller\JeuxController::main
+calendrier:
+    path: /calendrier
+    controller: App\Controller\CalendrierController::main

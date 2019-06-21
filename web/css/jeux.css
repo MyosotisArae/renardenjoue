@@ -1,0 +1,299 @@
+.mini
+{
+  height : 3em;
+  width : auto;
+  border : 2px dashed black;
+  background : #FDFCE9;
+  padding : 0.1em;
+}
+div.grandeImage
+{
+  width : 17vw;
+  height: 27vh;
+  background-size:cover;
+}
+h1
+{
+  color : #FDFCE9;
+  text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
+  text-align : center;
+  width : 100%;
+  font-size : 2em;
+}
+h2
+{
+  color : #FDFCE9;
+  text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
+  text-align : left;
+  font-size : 1.5em;
+}
+h3
+{
+  color : #FDFCE9;
+  text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
+  text-align : left;
+  font-size : 1.2em;
+}
+label
+{
+  color : #FDFCE9;
+  text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
+  text-align : right;
+  width : 100%;
+  font-size : 1.7em;
+}
+.gauche
+{
+  text-align : left;
+}
+.margeAdroite { padding-right : 2.5em; }
+input
+{
+  font-size : 1.5em;
+  width : 100%;
+  vertical-align : bottom;
+  border : 2px solid #5bc0de;
+  border-radius : 0.6em;
+  background : #FDFCE9;
+}
+select
+{
+  font-size : 1.5em;
+  width : 100%;
+  vertical-align : bottom;
+  border : 2px solid #5bc0de;
+  border-radius : 0.6em;
+  background : #FDFCE9;
+}
+div.listeJeux
+{
+  height : 45vh;
+  width : 100%;
+  overflow-x : hidden;
+  overflow-y : scroll;
+  border-radius : 0.6em;
+  margin-top : 0.2em;
+  margin-bottom : 1em;
+  padding : 0.2em;
+  background : black;
+  border : 3px solid #5bc0de;
+  position : relative;
+  left : -1em;
+  z-index : 3000;
+}
+::-webkit-scrollbar {
+  width: 0.7em;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 1 0 5px white; 
+  border-radius: 0.5em;
+}
+::-webkit-scrollbar-thumb {
+  background: #428bca; 
+  border-radius: 0.5em;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5bc0de; 
+}
+::-webkit-scrollbar-track:hover
+{
+  box-shadow: inset 0 0 15px #428bca; 
+  border-radius: 0.5em;
+}
+.jeSuisInvisible
+{
+  position : absolute;
+  left : 150vw;
+}
+.fondVert { background : lightgreen; }
+.fondJaune { background : yellow; }
+.fondOrange { background : orange; }
+.fondRouge
+{
+  background : red;
+  color : lightblue;
+  text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
+}
+.fondNoir
+{
+  background : black;
+  color : white;
+}
+.cadreBleu
+{
+  border: 5px solid #5bc0de;
+  border-radius : 1em;
+  margin : 0.2em;
+}
+.fondBleu { background: #428bca; }
+.reduire { max-width : 50vw; }
+.decalerAgauche
+{
+  position : relative;
+  left : -1em;
+}
+.souligneBleu
+{
+  display: inline-block;
+  border-bottom: 2px solid #5bc0de;
+}
+.enLigne
+{
+  display : inline-block;
+  white-space : nowrap;
+}
+.parchemin
+{
+  width : 50vw;
+  height: 44vh;
+  background-image : url('../../public/images/parchemin.gif');
+  background-size: cover;
+  background-repeat:no-repeat;
+  padding-top : 1.8em;
+  padding-bottom : 1.2em;
+  padding-left : 1em;
+  padding-right : 1em;
+  overflow-x : hidden;
+  overflow-y : auto;
+  font-family : 'Cursive standard';
+  font-size : 1.4em;
+  font-weight : bold;
+}
+a.confetti
+{
+  padding-right : 0.1em;
+  text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
+}
+a.couleur0 { color : yellow;}
+a.couleur1 { color : deeppink;}
+a.couleur2 { color : powderblue;}
+a.couleur3 { color : red;}
+a.couleur4 { color : springgreen;}
+a.couleur5 { color : orange;}
+a.couleur6 { color : aqua;}
+a.couleur7 { color : coral;}
+a.couleur8 { color : peachpuff;}
+a.couleur9 { color : lime;}
+a.couleur10{ color : deepskyblue;}
+a.couleur11{ color : orchid;}
+a.couleur12{ color : lightgreen;}
+a.taille0  { font-size : 2.5em;   }
+a.taille1  { font-size : 1.5em; }
+a.taille2  { font-size : 1.7em; }
+a.taille3  { font-size : 2em;   }
+a.taille4  { font-size : 1.7em; font-weight : bold; }
+a.taille5  { font-size : 2.1em; }
+a.taille6  { font-size : 1.4em; }
+a.fonte0   { font-family : Comics Sans MS; }
+a.fonte1   { font-family : Arial; }
+a.fonte2   { font-family : Times New Roman; }
+a.fonte3   { font-family : Segoe UI; }
+a.fonte4   { font-family : Agnes; }
+a.fonte5   { font-family : Stencil Std; }
+a.fonte6   { font-family : B650-Deco; }
+a.fonte7   { font-family : Tekton Pro Ext; }
+a.fonte8   { font-family : Agency FB; }
+a.fonte9   { font-family : B821-Deco; }
+a.fonte10  { font-family : Artistic-CE; }
+
+
+.camembert
+{
+  position : relative;
+}
+.camembertParent
+{
+  margin-top : 0.5em;
+  overflow : hidden;
+  width : 90%;
+  height : 15vh;
+  visibility : visible;
+}
+.legendeCamembert
+{
+  position : absolute;
+  top : 1em;
+  left : 1em;
+  width : 35vw;
+  border: 2px solid #5bc0de;
+  border-radius : 0.5em;
+  background : #FDFCE9;
+  visibility : hidden;
+  z-index : 3000;
+  padding : 0.5em;
+}
+.camembert:hover .legendeCamembert { visibility : visible; }
+img.rectangle
+{
+  height : 1em;
+  width : auto;
+}
+.texteInvisible
+{
+  position : relative;
+  color : transparent;
+  background-size : cover;
+  background-repeat: no-repeat;
+}
+.fleches
+{
+  position : absolute;
+  top : 0;
+  left : 0;
+}
+.fleches img
+{
+  height : 100%;
+  width : auto;
+}
+.bonhomme
+{
+  height : 3em;
+  width : auto;
+}
+
+img.imageCarree1
+{
+  position : absolute;
+  width : 6em;
+  height : 6em;
+}
+img.imageCarree2
+{
+  position : absolute;
+  width : 6em;
+  left : 7em;
+}
+img.imageCarree3
+{
+  position : absolute;
+  width : 6em;
+  left : 14em;
+}
+
+.texteCarre1
+{
+  position : relative;
+  top : 0.8em;
+  left : 1em;
+  font-family : "Comic Sans MS";
+  font-size : 2em;
+  color : #FDFCE9;
+  text-shadow : 1px 0px black, -1px 0px black, 0px 1px black, 0px -1px black;
+}
+.texteCarre2
+{
+  position : relative;
+  left : 3.1em;
+}
+.bouton
+{
+  width : 100%;
+  font-size : 1.5em;
+  color : #FDFCE9;
+  text-shadow : 1px 0px black, -1px 0px black, 0px 1px black, 0px -1px black;
+  padding-left : 1em;
+  padding-right : 1em;
+  float : right;
+  text-align : center;
+}

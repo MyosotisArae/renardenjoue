@@ -1,0 +1,2 @@
+<h1>{{ unEvt.titre }}</h1>
+<h4>{% if unEvt.dateFin!=null && unEvt.dateFin!=unEvt.dateDebut %}Du {{unEvt.dateDebut}} au {{unEvt.dateFin}} {% else %}Le {{unEvt.dateDebut}} {% endif %}</h4>

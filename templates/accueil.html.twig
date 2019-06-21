@@ -1,0 +1,45 @@
+{% extends "main.html.twig" %}
+
+{% block entete %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{css_path}}accueil.css">
+{% endblock %}
+
+{% block corps %}
+  {{ parent() }}
+{% endblock %}
+
+{% block laPage %}
+
+<div class="row">
+  <div class="offset-6 col-xs-2">
+    <img class="petiteImage" src="{{ img_path }}medina.jpg">
+  </div>
+</div>
+
+<div class="row">
+  <div class="offset-xs-1 offset-md-2 col-xs-11 col-md-4 bg-primary">
+    {% for txt in texteAvant %}
+      {% if loop.first %}
+    <img class="float-right petiteImage" src="{{ img_path }}46.jpg">
+      {% endif %}
+    <p>{{ txt }}{% if loop.last %}&nbsp;&nbsp;&nbsp;<span class="fa-stack fa-2x d-none d-lg-block"><i class="fas fa-meh-blank fa-regular fa-stack-1x rouge"></i><i class="fas fa-grin-wink fa-stack-1x jaune"></i></span>{% endif %}</p>
+    {% endfor %}
+  </div>
+</div>
+<div class="row">
+  <div class="offset-2 col-md-2 d-none d-md-block">
+    <br><br><br>
+    <img class="moyenneImage" src="{{ img_path }}LQ.gif">
+  </div>
+  <div class="offset-xs-1 offset-md-2 col-xs-11 col-md-5 bg-primary">
+    {% for txt in texteApres %}
+      <p>{{ txt }}</p>
+      {% if loop.first %}
+      <img class="float-right petiteImage" src="{{ img_path }}catane.gif">
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %} {# Fin du block laPage #}

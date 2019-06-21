@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% block entete %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="{{ BScss_path }}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{css_path}}general.css">
+
+  <script src="{{ BSjs_path }}" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/ac0e3984ff.js"></script>
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <![endif]-->
+  
+{% endblock %}
+</head>
+
+  <body class="fixer">
+{% block corps %}
+    <img class="fond container-fluid d-none d-md-block" src="{{img_path}}fond.png">
+    <img class="fond container-fluid d-md-none" src="{{img_path}}fondVertical.png">
+
+    <header class="row">
+      <div class="col-xs-12 container-fluid">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+            <a class="navbar-brand col-xs-1" href="#"><img src="{{img_path}}logo.gif" class="logo"></a>
+            <ul class="navbar-nav col-xs-11">
+              <div class="d-none d-lg-block"> {# Menu pour grand ecran #}
+                <li class="nav-item{{ ongletActif("A") }}">
+                  <a class="nav-link" href="accueil"><i class="fas fa-home">&nbsp;</i>Accueil <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item{{ ongletActif("C") }}">
+                  <a class="nav-link" href="calendrier"><i class="fas fa-calendar-alt">&nbsp;</i>Agenda</a>
+                </li>
+                <li class="nav-item{{ ongletActif("J") }}">
+                  <a class="nav-link" href="jeux"><i class="fas fa-dice">&nbsp;</i>Jeux</a>
+                </li>
+                <li class="nav-item">
+                  <select class="nav-link bg-primary">
+                    <option>Administrateur</option>
+                    <option>Evènements</option>
+                    <option>Jeux</option>
+                  </select>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#idPJ"><i class="fas fa-sign-in-alt">&nbsp;</i>Se connecter</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#idPJ"><i class="fas fa-address-card">&nbsp;</i>Mon compte</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#idPJ"><i class="fas fa-comment">&nbsp;</i>Contact</a>
+                </li>
+              </div> {# Menu pour grand ecran #}
+              <div class="navbar-nav col-xs-11 d-lg-none"> {# Menu pour petit ecran #}
+                <li class="nav-item active">
+                  <a class="nav-link{{ ongletActif("A") }}" href="accueil"><i class="fas fa-home"></i></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#idPC"><i class="fas fa-calendar-alt"></i></a>
+                </li>
+                <li class="nav-item{{ ongletActif("J") }}">
+                  <a class="nav-link" href="jeux"></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#idPJ"><i class="fas fa-cog"></i></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#idPJ"><i class="fas fa-sign-in-alt"></i></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#idPJ"><i class="fas fa-address-card"></i></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#idPJ"><i class="fas fa-comment"></i></a>
+                </li>
+              </div> {# Menu pour petit ecran #}
+            </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="row">
+      <div class="col-xs-3 col-sm-2 col-md-1">
+          <fieldset class="cadrePointilles bg-primary">
+            <legend class="bg-primary">Liens</legend>
+            <a href="https://www.bussysaintgeorges.fr/event/fete-mondiale-du-jeu-2/" title="Infos officielles sur la fête du jeu organisée au gymnase Herzog de Bussy Saint Georges.">Fête du jeu</a><br>
+            <a href="https://ludiworld.com/newshop/84-jeux-de-societe" title="Votre boutique de jeux, ici, à Bussy !">Ludiworld</a><br>
+            <a href="https://www.bussysaintgeorges.fr/education/petite-enfance/la-ludotheque/" title="Ludothèque pour les petits de 0 à 12 ans">Ludothèque</a><br>
+            <a href="http://www.ludhainaut.fr/" title="Association de joueurs à Onnaing">Lud'Hainaut</a><br>
+          </fieldset>
+      </div> {# colonne de gauche #}
+      <div class="col-xs-9 col-sm-10 col-md-11">
+        <div class="pre-scrollable divScroll" id='contenantPage'>
+        {% block laPage %}
+        {% endblock %}
+        </div>
+      </div> {# contenant des pages #}
+    </div> {# div principale #}
+
+{% endblock %}
+{% block piedDePage %}
+{% endblock %}
+  </body>
+</html>
