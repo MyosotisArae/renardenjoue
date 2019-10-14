@@ -1,28 +1,29 @@
 <?php
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class AccueilController extends ParentController
 {
   public function main()
   {
-    $_SESSION["ongletActif"] = "A";
+    $_SESSION["ongletActif"] = "ACC";
     $nom = "Ami Joueur";
     $util = $this->get("utilitaires");
     if ($util->estRenseigneSESSION("userPseudo")) { $nom = $_SESSION["userPseudo"]; }
     $texteAvant = array(
       utf8_encode("Bienvenue, ".$nom." !"),
       utf8_encode("Vous êtes chez le Renard Enjoué. Notre association a été créée en 2019. "),
-      utf8_encode("On compte bien vous transmettre notre passion du jeu, alors, lancez-vous et rejoignez-nous !")
+      utf8_encode('Notre but est de permettre aux amateurs de "jeux modernes" '.
+                  "de Bussy et ses environs de se retrouver pour jouer. ")
     );
     $texteApres = array(
-      utf8_encode('Notre but est de promouvoir les "jeux modernes" '.
-                  "en vous proposant de venir jouer avec nous, en soirée ou en journée. "),
-      utf8_encode("Nous ferons de notre mieux pour trouver des jeux adaptés à vos goûts, à votre style, à vos envies. ".
-                  "Nous en avons plus de 200, il y en a forcément un qui est fait pour vous !"),
-      utf8_encode("Nous nous situons à Bussy Saint Georges, face à la ludothèque."),
-      utf8_encode("N'hésitez pas à nous contacter, nous sommes très disponibles, nous pourrons certainement organiser une soirée jeux à la date et l'heure qui vous conviennent.")
+      utf8_encode("- utiliser le formulaire de contact, soit pour me prévenir que vous venez à un des événements de mon calendrier, soir pour me demander d'ajouter à ce calendrier un évènement que vous organisez."),
+      utf8_encode('- consulter la rubrique "Inviter des joueurs" du forum '.
+                  " pour voir ce qu'organisent les autres joueurs."),
+      utf8_encode('- proposer votre évènement dans cette même rubrique.')
       );
     return $this->render('/accueil.html.twig',["session" => $_SESSION, "texteAvant" => $texteAvant, "texteApres" => $texteApres]);
   }

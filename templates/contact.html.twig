@@ -14,156 +14,29 @@
 {% block laPage %}
 
   <div class='container-fluid'>
-    <section class='row'>
-
-      <div class='col-md-5'>
-        <section class ='row'>
-          <div class='col-md-12'>
-            <div class='listeJeux'>
-{% set classeCouleur = random(12) %}
-{% set classeTaille  = random(6)  %}
-{% set classFonte    = random(10) %}
-{% for jeu in listeJeux %}
-  <a href="jeux?jeuChoisi={{jeu.id}}" class="confetti couleur{{classeCouleur}} taille{{classeTaille}} fonte{{classFonte}}">{{jeu.nomComplet}}</a>
-  {% set classeCouleur = classeCouleur + 1 %}
-  {% set classeTaille = classeTaille + 1 %}
-  {% set classFonte = classFonte + 1 %}
-  {% if classeCouleur > 12 %}
-    {% set classeCouleur = 0 %}
-  {% endif %}
-  {% if classeTaille > 6 %}
-    {% set classeTaille = 0 %}
-  {% endif %}
-  {% if classFonte > 10 %}
-    {% set classFonte = 0 %}
-  {% endif %}
-{% endfor %}
-            </div>
-          </div>
-          <form class='col-md-12 margeAdroite' method="POST" action="jeux?operation=recherche">
-            <section class ='row'>
-              <div class='col-md-4'><label>Titre :</label></div>
-              <div class='col-md-8' style="position:relative;"><a href="#" style="position:relative;"><input type='text' name='jeuTitre'><div class='tool-tip right'>Ecrivez&nbsp;ici&nbsp;le&nbsp;titre,&nbsp;complet&nbsp;ou&nbsp;partiel,&nbsp;que&nbsp;vous&nbsp;recherchez.</div></a></div>
-              <div class='col-md-4'><label>Difficulté :</label></div>
-              <div class='col-md-8'><a href="#" style="position:relative;">
-      								<select name='jeuNiveau'>
-      									<option value='0'></option>
-      									<option value='1' class="fondVert" alt="Parties courtes, règles simples">famille - enfants</option>
-      									<option value='2' class="fondJaune">abordable</option>
-      									<option value='3' class="fondOrange">confirmés</option>
-      									<option value='4' class="fondRouge">connaisseurs</option>
-      									<option value='5' class="fondNoir">experts</option>
-      								</select><div class='tool-tip right'>Niveau&nbsp;de&nbsp;difficulté&nbsp;recherché.</div></a>
-      				</div>
-              <div class='col-md-4'><label>Durée :</label></div>
-              <div class='col-md-8'><a href="#" style="position:relative;">
-      								<select name='jeuDuree'>
-      									<option value='0'></option>
-      									<option value='1'>20mn ou moins</option>
-      									<option value='2'>20 à 45mn</option>
-      									<option value='3'>jusqu'à 1h30</option>
-      									<option value='4'>1h30 à 3h</option>
-      									<option value='5'>3h ou plus</option>
-      								</select><div class='tool-tip right'>Indiquez&nbsp;la&nbsp;durée&nbsp;approximative,&nbsp;du&nbsp;jeu.</div></a>
-              </div>
-              <div class='col-md-4'><label>pour :</label></div>
-              <div class='col-md-4'>
-      								<select name='jeuNb'>
-      									<option value='0'></option>
-      									<option value='1'>1</option>
-      									<option value='2'>2</option>
-      									<option value='3'>3</option>
-      									<option value='4'>4</option>
-      									<option value='5'>5</option>
-      									<option value='6'>6</option>
-      									<option value='7'>7</option>
-      									<option value='8'>8 et plus</option>
-      								</select>
-              </div>
-              <div class='col-md-4'><label class='gauche'>joueurs</label></div>
-              <div class='col-md-12'><input type="submit" class="cadreBleu fondBleu bouton" href="jeux?operation=recherche" value="Rechercher les jeux correspondants"></div>
-            </section>
-          </form>
-        </section>
-      </div>
-
-      <div class='col-md-7'>
-        <section class ='row'>
-          {#<div class='col-xs-5'><img class='grandeImage cadreBleu' src="{{ img_path }}imagesJeux/{{session.jeuChoisi.img}}.jpg"></div>#}
-          <div class='col-xs-5'><div class='grandeImage cadreBleu' style="background-image:url({{ img_path }}imagesJeux/{{session.jeuChoisi.img}}.jpg);"></div></div>
-          <div class='col-xs-7 camembert'>
-            <section class ='row'>
-              <div class='col-md-12 enLigne' id='divDuree'>
-                <div class="camembertParent enLigne">
-                  {{session.htmlDuree|raw}}
-                </div>
-                <div class="legendeCamembert">
-                  <h3>Légende :</h3>
-                  <img class='enLigne rectangle' src="{{ img_path }}legendeVert.gif">&nbsp;durée minimale{{session.jeuChoisi.dureemin|duree}}<br>
-                  <img class='enLigne rectangle' src="{{ img_path }}legendeRouge.gif">&nbsp;durée maximale{{session.jeuChoisi.dureemax|duree}}<br>
-                  Jeu pour {{session.jeuChoisi.nbJoueurs}}<br>
-                  Niveau de difficulté : {{session.jeuChoisi.difficulte}}
-                  <table>
-                    <tr>
-                      <td rowspan=3><img class='mini' src="{{ img_path }}pictoNiv{{session.jeuChoisi.dominance}}.gif"></td>
-                      <td rowspan=3><div class="texteInvisible">blabla</div></td>
-                      <td><img class='bonhomme' src="{{ img_path }}niveau_enfant.gif"></td>
-                      <td>5-8 ans</td>
-                      <td class='texteInvisible' rowspan=3 style="background-image:url({{ img_path }}fleches{{session.jeuChoisi.dominance}}.gif);">blabla</td>
-                      <td><img class='rectangle' src="{{ img_path }}niveauRouge.gif"></td>
-                      <td>trop dur</td>
-                    </tr>
-                    <tr>
-                      <td><img class='bonhomme' src="{{ img_path }}niveau_preado.gif"></td>
-                      <td>9-13 ans</td>
-                      <td><img class='rectangle' src="{{ img_path }}niveauOrange.gif"></td>
-                      <td>compliqué</td>
-                    </tr>
-                    <tr>
-                      <td><img class='bonhomme' src="{{ img_path }}niveau_grand.gif"></td>
-                      <td>14 ans et plus</td>
-                      <td><img class='rectangle' src="{{ img_path }}niveauVert.gif"></td>
-                      <td>facile</td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-              <div class='col-md-4' id='divImgNbJoueurs'><img class='mini' src="{{ img_path }}{{session.jeuChoisi.imgNbJoueurs}}"></div>
-              <div class='col-md-8' id='divTxtNbJoueurs'><label class='gauche'>{{session.jeuChoisi.nbJoueurs}}</labe></div>
-              <div class='col-md-2' id='divNiveau'><img class='mini' src="{{ img_path }}pictoNiv{{session.jeuChoisi.dominance}}.gif"></div>
-            </section>
-          </div>
-          <div class='col-md-12 cadreBleu fondBleu reduire'>
-            <h1>{{session.jeuChoisi.nomComplet}}</h1>
-          </div>
-          <div class='col-md-12'>
-            <div class='enLigne'>
-              <h2 class='enLigne souligneBleu'>But :</h2>
-              <h3 class='enLigne'>{{session.jeuChoisi.but}}</h3>
-            </div>
-          </div>
-          <div class='col-md-12'>
-            <div class="souligneBleu"><h2>Principe :</h2></div>
-          </div>
-          <div class='col-md-12'>
-            <div class='parchemin'>
-              {{session.jeuChoisi.ppe|raw}}
-            </div>
-          </div>
-        </section>
-      </div>
-      
-        </section>
-      </div>
-
-
-    </section>
+    <div class='row'>
+      <form class='col-md-11 fondOpaque' method="POST" action="mail">
+        <table>
+          <tr>
+            <td>Sujet :</td>
+            <td><input type="text" id="titreMail" name="titreMail" style="width:50em;"></td>
+          </tr>
+          <tr>
+            <td style="vertical-align : top;">Message :</td>
+            <td><textarea class="fondOpaque" id="contenuMail" name="contenuMail" style="width:75em; height:30em;"></textarea></td>
+          </tr>
+          <tr>
+            <td colspan=2><button type="submit">Envoyer le message</button></td>
+          </tr>
+          <tr>
+            <td colspan=2>{% if session.messageAlert is defined %} {{session.messageAlert}} {% endif %}</td>
+          </tr>
+        </table>
+      </form>
+    </div>
   </div>
 
 {% endblock %}
 
 {% block piedDePage %}
-    <div id="RangementDesJeux" class="jeSuisInvisible">
-    	<?php echo $_SESSION["remplissageJeux"]; ?>
-    </div>
 {% endblock %}

@@ -25,7 +25,7 @@
 
           {{evt.id}} : {
                          "titre": "{{evt.titre}}",
-                         "desc" : "{{ evt.description|replace({'\n':'<br>','\r':''})|raw }}",
+                         "desc" : "{{ evt.description|replace({'\n':'<br>','\r':'','"':'&quot;'})|raw }}",
                          "periode" : "{{ evt.periode|replace({'\n':'<br>','\r':''})|raw }}"
               }{% if (not loop.last) %},{% endif %}
         {% endfor %}
@@ -79,7 +79,7 @@
 {% endblock %}
 
 {% block laPage %}
-<div class="container-fluid">
+<div class="container-fluid fondOpaque">
   <div class="row">
 
     <div class="col-xs-12" id='calendar'>

@@ -20,7 +20,7 @@ class LudothequeRepository extends ServiceEntityRepository
 
     // Retourne les jeux dans l'ordre alphabétique.
     /**
-      * @return Evenements[]
+      * @return Ludotheque[]
       */
     public function getListeJeux()
     {

@@ -7,7 +7,7 @@ class CalendrierController extends ParentController
 {
   public function main()
   {
-    $_SESSION["ongletActif"] = "C";
+    $_SESSION["ongletActif"] = "CAL";
     return $this->render('/calendrier.html.twig',["listeDates" => $this->getDates(),"session" => $_SESSION]);
     //return $this->render('/test.html.twig');
   }

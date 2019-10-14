@@ -2,11 +2,12 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    form_themes: ['bootstrap_4_layout.html.twig']
     globals:
-        img_path: '../images/'
-        css_path: '../../web/css/'
-        js_path : '../../web/js/'
-        fc_path : '../../node_modules/fullcalendar/'
+        img_path: '/images/'
+        css_path: '/css/'
+        js_path : '/js/'
+        fc_path : '/node_modules/fullcalendar/'
         BScss_path: 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'
         BSjs_path : 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'
         jQuery  : 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'

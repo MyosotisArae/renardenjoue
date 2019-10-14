@@ -1,0 +1,33 @@
+{% extends 'main.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block entete %}
+  {{ parent() }}
+{% endblock %}
+
+{% block corps %}
+  {{ parent() }}
+{% endblock %}
+
+{% block laPage %}
+<div class="col-12">
+  <br>
+</div>
+<div class="col-3 enBleu centrer">
+    <br>
+    <a href="login" class="bouton bg-primary">
+        Connexion
+    </a>
+    <br>
+    <br>
+</div>
+
+<div class="col-2">
+</div>
+
+<div class="col-5 enBleu">
+    <h1 class="h3 mb-3 font-weight-normal">Inscrivez-vous ici :</h1>
+    {{ form(formulaire) }}
+</div>
+{% endblock %}

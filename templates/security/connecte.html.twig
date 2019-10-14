@@ -1,0 +1,28 @@
+{% extends 'main.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block entete %}
+  {{ parent() }}
+{% endblock %}
+
+{% block corps %}
+  {{ parent() }}
+{% endblock %}
+
+{% block laPage %}
+<div class="col-12">
+  <br>
+</div>
+<div class="col-3 enBleu">
+
+    {% if app.user %}
+        <div class="checkbox mb-3">Heureux de vous voir, {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+    {% endif %}
+
+    <h1 class="h3 mb-3 font-weight-normal">Mon compte :</h1>
+    {{ form(formulaire) }}
+
+</div>
+
+{% endblock %}

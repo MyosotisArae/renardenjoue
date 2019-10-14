@@ -1,0 +1,14 @@
+#contenantPage
+{
+  width : 100vw;
+  height : 90vh;
+  background : IVORY;
+  padding-left : 1.2em;
+  padding-right : 1em;
+  padding-top : 0.4em;
+}
+h3
+{
+  color:#000;
+  border-bottom:3px solid blue;
+}

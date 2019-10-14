@@ -1,0 +1,50 @@
+{% extends 'main.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block entete %}
+  {{ parent() }}
+{% endblock %}
+
+{% block corps %}
+  {{ parent() }}
+{% endblock %}
+
+{% block laPage %}
+<div class="col-12">
+  <br>
+</div>
+<div class="col-3 enBleu">
+    {% if app.user %}
+        <div class="checkbox mb-3">Heureux de vous voir, {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+    {% else %}
+
+    <h1 class="h3 mb-3 font-weight-normal">Connectez-vous ici :</h1>
+    {{ form(formulaire) }}
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+    <br>
+    <div class="checkbox mb-3">
+        <label>
+            &nbsp;<input type="checkbox" id="remember_me" name="_remember_me"> Se souvenir de moi
+        </label>
+    </div>
+    {% endif %}
+
+</div>
+
+<div class="col-2">
+</div>
+
+<div class="col-3 enBleu centrer">
+  <form method="POST" action="newUser">
+    <br>
+    <a href="newUser" class="bouton bg-primary">
+        Création de compte
+    </a>
+    <br>
+    <br>
+  </form>
+</div>
+{% endblock %}

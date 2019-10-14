@@ -50,11 +50,6 @@ class Evenements
     private $dateFin;
 
     /**
-     * @var boolean
-     */
-    private $aUneDateDeFin;
-
-    /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="heure_debut", type="time", nullable=true)
@@ -67,11 +62,6 @@ class Evenements
      * @ORM\Column(name="heure_fin", type="time", nullable=true)
      */
     private $heureFin;
-
-    /**
-     * @var \Boolean|false
-     */
-    private $aUneHeureDeFin;
 
     /**
      * @var string
@@ -166,25 +156,11 @@ class Evenements
         return true;
     }
 
-    public function setAUneDateDeFin(?\boolean $aUneDateDeFin): self
-    {
-        $this->aUneDateDeFin = $aUneDateDeFin;
-
-        return $this;
-    }
-
     public function getAUneHeureDeFin()
     {
         if ($this->heureFin == null) { return false; }
         if ($this->heureFin == $this->heureDebut) { return false; }
         return true;
-    }
-
-    public function setAUneHeureDeFin(?\boolean $aUneHeureDeFin): self
-    {
-        $this->aUneHeureDeFin = $aUneHeureDeFin;
-
-        return $this;
     }
 
     /* Retourne "du ... au ..." si la date de fin est precisee, sinon retourne "Le ..."

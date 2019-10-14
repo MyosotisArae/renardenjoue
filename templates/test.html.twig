@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,11 +17,104 @@
   <![endif]-->
   
 
-  <link rel="stylesheet" href="../../web/css/jeux.css">
+
+    <link href='../../web/css//calendrier.css' rel='stylesheet' />
+    <link href='../../node_modules/fullcalendar//core/main.css' rel='stylesheet' />
+    <link href='../../node_modules/fullcalendar//bootstrap/main.css' rel='stylesheet' />
+    <link href='../../node_modules/fullcalendar//daygrid/main.css' rel='stylesheet' />
+
+    <script src='../../web/js//calendrier.js'></script>
+
+    <script src='../../node_modules/fullcalendar//core/main.js'></script>
+    <script src='../../node_modules/fullcalendar//bootstrap/main.js'></script>
+    <script src='../../node_modules/fullcalendar//daygrid/main.js'></script>
+    <script src='../../node_modules/fullcalendar//interaction/main.js'></script>
+
+    <script>
+      
+      var listeDesc =
+      {
+                    
+          1 : {
+                         "titre": "Les renards jouent",
+                         "desc" : "Nous jouerons toute la journée, et même la soirée, avec une pause pour les repas, bien sûr (on ira chercher un truc chez O'Tacos, ou autre).<br><br>Vous pouvez venir à n'importe quel moment, pour une partie, pour deux heures, pour venir voir comment ça se passe. Vous prenez pas la tête.<br>Contactez-moi avec le formulaire de ce site, et je répondrai à toutes vos questions. Et comme ça vous récupérerez aussi l'adresse pour nos soirées jeux.",
+                         "periode" : " le 31/08/2019,<br>de 14h à 19h"
+              },                  
+          5 : {
+                         "titre": "COPS",
+                         "desc" : "Séance de jeux de rôles.<br><br>(Nous sommes au complet pour cette activité.)",
+                         "periode" : " le 14/09/2019,<br>de 15h à 23h"
+              },                  
+          6 : {
+                         "titre": "Les renards jouent",
+                         "desc" : "Après-midi jeux, lieu habituel.<br>Ce sera le samedi 28 septembre, et non un mardi comme indiqué ci-dessus. Je corrige ça au plus vite.<br><br>Contactez le webmaster par mail pour vous inscrire.",
+                         "periode" : " le 28/09/2019,<br>de 14h à 19h"
+              },                  
+          8 : {
+                         "titre": "Les renards jouent",
+                         "desc" : "La rentrée s'est bien passée ? Bon. Venez vous détendre autour d'une table de jeux.<br><br>On va tenter de vous proposer une journée jeux au moins un week-end sur deux, ce qui ne vous empêche pas de nous contacter pour qu'on en ajoute une à la date qui vous convient, même en soirée. On n'attend que ça !<br><br>Si vous n'êtes jamais venu, utilisez un formulaire de contact pour toutes vos questions. Précisez bien votre email pour que je puisse vous répondre.",
+                         "periode" : " le 15/09/2019,<br>de 14h à 19h"
+              }        
+      };
+      var lesMois = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+      var ceMoisCi = lesMois[new Date().getMonth()];
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          plugins: [ 'dayGrid','interaction','bootstrap' ],
+          height : 500,
+          buttonText : {
+                         today : 'Revenir en '+ceMoisCi,
+                         dayGridMonth : "mois",
+                         dayGridWeek : "semaine",
+                         dayGridDay  : "jour"
+                       },
+          firstDay : 1,
+          header : {
+                     center : 'title',
+                     right : 'today prev next',
+                     left :  'dayGridMonth dayGridWeek dayGridDay'
+                   },
+          businessHours: { daysOfWeek : [2,4,6] },
+          events : [
+                     {
+                       id : 1,
+                       title : "Les renards jouent",
+                       start : "2019-08-31"
+                       
+                     },                   
+                     {
+                       id : 5,
+                       title : "COPS",
+                       start : "2019-09-14"
+                       
+                     },                   
+                     {
+                       id : 6,
+                       title : "Les renards jouent",
+                       start : "2019-09-28"
+                       
+                     },                   
+                     {
+                       id : 8,
+                       title : "Les renards jouent",
+                       start : "2019-09-15"
+                       
+                     }                   
+                   ],
+          eventClick : function(info) { detailEvt(listeDesc[info.event.id]); }
+        });
+
+        calendar.render();
+      });
+
+    </script>
 </head>
 
-  <body class="fixer">
-      <img class="fond container-fluid d-none d-md-block" src="../images/fond.png">
+  <body>
+          <img class="fond container-fluid d-none d-md-block" src="../images/fond.png">
     <img class="fond container-fluid d-md-none" src="../images/fondVertical.png">
 
     <header class="row">
@@ -28,51 +122,29 @@
         <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
             <a class="navbar-brand col-xs-1" href="#"><img src="../images/logo.gif" class="logo"></a>
             <ul class="navbar-nav col-xs-11">
-              <div class="d-none d-lg-block">                 <li class="nav-item">
+              <div class="d-none d-md-block">                 <li class="nav-item">
                   <a class="nav-link" href="accueil"><i class="fas fa-home">&nbsp;</i>Accueil <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                   <a class="nav-link" href="calendrier"><i class="fas fa-calendar-alt">&nbsp;</i>Agenda</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a class="nav-link" href="jeux"><i class="fas fa-dice">&nbsp;</i>Jeux</a>
                 </li>
-                <li class="nav-item">
-                  <select class="nav-link bg-primary">
-                    <option>Administrateur</option>
-                    <option>Evènements</option>
-                    <option>Jeux</option>
-                  </select>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#idPJ"><i class="fas fa-sign-in-alt">&nbsp;</i>Se connecter</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#idPJ"><i class="fas fa-address-card">&nbsp;</i>Mon compte</a>
-                </li>
-                <li class="nav-item">
+                                                <li class="nav-item">
                   <a class="nav-link" href="#idPJ"><i class="fas fa-comment">&nbsp;</i>Contact</a>
                 </li>
-              </div>               <div class="navbar-nav col-xs-11 d-lg-none">                 <li class="nav-item active">
-                  <a class="nav-link" href="accueil"><i class="fas fa-home"></i></a>
+              </div>               <div class="navbar-nav col-xs-11 d-md-none">                 <li class="nav-item" title="Page d'accueil">
+                  <a class="nav-link" href="accueil"><i class="fas fa-home">&nbsp;</i><span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#idPC"><i class="fas fa-calendar-alt"></i></a>
+                <li class="nav-item active" title="Calendrier des évènements">
+                  <a class="nav-link" href="calendrier"><i class="fas fa-calendar-alt">&nbsp;</i></a>
                 </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="jeux"></a>
+                <li class="nav-item" title="Nos jeux">
+                  <a class="nav-link" href="jeux"><i class="fas fa-dice">&nbsp;</i></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#idPJ"><i class="fas fa-cog"></i></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#idPJ"><i class="fas fa-sign-in-alt"></i></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#idPJ"><i class="fas fa-address-card"></i></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#idPJ"><i class="fas fa-comment"></i></a>
+                                                <li class="nav-item" title="Formulaire de contact">
+                  <a class="nav-link" href="#idPJ"><i class="fas fa-comment">&nbsp;</i></a>
                 </li>
               </div>             </ul>
         </nav>
@@ -83,299 +155,35 @@
       <div class="col-xs-3 col-sm-2 col-md-1">
           <fieldset class="cadrePointilles bg-primary">
             <legend class="bg-primary">Liens</legend>
-            <a href="https://www.bussysaintgeorges.fr/event/fete-mondiale-du-jeu-2/" title="Infos officielles sur la fête du jeu organisée au gymnase Herzog de Bussy Saint Georges.">Fête du jeu</a><br>
+            <a href="https://discord.gg/wFjwqfF" title="Discutez des jeux que vous aimez (ou pas), proposez vos propres soirées jeux, ...">Notre forum</a><br>
+            <a href="https://https://lourshibou.blogspot.com/" title="Association partenaire du Renard enjoué, à Ferrières-en-Brie">L'Ours Hibou</a><br>
             <a href="https://ludiworld.com/newshop/84-jeux-de-societe" title="Votre boutique de jeux, ici, à Bussy !">Ludiworld</a><br>
-            <a href="https://www.bussysaintgeorges.fr/education/petite-enfance/la-ludotheque/" title="Ludothèque pour les petits de 0 à 12 ans">Ludothèque</a><br>
+            <a href="https://www.bussysaintgeorges.fr/education/petite-enfance/la-ludotheque/" title="Ludothèque de Bussy, pour les enfants de 0 à 12 ans">Ludothèque</a><br>
             <a href="http://www.ludhainaut.fr/" title="Association de joueurs à Onnaing">Lud'Hainaut</a><br>
           </fieldset>
       </div>       <div class="col-xs-9 col-sm-10 col-md-11">
-        <div class="pre-scrollable divScroll" id='contenantPage'>
-        
-  <div class='container-fluid'>
-    <section class='row'>
+        <div class="container-fluid">
+          <div class="row">
+          <div class="container-fluid">
+  <div class="row">
 
-      <div class='col-md-4'>
-        <section class ='row'>
-          <div class='col-md-12'>
-            <div class='listeJeux'>
-  <a href="144" class="confetti couleur0 taille0>7 Wonders</a>
-          <a href="1" class="confetti couleur1 taille1>Africa</a>
-          <a href="57" class="confetti couleur2 taille2>L&#039;age des Dieux</a>
-          <a href="186" class="confetti couleur3 taille3>Age of Conan</a>
-          <a href="2" class="confetti couleur4 taille4>Age of Renaissance</a>
-          <a href="84" class="confetti couleur5 taille5>Age of Steam</a>
-          <a href="123" class="confetti couleur6 taille6>Agricola</a>
-                <a href="149" class="confetti couleur7 taille0>Agricola - Terres d&#039;élevage</a>
-          <a href="158" class="confetti couleur8 taille1>Air show</a>
-          <a href="173" class="confetti couleur9 taille2>Alambra</a>
-          <a href="65" class="confetti couleur10 taille3>Alhambra</a>
-                <a href="131" class="confetti couleur0 taille4>Amyitis</a>
-          <a href="114" class="confetti couleur1 taille5>Animalia</a>
-          <a href="139" class="confetti couleur2 taille6>Assassin X</a>
-                <a href="96" class="confetti couleur3 taille0>Astoria</a>
-          <a href="53" class="confetti couleur4 taille1>Attakube</a>
-          <a href="59" class="confetti couleur5 taille2>Attika</a>
-          <a href="82" class="confetti couleur6 taille3>Les Aventuriers du Rail (Europe)</a>
-          <a href="3" class="confetti couleur7 taille4>The Awful green things from outer space</a>
-          <a href="176" class="confetti couleur8 taille5>Bath Khaos</a>
-          <a href="107" class="confetti couleur9 taille6>Battle Lore</a>
-                <a href="124" class="confetti couleur10 taille0>Battlestar Galactica</a>
-                <a href="37" class="confetti couleur0 taille1>Bazard bizarre ultime</a>
-          <a href="156" class="confetti couleur1 taille2>Blokus</a>
-          <a href="4" class="confetti couleur2 taille3>Bluff</a>
-          <a href="54" class="confetti couleur3 taille4>Buffy - Menace sur Sunnydale</a>
-          <a href="134" class="confetti couleur4 taille5>Les cabanes de m&#039;sieur Robinson</a>
-          <a href="5" class="confetti couleur5 taille6>Can&#039;t Stop</a>
-                <a href="6" class="confetti couleur6 taille0>Carcassonne</a>
-          <a href="85" class="confetti couleur7 taille1>Cash and guns</a>
-          <a href="81" class="confetti couleur8 taille2>Caylus</a>
-          <a href="7" class="confetti couleur9 taille3>César et Cléopatre</a>
-          <a href="1116" class="confetti couleur10 taille4>Chantilly</a>
-                <a href="8" class="confetti couleur0 taille5>Chasse gardée</a>
-          <a href="70" class="confetti couleur1 taille6>Les Chevaliers de la Table Ronde</a>
-                <a href="9" class="confetti couleur2 taille0>Chinatown</a>
-          <a href="109" class="confetti couleur3 taille1>CIA vs KGB</a>
-          <a href="10" class="confetti couleur4 taille2>Citadelle</a>
-          <a href="11" class="confetti couleur5 taille3>Les Cités Perdues</a>
-          <a href="12" class="confetti couleur6 taille4>Citta</a>
-          <a href="151" class="confetti couleur7 taille5>The city</a>
-          <a href="135" class="confetti couleur8 taille6>Claustrophobia</a>
-                <a href="1122" class="confetti couleur9 taille0>Code names Duo</a>
-          <a href="140" class="confetti couleur10 taille1>Coeur de dragon</a>
-                <a href="47" class="confetti couleur0 taille2>Le collier de la Reine</a>
-          <a href="13" class="confetti couleur1 taille3>Les Colons De Katane</a>
-          <a href="14" class="confetti couleur2 taille4>Les Colons De L&#039;Espace</a>
-          <a href="106" class="confetti couleur3 taille5>Colosseum</a>
-          <a href="71" class="confetti couleur4 taille6>Colossus Arena</a>
-                <a href="15" class="confetti couleur5 taille0>Condottiere</a>
-          <a href="105" class="confetti couleur6 taille1>La conquête de Rome</a>
-          <a href="76" class="confetti couleur7 taille2>Crimson Skies</a>
-          <a href="179" class="confetti couleur8 taille3>A la croisée des mondes - La boussole d&#039;or</a>
-          <a href="157" class="confetti couleur9 taille4>Descendance</a>
-          <a href="92" class="confetti couleur10 taille5>Descent</a>
-                <a href="17" class="confetti couleur0 taille6>Die Hanse</a>
-                <a href="16" class="confetti couleur1 taille0>Diplomacy</a>
-          <a href="155" class="confetti couleur2 taille1>Disque Monde - Ankh-Morpork</a>
-          <a href="166" class="confetti couleur3 taille2>Disque monde - Les sorcières</a>
-          <a href="125" class="confetti couleur4 taille3>Dixit</a>
-          <a href="119" class="confetti couleur5 taille4>Dominion</a>
-          <a href="95" class="confetti couleur6 taille5>Donjons et Dragons Miniatures</a>
-          <a href="18" class="confetti couleur7 taille6>Drakon</a>
-                <a href="19" class="confetti couleur8 taille0>Dune</a>
-          <a href="137" class="confetti couleur9 taille1>Dungeon Lords</a>
-          <a href="64" class="confetti couleur10 taille2>Dungeon twister</a>
-                <a href="72" class="confetti couleur0 taille3>Dungeoneer - Le Tombeau du Seigneur des Liches</a>
-          <a href="52" class="confetti couleur1 taille4>Eden</a>
-          <a href="20" class="confetti couleur2 taille5>Elixir</a>
-          <a href="21" class="confetti couleur3 taille6>En Garde</a>
-                <a href="128" class="confetti couleur4 taille0>Eve Conquest</a>
-          <a href="22" class="confetti couleur5 taille1>Evo</a>
-          <a href="68" class="confetti couleur6 taille2>Euphrate et Tigris</a>
-          <a href="98" class="confetti couleur7 taille3>Fairy Tale</a>
-          <a href="1128" class="confetti couleur8 taille4>Fairy tile</a>
-          <a href="150" class="confetti couleur9 taille5>A few acres of snow</a>
-          <a href="175" class="confetti couleur10 taille6>Firefly</a>
-                      <a href="167" class="confetti couleur0 taille0>Five tribes</a>
-          <a href="55" class="confetti couleur1 taille1>Formule Dé</a>
-          <a href="91" class="confetti couleur2 taille2>Full of dollars</a>
-          <a href="160" class="confetti couleur3 taille3>Galaxy Trucker</a>
-          <a href="61" class="confetti couleur4 taille4>A game of Thrones</a>
-          <a href="163" class="confetti couleur5 taille5>Gravity maze</a>
-          <a href="185" class="confetti couleur6 taille6>Guédelon</a>
-                <a href="69" class="confetti couleur7 taille0>La guerre de l&#039;anneau</a>
-          <a href="23" class="confetti couleur8 taille1>La Guerre des Moutons</a>
-          <a href="183" class="confetti couleur9 taille2>Guerre froide</a>
-          <a href="56" class="confetti couleur10 taille3>Guerriers des étoiles</a>
-                <a href="90" class="confetti couleur0 taille4>La Hache et le Feu</a>
-          <a href="190" class="confetti couleur1 taille5>Hakafuda</a>
-          <a href="24" class="confetti couleur2 taille6>Hannibal</a>
-                <a href="63" class="confetti couleur3 taille0>History of war</a>
-          <a href="122" class="confetti couleur4 taille1>Horreur à Arkham</a>
-          <a href="87" class="confetti couleur5 taille2>Iliade</a>
-          <a href="25" class="confetti couleur6 taille3>Illuminati</a>
-          <a href="1127" class="confetti couleur7 taille4>Imagine</a>
-          <a href="79" class="confetti couleur8 taille5>Infra Tank</a>
-          <a href="101" class="confetti couleur9 taille6>Invasions</a>
-                <a href="1129" class="confetti couleur10 taille0>Isle of Skye</a>
-                <a href="113" class="confetti couleur0 taille1>Jungle Speed</a>
-          <a href="117" class="confetti couleur1 taille2>Kahmaté</a>
-          <a href="26" class="confetti couleur2 taille3>Kahuna</a>
-          <a href="58" class="confetti couleur3 taille4>Keythedral</a>
-          <a href="104" class="confetti couleur4 taille5>Korsar</a>
-          <a href="89" class="confetti couleur5 taille6>Um Krone und Kragen</a>
-                <a href="172" class="confetti couleur6 taille0>Krosmaster arena</a>
-          <a href="1125" class="confetti couleur7 taille1>L&#039;aéropostale</a>
-          <a href="164" class="confetti couleur8 taille2>Laser maze</a>
-          <a href="180" class="confetti couleur9 taille3>Les Légendaires - L&#039;antre du Gardien</a>
-          <a href="88" class="confetti couleur10 taille4>Légendes de Camelot</a>
-                <a href="1117" class="confetti couleur0 taille5>Libertalia</a>
-          <a href="188" class="confetti couleur1 taille6>Los Mampfos</a>
-                <a href="110" class="confetti couleur2 taille0>Lost Valley</a>
-          <a href="27" class="confetti couleur3 taille1>Loups Garous</a>
-          <a href="182" class="confetti couleur4 taille2>Mage wars</a>
-          <a href="28" class="confetti couleur5 taille3>Maharadjah</a>
-          <a href="67" class="confetti couleur6 taille4>Maka Bana</a>
-          <a href="187" class="confetti couleur7 taille5>The Manhattan Project</a>
-          <a href="1126" class="confetti couleur8 taille6>Le manoir infernal</a>
-                <a href="48" class="confetti couleur9 taille0>Mare Nostrum</a>
-          <a href="99" class="confetti couleur10 taille1>Marvel Heroes</a>
-                <a href="165" class="confetti couleur0 taille2>Medina</a>
-          <a href="153" class="confetti couleur1 taille3>Meurtre sur le Nil</a>
-          <a href="126" class="confetti couleur2 taille4>Die Meuterei (La mutinerie)</a>
-          <a href="75" class="confetti couleur3 taille5>Mission Planète Rouge</a>
-          <a href="171" class="confetti couleur4 taille6>Mombasa</a>
-                <a href="100" class="confetti couleur5 taille0>Mr Jack</a>
-          <a href="73" class="confetti couleur6 taille1>Munchkin</a>
-          <a href="1119" class="confetti couleur7 taille2>Myrmes</a>
-          <a href="1123" class="confetti couleur8 taille3>Mysterium</a>
-          <a href="1120" class="confetti couleur9 taille4>Néfarious</a>
-          <a href="116" class="confetti couleur10 taille5>Nefertiti</a>
-                <a href="1130" class="confetti couleur0 taille6>Nemeton</a>
-                <a href="170" class="confetti couleur1 taille0>Netrunner</a>
-          <a href="120" class="confetti couleur2 taille1>Neuroshima Hex !</a>
-          <a href="147" class="confetti couleur3 taille2>NightFall</a>
-          <a href="141" class="confetti couleur4 taille3>Offrandes</a>
-          <a href="29" class="confetti couleur5 taille4>Oh les nains</a>
-          <a href="146" class="confetti couleur6 taille5>Olympos</a>
-          <a href="138" class="confetti couleur7 taille6>Opus Dei</a>
-                <a href="121" class="confetti couleur8 taille0>Pandémie</a>
-          <a href="30" class="confetti couleur9 taille1>Pente</a>
-          <a href="108" class="confetti couleur10 taille2>Petits meurtres &amp; faits divers</a>
-                <a href="31" class="confetti couleur0 taille3>Phoenix</a>
-          <a href="74" class="confetti couleur1 taille4>Pirates of the Spanish Main</a>
-          <a href="32" class="confetti couleur2 taille5>Planet Petri</a>
-          <a href="60" class="confetti couleur3 taille6>Puerto Rico</a>
-                <a href="161" class="confetti couleur4 taille0>Puissance 4</a>
-          <a href="33" class="confetti couleur5 taille1>Quads</a>
-          <a href="145" class="confetti couleur6 taille2>Quarriors</a>
-          <a href="34" class="confetti couleur7 taille3>Quatro</a>
-          <a href="181" class="confetti couleur8 taille4>Qui est-ce ?</a>
-          <a href="115" class="confetti couleur9 taille5>Race for the Galaxy</a>
-          <a href="94" class="confetti couleur10 taille6>Railroad tycoon</a>
-                      <a href="143" class="confetti couleur0 taille0>Rallyman</a>
-          <a href="35" class="confetti couleur1 taille1>RoboRally</a>
-          <a href="36" class="confetti couleur2 taille2>Le Roi des Roses</a>
-          <a href="130" class="confetti couleur3 taille3>Roll through the ages</a>
-          <a href="1124" class="confetti couleur4 taille4>Room 25</a>
-          <a href="162" class="confetti couleur5 taille5>Rummikub</a>
-          <a href="83" class="confetti couleur6 taille6>Runebound</a>
-                <a href="178" class="confetti couleur7 taille0>Rush hour</a>
-          <a href="50" class="confetti couleur8 taille1>Sans foi ni loi</a>
-          <a href="93" class="confetti couleur9 taille2>Santy Anno</a>
-          <a href="49" class="confetti couleur10 taille3>Scotland Yard</a>
-                <a href="51" class="confetti couleur0 taille4>Serengeti</a>
-          <a href="38" class="confetti couleur1 taille5>Service Compris</a>
-          <a href="39" class="confetti couleur2 taille6>Set !</a>
-                <a href="132" class="confetti couleur3 taille0>Shadow hunters</a>
-          <a href="169" class="confetti couleur4 taille1>Sheriff de Nittingham</a>
-          <a href="154" class="confetti couleur5 taille2>Six pieds sous terre</a>
-          <a href="184" class="confetti couleur6 taille3>Smash up</a>
-          <a href="174" class="confetti couleur7 taille4>Space alert</a>
-          <a href="40" class="confetti couleur8 taille5>Space Crusade</a>
-          <a href="41" class="confetti couleur9 taille6>Star Wars</a>
-                <a href="42" class="confetti couleur10 taille0>Stealth</a>
-                <a href="118" class="confetti couleur0 taille1>Stonehenge</a>
-          <a href="77" class="confetti couleur1 taille2>Stratego</a>
-          <a href="1118" class="confetti couleur2 taille3>Summoner Wars</a>
-          <a href="189" class="confetti couleur3 taille4>Takenoko</a>
-          <a href="111" class="confetti couleur4 taille5>Taluva</a>
-          <a href="97" class="confetti couleur5 taille6>Tannhaüser</a>
-                <a href="1121" class="confetti couleur6 taille0>Targui</a>
-          <a href="159" class="confetti couleur7 taille1>Taverna</a>
-          <a href="177" class="confetti couleur8 taille2>Terra Mystica</a>
-          <a href="136" class="confetti couleur9 taille3>Through the ages</a>
-          <a href="133" class="confetti couleur10 taille4>Thunderstone</a>
-                <a href="112" class="confetti couleur0 taille5>Tikal</a>
-          <a href="152" class="confetti couleur1 taille6>Timeline</a>
-                <a href="62" class="confetti couleur2 taille0>Tom Tube</a>
-          <a href="46" class="confetti couleur3 taille1>Tonga Bonga</a>
-          <a href="148" class="confetti couleur4 taille2>Tournay</a>
-          <a href="127" class="confetti couleur5 taille3>Trader</a>
-          <a href="43" class="confetti couleur6 taille4>Vertigo</a>
-          <a href="44" class="confetti couleur7 taille5>Une Vie de Chien</a>
-          <a href="45" class="confetti couleur8 taille6>Vinci</a>
-                <a href="168" class="confetti couleur9 taille0>Unlock</a>
-          <a href="86" class="confetti couleur10 taille1>When darkness comes</a>
-                <a href="66" class="confetti couleur0 taille2>Wings of War</a>
-          <a href="78" class="confetti couleur1 taille3>Wizard Kings</a>
-          <a href="129" class="confetti couleur2 taille4>Zack &amp; Pack</a>
-                    </div>
-          </div>
-            <div class='col-md-4'><label>Titre :</label></div>
-            <div class='col-md-8'><input type='text'></div>
-            <div class='col-md-4'><label>Difficulté :</label></div>
-            <div class='col-md-8'>
-    								<select name="complexite">
-    									<option value=0></option>
-    									<option value=1 class="fondVert" alt="Parties courtes, règles simples">famille - enfants</option>
-    									<option value=2 class="fondJaune">abordable</option>
-    									<option value=3 class="fondOrange">confirmés</option>
-    									<option value=4 class="fondRouge">connaisseurs</option>
-    									<option value=5 class="fondNoir">experts</option>
-    								</select>
-    				</div>
-            <div class='col-md-4'><label>Durée :</label></div>
-            <div class='col-md-8'>
-    								<select name="dureePartie">
-    									<option value=0></option>
-    									<option value=1>20mn ou moins</option>
-    									<option value=2>20 à 45mn</option>
-    									<option value=3>jusqu'à 1h30</option>
-    									<option value=4>2 ou 3h, voire plus</option>
-    								</select>
-            </div>
-            <div class='col-md-4'><label>pour :</label></div>
-            <div class='col-md-4'>
-    								<select name="nbJoueurs">
-    									<option value=0></option>
-    									<option value=1>1</option>
-    									<option value=2>2</option>
-    									<option value=3>3</option>
-    									<option value=4>4</option>
-    									<option value=5>5</option>
-    									<option value=6>6</option>
-    									<option value=7>7</option>
-    									<option value=8>8 et plus</option>
-    								</select>
-            </div>
-            <div class='col-md-4'><label class='gauche'>joueurs</label></div>
-        </section>
-      </div>
+    <div class="col-xs-12" id='calendar'>
+    </div>
 
-      <div class='col-md-8'>
-        <section class ='row'>
-          <div class='col-xs-5'><img class='grandeImage cadreBleu' src="../images/imagesJeux/13.jpg"></div>
-          <div class='col-xs-7'>
-            <section class ='row'>
-              <div class='col-md-12' id='divTitre'><h1>Die Hanse</h1></div>
-              <div class='col-md-12' id='divDuree'>
-                <div class="camembertParent">
-                  <div class="camembertEnfant">
-                    <div class="divCamembertCercle">
-                      <div class="divCentrerImage">
-                        <div id="jeu_dur"></div>
-                      </div>
-                    </div>
+    <div class="col-xs-4">
+        <div id='titreEvt'>
+                    4 évènements ce mois-ci !
                   </div>
-                </div>
-              </div>
-              <div class='col-md-3' id='divImgNbJoueurs'><img class='mini' src="../images/nbJoueurs6.gif"></div>
-              <div class='col-md-9' id='divTxtNbJoueurs'><label class='gauche'>3 à 6 joueurs</labe></div>
-              <div class='col-md-2' id='divNiveau'><img class='mini' src="../images/pictoNiv3.gif"></div>
-            </section>
-          </div>
-        </section>
-      </div>
+        <div id='dateEvt'></div>
+    </div>
+    <div class="col-xs-7 offset-1" id='descEvt'>
+    </div>
 
-    </section>
   </div>
-
+</div>
+          </div>
         </div>
       </div>     </div> 
 
-  
-    <div id="RangementDesJeux" class="jeSuisInvisible">
-    	<?php echo $_SESSION["remplissageJeux"]; ?>
-    </div>
   </body>
 </html>

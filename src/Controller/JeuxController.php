@@ -7,7 +7,7 @@ class JeuxController extends ParentController
 {
   public function main()
   {
-    $_SESSION["ongletActif"] = "J";
+    $_SESSION["ongletActif"] = "JEU";
     $listeJeux = $this->getJeux();
 
     $util = $this->get("utilitaires");
