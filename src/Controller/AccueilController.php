@@ -7,6 +7,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AccueilController extends ParentController
 {
+  /**
+   * @Route("/main", name="main")
+   */
   public function main()
   {
     $_SESSION["ongletActif"] = "ACC";
@@ -15,15 +18,15 @@ class AccueilController extends ParentController
     if ($util->estRenseigneSESSION("userPseudo")) { $nom = $_SESSION["userPseudo"]; }
     $texteAvant = array(
       utf8_encode("Bienvenue, ".$nom." !"),
-      utf8_encode("Vous êtes chez le Renard Enjoué. Notre association a été créée en 2019. "),
+      utf8_encode("Vous ï¿½tes chez le Renard Enjouï¿½. Notre association a ï¿½tï¿½ crï¿½ï¿½e en 2019. "),
       utf8_encode('Notre but est de permettre aux amateurs de "jeux modernes" '.
                   "de Bussy et ses environs de se retrouver pour jouer. ")
     );
     $texteApres = array(
-      utf8_encode("- utiliser le formulaire de contact, soit pour me prévenir que vous venez à un des événements de mon calendrier, soir pour me demander d'ajouter à ce calendrier un évènement que vous organisez."),
+      utf8_encode("- utiliser le formulaire de contact, soit pour me prï¿½venir que vous venez ï¿½ un des ï¿½vï¿½nements de mon calendrier, soir pour me demander d'ajouter ï¿½ ce calendrier un ï¿½vï¿½nement que vous organisez."),
       utf8_encode('- consulter la rubrique "Inviter des joueurs" du forum '.
                   " pour voir ce qu'organisent les autres joueurs."),
-      utf8_encode('- proposer votre évènement dans cette même rubrique.')
+      utf8_encode('- proposer votre ï¿½vï¿½nement dans cette mï¿½me rubrique.')
       );
     return $this->render('/accueil.html.twig',["session" => $_SESSION, "texteAvant" => $texteAvant, "texteApres" => $texteApres]);
   }

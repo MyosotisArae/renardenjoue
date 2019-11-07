@@ -8,64 +8,26 @@
 </style>
 {% endblock %}
 
-{% block corps %}
-  {{ parent() }}
-{% endblock %}
-
 {% block laPage %}
 
 <div class="row">
   {# Ligne 1 (sur ecran assez grand) : image Médina pour décaler le texte vers le bas. #}
-  <div class="offset-6 col-md-2 d-none d-md-block">
+  <div class="col-5">
     <br><br>
-    <img class="petiteImage" src="{{ img_path }}medina.jpg">
+    <h1><a href="jeux">Nos jeux</a></h1>
   </div>
-  <div class="offset-4">
+  <div class="col-7">
   </div>
-
-
-  {# Ligne 2 : Premier bloc de texte avec image de Carcassonne dans le coin haut droit. #}
-  <div class="offset-md-1 d-none d-md-block">
+  <div class="col-12">
+    <br><br>
+    <h1><a href="calendrier">Les évènements à venir</a></h1>
   </div>
-  <div class="col-md-4 col-xs-11 bg-primary bordRond">
-    <div class="container-fluid">
-      <div class="row">
-        {# Premiere partie : uniquement si l'ecran est assez grand. #}
-        <div class="d-none d-md-block">
-    {% for txt in texteAvant %}
-      {% if loop.first %}
-    <img class="float-right petiteImage" src="{{ img_path }}46.jpg">
-      {% endif %}
-    <p>{{ txt }}{% if loop.last %}&nbsp;&nbsp;&nbsp;<span class="fa-stack fa-2x d-none d-lg-block"><i class="fas fa-meh-blank fa-regular fa-stack-1x rouge"></i><i class="fas fa-grin-wink fa-stack-1x jaune"></i></span>{% endif %}</p>
-    {% endfor %}
-        </div>
-        {# Fin de la premiere partie. Afficher ceci dans tous les cas : #}
-    <span class="float-right">Voici&nbsp;comment&nbsp;ça&nbsp;se&nbsp;passe.&nbsp;</span><br>
-    <span class="float-right">Vous&nbsp;avez&nbsp;le&nbsp;choix&nbsp;entre&nbsp;:</span>
-      </div>
-    </div>
+  <div class="col-3">
   </div>
-  <div class="offset-md-2 d-none d-md-block">
+  <div class="col-9">
+    <br><br>
+    <h1><a href="contact">Nous contacter</a></h1>
   </div>
-  <div class="col-2 d-none d-md-block">
-    <br><br><br>
-    <img class="moyenneImage" src="{{ img_path }}LQ.gif">
-  </div>
-  <div class="offset-3">
-  </div>
-
-  {# Ligne 3 : Deuxième bloc de texte avec image de Catane au bout. #}
-  <div class="offset-md-5 offset-xs-1">
-  </div>
-  <div class="col-md-5 bg-primary bordRond">
-    {% for txt in texteApres %}
-      <p>{{ txt }}</p>
-      {% if loop.first %}
-      <img class="float-right petiteImage" src="{{ img_path }}catane.gif">
-      {% endif %}
-    {% endfor %}
-  </div>
-
 </div>{# row #}
 
 {% endblock %} {# Fin du block laPage #}
