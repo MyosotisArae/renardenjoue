@@ -159,18 +159,6 @@ div.listeJeux
   font-size : 1.4em;
   font-weight : bold;
 }
-.ascenseur
-{
-  width : 82vw;
-  height: 80vh;
-  padding-left : 1em;
-  margin-top : 1.8em;
-  margin-bottom : 1.2em;
-  margin-left : 1em;
-  margin-right : 1em;
-  overflow-x : hidden;
-  overflow-y : auto;
-}
 a.confetti
 {
   padding-right : 0.1em;
