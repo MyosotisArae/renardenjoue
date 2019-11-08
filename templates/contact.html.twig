@@ -15,24 +15,36 @@
 
   <div class='container-fluid'>
     <div class='row'>
-      <form class='col-md-11 fondOpaque' method="POST" action="mail">
+      <div class='col-12'>
+        <div class="fondOpaque ascenseur">
+        <br>
+        Notre association a été fondée en 2019.<br>
+        Son but est de permettre aux joueurs de Bussy Saint Georges de se retrouver pour jouer à des jeux de société <a href="" title="        Vers les années 90, les auteurs ont commencé à plancher sérieusement sur le rapport entre l'intérêt et la durée des parties. Les jeux ont commencé à faire l'objet de tests plus sérieux avant la sortie de leur version définitive. Les jeux dits ''familiaux'', où les choix sont généralement très restreints, voire inexistants, existent encore, mais servent plus à permettre à mamie de jouer avec ses petits enfants le soir de Noël.
+        Cela ne veut pas dire pour autant qu'on va vous faire jouer à des jeux hyper compliqués. Le jeu moderne vous impose de faire des choix, certes, car un jeu où il suffit de lancer un dé et d'avancer son pion d'autant n'a aucun intérêt. Mais quel que soit votre capacité à retenir des règles plus ou moins longues, plus ou moins complexes, il existe tout un panel de jeux qui devraient vous plaire.  ">"modernes"</a>.<br>
+        <br>
+        Le <a href="https://lerenardenjoue.forumactif.com/" title="Postez des annonces pour vos soirées jeux.">forum</a> vous offre la possibilité d'organiser des parties chez vous et d'inviter des joueurs. Mais nous proposons aussi, régulièrement des après-midi-jeux au siège de l'asso:<br>
         <table>
           <tr>
-            <td>Sujet :</td>
-            <td><input type="text" id="titreMail" name="titreMail" style="width:50em;"></td>
-          </tr>
-          <tr>
-            <td style="vertical-align : top;">Message :</td>
-            <td><textarea class="fondOpaque" id="contenuMail" name="contenuMail" style="width:75em; height:30em;"></textarea></td>
-          </tr>
-          <tr>
-            <td colspan=2><button type="submit">Envoyer le message</button></td>
-          </tr>
-          <tr>
-            <td colspan=2>{% if session.messageAlert is defined %} {{session.messageAlert}} {% endif %}</td>
+            <td style="vertical-align : top;">
+              4 boulevard Pierre Mendès France<br>
+              77600 Bussy Saint Georges<br>
+              <br>
+              Ce sera dans ce cas indiqué dans le calendrier. Pour y participer, il suffit de nous prévenir par mail à cette adresse :<br>
+              <a href="mailto:webmaster@lerenardenjoue.webou.net">webmaster@lerenardenjoue.webou.net</a><br>
+              Vous n'aurez à préciser à quelle heure vous pensez arriver, et je vous répondrai en mentionnant mon numéro de téléphone. Une fois devant la porte, vous m'appelez et je viens vous chercher. On discute avec tout le monde du genre de jeu auquel on veut jouer (durée, style, thème...) et on joue !<br>
+              <br>
+              Les inscriptions sont ouvertes jusqu'à 2 jours avant la date prévue. Ensuite, si personne ne s'est manifesté pour participer, la date est annulée. Si cette date tombe un samedi ou un dimanche, la date limite d'inscription est le jeudi. Au-delà, je risque de partir en week-end sans même voir votre message.<br>
+              <br>
+            </td>
+            <td>
+              <img src="{{ img_path }}planQuartier.png">
+            </td>
           </tr>
         </table>
-      </form>
+        <br>
+        <br><br>
+        </div>
+      </div>
     </div>
   </div>
 
