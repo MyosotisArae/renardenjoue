@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Ludotheque;
 
 class JeuxController extends ParentController
 {
@@ -24,7 +25,18 @@ class JeuxController extends ParentController
 
     // Calculer le code HTML pour afficher la duree du jeu choisi.
     $_SESSION["htmlDuree"] = $this->getDuree();
-    return $this->render('/jeux.html.twig',["session" => $_SESSION,"listeJeux" => $listeJeux]);
+
+	return $this->render('/jeux.html.twig',["session" => $_SESSION,"listeJeux" => $listeJeux]);
+  }
+  
+  private function getJeuxBis()
+  {
+	$jeu = new Ludotheque();
+	$jeu->nom = "Catane";
+	$jeu->but = "gagner";
+	$jeux = array($jeu,$jeu);
+    
+	return $jeux;
   }
   
   private function getJeux()

@@ -18,7 +18,7 @@ class LudothequeRepository extends ServiceEntityRepository
     //                              Mes requetes                                 //
     ///////////////////////////////////////////////////////////////////////////////
 
-    // Retourne les jeux dans l'ordre alphabétique.
+    // Retourne les jeux dans l'ordre alphabï¿½tique.
     /**
       * @return Ludotheque[]
       */
