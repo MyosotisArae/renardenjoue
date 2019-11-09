@@ -79,7 +79,7 @@
 {% endblock %}
 
 {% block laPage %}
-<div class="container-fluid fondOpaque">
+<div class="container-fluid fondOpaque ascenseur">
   <div class="row">
 
     <div class="col-xs-12" id='calendar'>
@@ -94,6 +94,14 @@
           {% else %}
           {{listeDates|length}} évènements ce mois-ci !
           {% endif %}
+{#
+        {% for evt in listeDates %}
+          <br>
+          {{evt.id}} : {{evt.titre}}<br>
+                       {{ evt.description|replace({'\n':'<br>','\r':'','"':'&quot;'})|raw }}<br>
+                       {{ evt.periode|replace({'\n':'<br>','\r':''})|raw }}
+        {% endfor %}
+#}
         </div>
         <div id='dateEvt'></div>
     </div>
