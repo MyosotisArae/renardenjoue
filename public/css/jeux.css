@@ -146,11 +146,11 @@ div.listeJeux
 {
   width : 50vw;
   height: 44vh;
-  background-image : url('../../public/images/parchemin.gif');
+  background-image : url('/images/parchemin.gif');
   background-size: cover;
   background-repeat:no-repeat;
   padding-top : 1.8em;
-  padding-bottom : 1.2em;
+  padding-bottom : 1.4em;
   padding-left : 1em;
   padding-right : 1em;
   overflow-x : hidden;
