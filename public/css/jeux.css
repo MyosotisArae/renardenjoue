@@ -36,6 +36,14 @@ h3
 }
 label
 {
+  color:#428bca;
+  text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
+  text-align : right;
+  width : 100%;
+  font-size : 1.7em;
+}
+label.ivoire
+{
   color : #FDFCE9;
   text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
   text-align : right;

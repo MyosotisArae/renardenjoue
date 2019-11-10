@@ -148,6 +148,12 @@ img.moyenneImage
   background : Ivory;
   opacity : 0.9;
 }
+.bordsArrondis
+{
+  padding-top:0.5em;
+  border-radius : 1em;
+  border : 3px solid blue;
+}
 .centrer
 {
   text-align : center;

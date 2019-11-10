@@ -40,7 +40,7 @@
 {% endfor %}
             </div>
           </div>
-          <form class='col-md-12 margeAdroite' method="POST" action="jeux?operation=recherche">
+          <form class='col-md-12 margeAdroite fondOpaque cadreBleu' style="padding-top : 0.5em; color : #428bca;" method="POST" action="jeux?operation=recherche">
             <section class ='row'>
               <div class='col-md-4'><label>Titre :</label></div>
               <div class='col-md-8' style="position:relative;"><a href="#" style="position:relative;"><input type='text' name='jeuTitre'><div class='tool-tip right'>Ecrivez&nbsp;ici&nbsp;le&nbsp;titre,&nbsp;complet&nbsp;ou&nbsp;partiel,&nbsp;que&nbsp;vous&nbsp;recherchez.</div></a></div>
@@ -129,7 +129,7 @@
                 </div>
               </div>
               <div class='col-md-4' id='divImgNbJoueurs'><img class='mini' src="{{ img_path }}{{session.jeuChoisi.imgNbJoueurs}}"></div>
-              <div class='col-md-8' id='divTxtNbJoueurs'><label class='gauche'>{{session.jeuChoisi.nbJoueurs}}</labe></div>
+              <div class='col-md-8' id='divTxtNbJoueurs'><label class='gauche ivoire'>{{session.jeuChoisi.nbJoueurs}}</labe></div>
               <div class='col-md-2' id='divNiveau'><img class='mini' src="{{ img_path }}pictoNiv{{session.jeuChoisi.dominance}}.gif"></div>
             </section>
           </div>

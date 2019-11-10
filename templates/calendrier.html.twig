@@ -4,16 +4,16 @@
   {{ parent() }}
 
     <link href='{{ css_path }}/calendrier.css' rel='stylesheet' />
-    <link href='{{ fc_path }}/core/main.css' rel='stylesheet' />
-    <link href='{{ fc_path }}/bootstrap/main.css' rel='stylesheet' />
-    <link href='{{ fc_path }}/daygrid/main.css' rel='stylesheet' />
+    <link href='{{ fc_path }}core/main.css' rel='stylesheet' />
+    <link href='{{ fc_path }}bootstrap/main.css' rel='stylesheet' />
+    <link href='{{ fc_path }}daygrid/main.css' rel='stylesheet' />
 
     <script src='{{ js_path }}/calendrier.js'></script>
 
-    <script src='{{ fc_path }}/core/main.js'></script>
-    <script src='{{ fc_path }}/bootstrap/main.js'></script>
-    <script src='{{ fc_path }}/daygrid/main.js'></script>
-    <script src='{{ fc_path }}/interaction/main.js'></script>
+    <script src='{{ fc_path }}core/main.js'></script>
+    <script src='{{ fc_path }}bootstrap/main.js'></script>
+    <script src='{{ fc_path }}daygrid/main.js'></script>
+    <script src='{{ fc_path }}interaction/main.js'></script>
 
     <script>
       {% set unEvt = null %}
@@ -53,13 +53,16 @@
                      left :  'dayGridMonth dayGridWeek dayGridDay'
                    },
           businessHours: { daysOfWeek : [2,4,6] },
+          nextDayThreshold: '18:00:00',
           events : [{% for evt in listeDates %}
 
                      {
                        id : {{evt.id}},
+                       textColor : '#FFFFFF',
+                       {% if evt.titre=="Les renards jouent" %}backgroundColor: '#ff0000',{% endif %}
                        title : "{{evt.titre}}",
                        start : "{{evt.dateDebut|date('Y-m-d')}}"
-                       {% if evt.aUneDateDeFin %},end : "{{evt.dateFin ? evt.dateFin|date('Y-m-d')}}"{% endif %}
+                       {% if evt.aUneDateDeFin %},end : "{{evt.dateFin ? evt.dateFin|date_modify('+1 day')|date('Y-m-d')}}"{% endif %}
 
                      }{% if (not loop.last) %},{% endif %}
                    {% endfor %}
@@ -91,8 +94,10 @@
           Aucun évènement ce mois-ci
           {% elseif listeDates|length == 1 %}
           {% include("_detailEvt.html.twig") %}
+          {#}
           {% else %}
           {{listeDates|length}} évènements ce mois-ci !
+          #}
           {% endif %}
 {#
         {% for evt in listeDates %}
