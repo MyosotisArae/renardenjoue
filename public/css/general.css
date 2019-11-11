@@ -59,11 +59,13 @@ body
   overflow-x : hidden;
   overflow-y : hidden;
 }
+/*
 body.fond
 {
   background-image : url('/images/fond.png');
   background-repeat : repeat;
 }
+*/
 img.fond
 {
   position : absolute;
@@ -132,6 +134,10 @@ img.moyenneImage
 {
   position : absolute;
 }
+.enRelatif
+{
+  position : relative;
+}
 .enBleu
 {
   color:#000;
@@ -147,12 +153,6 @@ img.moyenneImage
 {
   background : Ivory;
   opacity : 0.9;
-}
-.bordsArrondis
-{
-  padding-top:0.5em;
-  border-radius : 1em;
-  border : 3px solid blue;
 }
 .centrer
 {

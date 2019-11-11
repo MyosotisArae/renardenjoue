@@ -23,14 +23,12 @@
 {% block corps %}
   {% set isAdministrateur = false %}
   {% set afficherConnexion = false %}
-    <img class="fond container-fluid d-none d-md-block" src="{{img_path}}fond.png">
-    <img class="fond container-fluid d-md-none" src="{{img_path}}fondVertical.png">
 
     <header class="row">
-      <div class="col-xs-12 container-fluid">
+      <div class="col-12 container-fluid">
         <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-            <a class="navbar-brand col-xs-1" href="#"><img src="{{img_path}}logo.gif" class="logo"></a>
-            <ul class="navbar-nav col-xs-11">
+            <a class="navbar-brand col-1" href="#"><img src="{{img_path}}logo.gif" class="logo"></a>
+            <ul class="navbar-nav col-11">
               <div class="d-none d-md-block"> {# Menu pour grand ecran #}
                 <li class="nav-item{{ ongletActif("ACC") }}">
                   <a class="nav-link" href="accueil"><i class="fas fa-home">&nbsp;</i>Accueil <span class="sr-only">(current)</span></a>
@@ -98,8 +96,11 @@
       </div>
     </header>
 
+    <img class="fond container-fluid d-none d-md-block enAbsolu" style="top:3em;" src="{{img_path}}fond.png">
+    <img class="fond container-fluid d-md-none" src="{{img_path}}fondVertical.png">
+
     <div class="row">
-      <div class="col-xs-3 col-sm-2 col-md-1">
+      <div class="col-1">
           <fieldset class="cadrePointilles bg-primary">
             <legend class="bg-primary">Liens</legend>
             <a href="https://lerenardenjoue.forumactif.com/" title="Discutez des jeux que vous aimez (ou pas), proposez vos propres soirées jeux, ...">Notre forum</a><br>
@@ -108,7 +109,7 @@
             <a href="http://www.ludhainaut.fr/" title="Association de joueurs à Onnaing">Lud'Hainaut</a><br>
           </fieldset>
       </div> {# colonne de gauche #}
-      <div class="col-xs-9 col-sm-10 col-md-11">
+      <div class="col-11">
         <div class="container-fluid">
           <div class="row">
           {% block laPage %}

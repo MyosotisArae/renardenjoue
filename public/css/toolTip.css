@@ -4,7 +4,7 @@
 .tool-tip{
 	color: #fff;
 	background-color: rgba( 66, 139, 202, .95);
-	border : 1px solid #5bc0de;
+	border : 1px solid rgba( 66, 139, 202, .95);
 	text-shadow: none;
 	font-size: .8em;
 	visibility: hidden;
@@ -12,10 +12,10 @@
 	-moz-border-radius: 7px; 
 	-o-border-radius: 7px; 
 	border-radius: 7px;	
-	text-align: center;	
+	text-align: right;	
 	opacity: 0;
 	z-index: 999;
-	padding: 3px 8px;	
+	padding: 0px 8px;	
 	position: absolute;
 	cursor: default;
 	-webkit-transition: all 240ms ease-in-out;
@@ -42,25 +42,25 @@
 	height: 0px;
 	width: 0px;
 	border: 6px solid transparent;
-  border-top-color: rgba( 91, 192, 222, .95);
+  border-top-color: rgba( 66, 139, 202, .95);
 }
 
 /* default heights, width and margin w/o Javscript */
 
 .tool-tip,
 .tool-tip.top{
-	width: 100%;
+	width: auto;
 	height: 22px;
 	margin-left: -43px;
 }
 
-/* tool tip position right */
+/* tool tip position right : La fenetre tooltip est a droite */
 
 .tool-tip.right{
 	top: 35%;
 	right: auto;
-	left: 106%;
-	margin-top: -15px;
+	left: 105%; /* Distance entre la partie gauche du composant qui precede et la fleche du tooltip */
+	margin-top: -20px;
 	margin-right: auto;	
 	margin-left: auto;
 }
@@ -71,16 +71,16 @@
 	margin-top: -6px;
 	bottom: auto;
 	border-top-color: transparent;	
-    border-right-color: rgba( 91, 192, 222, .95);
+    border-right-color: rgba( 66, 139, 202, .95);
 }
 
-/* tool tip position left */
+/* tool tip position left : La fenetre tooltip est a gauche */
 
 .tool-tip.left{
-	top: 50%;
+	top: 40%;
 	left: auto;
-	right: 105%;
-	margin-top: -15px;	
+	right: 105%; /* Distance entre la partie droite du composant qui precede et la fleche du tooltip */
+	margin-top: -20px;	
 	margin-left: auto;	
 }
 
@@ -91,7 +91,7 @@
 	margin-top: -6px;
 	bottom: auto;
 	border-top-color: transparent;	
-    border-left-color: rgba( 91, 192, 222, .95);
+    border-left-color: rgba( 66, 139, 202, .95);
 }
 
 /* tool tip position bottom */
@@ -113,7 +113,7 @@
 	width: 0px;
 	border: 6px solid transparent;
     border-top-color: transparent;	
-    border-bottom-color: rgba( 91, 192, 222, .95);
+    border-bottom-color: rgba( 66, 139, 202, .95);
 }
 
 /* tooltip on focus left and right */

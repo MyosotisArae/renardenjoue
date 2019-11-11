@@ -8,10 +8,11 @@
 }
 div.grandeImage
 {
-  width : 17vw;
-  height: 27vh;
+  height: 100%;
+  width : auto;
   background-size:cover;
 }
+.h-100 { height: 100%; }
 h1
 {
   color : #FDFCE9;
@@ -24,7 +25,7 @@ h2
 {
   color : #FDFCE9;
   text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
-  text-align : left;
+  text-align : center;
   font-size : 1.5em;
 }
 h3
@@ -40,15 +41,7 @@ label
   text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
   text-align : right;
   width : 100%;
-  font-size : 1.7em;
-}
-label.ivoire
-{
-  color : #FDFCE9;
-  text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
-  text-align : right;
-  width : 100%;
-  font-size : 1.7em;
+  font-size : 1.2em;
 }
 .gauche
 {
@@ -73,20 +66,13 @@ select
   border-radius : 0.6em;
   background : #FDFCE9;
 }
-div.listeJeux
+.listeJeux
 {
-  height : 45vh;
-  width : 100%;
+  height : 60vh;
   overflow-x : hidden;
   overflow-y : scroll;
-  border-radius : 0.6em;
-  margin-top : 0.2em;
-  margin-bottom : 1em;
-  padding : 0.2em;
+  padding : 0.1em;
   background : black;
-  border : 3px solid #5bc0de;
-  position : relative;
-  left : -1em;
   z-index : 3000;
 }
 ::-webkit-scrollbar {
@@ -131,7 +117,6 @@ div.listeJeux
 {
   border: 5px solid #5bc0de;
   border-radius : 1em;
-  margin : 0.2em;
 }
 .fondBleu { background: #428bca; }
 .reduire { max-width : 50vw; }
@@ -150,20 +135,17 @@ div.listeJeux
   display : inline-block;
   white-space : nowrap;
 }
-.parchemin
+.sousFenetre
 {
   width : 50vw;
-  height: 44vh;
-  background-image : url('/images/parchemin.gif');
+  height: 35vh;
   background-size: cover;
   background-repeat:no-repeat;
-  padding-top : 1.8em;
   padding-bottom : 1.4em;
   padding-left : 1em;
   padding-right : 1em;
   overflow-x : hidden;
   overflow-y : auto;
-  font-family : 'Cursive standard';
   font-size : 1.4em;
   font-weight : bold;
 }
@@ -297,11 +279,21 @@ img.imageCarree3
 .bouton
 {
   width : 100%;
-  font-size : 1.5em;
+  font-size : 1.2em;
   color : #FDFCE9;
   text-shadow : 1px 0px black, -1px 0px black, 0px 1px black, 0px -1px black;
   padding-left : 1em;
   padding-right : 1em;
   float : right;
   text-align : center;
+}
+.w-40
+{
+  width : 40%;
+  padding : 5px;
+}
+.w-60
+{
+  width : 60%;
+  padding : 5px;
 }
