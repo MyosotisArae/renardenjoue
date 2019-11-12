@@ -31,6 +31,7 @@
         {% endfor %}
 
       };
+      var lesJours = ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
       var lesMois = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
       var ceMoisCi = lesMois[new Date().getMonth()];
 
@@ -47,13 +48,13 @@
                          dayGridDay  : "jour"
                        },
           firstDay : 1,
+          locale : "fr",
           header : {
                      center : 'title',
                      right : 'today prev next',
                      left :  'dayGridMonth dayGridWeek dayGridDay'
                    },
           businessHours: { daysOfWeek : [2,4,6] },
-          nextDayThreshold: '18:00:00',
           events : [{% for evt in listeDates %}
 
                      {
@@ -69,6 +70,8 @@
 
                    ],
           eventClick : function(info) { detailEvt(listeDesc[info.event.id]); }
+          /*,
+          columnHeaderText: function(d) { return lesJours[d.getDay()]; }*/ // plus besoin de ça avec le parametre locale
         });
 
         calendar.render();
@@ -85,13 +88,13 @@
 <div class="container-fluid fondOpaque ascenseur">
   <div class="row">
 
-    <div class="col-xs-12" id='calendar'>
+    <div class="col-12" id='calendar'>
     </div>
 
-    <div class="col-xs-4">
+    <div class="col-4">
         <div id='titreEvt'>
           {% if listeDates|length == 0 %}
-          Aucun évènement ce mois-ci
+          Aucun évènement ce mois-ci {# Pb : cette liste contient tous les evts, pas juste ceux de ce mois #}
           {% elseif listeDates|length == 1 %}
           {% include("_detailEvt.html.twig") %}
           {#}
@@ -99,18 +102,10 @@
           {{listeDates|length}} évènements ce mois-ci !
           #}
           {% endif %}
-{#
-        {% for evt in listeDates %}
-          <br>
-          {{evt.id}} : {{evt.titre}}<br>
-                       {{ evt.description|replace({'\n':'<br>','\r':'','"':'&quot;'})|raw }}<br>
-                       {{ evt.periode|replace({'\n':'<br>','\r':''})|raw }}
-        {% endfor %}
-#}
         </div>
         <div id='dateEvt'></div>
     </div>
-    <div class="col-xs-7 offset-1" id='descEvt'>
+    <div class="col-7 offset-1" id='descEvt'>
     </div>
 
   </div>
