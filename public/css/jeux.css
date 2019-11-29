@@ -12,6 +12,9 @@ div.grandeImage
   width : auto;
   background-size:cover;
 }
+.h-20 { height: 20%; }
+.h-30 { height: 27vh; }
+.h-70 { height: 72vh; }
 .h-100 { height: 100%; }
 h1
 {
@@ -203,8 +206,8 @@ a.fonte10  { font-family : Artistic-CE; }
 {
   position : absolute;
   top : 1em;
-  left : 1em;
-  width : 35vw;
+  left : -15em;
+  box-sizing: border-box;
   border: 2px solid #5bc0de;
   border-radius : 0.5em;
   background : #FDFCE9;

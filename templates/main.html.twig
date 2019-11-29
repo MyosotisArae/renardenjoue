@@ -27,8 +27,8 @@
     <header class="row">
       <div class="col-12 container-fluid">
         <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-            <a class="navbar-brand col-1" href="#"><img src="{{img_path}}logo.gif" class="logo"></a>
-            <ul class="navbar-nav col-11">
+            <a class="navbar-brand col-1" href="#"><img src="{{img_path}}logo.gif" class="logo" class="enAbsolu" style="top:-1em;left:0;"></a>
+            <div class="navbar-nav col-11">
               <div class="d-none d-md-block"> {# Menu pour grand ecran #}
                 <li class="nav-item{{ ongletActif("ACC") }}">
                   <a class="nav-link" href="accueil"><i class="fas fa-home">&nbsp;</i>Accueil <span class="sr-only">(current)</span></a>
@@ -91,31 +91,18 @@
                   <a class="nav-link" href="contact"><i class="fas fa-comment">&nbsp;</i></a>
                 </li>
               </div> {# Menu pour petit ecran #}
-            </ul>
+            </div>
         </nav>
       </div>
     </header>
 
-    <img class="fond container-fluid d-none d-md-block enAbsolu" style="top:3em;" src="{{img_path}}fond.png">
-    <img class="fond container-fluid d-md-none" src="{{img_path}}fondVertical.png">
+    <img class="fond container-fluid d-none d-md-block enAbsolu" style="top:3em;background-size : cover;" src="{{img_path}}fond.png">
+    <img class="fond container-fluid d-md-none" style="top:3em;background-size : cover;" src="{{img_path}}fondVertical.png">
 
     <div class="row">
-      <div class="col-1">
-          <fieldset class="cadrePointilles bg-primary">
-            <legend class="bg-primary">Liens</legend>
-            <a href="https://lerenardenjoue.forumactif.com/" title="Discutez des jeux que vous aimez (ou pas), proposez vos propres soirées jeux, ...">Notre forum</a><br>
-            <a href="https://ludiworld.com/newshop/84-jeux-de-societe" title="Votre boutique de jeux, ici, à Bussy !">Ludiworld</a><br>
-            <a href="https://www.bussysaintgeorges.fr/education/petite-enfance/la-ludotheque/" title="Ludothèque de Bussy, pour les enfants de 0 à 12 ans">Ludothèque</a><br>
-            <a href="http://www.ludhainaut.fr/" title="Association de joueurs à Onnaing">Lud'Hainaut</a><br>
-          </fieldset>
-      </div> {# colonne de gauche #}
-      <div class="col-11">
-        <div class="container-fluid">
-          <div class="row">
+      <div class="col-12">
           {% block laPage %}
           {% endblock %}
-          </div>
-        </div>
       </div> {# contenant des pages #}
     </div> {# div principale #}
 

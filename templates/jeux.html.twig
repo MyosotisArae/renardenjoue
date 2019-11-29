@@ -13,13 +13,13 @@
 
 {% block laPage %}
 
-  <div class='container-fluid'>
-    <div class='row w-100'>
+  <div class='container-fluid h-30'>
+    <div class='row w-100 h-100' >
 
       <div class='col-5 w-40 h-100'>
-          <form style="padding-top : 0.5em;" method="POST" action="jeux?operation=recherche" class="fondOpaque cadreBleu">
+          <form  method="POST" action="jeux?operation=recherche" class="h-100 fondOpaque cadreBleu">
               <table class="w-100 h-100">
-                <tr>
+                <tr class="h-20">
                   <td class="w-25">
                     <label>Titre :</label>
                   </td>
@@ -29,7 +29,7 @@
                     </a>
                   </td>
                 </tr>
-                <tr>
+                <tr class="h-20">
                   <td>
                     <label>Niveau :</label>
                   </td>
@@ -47,7 +47,7 @@
                     </a>
                   </td>
                 </tr>
-                <tr>
+                <tr class="h-20">
                   <td>
                     <label>Durée :</label>
                   </td>
@@ -66,7 +66,7 @@
                     </a>
                   </td>
                 </tr>
-                <tr>
+                <tr class="h-20">
                   <td>
                     <label>Nombre :</label>
                   </td>
@@ -87,7 +87,7 @@
                     </a>
                   </td>
                 </tr>
-                <tr>
+                <tr class="h-20">
                   <td colspan=2>
                     <input type="submit" class="cadreBleu fondBleu bouton" href="jeux?operation=recherche" value="Rechercher les jeux correspondants">
                   </td>
@@ -97,16 +97,16 @@
           </form>
       </div>
 
-      <div class='col-7 w-60'>
-        <div class="row">
-          <div class='col-5'>
-            <div class='grandeImage cadreBleu' style="padding-left:-1em;background-image:url({{ img_path }}imagesJeux/{{session.jeuChoisi.img}}.jpg);">
+      <div class='col-7 w-60 h-30'>
+        <div class="row h-30">
+          <div class='col-5 h-30'>
+            <div class='grandeImage h-30 cadreBleu' style="background-image:url({{ img_path }}imagesJeux/{{session.jeuChoisi.img}}.jpg);">
             </div>
           </div>
-          <div class='col-7 camembert'>
-            <div class ='row'>
+          <div class='col-7 camembert h-30'>
+            <div class ='row h-30'>
               <div class="col-12 cadreBleu fondBleu"><h2>{{session.jeuChoisi.nomComplet}}</h2></div>
-              <div class='col-12 enLigne' id='divDuree'>
+              <div class='col-10 enLigne' id='divDuree'>
                 <div class="camembertParent enLigne">
                   {{session.htmlDuree|raw}}
                 </div>
@@ -141,14 +141,20 @@
                   </table>
                 </div>
               </div>
-              <div class='col-4' id='divImgNbJoueurs'><img class='mini' src="{{ img_path }}{{session.jeuChoisi.imgNbJoueurs}}"></div>
-              <div class='col-4 ' id='divTxtNbJoueurs'><label class='gauche blanc' style="font-size : 1.4em;">{{session.jeuChoisi.nbJoueurs}}</label></div>
-              <div class='col-4' id='divNiveau'><img class='mini' src="{{ img_path }}pictoNiv{{session.jeuChoisi.dominance}}.gif"></div>
+              <div class='col-2' id='divNiveau'><img class='mini enAbsolu' style="right : 0;top : 2em;" src="{{ img_path }}pictoNiv{{session.jeuChoisi.dominance}}.gif"></div>
+              <div class='col-12 inline' id='divTxtNbJoueurs'>
+                <label class='gauche blanc' style="font-size : 1.4em;">{{session.jeuChoisi.nbJoueurs}}</label>
+                <img class='mini enAbsolu' style="right : 0;bottom : 1em;" src="{{ img_path }}{{session.jeuChoisi.imgNbJoueurs}}">
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
 
+  <div class='container-fluid h-70'>
+    <div class='row w-100' style="padding-top : 1em;">
       <div class='col-5 w-40'>
         <div class='listeJeux cadreBleu'>
 

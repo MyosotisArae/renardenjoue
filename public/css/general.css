@@ -6,6 +6,7 @@
 {
   background : white;
 }
+* { box-sizing: border-box; }
 .tresLarge
 {
   width : 95vw;
@@ -175,7 +176,7 @@ a.bouton:hover
 /* Pour mettre un ascenseur vertical dans une div */
 .ascenseur
 {
-  width : 82vw;
+  width : 95vw;
   height: 80vh;
   padding-left : 1em;
   margin-top : 1.8em;
