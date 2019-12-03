@@ -7,14 +7,14 @@
     <link href='{{ fc_path }}core/main.css' rel='stylesheet' />
     <link href='{{ fc_path }}bootstrap/main.css' rel='stylesheet' />
     <link href='{{ fc_path }}daygrid/main.css' rel='stylesheet' />
+    <link href='{{ fc_path }}list/main.css' rel='stylesheet' />
 
     <script src='{{ js_path }}/calendrier.js'></script>
 
     <script src='{{ fc_path }}core/main.js'></script>
     <script src='{{ fc_path }}bootstrap/main.js'></script>
     <script src='{{ fc_path }}daygrid/main.js'></script>
-    <script src='{{ fc_path }}interaction/main.js'></script>
-
+    <script src='{{ fc_path }}list/main.js'></script>
     <script>
       {% set unEvt = null %}
 
@@ -39,31 +39,59 @@
         var calendarEl = document.getElementById('monCalendrier');
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
-          plugins: [ 'dayGrid','interaction','bootstrap' ],
+          plugins: [ 'dayGrid', 'bootstrap', 'list' ],
           height : 500,
           buttonText : {
                          today : 'Revenir en '+ceMoisCi,
                          dayGridMonth : "mois",
                          dayGridWeek : "semaine",
-                         dayGridDay  : "jour"
+                         dayGridDay  : "jour",
+                         listYear : "année"
                        },
           firstDay : 1,
+          defaultView : "dayGridMonth",
+          displayEventTime: false,
           locale : "fr",
+          noEventsMessage : "Aucun évènement de prévu pour l'instant.",
           header : {
                      center : 'title',
                      right : 'today prev next',
-                     left :  'dayGridMonth dayGridWeek dayGridDay'
+                     left :  'listYear dayGridMonth dayGridWeek dayGridDay'
                    },
           businessHours: { daysOfWeek : [2,4,6] },
           events : [{% for evt in listeDates %}
-
                      {
                        id : {{evt.id}},
+                       allDay : false,
                        textColor : '#FFFFFF',
                        {% if evt.titre=="Les renards jouent" %}backgroundColor: '#ff0000',{% endif %}
-                       title : "{{evt.titre}}",
-                       start : "{{evt.dateDebut|date('Y-m-d')}}"
-                       {% if evt.aUneDateDeFin %},end : "{{evt.dateFin ? evt.dateFin|date_modify('+1 day')|date('Y-m-d')}}"{% endif %}
+                       title : "{{evt.heureDebut|date('H')}}h{% if evt.aUneHeureDeFin %}-{{evt.heureFin|date('H')}}h{% endif %} {{evt.titre}}",
+                       start : "{{evt.dateDebut|date('Y-m-d')}} {{evt.heureDebut|date('H:i')}}"
+                       {% if evt.aUneDateDeFin %},end : "{{evt.dateFin|date('Y-m-d')}}"
+                         {% if evt.aUneHeureDeFin %}
+                           +" {{evt.heureFin|date('H:i')}}"
+                         {% endif %}
+                       {% else %}
+                         {% if evt.aUneHeureDeFin %}
+                           ,end : "{{evt.dateDebut|date('Y-m-d')}} {{evt.heureFin|date('H:i')}}"
+                         {% endif %}
+                       {% endif %}
+
+                       {% if evt.aUneDateDeFin %}
+                       ,isMultipleDay: true,
+                       multipleDayEvents: [
+                         {
+                           description : "{{evt.titre}} - Premier jour",
+                           start : "{{evt.dateDebut|date('Y-m-d')}} {{evt.heureDebut|date('H:i')}}",
+                           end   : "{{evt.dateDebut|date('Y-m-d')}} {{evt.heureFin|date('H:i')}}"
+                         },
+                         {
+                           description : "{{evt.titre}} - Deuxième jour",
+                           start : "{{evt.dateFin|date('Y-m-d')}} {{evt.heureDebut|date('H:i')}}",
+                           end   : "{{evt.dateFin|date('Y-m-d')}} {{evt.heureFin|date('H:i')}}"
+                         }
+                       ]
+                       {% endif %}
 
                      }{% if (not loop.last) %},{% endif %}
                    {% endfor %}
@@ -88,7 +116,7 @@
 <div class="container-fluid fondOpaque ascenseur">
   <div class="row">
 
-    <div class="col-12" id='monCalendrier'>
+    <div class="col-12" id='monCalendrier' style="margin-bottom : 5px;">
     </div>
 
     <div class="col-4">

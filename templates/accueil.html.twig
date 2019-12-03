@@ -6,49 +6,70 @@
 <style>
   .grosTitre
   {
-    color : white;
+    color : #428bca;{# couleur bg-primary #}
     text-shadow : 1px 0px 5px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black, 2px 0px 1px black, -2px 0px 1px black, 0px 2px 1px black, 0px -2px 1px black;
     text-align : left;
+  }
+  .encadrer
+  {
+    box-sizing: border-box;
+    background : Ivory;
+    opacity : 0.9;
+    padding-right : 1em;
+    padding-left : 1em;
   }
 </style>
 {% endblock %}
 
 {% block laPage %}
 
-<div class="row">
+  <div class="col-12">
+    <br><br>
+  </div>
+
+  <div class="col-12 col-md-6 container" style="box-sizing: border-box;">
+    <div class="row encadrer cadreBleu">
+      <div class="col-11">
+        <br>
+        <h1 class="grosTitre"><a class="grosTitre" href="jeux">Nos jeux</a></h1>
+      </div>
+      <div class="col-1">
+      </div>
+      <div class="col-11">
+        <br><br>
+        <h1 class="grosTitre"><a class="grosTitre" href="https://lerenardenjoue.forumactif.com/">Notre forum</a></h1>
+      </div>
+      <div class="col-1">
+      </div>
+      <div class="col-11">
+        <br><br>
+        <h1 class="grosTitre"><a class="grosTitre" href="contact">Infos et contact</a></h1>
+      </div>
+      <div class="col-1">
+      </div>
+      <div class="col-11">
+        <br><br>
+        <h1 class="grosTitre"><a class="grosTitre" href="calendrier">{{"évènements à venir"|capitalize}}</a></h1>
+        <br>
+      </div>
+    </div>{# row encadrée #}
+    
+  </div>{# colonne 1 #}
+
+  <div class="col-12 col-md-1">
+    <h1>&nbsp;</h1>
+  </div>
+  <div class="col-12 col-md-2 encadrer cadreBleu">
+    <u>Prochaine soirée jeux :</u><br>
+    8 décembre 2019<br>
+    <br><br><br>
+    <u>Ajouts récents :</u><br>
+    <li>Dice mice</li>
+    <li>Minecraft : Builders & Biomes</li>
+    <br>
+    Venez les tester !<br>
+  </div>{# colonne 2 #}
   <div class="col-1">
   </div>
-  <div class="col-9">
-    <br><br>
-    <h1 class="grosTitre"><a class="grosTitre" href="jeux">Nos jeux</a></h1>
-  </div>
-  <div class="col-2">
-          <fieldset class="cadrePointilles bg-primary enAbsolu">
-            <legend class="bg-primary">Liens</legend>
-            <a href="https://lerenardenjoue.forumactif.com/" title="Discutez des jeux que vous aimez (ou pas), proposez vos propres soirées jeux, ...">Notre forum</a><br>
-            <a href="https://ludiworld.com/newshop/84-jeux-de-societe" title="Votre boutique de jeux, ici, à Bussy !">Ludiworld</a><br>
-            <a href="https://www.bussysaintgeorges.fr/education/petite-enfance/la-ludotheque/" title="Ludothèque de Bussy, pour les enfants de 0 à 12 ans">Ludothèque</a><br>
-            <a href="http://www.ludhainaut.fr/" title="Association de joueurs à Onnaing">Lud'Hainaut</a><br>
-          </fieldset>
-  </div>
-  <div class="col-1">
-  </div>
-  <div class="col-11">
-    <br><br>
-    <h1 class="grosTitre"><a class="grosTitre" href="https://lerenardenjoue.forumactif.com/">Notre forum</a></h1>
-  </div>
-  <div class="col-1">
-  </div>
-  <div class="col-11">
-    <br><br>
-    <h1 class="grosTitre"><a class="grosTitre" href="contact">Infos et contact</a></h1>
-  </div>
-  <div class="col-1">
-  </div>
-  <div class="col-11">
-    <br><br>
-    <h1 class="grosTitre"><a class="grosTitre" href="calendrier">Les évènements à venir</a></h1>
-  </div>
-</div>{# row #}
 
 {% endblock %} {# Fin du block laPage #}

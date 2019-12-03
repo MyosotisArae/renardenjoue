@@ -1,0 +1,142 @@
+<?php
+
+namespace Symfony\Component\VarExporter\Internal;
+
+return $getExpiry ? PHP_INT_MAX : Hydrator::hydrate(
+    $o = [
+        clone (($p = &Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ClassMetadata'] ?? Registry::p('Doctrine\\ORM\\Mapping\\ClassMetadata')),
+        clone ($p['Doctrine\\ORM\\Id\\IdentityGenerator'] ?? Registry::p('Doctrine\\ORM\\Id\\IdentityGenerator')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'App\\Entity\\Evenements',
+            ],
+            'namespace' => [
+                'App\\Entity',
+            ],
+            'rootEntityName' => [
+                'App\\Entity\\Evenements',
+            ],
+            'customRepositoryClassName' => [
+                'App\\Repository\\EvenementsRepository',
+            ],
+            'identifier' => [
+                [
+                    'id',
+                ],
+            ],
+            'generatorType' => [
+                4,
+            ],
+            'fieldMappings' => [
+                [
+                    'id' => [
+                        'fieldName' => 'id',
+                        'type' => 'integer',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'id',
+                        'id' => true,
+                    ],
+                    'titre' => [
+                        'fieldName' => 'titre',
+                        'type' => 'string',
+                        'scale' => 0,
+                        'length' => 100,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'titre',
+                    ],
+                    'description' => [
+                        'fieldName' => 'description',
+                        'type' => 'text',
+                        'scale' => 0,
+                        'length' => 65535,
+                        'unique' => false,
+                        'nullable' => true,
+                        'precision' => 0,
+                        'columnName' => 'description',
+                    ],
+                    'dateDebut' => [
+                        'fieldName' => 'dateDebut',
+                        'type' => 'date',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'date_debut',
+                    ],
+                    'dateFin' => [
+                        'fieldName' => 'dateFin',
+                        'type' => 'date',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => true,
+                        'precision' => 0,
+                        'columnName' => 'date_fin',
+                    ],
+                    'heureDebut' => [
+                        'fieldName' => 'heureDebut',
+                        'type' => 'time',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => true,
+                        'precision' => 0,
+                        'columnName' => 'heure_debut',
+                    ],
+                    'heureFin' => [
+                        'fieldName' => 'heureFin',
+                        'type' => 'time',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => true,
+                        'precision' => 0,
+                        'columnName' => 'heure_fin',
+                    ],
+                ],
+            ],
+            'fieldNames' => [
+                [
+                    'id' => 'id',
+                    'titre' => 'titre',
+                    'description' => 'description',
+                    'date_debut' => 'dateDebut',
+                    'date_fin' => 'dateFin',
+                    'heure_debut' => 'heureDebut',
+                    'heure_fin' => 'heureFin',
+                ],
+            ],
+            'columnNames' => [
+                [
+                    'id' => 'id',
+                    'titre' => 'titre',
+                    'description' => 'description',
+                    'dateDebut' => 'date_debut',
+                    'dateFin' => 'date_fin',
+                    'heureDebut' => 'heure_debut',
+                    'heureFin' => 'heure_fin',
+                ],
+            ],
+            'table' => [
+                [
+                    'name' => 'evenements',
+                ],
+            ],
+            'idGenerator' => [
+                $o[1],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+);

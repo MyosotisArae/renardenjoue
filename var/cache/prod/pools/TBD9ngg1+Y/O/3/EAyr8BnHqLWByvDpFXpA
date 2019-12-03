@@ -1,0 +1,31 @@
+<?php
+
+namespace Symfony\Component\VarExporter\Internal;
+
+return $getExpiry ? PHP_INT_MAX : Hydrator::hydrate(
+    $o = [
+        clone (($p = &Registry::$prototypes)['Symfony\\Component\\Validator\\Constraints\\Email'] ?? Registry::p('Symfony\\Component\\Validator\\Constraints\\Email')),
+        clone ($p['Doctrine\\ORM\\Mapping\\Column'] ?? Registry::p('Doctrine\\ORM\\Mapping\\Column')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'message' => [
+                'L\'email \'{{ value }}\' n\'est pas valide.',
+            ],
+            'groups' => [
+                [
+                    'Default',
+                ],
+            ],
+            'nullable' => [
+                1 => true,
+            ],
+        ],
+    ],
+    [
+        $o[0],
+        $o[1],
+    ],
+    []
+);
