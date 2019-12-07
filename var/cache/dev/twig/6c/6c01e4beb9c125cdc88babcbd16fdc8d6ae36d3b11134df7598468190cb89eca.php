@@ -389,28 +389,31 @@ class __TwigTemplate_20727c38d59d4d6bc0c2fd29ab8aa336933cf0963a981015b2ca1e63ce6
         // line 175
         echo "              </div>";
         // line 176
-        echo "              <div class='col-12 inline' id='divNiveau'>
+        echo "              <div class='col-12'>
+                <br><br>
+              </div>
+              <div class='col-12 inline' id='divNiveau'>
                 <label class='gauche' style=\"font-size : 1.4em;\">Complexité&nbsp;:&nbsp;";
-        // line 177
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["session"]) || array_key_exists("session", $context) ? $context["session"] : (function () { throw new RuntimeError('Variable "session" does not exist.', 177, $this->source); })()), "jeuChoisi", [], "any", false, false, false, 177), "dominance", [], "any", false, false, false, 177), "html", null, true);
+        // line 180
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["session"]) || array_key_exists("session", $context) ? $context["session"] : (function () { throw new RuntimeError('Variable "session" does not exist.', 180, $this->source); })()), "jeuChoisi", [], "any", false, false, false, 180), "dominance", [], "any", false, false, false, 180), "html", null, true);
         echo "/5</label>
                 <img class='mini enAbsolu' style=\"right : 2em;top : 0;\" src=\"";
-        // line 178
-        echo twig_escape_filter($this->env, (isset($context["img_path"]) || array_key_exists("img_path", $context) ? $context["img_path"] : (function () { throw new RuntimeError('Variable "img_path" does not exist.', 178, $this->source); })()), "html", null, true);
+        // line 181
+        echo twig_escape_filter($this->env, (isset($context["img_path"]) || array_key_exists("img_path", $context) ? $context["img_path"] : (function () { throw new RuntimeError('Variable "img_path" does not exist.', 181, $this->source); })()), "html", null, true);
         echo "pictoNiv";
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["session"]) || array_key_exists("session", $context) ? $context["session"] : (function () { throw new RuntimeError('Variable "session" does not exist.', 178, $this->source); })()), "jeuChoisi", [], "any", false, false, false, 178), "dominance", [], "any", false, false, false, 178), "html", null, true);
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["session"]) || array_key_exists("session", $context) ? $context["session"] : (function () { throw new RuntimeError('Variable "session" does not exist.', 181, $this->source); })()), "jeuChoisi", [], "any", false, false, false, 181), "dominance", [], "any", false, false, false, 181), "html", null, true);
         echo ".gif\">
                 <h1>&nbsp;</h1>
               </div>
               <div class='col-12 inline' id='divTxtNbJoueurs'>
                 <label class='gauche' style=\"font-size : 1.4em;\">";
-        // line 182
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["session"]) || array_key_exists("session", $context) ? $context["session"] : (function () { throw new RuntimeError('Variable "session" does not exist.', 182, $this->source); })()), "jeuChoisi", [], "any", false, false, false, 182), "nbJoueurs", [], "any", false, false, false, 182), "html", null, true);
+        // line 185
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["session"]) || array_key_exists("session", $context) ? $context["session"] : (function () { throw new RuntimeError('Variable "session" does not exist.', 185, $this->source); })()), "jeuChoisi", [], "any", false, false, false, 185), "nbJoueurs", [], "any", false, false, false, 185), "html", null, true);
         echo "</label>
                 <img class='mini enAbsolu' style=\"right : 2em;top : 0;\" src=\"";
-        // line 183
-        echo twig_escape_filter($this->env, (isset($context["img_path"]) || array_key_exists("img_path", $context) ? $context["img_path"] : (function () { throw new RuntimeError('Variable "img_path" does not exist.', 183, $this->source); })()), "html", null, true);
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["session"]) || array_key_exists("session", $context) ? $context["session"] : (function () { throw new RuntimeError('Variable "session" does not exist.', 183, $this->source); })()), "jeuChoisi", [], "any", false, false, false, 183), "imgNbJoueurs", [], "any", false, false, false, 183), "html", null, true);
+        // line 186
+        echo twig_escape_filter($this->env, (isset($context["img_path"]) || array_key_exists("img_path", $context) ? $context["img_path"] : (function () { throw new RuntimeError('Variable "img_path" does not exist.', 186, $this->source); })()), "html", null, true);
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["session"]) || array_key_exists("session", $context) ? $context["session"] : (function () { throw new RuntimeError('Variable "session" does not exist.', 186, $this->source); })()), "jeuChoisi", [], "any", false, false, false, 186), "imgNbJoueurs", [], "any", false, false, false, 186), "html", null, true);
         echo "\">
                 <h1>&nbsp;</h1>
               </div>
@@ -420,29 +423,29 @@ class __TwigTemplate_20727c38d59d4d6bc0c2fd29ab8aa336933cf0963a981015b2ca1e63ce6
           </table>
           <br><br>
       </div>";
-        // line 192
+        // line 195
         echo "
       <div class='col-md-8 col-12' style=\"padding-top : 1em; padding-bottom : 2em; z-index : -1; height:auto;\">";
-        // line 194
+        // line 197
         echo "        <div class='fondOpaque cadreBleu enRelatif' style='height:auto;'>
           <div class='enLigne'>
             <h3 class='enLigne'><label>But :</label></h3>
               <span class='enLigne' style=\"font-weight : bold;\">";
-        // line 197
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["session"]) || array_key_exists("session", $context) ? $context["session"] : (function () { throw new RuntimeError('Variable "session" does not exist.', 197, $this->source); })()), "jeuChoisi", [], "any", false, false, false, 197), "but", [], "any", false, false, false, 197), "html", null, true);
+        // line 200
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["session"]) || array_key_exists("session", $context) ? $context["session"] : (function () { throw new RuntimeError('Variable "session" does not exist.', 200, $this->source); })()), "jeuChoisi", [], "any", false, false, false, 200), "but", [], "any", false, false, false, 200), "html", null, true);
         echo "</span>
           </div>
           <h3><label style=\"text-align : left;\">Principe :</label></h3>
           <div class='sousFenetre text-justify'>
             ";
-        // line 201
-        echo twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["session"]) || array_key_exists("session", $context) ? $context["session"] : (function () { throw new RuntimeError('Variable "session" does not exist.', 201, $this->source); })()), "jeuChoisi", [], "any", false, false, false, 201), "ppe", [], "any", false, false, false, 201);
+        // line 204
+        echo twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["session"]) || array_key_exists("session", $context) ? $context["session"] : (function () { throw new RuntimeError('Variable "session" does not exist.', 204, $this->source); })()), "jeuChoisi", [], "any", false, false, false, 204), "ppe", [], "any", false, false, false, 204);
         echo "
           </div>
         </div>
         <br><br>
       </div>";
-        // line 206
+        // line 209
         echo "
       
 ";
@@ -451,14 +454,14 @@ class __TwigTemplate_20727c38d59d4d6bc0c2fd29ab8aa336933cf0963a981015b2ca1e63ce6
 
     }
 
-    // line 210
+    // line 213
     public function block_piedDePage($context, array $blocks = [])
     {
         $macros = $this->macros;
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "piedDePage"));
 
-        // line 211
+        // line 214
         echo "    <div id=\"RangementDesJeux\" class=\"jeSuisInvisible\">
     \t<?php echo \$_SESSION[\"remplissageJeux\"]; ?>
     </div>
@@ -480,7 +483,7 @@ class __TwigTemplate_20727c38d59d4d6bc0c2fd29ab8aa336933cf0963a981015b2ca1e63ce6
 
     public function getDebugInfo()
     {
-        return array (  462 => 211,  455 => 210,  446 => 206,  439 => 201,  432 => 197,  427 => 194,  424 => 192,  412 => 183,  408 => 182,  399 => 178,  395 => 177,  392 => 176,  390 => 175,  383 => 170,  378 => 168,  371 => 164,  366 => 162,  359 => 158,  353 => 157,  348 => 155,  341 => 153,  335 => 150,  331 => 149,  325 => 148,  319 => 147,  312 => 143,  306 => 140,  295 => 134,  290 => 131,  287 => 129,  279 => 125,  272 => 121,  266 => 120,  259 => 116,  255 => 114,  252 => 112,  248 => 109,  241 => 107,  238 => 106,  235 => 105,  232 => 104,  229 => 103,  226 => 102,  223 => 101,  220 => 100,  217 => 99,  214 => 98,  211 => 97,  209 => 96,  196 => 95,  192 => 94,  190 => 93,  188 => 92,  186 => 91,  182 => 89,  179 => 87,  108 => 17,  105 => 15,  98 => 14,  87 => 10,  80 => 9,  71 => 6,  67 => 5,  62 => 4,  55 => 3,  38 => 1,);
+        return array (  465 => 214,  458 => 213,  449 => 209,  442 => 204,  435 => 200,  430 => 197,  427 => 195,  415 => 186,  411 => 185,  402 => 181,  398 => 180,  392 => 176,  390 => 175,  383 => 170,  378 => 168,  371 => 164,  366 => 162,  359 => 158,  353 => 157,  348 => 155,  341 => 153,  335 => 150,  331 => 149,  325 => 148,  319 => 147,  312 => 143,  306 => 140,  295 => 134,  290 => 131,  287 => 129,  279 => 125,  272 => 121,  266 => 120,  259 => 116,  255 => 114,  252 => 112,  248 => 109,  241 => 107,  238 => 106,  235 => 105,  232 => 104,  229 => 103,  226 => 102,  223 => 101,  220 => 100,  217 => 99,  214 => 98,  211 => 97,  209 => 96,  196 => 95,  192 => 94,  190 => 93,  188 => 92,  186 => 91,  182 => 89,  179 => 87,  108 => 17,  105 => 15,  98 => 14,  87 => 10,  80 => 9,  71 => 6,  67 => 5,  62 => 4,  55 => 3,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -660,6 +663,9 @@ class __TwigTemplate_20727c38d59d4d6bc0c2fd29ab8aa336933cf0963a981015b2ca1e63ce6
                   </table>
                 </div>{# Fin du bloc invisible Légende #}
               </div>{# Fin du bloc Durée #}
+              <div class='col-12'>
+                <br><br>
+              </div>
               <div class='col-12 inline' id='divNiveau'>
                 <label class='gauche' style=\"font-size : 1.4em;\">Complexité&nbsp;:&nbsp;{{session.jeuChoisi.dominance}}/5</label>
                 <img class='mini enAbsolu' style=\"right : 2em;top : 0;\" src=\"{{ img_path }}pictoNiv{{session.jeuChoisi.dominance}}.gif\">
