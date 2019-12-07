@@ -54,9 +54,9 @@ class __TwigTemplate_6165e4c761f99ecfdc8b412237ff090d897c98f2283d9104888d843c4da
 ";
         // line 35
         $this->displayBlock('corps', $context, $blocks);
-        // line 142
+        // line 119
         $this->displayBlock('piedDePage', $context, $blocks);
-        // line 144
+        // line 121
         echo "  </body>
 </html>";
         
@@ -131,16 +131,16 @@ class __TwigTemplate_6165e4c761f99ecfdc8b412237ff090d897c98f2283d9104888d843c4da
     <header class=\"row w-max\">
       <div class=\"col-12 container-fluid w-max\">
         <nav class=\"navbar navbar-expand-sm navbar-dark bg-primary w-max\">
-            <a class=\"navbar-brand col-1\" href=\"#\"><img src=\"";
-        // line 42
-        echo twig_escape_filter($this->env, (isset($context["img_path"]) || array_key_exists("img_path", $context) ? $context["img_path"] : (function () { throw new RuntimeError('Variable "img_path" does not exist.', 42, $this->source); })()), "html", null, true);
-        echo "logo.gif\" class=\"logo\" class=\"enAbsolu\" style=\"top:-1em;left:0;\"></a>
-            <div class=\"navbar-nav col-11 d-none d-md-block\"> ";
+            <div class=\"navbar-nav col-md-12 d-none d-md-block\"> ";
+        // line 43
+        echo "                <li class=\"nav-item\" style=\"width:10px;\"><img src=\"";
+        echo twig_escape_filter($this->env, (isset($context["img_path"]) || array_key_exists("img_path", $context) ? $context["img_path"] : (function () { throw new RuntimeError('Variable "img_path" does not exist.', 43, $this->source); })()), "html", null, true);
+        echo "logo.gif\" class=\"logo\">&nbsp;</li>
+                <li class=\"nav-item";
         // line 44
-        echo "                <li class=\"nav-item";
         echo twig_escape_filter($this->env, $this->extensions['App\Twig\AppExtension']->getOngletActif("ACC"), "html", null, true);
         echo "\" title=\"Page d'accueil\">
-                  <a class=\"nav-link visible-xs-block\" href=\"accueil\"><i class=\"fas fa-home\">&nbsp;</i>Accueil</a>
+                  <a class=\"nav-link visible-block\" href=\"accueil\"><i class=\"fas fa-home\">&nbsp;</i>Accueil</a>
                 </li>
                 <li class=\"nav-item";
         // line 47
@@ -203,16 +203,16 @@ class __TwigTemplate_6165e4c761f99ecfdc8b412237ff090d897c98f2283d9104888d843c4da
                     </ul>
                   </div>
                 </li>
-              </div> ";
+            </div> ";
         // line 86
         echo "
-              <div class=\"navbar-nav col-xs-9 d-md-none enRelatif\"> ";
+            <div class=\"navbar-nav col-12 d-md-none\"> ";
         // line 88
-        echo "                <span class=\"texteInvisible w-max\" style=\"font-size : 30px;min-width : 80vw;\">blabla</span>
-              </div>
-              <div class=\"navbar-nav col-xs-2 d-md-none enRelatif\" style=\"text-align : right;\"> 
-                <i class=\"btn btn-default fas fa-bars enRelatif burger align-self-end\" data-toggle=\"dropdown\"  aria-expanded=\"false\" style=\"top : 0; right : 0;\">&nbsp;</i>
-                <div class=\"btn-group dropleft enRelatif\" style=\"right : 0; top : 3em; text-align : right; box-sizing: border-box;\">
+        echo "                <img src=\"";
+        echo twig_escape_filter($this->env, (isset($context["img_path"]) || array_key_exists("img_path", $context) ? $context["img_path"] : (function () { throw new RuntimeError('Variable "img_path" does not exist.', 88, $this->source); })()), "html", null, true);
+        echo "logo.gif\" class=\"logo\" style=\"height : 11vw;\">
+                <i class=\"btn btn-default fas fa-bars enRelatif w-max burger align-self-end\" data-toggle=\"dropdown\"  aria-expanded=\"false\">&nbsp;</i>
+                <div class=\"btn-group dropleft enAbsolu align-self-end\" style=\"min-width : 40em;\">
                   <ul class=\"dropdown-menu bg-primary enRelatif burgerMenu\" style=\"right : 0; box-sizing: border-box;\">
                       <a class=\"dropdown-item\" href=\"accueil\" title=\"Page d'accueil\">Accueil</a>
                       <a class=\"dropdown-item\" href=\"calendrier\" title=\"Calendrier des évènements\">Agenda</a>
@@ -225,33 +225,30 @@ class __TwigTemplate_6165e4c761f99ecfdc8b412237ff090d897c98f2283d9104888d843c4da
                       <a class=\"dropdown-item\" href=\"http://www.ludhainaut.fr/\" title=\"Association de joueurs à Onnaing (Nord)\">Lud'Hainaut</a>
                     </ul>
                 </div>
-                
-              ";
-        // line 126
-        echo "              </div> ";
-        // line 127
+            </div> ";
+        // line 104
         echo "
             </div>
         </nav>
       </div>
     </header>
 
-    <img class=\"fond container-fluid d-none d-md-block enAbsolu\" style=\"top:3em; background-size : cover;\" src=\"";
-        // line 133
-        echo twig_escape_filter($this->env, (isset($context["img_path"]) || array_key_exists("img_path", $context) ? $context["img_path"] : (function () { throw new RuntimeError('Variable "img_path" does not exist.', 133, $this->source); })()), "html", null, true);
+    <img class=\"fond container-fluid d-none d-lg-block enAbsolu\" style=\"top:3em; background-size : cover;\" src=\"";
+        // line 110
+        echo twig_escape_filter($this->env, (isset($context["img_path"]) || array_key_exists("img_path", $context) ? $context["img_path"] : (function () { throw new RuntimeError('Variable "img_path" does not exist.', 110, $this->source); })()), "html", null, true);
         echo "fond.png\">
-    <img class=\"fond container-fluid d-md-none enAbsolu\" style=\"top:3em; background-size : cover;\" src=\"";
-        // line 134
-        echo twig_escape_filter($this->env, (isset($context["img_path"]) || array_key_exists("img_path", $context) ? $context["img_path"] : (function () { throw new RuntimeError('Variable "img_path" does not exist.', 134, $this->source); })()), "html", null, true);
+    <img class=\"fond container-fluid d-lg-none enAbsolu\" style=\"top:3em; background-size : cover;\" src=\"";
+        // line 111
+        echo twig_escape_filter($this->env, (isset($context["img_path"]) || array_key_exists("img_path", $context) ? $context["img_path"] : (function () { throw new RuntimeError('Variable "img_path" does not exist.', 111, $this->source); })()), "html", null, true);
         echo "fondVertical.png\">
 
-    <div class=\"row\" id=\"mainRow\">
+    <div class=\"row retracter\" id=\"mainRow\">
           ";
-        // line 137
+        // line 114
         $this->displayBlock('laPage', $context, $blocks);
-        // line 139
+        // line 116
         echo "    </div> ";
-        // line 140
+        // line 117
         echo "
 ";
         
@@ -259,21 +256,21 @@ class __TwigTemplate_6165e4c761f99ecfdc8b412237ff090d897c98f2283d9104888d843c4da
 
     }
 
-    // line 137
+    // line 114
     public function block_laPage($context, array $blocks = [])
     {
         $macros = $this->macros;
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "laPage"));
 
-        // line 138
+        // line 115
         echo "          ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
     }
 
-    // line 142
+    // line 119
     public function block_piedDePage($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -292,7 +289,7 @@ class __TwigTemplate_6165e4c761f99ecfdc8b412237ff090d897c98f2283d9104888d843c4da
 
     public function getDebugInfo()
     {
-        return array (  277 => 142,  270 => 138,  263 => 137,  255 => 140,  253 => 139,  251 => 137,  245 => 134,  241 => 133,  233 => 127,  231 => 126,  211 => 88,  208 => 86,  196 => 75,  188 => 70,  181 => 66,  174 => 63,  171 => 62,  161 => 54,  159 => 53,  153 => 50,  147 => 47,  140 => 44,  136 => 42,  130 => 38,  127 => 37,  124 => 36,  117 => 35,  88 => 10,  83 => 8,  79 => 7,  75 => 5,  68 => 4,  60 => 144,  58 => 142,  56 => 35,  51 => 32,  49 => 4,  44 => 1,);
+        return array (  274 => 119,  267 => 115,  260 => 114,  252 => 117,  250 => 116,  248 => 114,  242 => 111,  238 => 110,  230 => 104,  211 => 88,  208 => 86,  196 => 75,  188 => 70,  181 => 66,  174 => 63,  171 => 62,  161 => 54,  159 => 53,  153 => 50,  147 => 47,  141 => 44,  136 => 43,  130 => 38,  127 => 37,  124 => 36,  117 => 35,  88 => 10,  83 => 8,  79 => 7,  75 => 5,  68 => 4,  60 => 121,  58 => 119,  56 => 35,  51 => 32,  49 => 4,  44 => 1,);
     }
 
     public function getSourceContext()
@@ -338,10 +335,10 @@ class __TwigTemplate_6165e4c761f99ecfdc8b412237ff090d897c98f2283d9104888d843c4da
     <header class=\"row w-max\">
       <div class=\"col-12 container-fluid w-max\">
         <nav class=\"navbar navbar-expand-sm navbar-dark bg-primary w-max\">
-            <a class=\"navbar-brand col-1\" href=\"#\"><img src=\"{{img_path}}logo.gif\" class=\"logo\" class=\"enAbsolu\" style=\"top:-1em;left:0;\"></a>
-            <div class=\"navbar-nav col-11 d-none d-md-block\"> {# Menu pour grand ecran #}
+            <div class=\"navbar-nav col-md-12 d-none d-md-block\"> {# Menu pour grand ecran #}
+                <li class=\"nav-item\" style=\"width:10px;\"><img src=\"{{img_path}}logo.gif\" class=\"logo\">&nbsp;</li>
                 <li class=\"nav-item{{ ongletActif(\"ACC\") }}\" title=\"Page d'accueil\">
-                  <a class=\"nav-link visible-xs-block\" href=\"accueil\"><i class=\"fas fa-home\">&nbsp;</i>Accueil</a>
+                  <a class=\"nav-link visible-block\" href=\"accueil\"><i class=\"fas fa-home\">&nbsp;</i>Accueil</a>
                 </li>
                 <li class=\"nav-item{{ ongletActif(\"CAL\") }}\" title=\"Calendrier des évènements\">
                   <a class=\"nav-link\" href=\"calendrier\"><i class=\"fas fa-calendar-alt\">&nbsp;</i>Agenda</a>
@@ -381,14 +378,12 @@ class __TwigTemplate_6165e4c761f99ecfdc8b412237ff090d897c98f2283d9104888d843c4da
                     </ul>
                   </div>
                 </li>
-              </div> {# Menu pour grand ecran #}
+            </div> {# Menu pour grand ecran #}
 
-              <div class=\"navbar-nav col-xs-9 d-md-none enRelatif\"> {# Menu pour petit ecran #}
-                <span class=\"texteInvisible w-max\" style=\"font-size : 30px;min-width : 80vw;\">blabla</span>
-              </div>
-              <div class=\"navbar-nav col-xs-2 d-md-none enRelatif\" style=\"text-align : right;\"> 
-                <i class=\"btn btn-default fas fa-bars enRelatif burger align-self-end\" data-toggle=\"dropdown\"  aria-expanded=\"false\" style=\"top : 0; right : 0;\">&nbsp;</i>
-                <div class=\"btn-group dropleft enRelatif\" style=\"right : 0; top : 3em; text-align : right; box-sizing: border-box;\">
+            <div class=\"navbar-nav col-12 d-md-none\"> {# Menu pour petit ecran #}
+                <img src=\"{{img_path}}logo.gif\" class=\"logo\" style=\"height : 11vw;\">
+                <i class=\"btn btn-default fas fa-bars enRelatif w-max burger align-self-end\" data-toggle=\"dropdown\"  aria-expanded=\"false\">&nbsp;</i>
+                <div class=\"btn-group dropleft enAbsolu align-self-end\" style=\"min-width : 40em;\">
                   <ul class=\"dropdown-menu bg-primary enRelatif burgerMenu\" style=\"right : 0; box-sizing: border-box;\">
                       <a class=\"dropdown-item\" href=\"accueil\" title=\"Page d'accueil\">Accueil</a>
                       <a class=\"dropdown-item\" href=\"calendrier\" title=\"Calendrier des évènements\">Agenda</a>
@@ -401,38 +396,17 @@ class __TwigTemplate_6165e4c761f99ecfdc8b412237ff090d897c98f2283d9104888d843c4da
                       <a class=\"dropdown-item\" href=\"http://www.ludhainaut.fr/\" title=\"Association de joueurs à Onnaing (Nord)\">Lud'Hainaut</a>
                     </ul>
                 </div>
-                
-              {#
-                  <table>
-                    <tr><td style=\"width : 99vw;\">&nbsp;</td><td style=\"min-width : 20px;\">
-                  <button type=\"button\" class=\"btn btn-default liens enAbsolu\" style=\"text-align : right; font-size : 4em;\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><i class=\"fas fa-bars\">&nbsp;</i></button>
-                    </td></tr>
-                  </table>
-                <div class=\"btn-group dropleft enRelatif\" style=\"right : 0; top : 3em; text-align : right; box-sizing: border-box;\">
-                  <ul class=\"dropdown-menu bg-primary enRelatif burgerMenu\" style=\"right : 0; box-sizing: border-box;\">
-                      <a class=\"dropdown-item\" href=\"accueil\" title=\"Page d'accueil\">Accueil</a>
-                      <a class=\"dropdown-item\" href=\"calendrier\" title=\"Calendrier des évènements\">Agenda</a>
-                      <a class=\"dropdown-item\" href=\"jeux\" title=\"Liste de nos jeux\">Jeux</a>
-                      <a class=\"dropdown-item\" href=\"contact\" title=\"Pour nous trouver ou nous envoyer un message\">Contact</a>
-                      <div class=\"dropdown-divider\"></div>
-                      <a class=\"dropdown-item\" href=\"https://www.bussysaintgeorges.fr/education/petite-enfance/la-ludotheque/\" title=\"Ludothèque de Bussy, gratuite, pour les enfants de 0 à 12 ans, pour le moment ...\">Ludothèque de Bussy</a>
-                      <a class=\"dropdown-item\" href=\"http://www.lavalleedesjeux.com/\" title=\"Ludothèque ouverte à tous, sur inscription (3O€)\">Ludothèque de Bailly Romainvilliers</a>
-                      <a class=\"dropdown-item\" href=\"https://ludiworld.com/newshop/84-jeux-de-societe\" title=\"Votre boutique de jeux, ici, à Bussy !\">Ludiworld</a>
-                      <a class=\"dropdown-item\" href=\"http://www.ludhainaut.fr/\" title=\"Association de joueurs à Onnaing (Nord)\">Lud'Hainaut</a>
-                    </ul>
-                </div>
-              #}
-              </div> {# Menu pour petit ecran #}
+            </div> {# Menu pour petit ecran #}
 
             </div>
         </nav>
       </div>
     </header>
 
-    <img class=\"fond container-fluid d-none d-md-block enAbsolu\" style=\"top:3em; background-size : cover;\" src=\"{{img_path}}fond.png\">
-    <img class=\"fond container-fluid d-md-none enAbsolu\" style=\"top:3em; background-size : cover;\" src=\"{{img_path}}fondVertical.png\">
+    <img class=\"fond container-fluid d-none d-lg-block enAbsolu\" style=\"top:3em; background-size : cover;\" src=\"{{img_path}}fond.png\">
+    <img class=\"fond container-fluid d-lg-none enAbsolu\" style=\"top:3em; background-size : cover;\" src=\"{{img_path}}fondVertical.png\">
 
-    <div class=\"row\" id=\"mainRow\">
+    <div class=\"row retracter\" id=\"mainRow\">
           {% block laPage %}
           {% endblock %}
     </div> {# div principale #}

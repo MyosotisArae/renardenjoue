@@ -39,10 +39,10 @@
     <header class="row w-max">
       <div class="col-12 container-fluid w-max">
         <nav class="navbar navbar-expand-sm navbar-dark bg-primary w-max">
-            <a class="navbar-brand col-1" href="#"><img src="{{img_path}}logo.gif" class="logo" class="enAbsolu" style="top:-1em;left:0;"></a>
-            <div class="navbar-nav col-11 d-none d-md-block"> {# Menu pour grand ecran #}
+            <div class="navbar-nav col-md-12 d-none d-md-block"> {# Menu pour grand ecran #}
+                <li class="nav-item" style="width:10px;"><img src="{{img_path}}logo.gif" class="logo">&nbsp;</li>
                 <li class="nav-item{{ ongletActif("ACC") }}" title="Page d'accueil">
-                  <a class="nav-link visible-xs-block" href="accueil"><i class="fas fa-home">&nbsp;</i>Accueil</a>
+                  <a class="nav-link visible-block" href="accueil"><i class="fas fa-home">&nbsp;</i>Accueil</a>
                 </li>
                 <li class="nav-item{{ ongletActif("CAL") }}" title="Calendrier des évènements">
                   <a class="nav-link" href="calendrier"><i class="fas fa-calendar-alt">&nbsp;</i>Agenda</a>
@@ -82,14 +82,12 @@
                     </ul>
                   </div>
                 </li>
-              </div> {# Menu pour grand ecran #}
+            </div> {# Menu pour grand ecran #}
 
-              <div class="navbar-nav col-xs-9 d-md-none enRelatif"> {# Menu pour petit ecran #}
-                <span class="texteInvisible w-max" style="font-size : 30px;min-width : 80vw;">blabla</span>
-              </div>
-              <div class="navbar-nav col-xs-2 d-md-none enRelatif" style="text-align : right;"> 
-                <i class="btn btn-default fas fa-bars enRelatif burger align-self-end" data-toggle="dropdown"  aria-expanded="false" style="top : 0; right : 0;">&nbsp;</i>
-                <div class="btn-group dropleft enRelatif" style="right : 0; top : 3em; text-align : right; box-sizing: border-box;">
+            <div class="navbar-nav col-12 d-md-none"> {# Menu pour petit ecran #}
+                <img src="{{img_path}}logo.gif" class="logo" style="height : 11vw;">
+                <i class="btn btn-default fas fa-bars enRelatif w-max burger align-self-end" data-toggle="dropdown"  aria-expanded="false">&nbsp;</i>
+                <div class="btn-group dropleft enAbsolu align-self-end" style="min-width : 40em;">
                   <ul class="dropdown-menu bg-primary enRelatif burgerMenu" style="right : 0; box-sizing: border-box;">
                       <a class="dropdown-item" href="accueil" title="Page d'accueil">Accueil</a>
                       <a class="dropdown-item" href="calendrier" title="Calendrier des évènements">Agenda</a>
@@ -102,38 +100,17 @@
                       <a class="dropdown-item" href="http://www.ludhainaut.fr/" title="Association de joueurs à Onnaing (Nord)">Lud'Hainaut</a>
                     </ul>
                 </div>
-                
-              {#
-                  <table>
-                    <tr><td style="width : 99vw;">&nbsp;</td><td style="min-width : 20px;">
-                  <button type="button" class="btn btn-default liens enAbsolu" style="text-align : right; font-size : 4em;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars">&nbsp;</i></button>
-                    </td></tr>
-                  </table>
-                <div class="btn-group dropleft enRelatif" style="right : 0; top : 3em; text-align : right; box-sizing: border-box;">
-                  <ul class="dropdown-menu bg-primary enRelatif burgerMenu" style="right : 0; box-sizing: border-box;">
-                      <a class="dropdown-item" href="accueil" title="Page d'accueil">Accueil</a>
-                      <a class="dropdown-item" href="calendrier" title="Calendrier des évènements">Agenda</a>
-                      <a class="dropdown-item" href="jeux" title="Liste de nos jeux">Jeux</a>
-                      <a class="dropdown-item" href="contact" title="Pour nous trouver ou nous envoyer un message">Contact</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="https://www.bussysaintgeorges.fr/education/petite-enfance/la-ludotheque/" title="Ludothèque de Bussy, gratuite, pour les enfants de 0 à 12 ans, pour le moment ...">Ludothèque de Bussy</a>
-                      <a class="dropdown-item" href="http://www.lavalleedesjeux.com/" title="Ludothèque ouverte à tous, sur inscription (3O€)">Ludothèque de Bailly Romainvilliers</a>
-                      <a class="dropdown-item" href="https://ludiworld.com/newshop/84-jeux-de-societe" title="Votre boutique de jeux, ici, à Bussy !">Ludiworld</a>
-                      <a class="dropdown-item" href="http://www.ludhainaut.fr/" title="Association de joueurs à Onnaing (Nord)">Lud'Hainaut</a>
-                    </ul>
-                </div>
-              #}
-              </div> {# Menu pour petit ecran #}
+            </div> {# Menu pour petit ecran #}
 
             </div>
         </nav>
       </div>
     </header>
 
-    <img class="fond container-fluid d-none d-md-block enAbsolu" style="top:3em; background-size : cover;" src="{{img_path}}fond.png">
-    <img class="fond container-fluid d-md-none enAbsolu" style="top:3em; background-size : cover;" src="{{img_path}}fondVertical.png">
+    <img class="fond container-fluid d-none d-lg-block enAbsolu" style="top:3em; background-size : cover;" src="{{img_path}}fond.png">
+    <img class="fond container-fluid d-lg-none enAbsolu" style="top:3em; background-size : cover;" src="{{img_path}}fondVertical.png">
 
-    <div class="row" id="mainRow">
+    <div class="row retracter" id="mainRow">
           {% block laPage %}
           {% endblock %}
     </div> {# div principale #}

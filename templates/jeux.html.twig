@@ -13,12 +13,12 @@
 
 {% block laPage %}
 
-      <div class='col-12 retracter'>{# Bloc Filtrage des jeux #}
+      <div class='col-12'>{# Bloc Filtrage des jeux #}
           <form  method="POST" action="jeux?operation=recherche" class="fondOpaque cadreBleu">
               <table class="w-100">
                 <tr>
                   <td>
-                    <label>Titre :</label>
+                    <label>Titre</label>
                   </td>
                   <td style="position:relative;">
                     <a href="#" style="position:relative;">
@@ -26,7 +26,7 @@
                     </a>
                   </td>
                   <td>
-                    <label>Niveau :</label>
+                    <label>Niveau</label>
                   </td>
                   <td>
                     <a href="#" style="position:relative;">
@@ -42,7 +42,7 @@
                     </a>
                   </td>
                   <td>
-                    <label>Durée :</label>
+                    <label>Durée</label>
                   </td>
                   <td>
                     <a href="#" style="position:relative;">
@@ -59,7 +59,7 @@
                     </a>
                   </td>
                   <td>
-                    <label>Nombre :</label>
+                    <label>Nombre</label>
                   </td>
                   <td>
                     <a href="#" style="position:relative;">
@@ -85,14 +85,14 @@
           </form>
       </div>{# Bloc Filtrage des jeux #}
 
-      <div class='col-12 retracter' style="padding-top : 1em;">{# Bloc Liste des jeux #}
+      <div class='col-12' style="padding-top : 1em;">{# Bloc Liste des jeux #}
         <div class='listeJeux cadreBleu h-30'>
 
 {% set classeCouleur = random(12) %}
 {% set classeTaille  = random(6)  %}
 {% set classFonte    = random(10) %}
 {% for jeu in listeJeux %}
-                <a href="jeux?jeuChoisi={{jeu.id}}" class="confetti couleur{{classeCouleur}} taille{{classeTaille}} fonte{{classFonte}}">{{jeu.nomComplet}}</a>
+                <a href="jeux?jeuChoisi={{jeu.id}}" class="confetti couleur{{classeCouleur}} taille{{classeTaille}} fonte{{classFonte}}">{{jeu.nom}}</a>
   {% set classeCouleur = classeCouleur + 1 %}
   {% set classeTaille = classeTaille + 1 %}
   {% set classFonte = classFonte + 1 %}
@@ -110,16 +110,33 @@
         </div>
       </div>{# Bloc Liste des jeux #}
 
-      <div class='col-md-4 col-sm-12 camembert retracter'>{# Bloc Nom, image et durée #}
-          <table>
+      <div class='col-12' style="padding-top : 1em;">{# Bloc Titre #}
+        <div class='row fondOpaque cadreBleu'>
+          <div class="col-12">&nbsp;</div>
+          <div class='col-md-6 col-sm-7 col-12' style="margin-top:-0.5em"><h2>{{session.jeuChoisi.nom}}</h2>
+          </div>
+          <div class='col-md-4 col-sm-4 col-7' style="margin-top:-0.5em">
+            <div class="row">
+              <div class='col-sm-6 col-12'>{{session.jeuChoisi.dureemin|dureehm}}-{{session.jeuChoisi.dureemax|dureehm}}</div>
+              <div class='col-sm-6 col-12'>{{session.jeuChoisi.nbJoueurs|replace({" à ":"-"})}}</div>
+            </div>
+          </div>
+          <div class='col-md-2 col-sm-1 col-5 float-right' style="margin-top:-0.9em; padding-bottom : 0.3em;">
+            <img class='mini float-right' src="{{ img_path }}pictoNiv{{session.jeuChoisi.dominance}}.gif">
+          </div>
+        </div>
+      </div>{# Bloc Titre #}
+
+      <div class='col-md-4 col-12 camembert' style="padding-top : 1em;">{# Bloc Nom, image et durée #}
+          <table class="w-100">
             <tr>
               <td>
-                <img class='grandeImage cadreBleu img-fluid' src="{{ img_path }}imagesJeux/{{session.jeuChoisi.img}}.jpg">
+                <img class='grandeImage cadreBleu img-fluid w-100' src="{{ img_path }}imagesJeux/{{session.jeuChoisi.img}}.jpg">
               </td>
             </tr>
             <tr>
-              <td class='retracter'>
-                <div class ='row camembert fondOpaque cadreBleu retracter'>
+              <td>
+                <div class ='row camembert fondOpaque cadreBleu'>
               <div class="col-12"><h2>{{session.jeuChoisi.nomComplet}}</h2></div>
               <div class='col-12 enLigne w-100' id='divDuree'>
                 <div class="camembertParent enLigne">
@@ -157,7 +174,7 @@
                 </div>{# Fin du bloc invisible Légende #}
               </div>{# Fin du bloc Durée #}
               <div class='col-12 inline' id='divNiveau'>
-                <label class='gauche' style="font-size : 1.4em;">Difficulté&nbsp;:&nbsp;{{session.jeuChoisi.dominance}}/5</label>
+                <label class='gauche' style="font-size : 1.4em;">Complexité&nbsp;:&nbsp;{{session.jeuChoisi.dominance}}/5</label>
                 <img class='mini enAbsolu' style="right : 2em;top : 0;" src="{{ img_path }}pictoNiv{{session.jeuChoisi.dominance}}.gif">
                 <h1>&nbsp;</h1>
               </div>
@@ -173,14 +190,14 @@
           <br><br>
       </div>{# Bloc Nom, image et durée #}
 
-      <div class='col-md-8 col-sm-12 retracter' style="padding-top : 1em; padding-bottom : 2em;">{# Bloc But et principe #}
-        <div class='fondOpaque cadreBleu enRelatif h-99'>
+      <div class='col-md-8 col-12' style="padding-top : 1em; padding-bottom : 2em; z-index : -1; height:auto;">{# Bloc But et principe #}
+        <div class='fondOpaque cadreBleu enRelatif' style='height:auto;'>
           <div class='enLigne'>
             <h3 class='enLigne'><label>But :</label></h3>
-              <span class='enLigne' style="font-size : 1.5em; font-weight : bold;">{{session.jeuChoisi.but}}</span>
+              <span class='enLigne' style="font-weight : bold;">{{session.jeuChoisi.but}}</span>
           </div>
           <h3><label style="text-align : left;">Principe :</label></h3>
-          <div class='sousFenetre text-justify h-99'>
+          <div class='sousFenetre text-justify'>
             {{session.jeuChoisi.ppe|raw}}
           </div>
         </div>

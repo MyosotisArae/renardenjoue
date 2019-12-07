@@ -3,13 +3,13 @@ img.petiteImage
   margin-top : -1em;
   margin-right : -2em;
 }
-h1
+h1, h1 a
 {
-  color : white;
+  color : #428bca; /* couleur bg-primary */
   text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
   text-align : center;
   width : 100%;
-  font-size : 4em;
+  font-size : 4vw;
 }
 h2
 {

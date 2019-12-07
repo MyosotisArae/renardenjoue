@@ -4,12 +4,6 @@
   {{ parent() }}
   <link rel="stylesheet" href="{{css_path}}accueil.css">
 <style>
-  .grosTitre
-  {
-    color : #428bca;{# couleur bg-primary #}
-    text-shadow : 1px 0px 5px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black, 2px 0px 1px black, -2px 0px 1px black, 0px 2px 1px black, 0px -2px 1px black;
-    text-align : left;
-  }
   .encadrer
   {
     box-sizing: border-box;
@@ -24,32 +18,32 @@
 {% block laPage %}
 
   <div class="col-12">
-    <br><br>
+    <br>
   </div>
 
-  <div class="col-12 col-md-6 container" style="box-sizing: border-box;">
+  <div class="col-12 col-md-7 container" style="box-sizing: border-box;">{# colonne 1 #}
     <div class="row encadrer cadreBleu">
       <div class="col-11">
         <br>
-        <h1 class="grosTitre"><a class="grosTitre" href="jeux">Nos jeux</a></h1>
+        <h1><a href="jeux">Nos jeux</a></h1>
       </div>
       <div class="col-1">
       </div>
       <div class="col-11">
         <br><br>
-        <h1 class="grosTitre"><a class="grosTitre" href="https://lerenardenjoue.forumactif.com/">Notre forum</a></h1>
+        <h1><a href="https://lerenardenjoue.forumactif.com/">Notre forum</a></h1>
       </div>
       <div class="col-1">
       </div>
       <div class="col-11">
         <br><br>
-        <h1 class="grosTitre"><a class="grosTitre" href="contact">Infos et contact</a></h1>
+        <h1><a href="contact">Infos et contact</a></h1>
       </div>
       <div class="col-1">
       </div>
       <div class="col-11">
         <br><br>
-        <h1 class="grosTitre"><a class="grosTitre" href="calendrier">{{"évènements à venir"|capitalize}}</a></h1>
+        <h1><a href="calendrier">{{"évènements à venir"|capitalize}}</a></h1>
         <br>
       </div>
     </div>{# row encadrée #}
@@ -59,17 +53,21 @@
   <div class="col-12 col-md-1">
     <h1>&nbsp;</h1>
   </div>
-  <div class="col-12 col-md-2 encadrer cadreBleu">
-    <u>Prochaine soirée jeux :</u><br>
-    8 décembre 2019<br>
-    <br><br><br>
-    <u>Ajouts récents :</u><br>
-    <li>Dice mice</li>
-    <li>Minecraft : Builders & Biomes</li>
-    <br>
-    Venez les tester !<br>
+  <div class="col-12 col-md-4 encadrer cadreBleu">{# colonne 2 #}
+    <div class="row">
+      <div class="col-md-12 col-6">
+        <u>Prochaine soirée jeux :</u><br>
+        {{nextDate}}<br><br><br><br>
+      </div>
+      <div class="col-md-12 col-6">
+        <u>Ajouts récents :</u><br>
+        {% for jeu in lastGames %}
+        <li><a href="jeux?jeuChoisi={{jeu.id}}">{{jeu.nomComplet}}</a></li>
+        {% endfor %}
+        <br>
+        Venez les tester !<br>
+      </div>
+    </div>
   </div>{# colonne 2 #}
-  <div class="col-1">
-  </div>
 
 {% endblock %} {# Fin du block laPage #}

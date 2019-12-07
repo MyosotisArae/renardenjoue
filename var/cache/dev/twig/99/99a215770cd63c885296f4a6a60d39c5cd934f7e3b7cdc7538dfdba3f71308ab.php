@@ -65,13 +65,6 @@ class __TwigTemplate_d1b6cc58c5539309141d898ec078845b1824b866568e6eeb5448acaf092
         echo twig_escape_filter($this->env, (isset($context["css_path"]) || array_key_exists("css_path", $context) ? $context["css_path"] : (function () { throw new RuntimeError('Variable "css_path" does not exist.', 5, $this->source); })()), "html", null, true);
         echo "accueil.css\">
 <style>
-  .grosTitre
-  {
-    color : #428bca;";
-        // line 10
-        echo "    text-shadow : 1px 0px 5px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black, 2px 0px 1px black, -2px 0px 1px black, 0px 2px 1px black, 0px -2px 1px black;
-    text-align : left;
-  }
   .encadrer
   {
     box-sizing: border-box;
@@ -87,70 +80,93 @@ class __TwigTemplate_d1b6cc58c5539309141d898ec078845b1824b866568e6eeb5448acaf092
 
     }
 
-    // line 24
+    // line 18
     public function block_laPage($context, array $blocks = [])
     {
         $macros = $this->macros;
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "laPage"));
 
-        // line 25
+        // line 19
         echo "
   <div class=\"col-12\">
-    <br><br>
+    <br>
   </div>
 
-  <div class=\"col-12 col-md-6 container\" style=\"box-sizing: border-box;\">
-    <div class=\"row encadrer cadreBleu\">
+  <div class=\"col-12 col-md-7 container\" style=\"box-sizing: border-box;\">";
+        // line 25
+        echo "    <div class=\"row encadrer cadreBleu\">
       <div class=\"col-11\">
         <br>
-        <h1 class=\"grosTitre\"><a class=\"grosTitre\" href=\"jeux\">Nos jeux</a></h1>
+        <h1><a href=\"jeux\">Nos jeux</a></h1>
       </div>
       <div class=\"col-1\">
       </div>
       <div class=\"col-11\">
         <br><br>
-        <h1 class=\"grosTitre\"><a class=\"grosTitre\" href=\"https://lerenardenjoue.forumactif.com/\">Notre forum</a></h1>
+        <h1><a href=\"https://lerenardenjoue.forumactif.com/\">Notre forum</a></h1>
       </div>
       <div class=\"col-1\">
       </div>
       <div class=\"col-11\">
         <br><br>
-        <h1 class=\"grosTitre\"><a class=\"grosTitre\" href=\"contact\">Infos et contact</a></h1>
+        <h1><a href=\"contact\">Infos et contact</a></h1>
       </div>
       <div class=\"col-1\">
       </div>
       <div class=\"col-11\">
         <br><br>
-        <h1 class=\"grosTitre\"><a class=\"grosTitre\" href=\"calendrier\">";
-        // line 52
+        <h1><a href=\"calendrier\">";
+        // line 46
         echo twig_escape_filter($this->env, twig_capitalize_string_filter($this->env, "évènements à venir"), "html", null, true);
         echo "</a></h1>
         <br>
       </div>
     </div>";
-        // line 56
+        // line 50
         echo "    
   </div>";
-        // line 58
+        // line 52
         echo "
   <div class=\"col-12 col-md-1\">
     <h1>&nbsp;</h1>
   </div>
-  <div class=\"col-12 col-md-2 encadrer cadreBleu\">
-    <u>Prochaine soirée jeux :</u><br>
-    8 décembre 2019<br>
-    <br><br><br>
-    <u>Ajouts récents :</u><br>
-    <li>Dice mice</li>
-    <li>Minecraft : Builders & Biomes</li>
-    <br>
-    Venez les tester !<br>
+  <div class=\"col-12 col-md-4 encadrer cadreBleu\">";
+        // line 57
+        echo "    <div class=\"row\">
+      <div class=\"col-md-12 col-6\">
+        <u>Prochaine soirée jeux :</u><br>
+        ";
+        // line 60
+        echo twig_escape_filter($this->env, (isset($context["nextDate"]) || array_key_exists("nextDate", $context) ? $context["nextDate"] : (function () { throw new RuntimeError('Variable "nextDate" does not exist.', 60, $this->source); })()), "html", null, true);
+        echo "<br><br><br><br>
+      </div>
+      <div class=\"col-md-12 col-6\">
+        <u>Ajouts récents :</u><br>
+        ";
+        // line 64
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["lastGames"]) || array_key_exists("lastGames", $context) ? $context["lastGames"] : (function () { throw new RuntimeError('Variable "lastGames" does not exist.', 64, $this->source); })()));
+        foreach ($context['_seq'] as $context["_key"] => $context["jeu"]) {
+            // line 65
+            echo "        <li><a href=\"jeux?jeuChoisi=";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["jeu"], "id", [], "any", false, false, false, 65), "html", null, true);
+            echo "\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["jeu"], "nomComplet", [], "any", false, false, false, 65), "html", null, true);
+            echo "</a></li>
+        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['jeu'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 67
+        echo "        <br>
+        Venez les tester !<br>
+      </div>
+    </div>
   </div>";
         // line 72
-        echo "  <div class=\"col-1\">
-  </div>
-
+        echo "
 ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -169,7 +185,7 @@ class __TwigTemplate_d1b6cc58c5539309141d898ec078845b1824b866568e6eeb5448acaf092
 
     public function getDebugInfo()
     {
-        return array (  151 => 72,  136 => 58,  133 => 56,  127 => 52,  98 => 25,  91 => 24,  72 => 10,  65 => 5,  60 => 4,  53 => 3,  36 => 1,);
+        return array (  169 => 72,  163 => 67,  152 => 65,  148 => 64,  141 => 60,  136 => 57,  130 => 52,  127 => 50,  121 => 46,  98 => 25,  91 => 19,  84 => 18,  65 => 5,  60 => 4,  53 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -180,12 +196,6 @@ class __TwigTemplate_d1b6cc58c5539309141d898ec078845b1824b866568e6eeb5448acaf092
   {{ parent() }}
   <link rel=\"stylesheet\" href=\"{{css_path}}accueil.css\">
 <style>
-  .grosTitre
-  {
-    color : #428bca;{# couleur bg-primary #}
-    text-shadow : 1px 0px 5px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black, 2px 0px 1px black, -2px 0px 1px black, 0px 2px 1px black, 0px -2px 1px black;
-    text-align : left;
-  }
   .encadrer
   {
     box-sizing: border-box;
@@ -200,32 +210,32 @@ class __TwigTemplate_d1b6cc58c5539309141d898ec078845b1824b866568e6eeb5448acaf092
 {% block laPage %}
 
   <div class=\"col-12\">
-    <br><br>
+    <br>
   </div>
 
-  <div class=\"col-12 col-md-6 container\" style=\"box-sizing: border-box;\">
+  <div class=\"col-12 col-md-7 container\" style=\"box-sizing: border-box;\">{# colonne 1 #}
     <div class=\"row encadrer cadreBleu\">
       <div class=\"col-11\">
         <br>
-        <h1 class=\"grosTitre\"><a class=\"grosTitre\" href=\"jeux\">Nos jeux</a></h1>
+        <h1><a href=\"jeux\">Nos jeux</a></h1>
       </div>
       <div class=\"col-1\">
       </div>
       <div class=\"col-11\">
         <br><br>
-        <h1 class=\"grosTitre\"><a class=\"grosTitre\" href=\"https://lerenardenjoue.forumactif.com/\">Notre forum</a></h1>
+        <h1><a href=\"https://lerenardenjoue.forumactif.com/\">Notre forum</a></h1>
       </div>
       <div class=\"col-1\">
       </div>
       <div class=\"col-11\">
         <br><br>
-        <h1 class=\"grosTitre\"><a class=\"grosTitre\" href=\"contact\">Infos et contact</a></h1>
+        <h1><a href=\"contact\">Infos et contact</a></h1>
       </div>
       <div class=\"col-1\">
       </div>
       <div class=\"col-11\">
         <br><br>
-        <h1 class=\"grosTitre\"><a class=\"grosTitre\" href=\"calendrier\">{{\"évènements à venir\"|capitalize}}</a></h1>
+        <h1><a href=\"calendrier\">{{\"évènements à venir\"|capitalize}}</a></h1>
         <br>
       </div>
     </div>{# row encadrée #}
@@ -235,18 +245,22 @@ class __TwigTemplate_d1b6cc58c5539309141d898ec078845b1824b866568e6eeb5448acaf092
   <div class=\"col-12 col-md-1\">
     <h1>&nbsp;</h1>
   </div>
-  <div class=\"col-12 col-md-2 encadrer cadreBleu\">
-    <u>Prochaine soirée jeux :</u><br>
-    8 décembre 2019<br>
-    <br><br><br>
-    <u>Ajouts récents :</u><br>
-    <li>Dice mice</li>
-    <li>Minecraft : Builders & Biomes</li>
-    <br>
-    Venez les tester !<br>
+  <div class=\"col-12 col-md-4 encadrer cadreBleu\">{# colonne 2 #}
+    <div class=\"row\">
+      <div class=\"col-md-12 col-6\">
+        <u>Prochaine soirée jeux :</u><br>
+        {{nextDate}}<br><br><br><br>
+      </div>
+      <div class=\"col-md-12 col-6\">
+        <u>Ajouts récents :</u><br>
+        {% for jeu in lastGames %}
+        <li><a href=\"jeux?jeuChoisi={{jeu.id}}\">{{jeu.nomComplet}}</a></li>
+        {% endfor %}
+        <br>
+        Venez les tester !<br>
+      </div>
+    </div>
   </div>{# colonne 2 #}
-  <div class=\"col-1\">
-  </div>
 
 {% endblock %} {# Fin du block laPage #}", "/accueil.html.twig", "/var/www/renardenjoue/templates/accueil.html.twig");
     }

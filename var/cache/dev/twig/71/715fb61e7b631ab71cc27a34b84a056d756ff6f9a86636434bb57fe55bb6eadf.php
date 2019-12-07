@@ -12,7 +12,7 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* /test.html.twig */
+/* test.html.twig */
 class __TwigTemplate_61216583ad63b80935d27efd6953a93f3a0d2bd7441e596b5acb0fe5302f20f9 extends \Twig\Template
 {
     private $source;
@@ -34,7 +34,7 @@ class __TwigTemplate_61216583ad63b80935d27efd6953a93f3a0d2bd7441e596b5acb0fe5302
     {
         $macros = $this->macros;
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "/test.html.twig"));
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "test.html.twig"));
 
         // line 1
         echo "
@@ -536,7 +536,7 @@ Extension : Les fermiers de la lande
 
     public function getTemplateName()
     {
-        return "/test.html.twig";
+        return "test.html.twig";
     }
 
     public function getDebugInfo()
@@ -1037,6 +1037,6 @@ Extension : Les fermiers de la lande
     \t<?php echo \$_SESSION[\"remplissageJeux\"]; ?>
     </div>
   </body>
-</html>", "/test.html.twig", "/var/www/renardenjoue/templates/test.html.twig");
+</html>", "test.html.twig", "/var/www/renardenjoue/templates/test.html.twig");
     }
 }

@@ -18,7 +18,7 @@ class LudothequeRepository extends ServiceEntityRepository
     //                              Mes requetes                                 //
     ///////////////////////////////////////////////////////////////////////////////
 
-    // Retourne les jeux dans l'ordre alphab�tique.
+    // Retourne les jeux dans l'ordre alphabétique.
     /**
       * @return Ludotheque[]
       */
@@ -99,5 +99,21 @@ class LudothequeRepository extends ServiceEntityRepository
         return true;
       }
       else return false;
+    }
+
+    // Retourne les derniers jeux de la base de données
+    /**
+      * @return Liste de jeux
+      */
+    public function getLastGame(): array
+    {
+      $liste = $this->findBy(
+        array(),              // Critère
+        array('id' => 'desc'),// Tri
+        3,                    // Limite : les 3 premiers (donc les 3 derniers car la liste est en ordre inverse)
+        0                     // Offset
+      );
+      
+      return $liste;
     }
 }
