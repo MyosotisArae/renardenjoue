@@ -393,7 +393,7 @@ class Ludotheque
         (
             1 => "écriture d'ordres",
             2 => "pose d'ouvriers",
-            4 => "enchère",
+            4 => "enchères",
             8 => "choix de cartes/tuiles",
             16 => "prise de risques",
             32 => "bluff",
@@ -406,25 +406,26 @@ class Ludotheque
             4096 => "tactique",
             8192 => "programmation",
             16384 => "sens de l'observation",
-            32768 => "déduction"
+            32768 => "déduction",
+            65536 => "draft",
+            131072 => "optimisation de paquet"
         );
         $liste = array();
-        /*
-        $val = $this->meca;
-        echo " meca=".$val;
+        
+        $val = $this->meca * 1;
         $puis2 = 1;
         while ($val > 0)
         {
-            echo " puissance ".$puis2;
-            if ($val&$puis2 > 0)
+            $operation = ($val & $puis2);
+            if ($operation > 0)
             {
                 $liste[] = $mecanismes[$puis2];
                 $val -= $puis2;
-                echo " oui : val=".$val;
             }
             $puis2 *= 2;
+            if ($puis2 > 131072) return $liste; // Sécurité
         }
-        */
+        
         return $liste;
     }
 
