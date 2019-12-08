@@ -92,7 +92,7 @@
 {% set classeTaille  = random(6)  %}
 {% set classFonte    = random(10) %}
 {% for jeu in listeJeux %}
-                <a href="jeux?jeuChoisi={{jeu.id}}" class="confetti couleur{{classeCouleur}} taille{{classeTaille}} fonte{{classFonte}}">{{jeu.nom}}</a>
+                <a href="jeux?jeuChoisi={{jeu.id}}" class="confetti couleur{{classeCouleur}} taille{{classeTaille}} fonte{{classFonte}}">{{jeu.nom|capitalize}}</a>
   {% set classeCouleur = classeCouleur + 1 %}
   {% set classeTaille = classeTaille + 1 %}
   {% set classFonte = classFonte + 1 %}
@@ -113,7 +113,7 @@
       <div class='col-12' style="padding-top : 1em;">{# Bloc Titre #}
         <div class='row fondOpaque cadreBleu'>
           <div class="col-12">&nbsp;</div>
-          <div class='col-md-6 col-sm-7 col-12' style="margin-top:-0.5em"><h2>{{session.jeuChoisi.nom}}</h2>
+          <div class='col-md-6 col-sm-7 col-12' style="margin-top:-0.5em"><h2>{{session.jeuChoisi.nom|capitalize}}</h2>
           </div>
           <div class='col-md-4 col-sm-4 col-7' style="margin-top:-0.5em">
             <div class="row">
@@ -186,6 +186,15 @@
                 <img class='mini enAbsolu' style="right : 2em;top : 0;" src="{{ img_path }}{{session.jeuChoisi.imgNbJoueurs}}">
                 <h1>&nbsp;</h1>
               </div>
+              {#
+              <div class='col-12'>
+                <label class='gauche' style="font-size : 1.4em;">Mécanismes</label>
+                {% for meca in session.jeuChoisi.mecanismes %}
+                <li>meca</li>
+                {% endfor %}
+                <h1>&nbsp;</h1>
+              </div>
+              #}
             </div>
               </td>
             </tr>

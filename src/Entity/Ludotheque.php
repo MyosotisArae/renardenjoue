@@ -148,6 +148,18 @@ class Ludotheque
     private $dominance;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="meca", type="integer", nullable=false)
+     */
+    private $meca = 0;
+
+    /**
+     * @var array
+     */
+    private $mecanismes;
+
+    /**
      * @var string
      */
     private $difficulte;
@@ -368,9 +380,57 @@ class Ludotheque
         return $this->dominance;
     }
 
-    public function setDominance(?bool $dominance): self
+    public function setDominance(?int $dominance): self
     {
         $this->dominance = $dominance;
+
+        return $this;
+    }
+
+    public function getMecanismes(): ?array
+    {
+        $mecanismes = array
+        (
+            1 => "écriture d'ordres",
+            2 => "pose d'ouvriers",
+            4 => "enchère",
+            8 => "choix de cartes/tuiles",
+            16 => "prise de risques",
+            32 => "bluff",
+            64 => "conquête",
+            128 => "exploration",
+            256 => "garder un secret",
+            512 => "combats",
+            1024 => "gestion de ressources",
+            2048 => "négociation",
+            4096 => "tactique",
+            8192 => "programmation",
+            16384 => "sens de l'observation",
+            32768 => "déduction"
+        );
+        $liste = array();
+        /*
+        $val = $this->meca;
+        echo " meca=".$val;
+        $puis2 = 1;
+        while ($val > 0)
+        {
+            echo " puissance ".$puis2;
+            if ($val&$puis2 > 0)
+            {
+                $liste[] = $mecanismes[$puis2];
+                $val -= $puis2;
+                echo " oui : val=".$val;
+            }
+            $puis2 *= 2;
+        }
+        */
+        return $liste;
+    }
+
+    public function setMeca(?int $meca): self
+    {
+        $this->meca = $meca;
 
         return $this;
     }
