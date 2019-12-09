@@ -24,30 +24,27 @@ class JeuxController extends ParentController
     }
 
     // Calculer le code HTML pour afficher la duree du jeu choisi.
-    $_SESSION["htmlDuree"] = $this->getDuree();
+    //$_SESSION["htmlDuree"] = $this->getDuree($_SESSION["jeuChoisi"]);
 
 	return $this->render('/jeux.html.twig',["session" => $_SESSION,"listeJeux" => $listeJeux]);
+	//return $this->render('/test.html.twig',["session" => $_SESSION,"listeJeux" => $listeJeux]);
   }
-  
-  private function getJeuxBis()
-  {
-	$jeu = new Ludotheque();
-	$jeu->nom = "Catane";
-	$jeu->but = "gagner";
-	$jeux = array($jeu,$jeu);
-    
-	return $jeux;
-  }
-  
+
   private function getJeux()
   {
     $doctrine = $this->getDoctrine();
     $em = $doctrine->getManager();
     $repository = $em->getRepository('App:Ludotheque');
     
-    $jeu = $repository->getListeJeux();
-    
-    return $jeu;
+    $jeux = $repository->getListeJeux();
+
+	// Ajouter le code HTML à afficher pour la durée en images
+	foreach ($jeux as $jeu)
+	{
+		$jeu->setDuree($this->getDuree($jeu));
+	}
+
+    return $jeux;
   }
   
   private function getJeuChoisi($listeJeux)
@@ -69,10 +66,10 @@ class JeuxController extends ParentController
       return $listeJeux[$i];
   }
 
-  private function getDuree()
+  private function getDuree($jeu)
   {
-    $dureeMin = $_SESSION["jeuChoisi"]->getDureemin();
-    $dureeMax = $_SESSION["jeuChoisi"]->getDureemax();
+    $dureeMin = $jeu->getDureemin();
+    $dureeMax = $jeu->getDureemax();
 
   	$codeHTML = "";
   	// Si la duree max est inferieure ou egale a 3h, on affiche 1 a 3 horloges

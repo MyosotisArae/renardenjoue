@@ -112,6 +112,14 @@ class Ludotheque
      */
     private $dureemax = '120';
 
+
+    /**
+     * Code HTML permettant d'afficher la durée sous forme d'horloges
+     * Champ calculé dans JeuxController.getDuree()
+     * @var string
+     */
+    private $duree;
+
     /**
      * @var int
      *
@@ -323,6 +331,18 @@ class Ludotheque
     public function setDureemax(int $dureemax): self
     {
         $this->dureemax = $dureemax;
+
+        return $this;
+    }
+
+    public function getDuree(): ?string
+    {
+        return $this->duree;
+    }
+
+    public function setDuree(string $duree): self
+    {
+        $this->duree = $duree;
 
         return $this;
     }

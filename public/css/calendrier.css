@@ -10,5 +10,12 @@
 h3
 {
   color:#000;
-  border-bottom:3px solid blue;
+  border-bottom:3px solid #428bca;
 }
+
+#monCalendrier { overflow-y: hidden; }
+.h-85 { height: 85vh; overflow-y: auto; }
+.fc-content-skeleton
+{ max-height : 1px; background-color: #428bca; }
+.fc-widget-content
+{ max-height : 1px; position : absolute; }
