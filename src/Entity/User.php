@@ -22,7 +22,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message = "Vous devez choisir un nom.")
      */
     private $nom;
 
@@ -33,14 +33,14 @@ class User implements UserInterface, \Serializable
 
     /**
      * @var string Mot de passe non crypté
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message = "Le mot de passe DOIT être renseigné.")
      */
     private $plainPassword;
 
     /**
      * @var string Mot de passe crypté et enregistré en base
      * @ORM\Column(type="string")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message = "Le mot de passe DOIT être renseigné.")
      */
     private $password;
 
