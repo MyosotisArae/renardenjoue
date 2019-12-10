@@ -1,6 +1,7 @@
 security:
     encoders:
-        App\Entity\User: 'auto'
+        App\Entity\User:
+            algorithm: bcrypt
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
@@ -16,8 +17,7 @@ security:
         main:
             pattern: ^/
             anonymous: true
-            x509:
-              provider: user_provider
+            provider: user_provider
             form_login:
               login_path: login
               check_path: login

@@ -9,9 +9,3 @@ function detailEvt(tableau)
   page.scrollTop = 0;
   page.scrollTop += 1000;
 }
-function scroller()
-{
-  page = document.getElementById('partieBlanche');
-  page.scrollTop = 0;
-  page.scrollTop += 1000;
-}

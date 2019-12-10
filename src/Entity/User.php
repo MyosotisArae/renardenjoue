@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields="nom", message="Il existe déjà un utilisateur portant ce nom.")
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -22,27 +22,37 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank()
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="array")
      */
     private $roles = ['ROLE_USER'];
 
     /**
-     * @var string The hashed password
+     * @var string Mot de passe non crypté
+     * @Assert\NotBlank()
+     */
+    private $plainPassword;
+
+    /**
+     * @var string Mot de passe crypté et enregistré en base
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     private $password;
 
     /**
-     * @Assert\Email(
-     *     message = "L'email '{{ value }}' n'est pas valide.")
-     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Email(message = "L'email '{{ value }}' n'est pas valide.")
+     * @ORM\Column(type="string", nullable=true, unique=true)
      */
     private $email;
 
+    /******************************************/
+    /************* Getteurs *******************/
+    /******************************************/
     public function getId(): ?int
     {
         return $this->id;
@@ -51,18 +61,6 @@ class User implements UserInterface
     public function getNom(): ?string
     {
         return $this->nom;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setNom(string $nom): self
-    {
-        $this->nom = $nom;
-
-        return $this;
     }
 
     /**
@@ -76,15 +74,53 @@ class User implements UserInterface
     }
 
     /**
+     */
+    public function getPlainPassword(): string
+    {
+        return (string) $this->plainPassword;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return (string) $this->password;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
      * @see UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        if (empty($this->roles)) {
+            return ['ROLE_USER'];
+        }
 
-        return array_unique($roles);
+        return $this->roles;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /******************************************/
+    /************* Setteurs *******************/
+    /******************************************/
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
     }
 
     public function setRoles(array $roles): self
@@ -94,12 +130,11 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getPassword(): string
+    public function setPlainPassword(string $plainPassword): self
     {
-        return (string) $this->password;
+        $this->plainPassword = $plainPassword;
+
+        return $this;
     }
 
     public function setPassword(string $password): self
@@ -116,12 +151,12 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getSalt()
-    {
-        // not needed when using the "bcrypt" algorithm in security.yaml
+
+    /******************************************/
+    /************** Autres ********************/
+    /******************************************/
+    function addRole($role) {
+        $this->roles[] = $role;
     }
 
     /**
@@ -131,5 +166,25 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize() {
+        return serialize(array(
+            $this->id,
+            $this->nom,
+            $this->email,
+            $this->password
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized) {
+        list (
+                $this->id,
+                $this->nom,
+                $this->email,
+                $this->password
+                ) = unserialize($serialized);
     }
 }

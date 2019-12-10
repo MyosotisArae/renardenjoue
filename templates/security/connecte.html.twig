@@ -14,7 +14,10 @@
 <div class="col-12">
   <br>
 </div>
-<div class="col-3 enBleu">
+<div class="col-md-3 col-1">
+  &nbsp;
+</div>
+<div class="col-md-5 col-10 enBleu">
 
     {% if app.user %}
         <div class="checkbox mb-3">Heureux de vous voir, {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
@@ -25,4 +28,7 @@
 
 </div>
 
+<div class="col-md-3 col-1">
+  &nbsp;
+</div>
 {% endblock %}

@@ -35,22 +35,19 @@ class SecurityController extends AbstractController
 
         $user = new User;
         $formulaire = $this->createForm(UserCnxType::class, $user);
-        print_r(">>> method:'".$request->getMethod()."' <<<");
-        print_r(">>> $formulaire->getName():'".$formulaire->getName()."' <<<");
-//        if ($request->isMethod('POST'))
-//        {
+        if ($request->isMethod('POST'))
+        {
           $formulaire->submit($request->request->get($formulaire->getName()));
-//print_r(">>> isSubmitted:'".$formulaire->isSubmitted()."' <<<");
           if ($formulaire->isSubmitted() && $formulaire->isValid())
           {
             $user = $formulaire->getData();
-            //$em = $this->getDoctrine()->getManager();
-            //$em->persist($user);
-            //$em->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
             $_SESSION["user"] = $user;
             return $this->redirectToRoute('compte');
           }
-//        }
+        }
 
         return $this->render('security/login.html.twig', ['formulaire' => $formulaire->createView()]);
     }
@@ -108,12 +105,7 @@ if ($request->getMethod() != 'GET') die;
 
         if ($request->isMethod('POST'))
         {
-print_r(">>> connecte : method = POST <<<");
-var_dump($request->request);
           $formulaire->submit($request->request->get($formulaire->getName()));
-print_r(">>> connecte : formulaire isSubmitted:");
-var_dump($formulaire->isSubmitted());
-print_r("<<<");
           if ($formulaire->isSubmitted() && $formulaire->isValid())
           {
             $user = $formulaire->getData();
@@ -160,7 +152,6 @@ print_r("<<<");
      */
     public function logout()
     {
-var_dump("-- debut logout :");
         throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
     }
 }
