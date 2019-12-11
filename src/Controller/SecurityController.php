@@ -21,7 +21,7 @@ use Symfony\Component\Form\Forms;
 //use Symfony\Component\Validator\Validation;
 //use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 
-class SecurityController extends AbstractController
+class SecurityController extends ParentController
 {
     /**
      * @Route("/login", name="login")
@@ -35,12 +35,9 @@ class SecurityController extends AbstractController
 
         $user = new User;
         $formulaire = $this->createForm(UserCnxType::class, $user);
-        print_r(">>> method:'".$request->getMethod()."' <<<");
-        print_r(">>> $formulaire->getName():'".$formulaire->getName()."' <<<");
-//        if ($request->isMethod('POST'))
-//        {
+        if ($request->isMethod('POST'))
+        {
           $formulaire->submit($request->request->get($formulaire->getName()));
-//print_r(">>> isSubmitted:'".$formulaire->isSubmitted()."' <<<");
           if ($formulaire->isSubmitted() && $formulaire->isValid())
           {
             $user = $formulaire->getData();
@@ -50,9 +47,9 @@ class SecurityController extends AbstractController
             $_SESSION["user"] = $user;
             return $this->redirectToRoute('compte');
           }
-//        }
+        }
 
-        return $this->render('security/login.html.twig', ['formulaire' => $formulaire->createView()]);
+        return $this->render('security/login.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView()]);
     }
 
 /*
@@ -94,12 +91,6 @@ if ($request->getMethod() != 'GET') die;
     public function connecte(Request $request)
     {
         $_SESSION["ongletActif"] = "CMP";
-        if ($this->getUser())
-        {
-          var_dump("------------------- this->getUser() ------------------------");
-          var_dump($this->getUser());
-          //$this->redirectToRoute('target_path');
-        }
 
         //$user = $_SESSION["user"];
         $user = new User;
@@ -108,12 +99,7 @@ if ($request->getMethod() != 'GET') die;
 
         if ($request->isMethod('POST'))
         {
-print_r(">>> connecte : method = POST <<<");
-var_dump($request->request);
           $formulaire->submit($request->request->get($formulaire->getName()));
-print_r(">>> connecte : formulaire isSubmitted:");
-var_dump($formulaire->isSubmitted());
-print_r("<<<");
           if ($formulaire->isSubmitted() && $formulaire->isValid())
           {
             $user = $formulaire->getData();
@@ -122,7 +108,7 @@ print_r("<<<");
           }
         }
 
-        return $this->render('security/connecte.html.twig', ['formulaire' => $formulaire->createView()]);
+        return $this->render('security/connecte.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView()]);
     }
 
     /**
@@ -152,7 +138,7 @@ print_r("<<<");
           }
         }
 
-        return $this->render('security/newUser.html.twig', ['formulaire' => $formulaire->createView()]);
+        return $this->render('security/newUser.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView()]);
     }
 
     /**

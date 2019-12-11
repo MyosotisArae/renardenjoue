@@ -34,7 +34,7 @@
   <body class="w-max">
 {% block corps %}
   {% set isAdministrateur = false %}
-  {% set afficherConnexion = false %}
+  {% set afficherConnexion = true %}
 
     <header class="row w-max">
       <div class="col-12 container-fluid w-max">
@@ -60,12 +60,15 @@
                 </li>
                 {% endif %}
                 {% if afficherConnexion %}
+                  {% if session is null %}
                 <li class="nav-item{{ ongletActif("CNX") }}">
                   <a class="nav-link" href="login"><i class="fas fa-sign-in-alt">&nbsp;</i>Se connecter</a>
                 </li>
+                  {% else %}
                 <li class="nav-item{{ ongletActif("CMP") }}">
                   <a class="nav-link" href="compte"><i class="fas fa-address-card">&nbsp;</i>Mon compte</a>
                 </li>
+                  {% endif %}
                 {% endif %}
                 <li class="nav-item{{ ongletActif("CTC") }}" title="Pour nous trouver ou nous envoyer un message">
                   <a class="nav-link" href="contact"><i class="fas fa-comment">&nbsp;</i>Contact</a>

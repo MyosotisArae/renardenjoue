@@ -1,5 +1,8 @@
-main:
+vide:
     path: /
+    controller: App\Controller\AccueilController::main
+main:
+    path: /main
     controller: App\Controller\AccueilController::main
 accueil:
     path: /accueil
