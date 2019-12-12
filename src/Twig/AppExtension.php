@@ -32,7 +32,9 @@ class AppExtension extends AbstractExtension
     {
       if (!$this->util->estRenseigneSESSION("ongletActif"))
       {
-        $_SESSION["ongletActif"] = "A";
+        // Le seul cas où on "perd" la variable ongletActif, c'est lors du logout.
+        // Alors prenons comme valeur par défaut de l'onglet la page de connexion.
+        $_SESSION["ongletActif"] = "CNX";
       }
       if ($_SESSION["ongletActif"] == $idOnglet) return " active";
       return "";

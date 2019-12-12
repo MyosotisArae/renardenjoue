@@ -58,15 +58,13 @@
                   </select>
                 </li>
                 {% endif %}
-                {% if 'memberConnected' in session|keys %}
-                <li class="nav-item{{ ongletActif("CMP") }}">
-                  <a class="nav-link" href="compte"><i class="fas fa-address-card">&nbsp;</i>Mon compte</a>
-                </li>
-                {% else %}
                 <li class="nav-item{{ ongletActif("CNX") }}">
+                {% if 'memberConnected' in session|keys %}
+                  <a class="nav-link" href="compte"><i class="fas fa-address-card">&nbsp;</i>Mon compte</a>
+                {% else %}
                   <a class="nav-link" href="login"><i class="fas fa-sign-in-alt">&nbsp;</i>Se connecter</a>
-                </li>
                 {% endif %}
+                </li>
                 <li class="nav-item{{ ongletActif("CTC") }}" title="Pour nous trouver ou nous envoyer un message">
                   <a class="nav-link" href="contact"><i class="fas fa-comment">&nbsp;</i>Contact</a>
                 </li>

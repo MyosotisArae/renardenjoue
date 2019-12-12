@@ -37,37 +37,6 @@ class SecurityController extends ParentController
 
         $user = new User;
         $formulaire = $this->createForm(UserCnxType::class, $user, ['action' => 'check']);
-        /*
-        if ($request->isMethod('POST'))
-        {
-          $formulaire->submit($request->request->get($formulaire->getName()));
-          if ($formulaire->isSubmitted() && $formulaire->isValid())
-          {
-            $user = $formulaire->getData();
-
-            $userEnBase = $this->getDoctrine()
-                               ->getManager()
-                               ->getUser($user);
-            
-            if ($userEnBase != null && $userEnBase->getId() > 0)
-            {
-              $pwd = $user->getPlainPassword();
-              $pwdEncoded = $encoder->encodePassword($user, $pwd);
-              $user->setPassword($pwdEncoded);
-              if (!$encoder->isPasswordValid($pwd, $userEnBase->getPassword()))
-              {
-                return $this->render('security/login.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView()]);
-              }
-
-            }
-            
-            
-            
-            $this->setUser($user);
-            return $this->redirectToRoute('compte');
-          }
-        }
-        */
 
         return $this->render('security/login.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView()]);
     }
@@ -90,18 +59,14 @@ class SecurityController extends ParentController
       if ($formulaire->isSubmitted() && $formulaire->isValid())
       {
         $user = $formulaire->getData();
-
-        $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
-        $repository = $em->getRepository('App:User');
-        $userEnBase = $repository->getUser($user);
+        $userEnBase = $this->findUser($user);
         
-        if ($userEnBase != null && $userEnBase->getId() > 0)
+        if ($this->existe($userEnBase))
         {
           if ($encoder->isPasswordValid($userEnBase, $user->getPlainPassword()))
           {
             $this->setUser($userEnBase);
-            $formulaire = $this->createForm(UserDisplayType::class, $user);
+            $formulaire = $this->createForm(UserDisplayType::class, $user, ['action' => 'compte']);
             return $this->render('security/connecte.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView()]);
           }
           else $formulaire->get('plainPassword')->addError(new FormError("Ce n'est pas le bon mot de passe."));
@@ -117,7 +82,7 @@ class SecurityController extends ParentController
      */
     public function connecte(Request $request)
     {
-        $_SESSION["ongletActif"] = "CMP";
+        $_SESSION["ongletActif"] = "CNX";
 
         $user = $this->getUser();
         $formulaire = $this->createForm(UserDisplayType::class, $user);
@@ -157,6 +122,13 @@ class SecurityController extends ParentController
           {
             $user = $formulaire->getData();
 
+            // Vérifier l'unicité de ce nom.
+            $userEnBase = $this->findUser($user);
+            if ($this->existe($userEnBase))
+            {
+              $formulaire->get('nom')->addError(new FormError("Le nom ".$user->getNom()." est déjà pris, désolé."));
+              return $this->render('security/newUser.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView()]);
+            }
             $pwd = $user->getPlainPassword();
             $pwdEncoded = $encoder->encodePassword($user, $pwd);
             $user->setPassword($pwdEncoded);
@@ -182,5 +154,26 @@ class SecurityController extends ParentController
       $this->setUser($user);
       $formulaire = $this->createForm(UserCnxType::class, $user, ['action' => 'check']);
       return $this->render('security/login.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView()]);
+    }
+
+    /**
+     * Recherche d'un utilisateur par son nom.
+     */
+    private function findUser(User $user)
+    {
+      $doctrine = $this->getDoctrine();
+      $em = $doctrine->getManager();
+      $repository = $em->getRepository('App:User');
+      return $repository->getUser($user);
+    }
+
+    /**
+     * Cette fonction indique si l'utilisateur existe :
+     * - il ne vaut pas NULL
+     * - son id n'est pas zéro (la valeur que le constructeur de User.php met par défaut)
+     */
+    private function existe($user)
+    {
+      return ($user != null && $user->getId() > 0);
     }
 }
