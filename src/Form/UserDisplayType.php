@@ -17,7 +17,7 @@ class UserDisplayType extends AbstractType
     {
         $builder
             ->add('nom',      TextType::class,     ['label' => "Nom d'utilisateur", 'attr' => array('readonly' => true)])
-            ->add('password', PasswordType::class, ['label' => 'Mot de passe'])
+            ->add('plainPassword', PasswordType::class, ['label' => 'Mot de passe'])
             ->add('email',    EmailType::class,    ['label' => 'Adresse mail', 'required' => false])
             ->add('submit',   SubmitType::class,   ['label' => 'Enregistrer les modifications'])
         ;

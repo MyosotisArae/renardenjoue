@@ -16,9 +16,9 @@ class UserCnxType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom',      TextType::class,     ['label' => "Nom d'utilisateur"])
-            ->add('password', PasswordType::class, ['label' => 'Mot de passe'])
-            ->add('submit',   SubmitType::class,   ['label' => 'Se connecter', 'attr' => ['method' => 'POST']])
+            ->add('nom',           TextType::class,     ['label' => "Nom d'utilisateur"])
+            ->add('plainPassword', PasswordType::class, ['label' => 'Mot de passe'])
+            ->add('submit',        SubmitType::class,   ['label' => 'Se connecter', 'attr' => ['method' => 'POST']])
         ;
     }
 

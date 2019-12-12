@@ -18,72 +18,99 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Symfony\Component\Form\Forms;
+use Symfony\Component\Form\FormError;
 //use Symfony\Component\Validator\Validation;
 //use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends ParentController
 {
     /**
      * @Route("/login", name="login")
      */
-    public function login(Request $request)
+    public function login(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $_SESSION["ongletActif"] = "CNX";
-        // if ($this->getUser()) {
-        //    $this->redirectToRoute('target_path');
-        // }
+        if ($this->getUser()) {
+          $this->redirectToRoute('compte');
+        }
 
         $user = new User;
-        $formulaire = $this->createForm(UserCnxType::class, $user);
+        $formulaire = $this->createForm(UserCnxType::class, $user, ['action' => 'check']);
+        /*
         if ($request->isMethod('POST'))
         {
           $formulaire->submit($request->request->get($formulaire->getName()));
           if ($formulaire->isSubmitted() && $formulaire->isValid())
           {
             $user = $formulaire->getData();
-            //$em = $this->getDoctrine()->getManager();
-            //$em->persist($user);
-            //$em->flush();
-            $_SESSION["user"] = $user;
+
+            $userEnBase = $this->getDoctrine()
+                               ->getManager()
+                               ->getUser($user);
+            
+            if ($userEnBase != null && $userEnBase->getId() > 0)
+            {
+              $pwd = $user->getPlainPassword();
+              $pwdEncoded = $encoder->encodePassword($user, $pwd);
+              $user->setPassword($pwdEncoded);
+              if (!$encoder->isPasswordValid($pwd, $userEnBase->getPassword()))
+              {
+                return $this->render('security/login.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView()]);
+              }
+
+            }
+            
+            
+            
+            $this->setUser($user);
             return $this->redirectToRoute('compte');
           }
         }
+        */
 
         return $this->render('security/login.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView()]);
     }
 
-/*
-    public function login(Request $request)
+    
+    /**
+     * L'utilisateur tente de se logguer sur son compte.
+     * @Route("/check", name="check")
+     */
+    public function checkPassword(Request $request, UserPasswordEncoderInterface $encoder)
     {
-        $_SESSION["ongletActif"] = "CNX";
-        
-        if ($this->getUser()) {
-            $this->redirectToRoute('compte');
-        }
-        
+      $_SESSION["ongletActif"] = "CNX";
+      if ($this->getUser()) {
+        $this->redirectToRoute('compte');
+      }
+      $msgErreur = "";
+      $user = new User;
+      $formulaire = $this->createForm(UserCnxType::class, $user);
+      $formulaire->submit($request->request->get($formulaire->getName()));
+      if ($formulaire->isSubmitted() && $formulaire->isValid())
+      {
+        $user = $formulaire->getData();
 
-        $user = new User;
-        //$formulaire = $this->createForm(UserCnxType::class, $user); //, ['action' => $this->generateUrl('compte')]);
-        $formulaire = $this->createFormBuilder($user)
-            ->add('nom',      TextType::class,     ['label' => "Nom d'utilisateur"])
-            ->add('password', PasswordType::class, ['label' => 'Mot de passe'])
-            ->add('submit',   SubmitType::class,   ['label' => 'Connexion', 'attr' => ['method' => 'POST']])
-            ->getForm();
-
-        $formulaire->handleRequest($request);
-print_r(">>> method:'".$request->getMethod()."' <<<");
-if ($request->getMethod() != 'GET') die;
-        //$formulaire->submit($request->request->get($formulaire->getName()));
-        if ($formulaire->isSubmitted() && $formulaire->isValid())
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+        $repository = $em->getRepository('App:User');
+        $userEnBase = $repository->getUser($user);
+        
+        if ($userEnBase != null && $userEnBase->getId() > 0)
         {
-          $user = $formulaire->getData();
-          //$_SESSION["user"] = $user;
-          return $this->redirectToRoute('compte');
+          if ($encoder->isPasswordValid($userEnBase, $user->getPlainPassword()))
+          {
+            $this->setUser($userEnBase);
+            $formulaire = $this->createForm(UserDisplayType::class, $user);
+            return $this->render('security/connecte.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView()]);
+          }
+          else $formulaire->get('plainPassword')->addError(new FormError("Ce n'est pas le bon mot de passe."));
         }
-
-        return $this->render('security/login.html.twig', ['formulaire' => $formulaire->createView()]);
+        else $formulaire->get('nom')->addError(new FormError("Nom d'utilisateur inconnu."));
+      }
+      return $this->render('security/login.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView()]);
     }
-*/
+    
     /**
      * L'utilisateur est connecté.
      * @Route("/compte", name="compte")
@@ -92,8 +119,7 @@ if ($request->getMethod() != 'GET') die;
     {
         $_SESSION["ongletActif"] = "CMP";
 
-        //$user = $_SESSION["user"];
-        $user = new User;
+        $user = $this->getUser();
         $formulaire = $this->createForm(UserDisplayType::class, $user);
         $formulaire->handleRequest($request);
 
@@ -103,8 +129,8 @@ if ($request->getMethod() != 'GET') die;
           if ($formulaire->isSubmitted() && $formulaire->isValid())
           {
             $user = $formulaire->getData();
-            $_SESSION["user"] = $user;
-            //return $this->redirectToRoute('compte');
+            $this->setUser($user);
+            return $this->redirectToRoute('compte');
           }
         }
 
@@ -114,12 +140,12 @@ if ($request->getMethod() != 'GET') die;
     /**
      * @Route("/newUser", name="newUser")
      */
-    public function newUser(Request $request)
+    public function newUser(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $_SESSION["ongletActif"] = "CNX";
-        // if ($this->getUser()) {
-        //    $this->redirectToRoute('target_path');
-        // }
+        if ($this->getUser()) {
+          $this->redirectToRoute('compte');
+        }
 
         $user = new User;
         $formulaire = $this->createForm(UserCreateType::class, $user);
@@ -130,10 +156,15 @@ if ($request->getMethod() != 'GET') die;
           if ($formulaire->isSubmitted() && $formulaire->isValid())
           {
             $user = $formulaire->getData();
+
+            $pwd = $user->getPlainPassword();
+            $pwdEncoded = $encoder->encodePassword($user, $pwd);
+            $user->setPassword($pwdEncoded);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-            $_SESSION["user"] = $user;
+            $this->setUser($user);
             return $this->redirectToRoute('compte');
           }
         }
@@ -146,7 +177,10 @@ if ($request->getMethod() != 'GET') die;
      */
     public function logout()
     {
-var_dump("-- debut logout :");
-        throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
+      $_SESSION["ongletActif"] = "CNX";
+      $user = new User;
+      $this->setUser($user);
+      $formulaire = $this->createForm(UserCnxType::class, $user, ['action' => 'check']);
+      return $this->render('security/login.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView()]);
     }
 }

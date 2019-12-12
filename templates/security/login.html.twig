@@ -24,15 +24,7 @@
 
     <h1 class="h3 mb-3 font-weight-normal">Connectez-vous ici :</h1>
     {{ form(formulaire) }}
-
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
     <br>
-    <div class="checkbox mb-3">
-        <label>
-            &nbsp;<input type="checkbox" id="remember_me" name="_remember_me"> Se souvenir de moi
-        </label>
-    </div>
     {% endif %}
 
 </div>
@@ -44,7 +36,7 @@
   <form method="POST" action="newUser">
     <br>
     <a href="newUser" class="bouton bg-primary">
-        Création de compte
+        Créez votre compte
     </a>
     <br>
     <br>

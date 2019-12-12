@@ -9,10 +9,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields="nom", message="Il existe déjà un utilisateur portant ce nom.")
  */
-class User implements UserInterface
+class User implements UserInterface //, \Serializable
 {
+    public function __construct()
+    {
+        $id = 0;
+        $nom = 'a';
+        $plainPassword = 'b';
+        $password = 'c';
+    }
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -22,6 +28,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank()
      */
     private $nom;
 
@@ -31,15 +38,20 @@ class User implements UserInterface
     private $roles = ['ROLE_USER'];
 
     /**
-     * @var string The hashed password
+     * @var string Mot de passe saisi par l'utilisateur
+     * @Assert\NotBlank()
+     */
+    private $plainPassword;
+
+    /**
+     * @var string Mot de passe encodé et persisté
      * @ORM\Column(type="string")
      */
     private $password;
 
     /**
-     * @Assert\Email(
-     *     message = "L'email '{{ value }}' n'est pas valide.")
      * @ORM\Column(type="string", nullable=true)
+     * @Assert\Email(message = "L'email '{{ value }}' n'est pas valide.")
      */
     private $email;
 
@@ -97,9 +109,24 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
+    public function getPlainPassword(): string
+    {
+        return (string) $this->plainPassword;
+    }
+
+    /**
+     * @see UserInterface
+     */
     public function getPassword(): string
     {
         return (string) $this->password;
+    }
+
+    public function setPlainPassword(string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
     }
 
     public function setPassword(string $password): self
