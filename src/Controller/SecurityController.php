@@ -20,9 +20,12 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\FormError;
-//use Symfony\Component\Validator\Validation;
-//use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 class SecurityController extends ParentController
 {
@@ -159,7 +162,7 @@ class SecurityController extends ParentController
     /**
      * @Route("/oubli-mot-de-passe", name="app_forgotten_password", methods="GET|POST")
      */
-    public function forgottenPassword(Request $request, UserPasswordEncoderInterface $encoder) //, \Swift_Mailer $mailer, TokenGeneratorInterface $tokenGenerator): Response
+    public function forgottenPassword(Request $request, MailerInterface $mailer) //, \Swift_Mailer $mailer, TokenGeneratorInterface $tokenGenerator): Response
     {
       $_SESSION["ongletActif"] = "CNX";
       if ($this->getUser()) {
@@ -167,7 +170,36 @@ class SecurityController extends ParentController
       }
 
       $user = new User;
+      $user->setNom("tata");
+      $user->setPlainPassword("tata");
       $formulaire = $this->createForm(ForgotPwdType::class, $user);
+      //$transport = new EsmtpTransport('localhost');
+      //$mailer = new Mailer($transport);
+      $email = (new Email())
+            ->from('myosotis.arae@gmail.com')
+            ->to('libell.arae@gmail.com')
+            //->cc('cc@example.com')
+            //->bcc('bcc@example.com')
+            //->replyTo('fabien@example.com')
+            //->priority(Email::PRIORITY_HIGH)
+            ->subject('Test mot de passe oublié')
+            ->text('Cliquez sur ce lien:')
+            ->html('<div style="display: inline-block; border : 2px solid orange;">
+          <table style="font-family:"Times New Roman";">
+            <tr>
+              <td>
+                <img style="height : 9em;width : auto;" src="http://lerenardenjoue.webou.net/logo.png">
+              </td>
+              <td>
+                <h1 style="font-size : 2em;text-align : center;">Le Renard Enjoué</h1>
+                <h2 style="font-size : 1em;text-align : center;">Association buxangeorgienne<br>de jeux de société modernes</h2>
+                <br>
+                Site : <a style="font-size : 1em;text-align : center;" href="https://renardenjoue.araetech.eu/">https://renardenjoue.araetech.eu/</a>
+              </td>
+            </tr>
+          </table>
+        </div>');
+      //$mailer->send($email);
       /*
       
       if ($request->isMethod('POST'))
