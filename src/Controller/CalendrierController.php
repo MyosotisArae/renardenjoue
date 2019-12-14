@@ -5,6 +5,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CalendrierController extends ParentController
 {
+  /**
+   * @Route("/calendrier", name="calendrier")
+   */
   public function main()
   {
     $_SESSION["ongletActif"] = "CAL";

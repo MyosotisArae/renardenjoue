@@ -5,6 +5,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ContactController extends ParentController
 {
+  /**
+   * @Route("/contact", name="contact")
+   */
   public function main()
   {
     $_SESSION["ongletActif"] = "CTC";

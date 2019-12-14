@@ -6,6 +6,9 @@ use App\Entity\Ludotheque;
 
 class JeuxController extends ParentController
 {
+	/**
+	 * @Route("/jeux", name="jeux")
+	 */
   public function main()
   {
     $_SESSION["ongletActif"] = "JEU";
