@@ -40,7 +40,7 @@
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
           plugins: [ 'dayGrid', 'bootstrap', 'list' ],
-          height : 500,
+          height : 'parent',
           buttonText : {
                          today : 'Revenir en '+ceMoisCi,
                          dayGridMonth : "mois",
@@ -115,7 +115,7 @@
 {% block laPage %}
 <div class="container-fluid fondOpaque h-85" id="partieBlanche">
   <div class="row">
-    <div class="col-12 h-85" id='monCalendrier'>
+    <div class="col-12 h-100" id='monCalendrier'>
     </div>
 
     <div class="col-4">

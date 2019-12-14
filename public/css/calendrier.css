@@ -14,8 +14,9 @@ h3
 }
 
 #monCalendrier { overflow-y: hidden; }
-.h-85 { height: 85vh; overflow-y: auto; }
 .fc-content-skeleton
-{ max-height : 1px; background-color: #428bca; }
+{ max-height : 1px; margin-top: 0.5em; background-color: #428bca; }
+/*
 .fc-widget-content
-{ max-height : 1px; position : absolute; }
+{ height : 98%; position : absolute; }
+*/
