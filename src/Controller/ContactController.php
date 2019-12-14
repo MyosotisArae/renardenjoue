@@ -2,9 +2,13 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ContactController extends ParentController
 {
+  /**
+   * @Route("/contact", name="contact")
+   */
   public function main()
   {
     $_SESSION["ongletActif"] = "CTC";

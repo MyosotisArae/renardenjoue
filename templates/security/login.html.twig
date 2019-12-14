@@ -14,34 +14,31 @@
 <div class="col-12">
   <br>
 </div>
-<div class="col-3 enBleu">
+<div class="col-1">
+  <br>
+</div>
+<div class="col-5 enBleu">
     {% if app.user %}
         <div class="checkbox mb-3">Heureux de vous voir, {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
     {% else %}
 
     <h1 class="h3 mb-3 font-weight-normal">Connectez-vous ici :</h1>
     {{ form(formulaire) }}
-
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
+    <a href="mailto:myosotis.arae@gmail.com">Vous avez oublié vos identifiants ? Contactez-moi.</a>
+    {#<a href='oubli-mot-de-passe'>J'ai oublié mes identifiants.</a>#}
     <br>
-    <div class="checkbox mb-3">
-        <label>
-            &nbsp;<input type="checkbox" id="remember_me" name="_remember_me"> Se souvenir de moi
-        </label>
-    </div>
     {% endif %}
 
 </div>
 
-<div class="col-2">
+<div class="col-1">
 </div>
 
 <div class="col-3 enBleu centrer">
   <form method="POST" action="newUser">
     <br>
     <a href="newUser" class="bouton bg-primary">
-        Création de compte
+        Créez votre compte
     </a>
     <br>
     <br>

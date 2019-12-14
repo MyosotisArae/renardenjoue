@@ -2,9 +2,13 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class CalendrierController extends ParentController
 {
+  /**
+   * @Route("/calendrier", name="calendrier")
+   */
   public function main()
   {
     $_SESSION["ongletActif"] = "CAL";

@@ -4,6 +4,9 @@
 
 {% block entete %}
   {{ parent() }}
+  {% if not('memberConnected' in session|keys) %}
+    <meta http-equiv= "refresh" content="0; login" />
+  {% endif %}
 {% endblock %}
 
 {% block corps %}
@@ -14,14 +17,26 @@
 <div class="col-12">
   <br>
 </div>
-<div class="col-3 enBleu">
+<div class="col-1">
+  <br>
+</div>
+<div class="col-md-7 col-11 enBleu">
 
-    {% if app.user %}
-        <div class="checkbox mb-3">Heureux de vous voir, {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-    {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Mon compte :</h1>
+  {% if 'memberConnected' in session|keys %}
+    <table class='w-100'>
+      <tr>
+        <td style='width : 70%;'>
+          <h1 class="h3 mb-3 font-weight-normal">Compte de {{ session.memberConnected.nom }} :</h1>
+        </td>
+        <td style='width : 30%;'>
+          <form action='logout'>
+            <button class='btn-primary btn float-right' type='submit'>Déconnexion</button>
+          </form>
+        </td>
+      </tr>
+    </table>    
     {{ form(formulaire) }}
+  {% endif %}
 
 </div>
 

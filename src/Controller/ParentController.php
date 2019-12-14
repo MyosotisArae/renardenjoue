@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
  
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
  
@@ -11,6 +12,18 @@ class ParentController extends AbstractController
       return array_merge(parent::getSubscribedServices(), [ // Melange du tableau des services par defaut avec les notres
           'utilitaires' => 'App\Service\Utilitaires'
       ]);
+  }
+
+  public function getUser():User
+  {
+    $util = $this->get("utilitaires");
+    if ($util->estRenseigneSESSION("memberConnected")) { return $_SESSION['memberConnected']; }
+    return new User;
+  }
+
+  public function setUser(User $u)
+  {
+    $_SESSION['memberConnected'] = $u;
   }
 }
 ?>
