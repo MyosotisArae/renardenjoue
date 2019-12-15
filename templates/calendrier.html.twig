@@ -65,7 +65,7 @@
                        allDay : false,
                        textColor : '#FFFFFF',
                        {% if evt.titre=="Les renards jouent" %}backgroundColor: '#ff0000',{% endif %}
-                       title : "{{evt.heureDebut|date('H')}}h{% if evt.aUneHeureDeFin %}-{{evt.heureFin|date('H')}}h{% endif %} {{evt.titre}}",
+                       title : "{{evt.titre}}",
                        start : "{{evt.dateDebut|date('Y-m-d')}} {{evt.heureDebut|date('H:i')}}"
                        {% if evt.aUneDateDeFin %},end : "{{evt.dateFin|date('Y-m-d')}}"
                          {% if evt.aUneHeureDeFin %}
@@ -113,26 +113,24 @@
 {% endblock %}
 
 {% block laPage %}
-<div class="container-fluid fondOpaque h-85" id="partieBlanche">
-  <div class="row">
-    <div class="col-12 h-100" id='monCalendrier'>
+<div class='container-fluid fondOpaque' id='partieBlanche' style='width : 95%;height : 100vh; overflow-y : auto; margin-bottom : 25vh;'>
+  <div class='row' style='height : 100%;'>
+    <div class='col-12' id='monCalendrier' style='height : 90%;'>
     </div>
 
-    <div class="col-4">
-        <div id='titreEvt'>
-          {% if listeDates|length == 0 %}
-          Aucun évènement ce mois-ci {# Pb : cette liste contient tous les evts, pas juste ceux de ce mois #}
-          {% elseif listeDates|length == 1 %}
-          {% include("_detailEvt.html.twig") %}
-          {#}
-          {% else %}
-          {{listeDates|length}} évènements ce mois-ci !
-          #}
-          {% endif %}
-        </div>
+    <div class='col-md-4 col-5' style='min-height : 300px;'>
+        <div id='titreEvt'></div>
         <div id='dateEvt'></div>
     </div>
-    <div class="col-7 offset-1" id='descEvt'>
+    <div class='col-7 offset-md-1' id='descEvt'>
+      Cliquez sur un évènement pour en lire le détail ici.
+    </div>
+
+    <div class='col-12'>
+      <br>&nbsp;
+      <br>&nbsp;
+      <br>&nbsp;
+      <br>&nbsp;
     </div>
 
   </div>
