@@ -55,6 +55,23 @@ class User implements UserInterface //, \Serializable
      */
     private $email;
 
+    /**
+     * Soirées jeux auxquelles l'utilisateur est inscrit.
+     * tableau d'id (table Evenements)
+     */
+/*
+    private $soirees;
+
+    public function getSoirees(): ?array
+    {
+        return $this->soirees;
+    }
+
+    public function setSoirees(array $liste)
+    {
+        $this->soirees = $liste;
+    }
+*/
     public function getId(): ?int
     {
         return $this->id;

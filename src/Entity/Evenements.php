@@ -68,7 +68,23 @@ class Evenements
      */
     private $periode;
 
-    public function getId(): ?int
+    /**
+     * Vaut true si l'utilisateur connecté est inscrit.
+     * @var bool
+     */
+    private $isInscrit;
+
+    public function getIsInscrit(): ?bool
+    {
+       return $this->isInscrit;
+    }
+
+    public function setIsInscrit(bool $isInscrit)
+    {
+       $this->isInscrit = $isInscrit;
+    }
+
+     public function getId(): ?int
     {
         return $this->id;
     }

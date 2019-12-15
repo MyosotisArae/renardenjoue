@@ -31,7 +31,15 @@ class UserRepository extends ServiceEntityRepository
         $users = $qb->getQuery()
                     ->getResult();
         if (count($users) == 0) { return null; }
-        return $users[0];
+        $user = $users[0];
+/*
+        // Ajouter la liste de ses soirées jeux
+        $participants = $this->getEntityManager()
+                             ->getRepository('App:Participant')
+                             ->getParticipants($user);
+        $user->setSoirees($participants);
+*/
+        return $user;
       }
   
 }
