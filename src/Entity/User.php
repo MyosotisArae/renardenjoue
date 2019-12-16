@@ -10,11 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-<<<<<<< HEAD
-class User implements UserInterface //, \Serializable
-=======
-class User implements UserInterface, \Serializable
->>>>>>> f2dfef2397485dcd4f1daa1219278ee358d4b321
+class User implements UserInterface
 {
     public function __construct()
     {
@@ -32,11 +28,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-<<<<<<< HEAD
-     * @Assert\NotBlank()
-=======
      * @Assert\NotBlank(message = "Vous devez choisir un nom.")
->>>>>>> f2dfef2397485dcd4f1daa1219278ee358d4b321
      */
     private $nom;
 
@@ -46,52 +38,19 @@ class User implements UserInterface, \Serializable
     private $roles = ['ROLE_USER'];
 
     /**
-<<<<<<< HEAD
-     * @var string Mot de passe saisi par l'utilisateur
-     * @Assert\NotBlank()
-=======
      * @var string Mot de passe non crypté
      * @Assert\NotBlank(message = "Le mot de passe DOIT être renseigné.")
->>>>>>> f2dfef2397485dcd4f1daa1219278ee358d4b321
      */
     private $plainPassword;
 
     /**
-<<<<<<< HEAD
-     * @var string Mot de passe encodé et persisté
-=======
      * @var string Mot de passe crypté et enregistré en base
->>>>>>> f2dfef2397485dcd4f1daa1219278ee358d4b321
      * @ORM\Column(type="string")
      * @Assert\NotBlank(message = "Le mot de passe DOIT être renseigné.")
      */
     private $password;
 
     /**
-<<<<<<< HEAD
-     * @ORM\Column(type="string", nullable=true)
-     * @Assert\Email(message = "L'email '{{ value }}' n'est pas valide.")
-     */
-    private $email;
-
-    /**
-     * Soirées jeux auxquelles l'utilisateur est inscrit.
-     * tableau d'id (table Evenements)
-     */
-/*
-    private $soirees;
-
-    public function getSoirees(): ?array
-    {
-        return $this->soirees;
-    }
-
-    public function setSoirees(array $liste)
-    {
-        $this->soirees = $liste;
-    }
-*/
-=======
      * @Assert\Email(message = "L'email '{{ value }}' n'est pas valide.")
      * @ORM\Column(type="string", nullable=true, unique=true)
      */
@@ -100,7 +59,6 @@ class User implements UserInterface, \Serializable
     /******************************************/
     /************* Getteurs *******************/
     /******************************************/
->>>>>>> f2dfef2397485dcd4f1daa1219278ee358d4b321
     public function getId(): ?int
     {
         return $this->id;
@@ -174,28 +132,6 @@ class User implements UserInterface, \Serializable
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
-        return $this;
-    }
-
-<<<<<<< HEAD
-    /**
-     * @see UserInterface
-     */
-    public function getPlainPassword(): string
-    {
-        return (string) $this->plainPassword;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function getPassword(): string
-=======
-    public function setPlainPassword(string $plainPassword): self
->>>>>>> f2dfef2397485dcd4f1daa1219278ee358d4b321
-    {
-        $this->plainPassword = $plainPassword;
 
         return $this;
     }

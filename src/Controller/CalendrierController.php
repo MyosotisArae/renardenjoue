@@ -3,12 +3,9 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-<<<<<<< HEAD
 use App\Entity\Participant;
 use \DateTime;
 use \DateInterval;
-=======
->>>>>>> f2dfef2397485dcd4f1daa1219278ee358d4b321
 
 class CalendrierController extends ParentController
 {
