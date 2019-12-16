@@ -1,6 +1,22 @@
+<<<<<<< HEAD
 vide:
     path: /
     controller: App\Controller\AccueilController::main
 accueil:
     path: /accueil
     controller: App\Controller\AccueilController::main
+=======
+accueil:
+    path: /accueil
+    controller: App\Controller\AccueilController::main
+mail:
+    path: /mail
+    controller: App\Controller\ContactController::envoi
+#login:
+#    path: /login
+#    controller: App\Controller\LogController::main
+#login_check:
+#    path: /login_check
+#logout:
+#    path: /logout
+>>>>>>> f2dfef2397485dcd4f1daa1219278ee358d4b321

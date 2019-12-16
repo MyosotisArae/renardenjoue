@@ -10,7 +10,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
+<<<<<<< HEAD
 class User implements UserInterface //, \Serializable
+=======
+class User implements UserInterface, \Serializable
+>>>>>>> f2dfef2397485dcd4f1daa1219278ee358d4b321
 {
     public function __construct()
     {
@@ -28,28 +32,43 @@ class User implements UserInterface //, \Serializable
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+<<<<<<< HEAD
      * @Assert\NotBlank()
+=======
+     * @Assert\NotBlank(message = "Vous devez choisir un nom.")
+>>>>>>> f2dfef2397485dcd4f1daa1219278ee358d4b321
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="array")
      */
     private $roles = ['ROLE_USER'];
 
     /**
+<<<<<<< HEAD
      * @var string Mot de passe saisi par l'utilisateur
      * @Assert\NotBlank()
+=======
+     * @var string Mot de passe non crypté
+     * @Assert\NotBlank(message = "Le mot de passe DOIT être renseigné.")
+>>>>>>> f2dfef2397485dcd4f1daa1219278ee358d4b321
      */
     private $plainPassword;
 
     /**
+<<<<<<< HEAD
      * @var string Mot de passe encodé et persisté
+=======
+     * @var string Mot de passe crypté et enregistré en base
+>>>>>>> f2dfef2397485dcd4f1daa1219278ee358d4b321
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message = "Le mot de passe DOIT être renseigné.")
      */
     private $password;
 
     /**
+<<<<<<< HEAD
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Email(message = "L'email '{{ value }}' n'est pas valide.")
      */
@@ -72,6 +91,16 @@ class User implements UserInterface //, \Serializable
         $this->soirees = $liste;
     }
 */
+=======
+     * @Assert\Email(message = "L'email '{{ value }}' n'est pas valide.")
+     * @ORM\Column(type="string", nullable=true, unique=true)
+     */
+    private $email;
+
+    /******************************************/
+    /************* Getteurs *******************/
+    /******************************************/
+>>>>>>> f2dfef2397485dcd4f1daa1219278ee358d4b321
     public function getId(): ?int
     {
         return $this->id;
@@ -80,18 +109,6 @@ class User implements UserInterface //, \Serializable
     public function getNom(): ?string
     {
         return $this->nom;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setNom(string $nom): self
-    {
-        $this->nom = $nom;
-
-        return $this;
     }
 
     /**
@@ -105,26 +122,6 @@ class User implements UserInterface //, \Serializable
     }
 
     /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    /**
-     * @see UserInterface
      */
     public function getPlainPassword(): string
     {
@@ -137,6 +134,70 @@ class User implements UserInterface //, \Serializable
     public function getPassword(): string
     {
         return (string) $this->password;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        if (empty($this->roles)) {
+            return ['ROLE_USER'];
+        }
+
+        return $this->roles;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /******************************************/
+    /************* Setteurs *******************/
+    /******************************************/
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+<<<<<<< HEAD
+    /**
+     * @see UserInterface
+     */
+    public function getPlainPassword(): string
+    {
+        return (string) $this->plainPassword;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+=======
+    public function setPlainPassword(string $plainPassword): self
+>>>>>>> f2dfef2397485dcd4f1daa1219278ee358d4b321
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
     }
 
     public function setPlainPassword(string $plainPassword): self
@@ -160,12 +221,12 @@ class User implements UserInterface //, \Serializable
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getSalt()
-    {
-        // not needed when using the "bcrypt" algorithm in security.yaml
+
+    /******************************************/
+    /************** Autres ********************/
+    /******************************************/
+    function addRole($role) {
+        $this->roles[] = $role;
     }
 
     /**
@@ -175,5 +236,25 @@ class User implements UserInterface //, \Serializable
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize() {
+        return serialize(array(
+            $this->id,
+            $this->nom,
+            $this->email,
+            $this->password
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized) {
+        list (
+                $this->id,
+                $this->nom,
+                $this->email,
+                $this->password
+                ) = unserialize($serialized);
     }
 }
