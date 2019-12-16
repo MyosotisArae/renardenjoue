@@ -119,36 +119,7 @@
     <div class='col-12' id='monCalendrier' style='height : 90%;'>
     </div>
 
-    {% if evt is defined %}
-    <div class='col-md-4 col-5' style='min-height : 300px;'>
-        <div id='titreEvt'><h3>{{evt.titre}}</h3></div>
-        <div id='dateEvt'><h5>{{evt.periode}}</h5></div>
-        <div id='insc' class='custom-control custom-checkbox'>
-          <br>
-          {% if cas == 1 %}
-            Les inscriptions sont closes.
-          {% elseif cas == 22 %}
-            Vous devez vous connecter pour vous inscrire.<br>
-            <a href='login' class='bouton bg-primary'>Page de connexion</a>
-          {% elseif cas == 211 %}
-            Vous y êtes déjà inscrit.<br>
-            <a href='desinscription{{evt.id}}' class='bouton bg-primary'>Désinscription</a>
-          {% elseif cas == 212 %}
-            Vous avez jusqu'au {{limite|date('d/m/Y')}} pour vous inscrire.<br>
-            Venez jouer !<br>
-            <a href='Inscription{{evt.id}}' class='bouton bg-primary'>Inscription</a>
-          {% endif %}
-        </div>
-    </div>
-    <div class='col-7 offset-md-1' id='descEvt' style='height:auto;'>
-      <div class='enBleu'>{{evt.description|retourChariot|raw}}</div>
-    </div>
-    {% endif %}
-
     <div class='col-12'>
-      <br>&nbsp;
-      <br>&nbsp;
-      <br>&nbsp;
       <br>&nbsp;
     </div>
 

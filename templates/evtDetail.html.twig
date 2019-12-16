@@ -1,0 +1,67 @@
+{% extends "main.html.twig" %}
+
+{% block entete %}
+  {{ parent() }}
+
+    <link href='{{ css_path }}/calendrier.css' rel='stylesheet' />
+    <link href='{{ fc_path }}core/main.css' rel='stylesheet' />
+    <link href='{{ fc_path }}bootstrap/main.css' rel='stylesheet' />
+    <link href='{{ fc_path }}daygrid/main.css' rel='stylesheet' />
+    <link href='{{ fc_path }}list/main.css' rel='stylesheet' />
+
+    <script src='{{ fc_path }}core/main.js'></script>
+    <script src='{{ fc_path }}bootstrap/main.js'></script>
+    <script src='{{ fc_path }}daygrid/main.js'></script>
+    <script src='{{ fc_path }}list/main.js'></script>
+
+{% endblock %}
+
+{% block corps %}
+  {{ parent() }}
+{% endblock %}
+
+{% block laPage %}
+<div class='container-fluid fondOpaque' style='padding : 0; margin : 1em;'>
+  <div class='row' style='height : 100%;'>
+    <div class='col-12'>
+      <div class='enRelatif'>
+        <a href='calendrier'><img src='{{img_path}}fermer.png' class='enAbsolu' style='right : 0;top:0;'></a>
+      </div>
+      <br>
+    </div>
+    <div class='col-12'>
+      <br>
+    </div>
+
+    {% if evt is defined %}
+    <div class='col-md-4 col-12'>
+        <div><h3>{{evt.titre}}</h3></div>
+        <div><h5>{{evt.periode}}</h5></div>
+        <div>
+          <br>
+          {% if cas == 12 %}
+            Les inscriptions sont closes.
+          {% elseif cas == 22 %}
+            Vous devez vous connecter pour vous inscrire.<br>
+            <a href='login' class='bouton bg-primary'>Page de connexion</a>
+          {% elseif cas == 211 %}
+            Vous y êtes déjà inscrit.<br>
+            <a href='desinscription{{evt.id}}' class='bouton bg-primary'>Désinscription</a>
+          {% elseif cas == 212 %}
+            Vous avez jusqu'au {{limite|date('d/m/Y')}} pour vous inscrire.<br>
+            Venez jouer !<br>
+            <a href='inscription{{evt.id}}' class='bouton bg-primary'>Inscription</a>
+          {% endif %}
+          <br><br>
+        </div>
+    </div>
+    <div class='col-md-7 offset-md-1 col-12' style='height:auto;padding-right : 1em;'>
+      <div class='enBleu text-justify'>{{evt.description|retourChariot|raw}}</div>
+    </div>
+    {% else %}
+    <h3>Cet évènement n'existe pas.</h3>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}

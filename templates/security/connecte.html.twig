@@ -38,6 +38,10 @@
     {{ form(formulaire) }}
   {% endif %}
 
+  {% if message is defined %}
+    alert(message);
+  {% endif %}
+
 </div>
 
 {% endblock %}

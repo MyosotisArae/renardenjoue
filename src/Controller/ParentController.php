@@ -14,11 +14,11 @@ class ParentController extends AbstractController
       ]);
   }
 
-  public function getUser():User
+  public function getUser()
   {
     $util = $this->get("utilitaires");
     if ($util->estRenseigneSESSION("memberConnected")) { return $_SESSION['memberConnected']; }
-    return new User;
+    return null;
   }
 
   public function setUser(User $u)

@@ -17,7 +17,7 @@
 <div class="col-1">
   <br>
 </div>
-<div class="col-3 enBleu centrer">
+<div class="col-3 enBleu centrer" style='height : 100%;'>
     <br>
     <a href="login" class="bouton bg-primary">
         Connexion
@@ -33,4 +33,9 @@
     <h1 class="h3 mb-3 font-weight-normal">Inscrivez-vous ici :</h1>
     {{ form(formulaire) }}
 </div>
+
+{% if message is defined %}
+  alert(message);
+{% endif %}
+
 {% endblock %}

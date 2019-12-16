@@ -12,6 +12,10 @@ h3
   color:#000;
   border-bottom:3px solid #428bca;
 }
+.bouton
+{
+  margin-left : 2em;
+}
 
 #monCalendrier { overflow-y: hidden; }
 .fc-content-skeleton

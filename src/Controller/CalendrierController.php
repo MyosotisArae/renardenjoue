@@ -20,7 +20,73 @@ class CalendrierController extends ParentController
   }
 
   /**
-   * Inscription/désinscription de l'utilisateur courant à la soirée d'id num
+   * Inscription de l'utilisateur courant à la soirée d'id num
+   * @Route("/inscription{num}", name="inscription", requirements={"num" = "\d+"})
+   */
+  public function inscription($num)
+  {
+    $_SESSION["ongletActif"] = "CAL";
+
+    $evt = $this->getEvenement($num);
+    if ($evt == null)
+    {
+      // Cet évènement n'existe pas (url trafiquée)
+      return $this->render('/calendrier.html.twig',["listeDates" => $this->getDates(),"session" => $_SESSION, "cas" => 0]);
+    }
+
+    $user = $this->getUser();
+    if ($user != null)
+    {
+      // L'utilisateur s'est connecté.
+      $p  = new Participant($user->getId(), $evt->getId());
+      $em = $this->getDoctrine()
+                 ->getManager();
+      $em->persist($p);
+      $em->flush();
+      return $this->redirect('afficherEvt'.$evt->getId());
+    }
+    else
+    {
+      // Tu n'es pas réellement connecté. Tu me prends pour un jambon ?
+      return $this->redirectToRoute('login');
+    }
+  }
+
+  /**
+   * Désnscription de l'utilisateur courant à la soirée d'id num
+   * @Route("/deinscription{num}", name="inscription", requirements={"num" = "\d+"})
+   */
+  public function deinscription($num)
+  {
+    $_SESSION["ongletActif"] = "CAL";
+
+    $evt = $this->getEvenement($num);
+    if ($evt == null)
+    {
+      // Cet évènement n'existe pas (url trafiquée)
+      return $this->render('/calendrier.html.twig',["listeDates" => $this->getDates(),"session" => $_SESSION, "cas" => 0]);
+    }
+
+    $user = $this->getUser();
+    if ($user != null)
+    {
+      // L'utilisateur s'est connecté.
+      $p  = new Participant($user->getId(), $evt->getId());
+      $em = $this->getDoctrine()
+                 ->getManager();
+      $em->remove($p);
+      $em->flush();
+      return $this->redirect('afficherEvt'.$evt->getId());
+    }
+    else
+    {
+      // Tu n'es pas réellement connecté. Tu me prends pour un jambon ?
+      return $this->redirectToRoute('login');
+    }
+  }
+
+  /**
+   * Affichage du détail d'un évènement
    * @Route("/afficherEvt{num}", name="afficherEvt", requirements={"num" = "\d+"})
    */
   public function afficherEvt($num)
@@ -29,8 +95,11 @@ class CalendrierController extends ParentController
     $cas = 0;
     /* Cas à gérer :
       0. C'est un évènement sans inscription (Le titre n'est pas Les renards jouent).
+         => Ne pas exécuter ce qui suit.
       1. L'évènement est passé (date de début inférieure à aujourd'hui moins 2 jours)
          => Afficher l'évènement sans bouton d'inscription.
+         1.1. Si la date de fin est passée, ne rien écrire.
+         1.2. Sinon, indiquer que les inscriptions sont closes.
       2. L'inscription est encore possible.
          2.1. L'utilisateur est connecté
               2.1.1. Il y participe déjà.
@@ -82,11 +151,12 @@ class CalendrierController extends ParentController
       }
       else
       {
-        $cas = 1;
+        $cas = 12;
+        if ($dateDebut < $now) { $cas = 11; }
       }
     }
 
-    return $this->render('/calendrier.html.twig',["listeDates" => $this->getDates(),"session" => $_SESSION, "cas" => $cas, "evt" => $evt, "limite" => $limiteInscription]);
+    return $this->render('/evtDetail.html.twig',["listeDates" => $this->getDates(),"session" => $_SESSION, "cas" => $cas, "evt" => $evt, "limite" => $limiteInscription]);
   }
 
   private function getDates()
