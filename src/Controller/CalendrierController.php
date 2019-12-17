@@ -54,9 +54,9 @@ class CalendrierController extends ParentController
 
   /**
    * Désnscription de l'utilisateur courant à la soirée d'id num
-   * @Route("/deinscription{num}", name="inscription", requirements={"num" = "\d+"})
+   * @Route("/desinscription{num}", name="desinscription", requirements={"num" = "\d+"})
    */
-  public function deinscription($num)
+  public function desinscription($num)
   {
     $_SESSION["ongletActif"] = "CAL";
 
@@ -71,12 +71,21 @@ class CalendrierController extends ParentController
     if ($user != null)
     {
       // L'utilisateur s'est connecté.
-      $p  = new Participant($user->getId(), $evt->getId());
       $em = $this->getDoctrine()
                  ->getManager();
-      $em->remove($p);
-      $em->flush();
-      return $this->redirect('afficherEvt'.$evt->getId());
+      $p = $em->getRepository('App:Participant')
+              ->getParticipant($user->getId(), $evt->getId());
+      if ($p == null)
+      {
+        // Il n'est pas vraiment inscrit (url trafiquée)
+        return $this->render('/calendrier.html.twig',["listeDates" => $this->getDates(),"session" => $_SESSION, "cas" => 0]);
+      }
+      else
+      {
+        $em->remove($p);
+        $em->flush();
+        return $this->redirect('afficherEvt'.$evt->getId());
+      }
     }
     else
     {
@@ -92,6 +101,7 @@ class CalendrierController extends ParentController
   public function afficherEvt($num)
   {
     $_SESSION["ongletActif"] = "CAL";
+    $combien = 0;
     $cas = 0;
     /* Cas à gérer :
       0. C'est un évènement sans inscription (Le titre n'est pas Les renards jouent).
@@ -118,10 +128,10 @@ class CalendrierController extends ParentController
     }
 
     // Vérifier la date de l'évènement.
-    $dateDebut = $evt->getDateDebut();
+    $dateDebut = new Datetime(date_format($evt->getDateDebut(), 'Y-m-d'));
     $limiteInscription = new Datetime(date_format($dateDebut, 'Y-m-d'));
     $delai = new DateInterval("P3D");
-    $now = new DateTime('now');
+    $now = new Datetime(date_format(new DateTime('now'), 'Y-m-d'));
     $limiteInscription = $limiteInscription->sub($delai);
 
     $this->util = $this->get("utilitaires");
@@ -131,32 +141,40 @@ class CalendrierController extends ParentController
 
       if ($now < $limiteInscription)
       {
-        // Cas 2.
+        // Cas 2. Inscription possible
         if ($this->util->estRenseigneSESSION('memberConnected'))
         {
-          // Cas 2.1.
-          if ($this->getParticipation($num))
+          // Cas 2.1. Utilisateur connecté
+          if ($this->isParticipant($num))
           {
             $cas = 211;
           }
+          else
           {
             $cas = 212;
           }
         }
         else
         {
-          // Cas 2.2.
+          // Cas 2.2. Utilisateur non connecté
           $cas = 22;
         }
       }
-      else
+      else // Cas 1. Trop tard pour s'inscrire
       {
-        $cas = 12;
+        print(" début : ".date_format($dateDebut, 'Y-m-d'));
+        print(" now : ".date_format($now, 'Y-m-d'));
         if ($dateDebut < $now) { $cas = 11; }
+        else
+        {
+          $cas = 12;
+          // Indiquer combien on sera.
+          $combien = $this->combienDeParticipants($num);
+        }
       }
     }
 
-    return $this->render('/evtDetail.html.twig',["listeDates" => $this->getDates(),"session" => $_SESSION, "cas" => $cas, "evt" => $evt, "limite" => $limiteInscription]);
+    return $this->render('/evtDetail.html.twig',["listeDates" => $this->getDates(),"session" => $_SESSION, "cas" => $cas, "evt" => $evt, "limite" => $limiteInscription, "combien" => $combien]);
   }
 
   private function getDates()
@@ -180,14 +198,20 @@ class CalendrierController extends ParentController
     return $evt;
   }
 
-  private function getParticipation($idEvt)
+  private function isParticipant($idEvt)
   {
-    $participe = $this->getDoctrine()
-                      ->getManager()
-                      ->getRepository('App:Participant')
-                      ->getParticipation($_SESSION["memberConnected"]->getId(), $idEvt);
+    return $this->getDoctrine()
+                ->getManager()
+                ->getRepository('App:Participant')
+                ->isParticipant($_SESSION["memberConnected"]->getId(), $idEvt);
+  }
 
-    return $participe;
+  private function combienDeParticipants($idEvt)
+  {
+    return $this->getDoctrine()
+                ->getManager()
+                ->getRepository('App:Participant')
+                ->combienDeParticipants($idEvt);
   }
 }
 
