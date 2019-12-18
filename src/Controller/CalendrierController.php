@@ -162,8 +162,6 @@ class CalendrierController extends ParentController
       }
       else // Cas 1. Trop tard pour s'inscrire
       {
-        print(" début : ".date_format($dateDebut, 'Y-m-d'));
-        print(" now : ".date_format($now, 'Y-m-d'));
         if ($dateDebut < $now) { $cas = 11; }
         else
         {
