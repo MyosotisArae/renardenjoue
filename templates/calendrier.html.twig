@@ -61,13 +61,18 @@
                      left :  'listYear dayGridMonth dayGridWeek dayGridDay'
                    },
           businessHours: { daysOfWeek : [2,4,6] },
+          eventLimit : false,
+          views: {
+                   dayGridMonth: { eventLimit: 2 }
+                 },
+          eventLimitText :function(nb) { if (nb<2) return '+ un autre'; return '+'+nb+' autres'; },
           events : [{% for evt in listeDates %}
                      {
                        id : {{evt.id}},
                        allDay : false,
                        textColor : '#FFFFFF',
                        {% if evt.titre=="Les renards jouent" %}backgroundColor: '#ff0000',{% endif %}
-                       title : "{{evt.titre}}",
+                       title : "{{evt.titre|raw}}",
                        start : "{{evt.dateDebut|date('Y-m-d')}} {{evt.heureDebut|date('H:i')}}"
                        {% if evt.aUneDateDeFin %},end : "{{evt.dateFin|date('Y-m-d')}}"
                          {% if evt.aUneHeureDeFin %}
@@ -99,8 +104,7 @@
                    {% endfor %}
 
                    ],
-          //eventClick : function(info) { alert(listeDesc[info.event.id].id); }
-          eventClick : function(info) { window.open("/afficherEvt"+listeDesc[info.event.id].id,"_self");return false; }
+          eventClick : function(info) { window.open("/afficherEvt"+listeDesc[info.event.id].id,"_self"); return false; }
         });
 
         calendar.render();
