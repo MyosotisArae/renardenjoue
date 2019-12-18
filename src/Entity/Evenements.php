@@ -187,10 +187,6 @@ class Evenements
     public function getPeriode(): ?string
     {
         $this->periode = "";
-        // Si les secondes ne sont pas nulles dans l'heure de début,
-        // retourner une chaine vide.
-        $secondes = intval($this->dateDebut->format("s"));
-        if ($secondes == 0) return '';
 
         if ($this->getAUneDateDeFin())
         {
@@ -201,7 +197,14 @@ class Evenements
           { $this->periode = " du ".$this->dateDebut->format("d/m/Y")." au ".$this->dateFin->format("d/m/Y"); }
         }
         else { $this->periode = " le ".$this->dateDebut->format("d/m/Y"); }
-        $this->periode .= ",\n";
+
+
+        // Si les secondes ne sont pas nulles dans l'heure de début,
+        // ne pas afficher d'heure.
+        $secondes = intval($this->heureDebut->format("s"));
+        if ($secondes != 0) return $this->periode;
+
+        $this->periode .= ",  ";
         if ($this->getAUneHeureDeFin()) { $this->periode .= "de ".$this->getHeure($this->heureDebut)." à ".$this->getHeure($this->heureFin); }
         else { $this->periode .= "à  ".$this->getHeure($this->heureDebut); }
 
