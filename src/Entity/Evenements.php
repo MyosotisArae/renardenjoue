@@ -187,6 +187,11 @@ class Evenements
     public function getPeriode(): ?string
     {
         $this->periode = "";
+        // Si les secondes ne sont pas nulles dans l'heure de début,
+        // retourner une chaine vide.
+        $secondes = intval($this->dateDebut->format("s"));
+        if ($secondes == 0) return '';
+
         if ($this->getAUneDateDeFin())
         {
           // Si les 2 dates ont le même mois, ne pas le répéter 2 fois.

@@ -36,7 +36,9 @@
     {% if evt is defined %}
     <div class='col-md-4 col-12'>
         <div><h3>{{evt.titre}}</h3></div>
+        {% if evt.periode|length > 0 %}
         <div><h5>{{evt.periode}}</h5></div>
+        {% endif %}
         <div>
           <br>
           {% if cas == 12 %}
