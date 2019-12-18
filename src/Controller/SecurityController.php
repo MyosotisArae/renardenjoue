@@ -98,15 +98,16 @@ class SecurityController extends ParentController
           $user = $formulaire->getData();
           if ($this->updateUser($user, $encoder))
           {
-            $message = 'Les modifications ont bien été enregistrées.';
+            $this->setSss('msgAlert', "Les modifications ont bien été enregistrées.");
           }
           else
           {
-            $message = "Une erreur s'est produite. Vos modifications n'ont pas été prises en compte.";
+            $this->setSss('msgAlert', "Une erreur s'est produite. Vos modifications n'ont pas été prises en compte.");
           }
         }
+        else $this->setSss('msgAlert', "Bienvenue,".$user->getNom());
 
-        return $this->render('security/connecte.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView(), 'message' => $message]);
+        return $this->render('security/connecte.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView(), 'message' => '']);
     }
 
     /**
@@ -155,9 +156,6 @@ class SecurityController extends ParentController
       $formulaire = $this->createForm(UserCnxType::class, $user, ['action' => 'check']);
       return $this->render('security/login.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView()]);
     }
-
-
-
 
     /**
      * @Route("/oubli-mot-de-passe", name="app_forgotten_password", methods="GET|POST")
@@ -264,7 +262,7 @@ class SecurityController extends ParentController
             /* @var $user User */
  
             if ($user === null) {
-                $this->addFlash('danger', 'Mot de passe non reconnu');
+                $this->setSss('msgAlert', "Mot de passe non reconnu");
                 return $this->redirectToRoute('home');
             }
  
@@ -272,7 +270,7 @@ class SecurityController extends ParentController
             $user->setPassword($passwordEncoder->encodePassword($user, $request->request->get('password')));
             $entityManager->flush();
  
-            $this->addFlash('notice', 'Mot de passe mis à jour !');
+            $this->setSss('msgAlert', "Mot de passe mis à jour !");
  
             return $this->redirectToRoute('security_login');
         }else {
@@ -281,10 +279,6 @@ class SecurityController extends ParentController
         }
  
     }
-
-
-
-
 
     /**
      * Recherche d'un utilisateur par son nom.
@@ -330,6 +324,7 @@ class SecurityController extends ParentController
       $em = $this->getDoctrine()->getManager();
       $em->flush();
       $this->setUser($userEnBase);
+      $this->setSss('msgAlert', "Votre compte a été mis à jour.");
       return true;
     }
     

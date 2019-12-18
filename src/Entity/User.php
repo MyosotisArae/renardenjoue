@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -33,20 +32,18 @@ class User implements UserInterface
     private $nom;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="integer")
      */
-    private $roles = ['ROLE_USER'];
+    private $roles = 0;
 
     /**
      * @var string Mot de passe non crypté
-     * @Assert\NotBlank(message = "Le mot de passe DOIT être renseigné.")
      */
     private $plainPassword;
 
     /**
      * @var string Mot de passe crypté et enregistré en base
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message = "Le mot de passe DOIT être renseigné.")
      */
     private $password;
 
@@ -102,12 +99,8 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getRoles(): array
+    public function getRoles(): int
     {
-        if (empty($this->roles)) {
-            return ['ROLE_USER'];
-        }
-
         return $this->roles;
     }
 
@@ -129,7 +122,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function setRoles(array $roles): self
+    public function setRoles(int $roles): self
     {
         $this->roles = $roles;
 
@@ -174,23 +167,4 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    /** @see \Serializable::serialize() */
-    public function serialize() {
-        return serialize(array(
-            $this->id,
-            $this->nom,
-            $this->email,
-            $this->password
-        ));
-    }
-
-    /** @see \Serializable::unserialize() */
-    public function unserialize($serialized) {
-        list (
-                $this->id,
-                $this->nom,
-                $this->email,
-                $this->password
-                ) = unserialize($serialized);
-    }
 }
