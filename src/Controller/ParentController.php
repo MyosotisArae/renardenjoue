@@ -11,7 +11,14 @@ class ParentController extends AbstractController
   public function __construct(SessionInterface $session)
   {
     if (!isset($this->session)) { $this->session = $session; }
-    $this->setSss('msgAlert', '');
+    /*
+    $msg = $this->getSss('msgAlert', '');
+    if ($msg != '')
+    {
+      if ($msg[0] != '!') $this->setSss('msgAlert', '');
+      else $this->setSss('msgAlert', substr($msg,1));
+    }
+    */
   }
 
   public static function getSubscribedServices(): array
@@ -47,5 +54,33 @@ class ParentController extends AbstractController
     $this->session->set($nomVar, $valeur);
   }
 
+  public function isSetSss(string $nomVar)
+  {
+    if ($this->session)
+    {
+      $x = $this->session->get($nomVar);
+      if (is_int($x))
+      {
+        if ($x == 0) return true;
+        else if ($x == null) return false;
+        return true;
+      }
+      if (is_array($x))
+      {
+        if ($x == array()) return true;
+        else if ($x == null) return false;
+        return true;
+      }
+      if (is_string($x))
+      {
+        if ($x == '') return true;
+        else if ($x == null) return false;
+        return true;
+      }
+      if ($this->session->get($nomVar) == null) return false;
+      return true;
+    }
+    return false;
+  }
 }
 ?>

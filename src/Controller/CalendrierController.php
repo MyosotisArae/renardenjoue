@@ -31,6 +31,7 @@ class CalendrierController extends ParentController
     if ($evt == null)
     {
       // Cet évènement n'existe pas (url trafiquée)
+      $this->setSss('msgAlert', "Pourquoi vous trafiquez les urls ?");
       return $this->render('/calendrier.html.twig',["listeDates" => $this->getDates(),"session" => $_SESSION, "cas" => 0]);
     }
 
@@ -38,16 +39,29 @@ class CalendrierController extends ParentController
     if ($user != null)
     {
       // L'utilisateur s'est connecté.
+      // Vérifier s'il est déjà inscrit.
+      $em = $this->getDoctrine()
+                 ->getManager();
+      $p = $em->getRepository('App:Participant')
+              ->getParticipant($user->getId(), $evt->getId());
+      if ($p != null)
+      {
+        $this->setSss('msgAlert', "C'est déjà fait !");
+        return $this->redirect('afficherEvt'.$evt->getId());
+      }
+
       $p  = new Participant($user->getId(), $evt->getId());
       $em = $this->getDoctrine()
                  ->getManager();
       $em->persist($p);
       $em->flush();
+      $this->setSss('msgAlert', "Vous voilà inscrit à la session du ".$evt->getDateDebut()->format('d/m/Y'));
       return $this->redirect('afficherEvt'.$evt->getId());
     }
     else
     {
       // Tu n'es pas réellement connecté. Tu me prends pour un jambon ?
+      $this->setSss('msgAlert', "Il faut être connecté pour pouvoir s'inscrire à une soirée jeux.");
       return $this->redirectToRoute('login');
     }
   }
@@ -64,6 +78,7 @@ class CalendrierController extends ParentController
     if ($evt == null)
     {
       // Cet évènement n'existe pas (url trafiquée)
+      $this->setSss('msgAlert', "On bidouille les urls ?");
       return $this->render('/calendrier.html.twig',["listeDates" => $this->getDates(),"session" => $_SESSION, "cas" => 0]);
     }
 
@@ -78,18 +93,21 @@ class CalendrierController extends ParentController
       if ($p == null)
       {
         // Il n'est pas vraiment inscrit (url trafiquée)
-        return $this->render('/calendrier.html.twig',["listeDates" => $this->getDates(),"session" => $_SESSION, "cas" => 0]);
+        $this->setSss('msgAlert', "Heiiin ? Mais vous n'êtes même pas inscrit !");
+        return $this->redirect('afficherEvt'.$evt->getId());
       }
       else
       {
         $em->remove($p);
         $em->flush();
+        $this->setSss('msgAlert', "Vous n'êtes plus inscrit à la session du ".$evt->getDateDebut()->format('d/m/Y'));
         return $this->redirect('afficherEvt'.$evt->getId());
       }
     }
     else
     {
       // Tu n'es pas réellement connecté. Tu me prends pour un jambon ?
+      $this->setSss('msgAlert', "Vous devez vous connecter pour vous désinscrire d'une soirée jeux.");
       return $this->redirectToRoute('login');
     }
   }
@@ -124,6 +142,7 @@ class CalendrierController extends ParentController
     if ($evt == null)
     {
       // Cet évènement n'existe pas (url trafiquée)
+      $this->setSss('msgAlert', "Ne jouez pas avec les urls. Trouvez une VRAIE soirée jeux.");
       return $this->render('/calendrier.html.twig',["listeDates" => $this->getDates(),"session" => $_SESSION, "cas" => 0]);
     }
 

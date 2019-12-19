@@ -20,19 +20,13 @@ class UserRepository extends ServiceEntityRepository
       public function getUser(User $user)
       {
         $qb = $this->createQueryBuilder('u')
-                   ->andWhere('u.nom = :pseudo')->setParameter('pseudo',$user->getNom());
+                   ->andWhere('LOWER(u.nom) = LOWER(:pseudo)')->setParameter('pseudo',$user->getNom());
   
         $users = $qb->getQuery()
                     ->getResult();
         if (count($users) == 0) { return null; }
         $user = $users[0];
-/*
-        // Ajouter la liste de ses soirées jeux
-        $participants = $this->getEntityManager()
-                             ->getRepository('App:Participant')
-                             ->getParticipants($user);
-        $user->setSoirees($participants);
-*/
+
         return $user;
       }
   

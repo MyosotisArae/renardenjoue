@@ -3,7 +3,7 @@
 
 <style>
 
-.montrerTrophee
+.montrerMessage
 {
   position : absolute;
   z-index : 9000;
@@ -11,29 +11,33 @@
   left : 35vw;
   width : 30vw;
   text-align : center;
-  border : 4px solid black;
+  border : 4px solid #428bca;
   border-radius : 1em;
-  background : #FFF;
+  background : Ivory;
+  color : #428bca;
+  text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
   animation-timing-function: ease-in;
 
-  -webkit-animation: fadeinout 10s; /* Safari, Chrome and Opera > 12.1 */
-     -moz-animation: fadeinout 10s; /* Firefox < 16 */
-      -ms-animation: fadeinout 10s; /* Internet Explorer */
-       -o-animation: fadeinout 10s; /* Opera < 12.1 */
-          animation: fadeinout 10s;
+  -webkit-animation: fadeinout 20s; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: fadeinout 20s; /* Firefox < 16 */
+      -ms-animation: fadeinout 20s; /* Internet Explorer */
+       -o-animation: fadeinout 20s; /* Opera < 12.1 */
+          animation: fadeinout 20s;
 }
 @keyframes fadeinout
 {
     from { opacity: 0; top : -40vh;  left : 35vw; }
-    40%  { opacity: 1; top : 40vh;   left : 35vw; }
+    10%  { opacity: 1; top : 40vh;   left : 35vw; }
     to   { opacity: 0; top : -50vh; left : 35vw; }
 }
 
 </style>
 
-      <div class="montrerTrophee">
+      <div class="montrerMessage">
         <h2>{{app.session.get('msgAlert')}}</h2>
       </div>
+      {# Supprimer le message après qu'il ait été affiché. #}
+      {{ app.session.set('msgAlert','') }}
 
 {% endif %}
 {% endif %}
