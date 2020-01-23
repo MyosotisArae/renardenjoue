@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * Evenements
@@ -135,6 +136,13 @@ class Evenements
         return $this->debut;
     }
 
+    public function setDateDebutFromString(string $dateDebut): self
+    {
+        $this->dateDebut = date_create_from_format('d-m-Y',$dateDebut);
+
+        return $this;
+    }
+
     public function setDateDebut(\DateTimeInterface $dateDebut): self
     {
         $this->dateDebut = $dateDebut;
@@ -145,6 +153,13 @@ class Evenements
     public function getFin(): ?\DateTimeInterface
     {
         return $this->fin;
+    }
+
+    public function setDateFinFromString(string $dateFin): self
+    {
+        $this->dateFin = date_create_from_format('d-m-Y',$dateFin);
+
+        return $this;
     }
 
     public function getDateFin(): ?\DateTimeInterface
@@ -164,6 +179,13 @@ class Evenements
         return $this->heureDebut;
     }
 
+    public function setHeureDebutFromString(string $heureDebut): self
+    {
+        $this->heureDebut = date_create_from_format('H:i',$heureDebut);
+
+        return $this;
+    }
+
     public function setHeureDebut(?\DateTimeInterface $heureDebut): self
     {
         $this->heureDebut = $heureDebut;
@@ -174,6 +196,13 @@ class Evenements
     public function getHeureFin(): ?\DateTimeInterface
     {
         return $this->heureFin;
+    }
+
+    public function setHeureFinFromString(string $heureFin): self
+    {
+        $this->heureFin = date_create_from_format('H:i',$heureFin);
+
+        return $this;
     }
 
     public function setHeureFin(?\DateTimeInterface $heureFin): self

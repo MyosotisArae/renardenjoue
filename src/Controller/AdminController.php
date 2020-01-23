@@ -56,6 +56,30 @@ class AdminController extends ParentController
           return $this->render('gerer_dates_list.html.twig', ["session" => $_SESSION, "listeDates" => $this->getDates()]);
       }
 
+      /**
+       * Mise à jour d'un evt qui existe déjà en base.
+       * 
+       * @Route("/save_evt", name="save_evt")
+       */
+        public function save_evt(Request $request)
+        {
+            if (!$this->isAdmin()) {
+              return $this->redirectToRoute('login');
+            }
+    
+            $evt = new Evenements;
+            $evt->setTitre($_POST['chTitre']);
+            $evt->setDescription($_POST['chDesc']);
+            $evt->setDateDebutFromString($_POST['chDdeb-j'].'-'.$_POST['chDdeb-m'].'-'.$_POST['chDdeb-a']);
+            $evt->setHeureDebutFromString($_POST['chHdeb-h'].':'.$_POST['chHdeb-m']);
+            $evt->setDateFinFromString($_POST['chDfin-j'].'-'.$_POST['chDfin-m'].'-'.$_POST['chDfin-a']);
+            $evt->setHeureFinFromString($_POST['chHfin-h'].':'.$_POST['chHfin-m']);
+
+            $this->saveEvt($evt);
+    
+            return $this->render('gerer_dates_list.html.twig', ["session" => $_SESSION, "listeDates" => $this->getDates()]);
+        }
+
     /**
      * Enregistrement en base d'un nouvel utilisateur
      */
