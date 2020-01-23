@@ -1,0 +1,21 @@
+{% extends 'main.html.twig' %}
+
+{% block entete %}
+  {{ parent() }}
+  <link rel='stylesheet' href='{{css_path}}jeux.css'>
+  <link rel='stylesheet' href='{{css_path}}toolTip.css'>
+  <script src='{{js_path}}jeux.js'></script>
+{% endblock %}
+
+{% block corps %}
+  {{ parent() }}
+  
+{% endblock %}
+
+{% block laPage %}
+
+  <h1>Cette page n'existe pas.</h1>
+  <h3>Vous vous épargnerez des désagréments en utilisant uniquement la barre de menu pour naviquer dans ce site.</h3>
+  <h3>Merci.</h3>
+      
+{% endblock %}
