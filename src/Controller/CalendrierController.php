@@ -67,7 +67,7 @@ class CalendrierController extends ParentController
   }
 
   /**
-   * Désnscription de l'utilisateur courant à la soirée d'id num
+   * Désinscription de l'utilisateur courant à la soirée d'id num
    * @Route("/desinscription{num}", name="desinscription", requirements={"num" = "\d+"})
    */
   public function desinscription($num)
@@ -192,17 +192,6 @@ class CalendrierController extends ParentController
     }
 
     return $this->render('/evtDetail.html.twig',["listeDates" => $this->getDates(),"session" => $_SESSION, "cas" => $cas, "evt" => $evt, "limite" => $limiteInscription, "combien" => $combien]);
-  }
-
-  private function getDates()
-  {
-    // On veut les dates des 3 derniers mois et celles des 6 prochains.
-    $mesDates = $this->getDoctrine()
-                     ->getManager()
-                     ->getRepository('App:Evenements')
-                     ->getDatesToDisplay();
-
-    return $mesDates;
   }
 
   private function getEvenement($idEvt)

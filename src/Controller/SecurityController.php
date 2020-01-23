@@ -34,15 +34,15 @@ class SecurityController extends ParentController
      */
     public function login(Request $request, UserPasswordEncoderInterface $encoder)
     {
-        $_SESSION["ongletActif"] = "CNX";
-        if ($this->getUser()) {
-          $this->redirectToRoute('compte');
-        }
+      $_SESSION["ongletActif"] = "CNX";
+      if ($this->getUser()) {
+        return $this->redirectToRoute('compte');
+      }
 
-        $user = new User;
-        $formulaire = $this->createForm(UserCnxType::class, $user, ['action' => 'check']);
+      $user = new User;
+      $formulaire = $this->createForm(UserCnxType::class, $user, ['action' => 'check']);
 
-        return $this->render('security/login.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView()]);
+      return $this->render('security/login.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView()]);
     }
 
     
@@ -54,7 +54,7 @@ class SecurityController extends ParentController
     {
       $_SESSION["ongletActif"] = "CNX";
       if ($this->getUser()) {
-        $this->redirectToRoute('compte');
+        return $this->redirectToRoute('compte');
       }
       $msgErreur = "";
       $user = new User;
@@ -90,6 +90,9 @@ class SecurityController extends ParentController
 
         $message = '';
         $user = $this->getUser();
+        if ($user == null) {
+          return $this->redirectToRoute('login');
+        }
         $formulaire = $this->createForm(UserDisplayType::class, $user);
         $formulaire->handleRequest($request);
 
@@ -117,7 +120,7 @@ class SecurityController extends ParentController
     {
         $_SESSION["ongletActif"] = "CNX";
         if ($this->getUser()) {
-          $this->redirectToRoute('compte');
+          return $this->redirectToRoute('compte');
         }
 
         $user = new User;
@@ -164,7 +167,7 @@ class SecurityController extends ParentController
     {
       $_SESSION["ongletActif"] = "CNX";
       if ($this->getUser()) {
-        $this->redirectToRoute('compte');
+        return $this->redirectToRoute('compte');
       }
 
       $user = new User;
@@ -326,15 +329,5 @@ class SecurityController extends ParentController
       $this->setUser($userEnBase);
       $this->setSss('msgAlert', "Votre compte a été mis à jour.");
       return true;
-    }
-    
-    /**
-     * Cette fonction indique si l'utilisateur existe :
-     * - il ne vaut pas NULL
-     * - son id n'est pas zéro (la valeur que le constructeur de User.php met par défaut)
-     */
-    private function existe($user)
-    {
-      return ($user != null && $user->getId() > 0);
     }
 }

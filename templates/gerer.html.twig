@@ -1,0 +1,96 @@
+{% extends 'main.html.twig' %}
+
+{% block entete %}
+  {{ parent() }}
+<style>
+html
+{
+  font-size : 1em;
+}
+.barreGauche
+{
+  font-size : 0.9rem;
+}
+span
+{
+  width : 80vw;
+  font-size : 1.5rem;
+  text-align : center;
+  position : absolute;
+}
+.listeDeroulante
+{
+  display : block;
+  overflow-x : hidden;
+  overflow-y : auto;
+}
+</style>
+
+{% endblock %}
+
+{% block corps %}
+    <div class='container-fluid'>
+      <div class='row'>
+
+        {# Si c'est l'administrateur qui est connecté, l'affichage sera différent. #}
+        {% set isAdmin = false %}
+        {% if 'memberConnected' in session|keys %}
+        {%   if session.memberConnected.isAdmin %}
+        {%     set isAdmin = true %}
+        {%     set styleBody = '' %}
+        {%   endif %}
+        {% endif %}
+
+        {% if isAdmin %}
+
+        <div class='col-2' style="height : 90vh; padding : 0.5rem;">
+          <div style="border: 1px solid black; height : 100%; padding : 0.5rem; position : relative;">
+            <li>Dates</li>
+            <a href="ajout_date">- en ajouter une</a><br>
+            <a href="modif_date">- modifier</a><br>
+            <a href="voir_inscrip">- inscriptions</a><br>
+            <br>
+            <li>Jeux</li>
+            <a href="ajout_jeu">- en ajouter un</a><br>
+            <a href="modif_jeu">- modifier</a><br>
+            <br>
+            <li>Joueurs</li>
+            <a href="liste_membres">- lister</a><br>
+            <br>
+            <br>
+            <div style='position : absolute; bottom : 0.5rem; left : 0.5rem; '>
+              <form method='post' action='calendrier'>
+                <button class='btn-primary btn float-right' type='submit'>Retour au site</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class='col-1'>
+          &nbsp;<br>
+        </div>
+
+        <div class='col-9' style="height : 90vh; padding : 0.5rem;">
+          <div class='listeDeroulante' style="border: 1px solid black; height : 100%; padding : 0.5rem;">
+          {% block laPage %}
+          {% endblock %}
+          </div>
+        </div>
+
+        {% else %}
+        {# Ce n'est pas l'administrateur qui est connecté, afficher une page 404. #}
+        <div class='col-12'>
+          &nbsp;<br>
+        </div>
+        <div class='col-1'>
+        </div>
+        <div class='col-10' style='width:60vw;'>
+          <span class="form-error-icon badge badge-danger" style='width:60vw;'>Erreur 404</span><br>
+          <img src="{{img_path}}renard_404.png"style='width:60vw;'>
+        </div>
+        {% endif %}
+
+      </div> {# div principale row #}
+    </div> {# div principale container #}
+
+{% endblock %}

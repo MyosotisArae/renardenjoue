@@ -3,7 +3,7 @@ namespace App\Repository;
 
 use App\Entity\Evenements;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use \DateTime;
 use \DateInterval;
 
@@ -15,7 +15,7 @@ use \DateInterval;
  */
 class EvenementsRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Evenements::class);
     }
@@ -49,6 +49,7 @@ class EvenementsRepository extends ServiceEntityRepository
         ->orWhere('e.dateFin is null')
         ->andWhere('e.dateDebut < :df')
         ->setParameter('df', $dateFin)
+        ->orderBy('e.dateDebut');
       ;
       $_SESSION['requeteSQL'] = $qb->getQuery()->getSQL();
 

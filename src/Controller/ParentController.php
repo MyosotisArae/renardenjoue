@@ -2,6 +2,7 @@
 namespace App\Controller;
  
 use App\Entity\User;
+use App\Entity\Evenements;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -11,14 +12,6 @@ class ParentController extends AbstractController
   public function __construct(SessionInterface $session)
   {
     if (!isset($this->session)) { $this->session = $session; }
-    /*
-    $msg = $this->getSss('msgAlert', '');
-    if ($msg != '')
-    {
-      if ($msg[0] != '!') $this->setSss('msgAlert', '');
-      else $this->setSss('msgAlert', substr($msg,1));
-    }
-    */
   }
 
   public static function getSubscribedServices(): array
@@ -26,6 +19,25 @@ class ParentController extends AbstractController
       return array_merge(parent::getSubscribedServices(), [ // Melange du tableau des services par defaut avec les notres
           'utilitaires' => 'App\Service\Utilitaires'
       ]);
+  }
+
+  public function isAdmin()
+  {
+    $joueur = $this->getUser();
+    if ($joueur == null) return false;
+    if ($joueur->getRoles() != 8) return false;
+    return true;
+  }
+
+  public function getDates()
+  {
+    // On veut les dates des 3 derniers mois et celles des 6 prochains.
+    $mesDates = $this->getDoctrine()
+                     ->getManager()
+                     ->getRepository('App:Evenements')
+                     ->getDatesToDisplay();
+
+    return $mesDates;
   }
 
   public function getUser()
@@ -81,6 +93,16 @@ class ParentController extends AbstractController
       return true;
     }
     return false;
+  }
+    
+  /**
+   * Cette fonction indique si l'utilisateur existe :
+   * - il ne vaut pas NULL
+   * - son id n'est pas zéro (la valeur que le constructeur de User.php met par défaut)
+   */
+  public function existe($user)
+  {
+    return ($user != null && $user->getId() > 0);
   }
 }
 ?>

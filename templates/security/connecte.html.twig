@@ -27,28 +27,28 @@
 {% if 'memberConnected' in session|keys %}
 {%   if session.memberConnected.id >= 1 %}
 {%     set isAdmin = true %}
-{%     set largeurFenetre = 11 %}
-{%     set pourcentBoutons = 10 %}
+{%     set largeurFenetre = 10 %}
+{%     set pourcentBoutons = 14 %}
 {%   endif %}
 {% endif %}
 <div class="col-md-{{largeurFenetre}} col-11 enBleu">
 
   {% if 'memberConnected' in session|keys %}
     <table class='w-100'> 
-    
+
       <tr>
         <td style='width : 70%;'>
           <h1 class="h3 mb-3 font-weight-normal">Compte de {{ session.memberConnected.nom }} :</h1>
         </td>
         <td style='width : {{pourcentBoutons}}%;'>
-          <form action='logout'>
+          <form method='post' action='logout'>
             <button class='btn-primary btn float-right' type='submit'>Déconnexion</button>
           </form>
         </td>
         {% if isAdmin %}
-        <td style='width : 20%;'>
-          <form action='admin'>
-            <button class='btn-primary btn float-right' type='submit'>Interface administrateur</button>
+        <td style='width : 16%;'>
+          <form method='post' action='gestion'>
+            <button class='btn-primary btn float-right' type='submit'>Administrateur</button>
           </form>
         </td>
         {% endif %}

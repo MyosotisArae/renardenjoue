@@ -36,32 +36,44 @@ class Evenements
     private $description;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
      * @ORM\Column(name="date_debut", type="date", nullable=false)
      */
     private $dateDebut;
 
     /**
-     * @var \DateTime|null
+     * @var \Date|null
      *
      * @ORM\Column(name="date_fin", type="date", nullable=true)
      */
     private $dateFin;
 
     /**
-     * @var \DateTime|null
+     * @var \Time|null
      *
      * @ORM\Column(name="heure_debut", type="time", nullable=true)
      */
     private $heureDebut;
 
     /**
-     * @var \DateTime|null
+     * @var \Time|null
      *
      * @ORM\Column(name="heure_fin", type="time", nullable=true)
      */
     private $heureFin;
+
+    /**
+     * @var \DateTime|null
+     *
+     */
+    private $debut;
+
+    /**
+     * @var \DateTime|null
+     *
+     */
+    private $fin;
 
     /**
      * @var string
@@ -118,11 +130,21 @@ class Evenements
         return $this->dateDebut;
     }
 
+    public function getDebut(): ?\DateTimeInterface
+    {
+        return $this->debut;
+    }
+
     public function setDateDebut(\DateTimeInterface $dateDebut): self
     {
         $this->dateDebut = $dateDebut;
 
         return $this;
+    }
+
+    public function getFin(): ?\DateTimeInterface
+    {
+        return $this->fin;
     }
 
     public function getDateFin(): ?\DateTimeInterface
@@ -157,6 +179,22 @@ class Evenements
     public function setHeureFin(?\DateTimeInterface $heureFin): self
     {
         $this->heureFin = $heureFin;
+
+        return $this;
+    }
+
+    public function setDebut(?\DateTimeInterface $debut): self
+    {
+        $this->dateDebut = strtotime($debut->format('Y-m-d'));
+        $this->heureDebut = strtotime($debut->format('H:i:s'));
+
+        return $this;
+    }
+
+    public function setFin(?\DateTimeInterface $fin): self
+    {
+        $this->dateFin = strtotime($fin->format('Y-m-d'));
+        $this->heureFin = strtotime($fin->format('H:i:s'));
 
         return $this;
     }

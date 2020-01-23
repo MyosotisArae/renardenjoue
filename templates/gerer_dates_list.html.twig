@@ -1,0 +1,40 @@
+{% extends 'gerer.html.twig' %}
+
+{% block entete %}
+  {{ parent() }}
+
+  <style>
+    input { width : 80%; }
+    textarea { width : 100%; height : 6rem; }
+  </style>
+
+{% endblock %}
+
+{% block corps %}
+  {{ parent() }}
+{% endblock %}
+
+{% block laPage %}
+
+{% for evt in listeDates %}
+<form action='save_evt' method='post'>
+<div class='container-fluid' style='border : 2px solid black; padding : 1rem;'>
+  <div class='row'>
+    <form action='save_evt' method='post'>
+      <div class='col-3'>
+        <input value="{{evt.titre|raw}}" style='width : 100%; margin-bottom : 0.7rem;'><br>
+        <button class='btn-primary btn' type='submit'>Enregistrer</button>
+      </div>
+      <div class='col-9'><textarea>{{evt.description|retourChariot|raw}}</textarea></div>
+      <div class='col-3'>du&nbsp;<input value="{{evt.dateDebut|date('Y-m-d')}}"></div>
+      <div class='col-3'>à&nbsp;<input value="{{evt.heureDebut|date('H:i')}}"></div>
+      <div class='col-3'>au&nbsp;<input value="{{evt.dateFin|date('Y-m-d')}}"></div>
+      <div class='col-3'>à&nbsp;<input value="{{evt.heureFin|date('H:i')}}"></div>
+      <div class='col-12'></div>
+  </div>
+</div>
+</form>
+<br>
+{% endfor %}
+
+{% endblock %}

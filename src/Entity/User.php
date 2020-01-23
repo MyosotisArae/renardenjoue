@@ -37,6 +37,11 @@ class User implements UserInterface
     private $roles = 0;
 
     /**
+     * @var bool Est-ce un administrateur ?
+     */
+    private $isAdmin;
+
+    /**
      * @var string Mot de passe non crypté
      */
     private $plainPassword;
@@ -102,6 +107,14 @@ class User implements UserInterface
     public function getRoles(): int
     {
         return $this->roles;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getIsAdmin(): bool
+    {
+        return ($this->roles == 8);
     }
 
     /**
