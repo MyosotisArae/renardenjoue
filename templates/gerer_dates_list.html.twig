@@ -39,10 +39,9 @@
 {% block laPage %}
 
 {% for evt in listeDates %}
-<form action='save_evt' method='post'>
-<div class='container-fluid' style='border : 2px solid black; padding-top : 1rem;'>
-  <div class='row'>
-    <form action='save_evt' method='post'>
+<form action='save_evt_{{evt.id}}' method='post'>
+  <div class='container-fluid' style='border : 2px solid black; padding-top : 1rem;'>
+    <div class='row'>
       <div class='col-3'>
         <input name='chTitre' value="{{evt.titre|raw}}" style='width : 100%; margin-bottom : 1.2rem;'><br>
         <a href='del_evt_{{evt.id}}'><button class='btn-danger btn float-right' type='button'>Supprimer id {{evt.id}}</button></a>
@@ -66,8 +65,8 @@
         {% endif %}
       </div>
       <div class='col-2'><button class='btn-primary btn float-right' type='submit'>Enregistrer id {{evt.id}}</button></div>
+    </div>
   </div>
-</div>
 </form>
 <br>
 {% endfor %}

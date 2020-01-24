@@ -1,0 +1,30 @@
+{% extends 'gerer.html.twig' %}
+
+{% block entete %}
+  {{ parent() }}
+{% endblock %}
+
+{% block corps %}
+  {{ parent() }}
+{% endblock %}
+
+{% block laPage %}
+
+<div class='container-fluid' style='padding-top : 1rem; font-size : 1.5rem;'>
+  <div class='row'>
+{% for evt in soirees %}
+    <div class='col-12'>
+        Soirée du&nbsp;{{evt.dateDebut|date('d')}}/{{evt.dateDebut|date('m')}}/{{evt.dateDebut|date('Y')}}&nbsp;:
+    </div>
+    {% for joueur in evt.inscrits %}
+    <div class='col-2'></div>
+    <div class='col-1'>{{ joueur.id }}</div>
+    <div class='col-3'>{{ joueur.nom }}</div>
+    <div class='col-6'>{{ joueur.email }}</div>
+    {% endfor %}
+    <br>
+{% endfor %}
+  </div>
+</div>
+
+{% endblock %}

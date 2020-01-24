@@ -28,21 +28,7 @@ class AdminController extends ParentController
           return $this->redirectToRoute('login');
         }
 
-        $evt = new Evenements;
-        $formulaire = $this->createForm(EvtCreateType::class, $evt);
-
-        if ($request->isMethod('POST'))
-        {
-          $formulaire->submit($request->request->get($formulaire->getName()));
-          if ($formulaire->isSubmitted() && $formulaire->isValid())
-          {
-            $evt = $formulaire->getData();
-            $this->saveEvt($evt);
-            return $this->redirectToRoute('gestion');
-          }
-        }
-
-        return $this->render('gerer_date_ajout.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView()]);
+        return $this->render('gerer_date_ajout.html.twig', ["session" => $_SESSION]);
     }
 
     /**
@@ -53,37 +39,79 @@ class AdminController extends ParentController
           if (!$this->isAdmin()) {
             return $this->redirectToRoute('login');
           }
-          $evts = $this->getDates();
-          foreach ($evts as $evt)
-          {
-            echo $evt->getId().":";
-            if ($evt->getDateFin() == null) echo "nul";
-            else echo $evt->getDateFin()->format('Y-m-d');
-            echo ".  ";
-          }
-          return $this->render('gerer_dates_list.html.twig', ["session" => $_SESSION, "listeDates" => $evts]);
+          return $this->render('gerer_dates_list.html.twig', ["session" => $_SESSION, "listeDates" => $this->getDates()]);
       }
 
       /**
-       * Mise à jour d'un evt qui existe déjà en base.
-       * 
-       * @Route("/save_evt", name="save_evt")
+       * @Route("/voir_inscrip", name="voir_inscrip")
        */
-        public function save_evt(Request $request)
+        public function voir_inscriptions(Request $request)
+        {
+            if (!$this->isAdmin()) {
+              return $this->redirectToRoute('login');
+            }
+
+            // Liste de nos soirées jeux
+            $em = $this->getDoctrine()->getManager();
+            $rpEvts = $em->getRepository('App:Evenements');
+            $rpPart = $em->getRepository('App:Participant');
+            $rpUser = $em->getRepository('App:User');
+            $evts = $rpEvts->getDatesRenard();
+            // Compléter en ajoutant leurs inscrits (ne conserver que les soirées où il y en a).
+            $soireesConfirmees = [];
+            foreach ($evts as $evt)
+            {
+              $inscrits = $rpPart->getParticipants($evt->getId());
+              if (count($inscrits) > 0)
+              {
+                $listeInscrits = [];
+                foreach ($inscrits as $p)
+                {
+                  $listeInscrits[] = $rpUser->findOneBy(array('id' => $p->getIdUser()));
+                }
+                $evt->setInscrits($listeInscrits);
+                $soireesConfirmees[] = $evt;
+              }
+            }
+            return $this->render('gerer_inscriptions.html.twig', ["session" => $_SESSION, "soirees" => $soireesConfirmees]);
+        }
+
+      /**
+       * Mise à jour d'un evt qui existe déjà en base, ou création d'une date si id=0.
+       * 
+       * @Route("/save_evt_{id}", name="save_evt", requirements={"id" = "\d+"})
+       */
+        public function saveEvt(Request $request, int $id)
         {
             if (!$this->isAdmin()) {
               return $this->redirectToRoute('login');
             }
     
             $evt = new Evenements;
+            if ($id > 0)
+            {
+              $em = $this->getDoctrine()->getManager();
+              $rp = $em->getRepository('App:Evenements');
+              $evt = $rp->findOneBy(array('id' => $id));
+            }
+
             $evt->setTitre($_POST['chTitre']);
             $evt->setDescription($_POST['chDesc']);
             $evt->setDateDebutFromString($_POST['chDdeb-j'].'-'.$_POST['chDdeb-m'].'-'.$_POST['chDdeb-a']);
             $evt->setHeureDebutFromString($_POST['chHdeb-h'].':'.$_POST['chHdeb-m']);
-            $evt->setDateFinFromString($_POST['chDfin-j'].'-'.$_POST['chDfin-m'].'-'.$_POST['chDfin-a']);
-            $evt->setHeureFinFromString($_POST['chHfin-h'].':'.$_POST['chHfin-m']);
+            // Date et heure de fin sont facultatives
+            $jour = $_POST['chDfin-j'];
+            if ($jour != null && count($jour)>0)
+            {
+              $evt->setDateFinFromString($jour.'-'.$_POST['chDfin-m'].'-'.$_POST['chDfin-a']);
+            }
+            $heure = $_POST['chHfin-h'];
+            if ($heure != null && count($heure)>0)
+            {
+              $evt->setHeureFinFromString($heure.':'.$_POST['chHfin-m']);
+            }
 
-            $this->saveEvt($evt);
+            $this->saveDate($evt);
     
             return $this->render('gerer_dates_list.html.twig', ["session" => $_SESSION, "listeDates" => $this->getDates()]);
         }
@@ -109,9 +137,9 @@ class AdminController extends ParentController
           }
 
     /**
-     * Enregistrement en base d'un nouvel utilisateur
+     * Enregistrement en base d'une nouvelle date
      */
-    private function saveEvt(Evenements $evt)
+    private function saveDate(Evenements $evt)
     {
       $em = $this->getDoctrine()->getManager();
       $em->persist($evt);

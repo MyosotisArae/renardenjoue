@@ -82,6 +82,11 @@ class Evenements
     private $periode;
 
     /**
+     * @var array[User]
+     */
+    private $inscrits;
+
+    /**
      * Vaut true si l'utilisateur connecté est inscrit.
      * @var bool
      */
@@ -95,6 +100,18 @@ class Evenements
     public function setIsInscrit(bool $isInscrit)
     {
        $this->isInscrit = $isInscrit;
+    }
+
+    public function getInscrits()
+    {
+      if ($this->inscrits == null) return [];
+      return $this->inscrits;
+    }
+
+    public function setInscrits(array $inscrits)
+    {
+      if ($inscrits == null) $this->inscrits = [];
+       else $this->inscrits = $inscrits;
     }
 
      public function getId(): ?int

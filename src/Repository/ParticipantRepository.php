@@ -18,7 +18,8 @@ class ParticipantRepository extends ServiceEntityRepository
      * Retourne la liste des id des soirées auxquelles participe l'utilisateur user
      * @return array
      */
-    public function getParticipants(User $user)
+    /*
+    public function getSoirees(User $user)
     {
       $qb = $this->createQueryBuilder('p')
                  ->andWhere('p.idUser = :idUser')->setParameter('idUser',$user->getId());
@@ -34,6 +35,7 @@ class ParticipantRepository extends ServiceEntityRepository
 
       return $liste;
     }
+    */
 
     /**
      * Retourne le participant éventuel à cette soirée, ou null s'il n'y est pas inscrit
@@ -78,6 +80,22 @@ class ParticipantRepository extends ServiceEntityRepository
       if (count($part) == 0) return 0;
 
       return count($part) + 2;
+    }
+
+    /**
+     * Retourne les participants à la soirée jeux
+     * @return int
+     */
+    public function getParticipants(int $idEvt)
+    {
+      $qb = $this->createQueryBuilder('p')
+                 ->andWhere('p.idEvt  = :idEvt' )->setParameter('idEvt' ,$idEvt);
+
+      $part = $qb->getQuery()
+                 ->getResult();
+      if (count($part) == 0) return [];
+
+      return $part;
     }
   
 }

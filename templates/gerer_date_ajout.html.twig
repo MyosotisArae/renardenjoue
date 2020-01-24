@@ -2,6 +2,30 @@
 
 {% block entete %}
   {{ parent() }}
+
+  <style>
+    .input2
+    {
+      text-align : right;
+      width : 2.5rem;
+    }
+    .input4
+    {
+      text-align : left;
+      width : 4rem;
+    }
+    textarea
+    {
+      width : 100%;
+      height : 10rem;
+    }
+    button.basDroite
+    {
+      position : absolute;
+      right : 1rem;
+      bottom : 1rem;
+    }
+  </style>
 {% endblock %}
 
 {% block corps %}
@@ -9,5 +33,34 @@
 {% endblock %}
 
 {% block laPage %}
-{{ form(formulaire) }}
+<form action='save_evt_0' method='post' style='font-size : 1.5rem; height : 100%;'>
+  <div class='container-fluid' style='padding-top : 1rem; height : 100%;'>
+    <div class='row' style='height : 100%;'>
+      <div class='col-2'>
+        Titre&nbsp;:&nbsp;
+      </div>
+      <div class='col-10'>
+        <input name='chTitre' style='width : 100%;' value="Les renards jouent">
+      </div>
+      <div class='col-2'>
+        Description:
+      </div>
+      <div class='col-10'><textarea name='chDesc'></textarea></div>
+      <div class='col-4'>
+        Date début&nbsp;:<input name='chDdeb-j' class='input2' placeholder='j'>/<input name='chDdeb-m' class='input2'  value="{{today|date('m')}}">/<input name='chDdeb-a' class='input4' value="{{today|date('Y')}}">
+      </div>
+      <div class='col-8'>
+        Date fin&nbsp;:&nbsp;<input name='chDfin-j' class='input2' placeholder='j'>/<input name='chDfin-m' class='input2'  value="{{today|date('m')}}">/<input name='chDfin-a' class='input4' value="{{today|date('Y')}}">
+      </div>
+      <div class='col-4'>
+        heure début&nbsp;:&nbsp;<input name='chHdeb-h' class='input2' value='14'>:<input name='chHdeb-m' class='input2' value='00'>
+      </div>
+      <div class='col-8'>
+        heure fin&nbsp;:&nbsp;<input name='chHfin-h' class='input2' placeholder='h'>:<input name='chHfin-m' class='input2' value='00'>
+      </div>
+      <div class='col-12 enRelatif'><button class='btn-primary btn basDroite' type='submit'>Ajouter cette date</button><br><br>
+      </div>
+    </div>
+  </div>
+</form>
 {% endblock %}

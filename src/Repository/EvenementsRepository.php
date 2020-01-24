@@ -60,6 +60,26 @@ class EvenementsRepository extends ServiceEntityRepository
 
     }
 
+    // Retourne les dates de nos soirées jeux, les plus récentes en premier.
+    /**
+      * @return Evenements[]
+      */
+      public function getDatesRenard(): array
+      {  
+        // Recuperer tout evenement qui se finit ou debute dans l'intervalle [$dateDebut,$dateFin[
+        $qb = $this->createQueryBuilder('e')
+          ->where('e.titre = :tit')
+          ->setParameter('tit', "Les renards jouent")
+          ->orderBy('e.dateDebut', 'DESC');
+        ;
+  
+        return $qb
+          ->getQuery()
+          ->getResult()
+        ;
+  
+      }
+  
     // Retourne la prochaine date
     /**
       * @return Evenement sous forme de texte
