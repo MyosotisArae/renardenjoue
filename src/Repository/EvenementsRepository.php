@@ -51,7 +51,7 @@ class EvenementsRepository extends ServiceEntityRepository
         ->setParameter('df', $dateFin)
         ->orderBy('e.dateDebut');
       ;
-      $_SESSION['requeteSQL'] = $qb->getQuery()->getSQL();
+      //$_SESSION['requeteSQL'] = $qb->getQuery()->getSQL();
 
       return $qb
         ->getQuery()

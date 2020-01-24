@@ -53,7 +53,15 @@ class AdminController extends ParentController
           if (!$this->isAdmin()) {
             return $this->redirectToRoute('login');
           }
-          return $this->render('gerer_dates_list.html.twig', ["session" => $_SESSION, "listeDates" => $this->getDates()]);
+          $evts = $this->getDates();
+          foreach ($evts as $evt)
+          {
+            echo $evt->getId().":";
+            if ($evt->getDateFin() == null) echo "nul";
+            else echo $evt->getDateFin()->format('Y-m-d');
+            echo ".  ";
+          }
+          return $this->render('gerer_dates_list.html.twig', ["session" => $_SESSION, "listeDates" => $evts]);
       }
 
       /**
@@ -79,6 +87,26 @@ class AdminController extends ParentController
     
             return $this->render('gerer_dates_list.html.twig', ["session" => $_SESSION, "listeDates" => $this->getDates()]);
         }
+
+        /**
+         * Suppression d'un evt.
+         * 
+         * @Route("/del_evt_{id}", name="del_evt", requirements={"id" = "\d+"})
+         */
+          public function del_evt(Request $request, int $id)
+          {
+              if (!$this->isAdmin()) {
+                return $this->redirectToRoute('login');
+              }
+      
+              $em = $this->getDoctrine()->getManager();
+              $rp = $em->getRepository('App:Evenements');
+              $evt = $rp->findOneBy(array('id' => $id));
+              $em->remove($evt);
+              $em->flush();
+    
+              return $this->render('gerer_dates_list.html.twig', ["session" => $_SESSION, "listeDates" => $this->getDates()]);
+          }
 
     /**
      * Enregistrement en base d'un nouvel utilisateur

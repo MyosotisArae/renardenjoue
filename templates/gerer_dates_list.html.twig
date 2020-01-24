@@ -45,16 +45,25 @@
     <form action='save_evt' method='post'>
       <div class='col-3'>
         <input name='chTitre' value="{{evt.titre|raw}}" style='width : 100%; margin-bottom : 1.2rem;'><br>
-        
+        <a href='del_evt_{{evt.id}}'><button class='btn-danger btn float-right' type='button'>Supprimer id {{evt.id}}</button></a>
       </div>
       <div class='col-9'><textarea name='chDesc'>{{evt.description|retourChariot|raw}}</textarea></div>
       <div class='col-10'>
-        du&nbsp;<input class='input2' name='chDdeb-j' value="{{evt.dateDebut|date('d')}}">/<input class='input2' name='chDdeb-m' value="{{evt.dateDebut|date('m')}}">/<input class='input4' name='chDdeb-a' value="{{evt.dateDebut|date('Y')}}">
-        &nbsp;à&nbsp;<input class='input2' name='chHdeb-h' value="{{evt.heureDebut|date('H')}}">:
+        {% if evt.dateFin %}
+        du
+        {% else %}
+        le
+        {% endif %}
+        &nbsp;<input class='input2' name='chDdeb-j' value="{{evt.dateDebut|date('d')}}">/<input class='input2' name='chDdeb-m' value="{{evt.dateDebut|date('m')}}">/<input class='input4' name='chDdeb-a' value="{{evt.dateDebut|date('Y')}}">
+        &nbsp;dès&nbsp;<input class='input2' name='chHdeb-h' value="{{evt.heureDebut|date('H')}}">:
         <input class='input2' name='chHdeb-m' value="{{evt.heureDebut|date('i')}}" style='text-align:left;'>
+        {% if evt.dateFin %}
         &nbsp;au&nbsp;<input class='input2' name='chDfin-j' value="{{evt.dateFin|date('d')}}">/<input class='input2' name='chDfin-m' value="{{evt.dateFin|date('m')}}">/<input class='input4' name='chDfin-a' value="{{evt.dateFin|date('Y')}}">
-        &nbsp;à&nbsp;<input class='input2' name='chHfin-h' value="{{evt.heureFin|date('H')}}">:
+        {% endif %}
+        {% if evt.heureFin %}
+        &nbsp;jusqu'à&nbsp;<input class='input2' name='chHfin-h' value="{{evt.heureFin|date('H')}}">:
         <input class='input2' name='chHfin-m' value="{{evt.heureFin|date('i')}}" style='text-align:left;'>
+        {% endif %}
       </div>
       <div class='col-2'><button class='btn-primary btn float-right' type='submit'>Enregistrer id {{evt.id}}</button></div>
   </div>
