@@ -438,7 +438,7 @@ class Ludotheque
         );
     }
 
-    public function getMecanismesActifs(): ?array
+    public function getMecanismes(): ?array
     {
         $liste = array();
         

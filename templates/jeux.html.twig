@@ -226,7 +226,7 @@
               </div>
               <div class='col-12' id='divMeca'>
               {% if session.jeuChoisi.mecanismes|length > 0 %}
-                <label class='gauche' style='font-size : 1.4em;'>Mécanismes:</label>
+                <label class='gauche' style='font-size : 1.4em;'>Mécanismes et prérequis:</label>
                   {% for meca in session.jeuChoisi.mecanismes %}
                   <li>{{meca}}</li>
                   {% endfor %}

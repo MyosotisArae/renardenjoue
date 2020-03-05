@@ -24,8 +24,8 @@ function selectGame(reference)
 	// Texte des durées, sur la barre de titre
 	duree = dureehm(caseMin.innerHTML) + '-' + dureehm(caseMax.innerHTML);
 	// Durées dans le texte de la légende
-	document.getElementById('legMin').innerHTML = '&nbsp;' + dureehm(caseMin.innerHTML) + ' environ';
-	document.getElementById('legMax').innerHTML = '&nbsp;à peu près ' + dureehm(caseMax.innerHTML);
+	document.getElementById('legMin').innerHTML = "&nbsp;au moins " + dureehm(caseMin.innerHTML);
+	document.getElementById('legMax').innerHTML = '&nbsp;' + dureehm(caseMax.innerHTML) + ' à tout casser';
 	// Image : récupérer les dimensions de l'image actuelle et les réappliquer
 	imageDuJeu = document.getElementById('divImg');
 	imageDuJeu.innerHTML='';
@@ -66,7 +66,7 @@ function selectGame(reference)
 	document.getElementById('divMeca').innerHTML = '';
 	if (meca.innerText.length > 9)
 	{
-		document.getElementById('divMeca').innerHTML = "<label class='gauche' style='font-size : 1.4em;'>Mécanismes:</label> " + meca.innerHTML;
+		document.getElementById('divMeca').innerHTML = "<label class='gauche' style='font-size : 1.4em;'>Mécanismes et prérequis :</label> " + meca.innerHTML;
 	}
 }
 

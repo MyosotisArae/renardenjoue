@@ -84,19 +84,19 @@ class AppExtension extends AbstractExtension
       (
         array("avant" => " approximative : ", "apres" => ""),
         array("avant" => " estimée à ", "apres" => " environ"),
-        array("avant" => " : ", "apres" => ", à un chouïa près"),
-        array("avant" => " : ", "apres" => " (mais ça dépend surtout de vous)"),
-        array("avant" => " : à peu près ", "apres" => ""),
-        array("avant" => " : ", "apres" => " (mais c'est variable)"),
-        array("avant" => " : ", "apres" => ", enfin la plupart du temps"),
-        array("avant" => " : ", "apres" => ", quoique, des fois ..."),
+        array("avant" => " ", "apres" => ", à un chouïa près"),
+        array("avant" => " ", "apres" => " (mais ça dépend surtout de vous)"),
+        array("avant" => ", à peu près ", "apres" => ""),
+        array("avant" => " ", "apres" => " (mais c'est variable)"),
+        array("avant" => " ", "apres" => ", enfin la plupart du temps"),
+        array("avant" => " ", "apres" => ", quoique, des fois ..."),
         array("avant" => ", à la louche, disons ", "apres" => ""),
-        array("avant" => " : environ ", "apres" => ", après, bin ... vous savez ce que c'est !"),
-        array("avant" => " : ", "apres" => " (mais, bon, en même temps ...)"),
+        array("avant" => ", environ ", "apres" => "; après, bin, vous savez ce que c'est ..."),
+        array("avant" => " ", "apres" => " (mais, bon, en même temps ...)"),
         array("avant" => " moyenne constatée : ", "apres" => ""),
-        array("avant" => " : ", "apres" => ", avec une marge d'erreur de 10% (ou 15)"),
-        array("avant" => " : ", "apres" => ", plus ou moins"),
-        array("avant" => " : ", "apres" => ", à vue de nez")
+        array("avant" => " ", "apres" => ", avec une marge d'erreur de 10% (ou 15)"),
+        array("avant" => " ", "apres" => ", plus ou moins"),
+        array("avant" => " ", "apres" => ", à vue de nez")
       );
       // Pour éviter que les durées min et max aient le même commentaire, on stocke dans la session le dernier numéro, et on l'évite.
       $dernier = -1;
