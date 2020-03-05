@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Evenements;
+use App\Entity\Ludotheque;
 use App\Form\EvtCreateType;
+use App\Form\JeuType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,6 +43,74 @@ class AdminController extends ParentController
           }
           return $this->render('gerer_dates_list.html.twig', ["session" => $_SESSION, "listeDates" => $this->getDates()]);
       }
+
+      /**
+       * @Route("/ajout_jeu{id}", name="ajout_jeu", requirements={"id" = "\d+"})
+       */
+      public function ajout_jeu(Request $request, int $id)
+      {
+          if (!$this->isAdmin()) {
+            return $this->redirectToRoute('login');
+          }
+          $jeu = new Ludotheque;
+          if ($id > 0)
+          {
+            $jeu = $this->getJeu($id);
+            if ($jeu == null) $jeu = new Ludotheque;
+          }
+          $formulaire = $this->createForm(JeuType::class, $jeu);
+          //$formulaire->submit($request->request->get($formulaire->getName()));
+          if ($formulaire->isSubmitted() && $formulaire->isValid())
+          {
+            $jeu = $formulaire->getData();
+          }
+            
+          //return $this->render('gerer_jeu_ajout.html.twig', ["session" => $_SESSION, "formulaire" => $formulaire->createView()]);
+          return $this->render('gerer_jeu_ajout.html.twig', ["session" => $_SESSION, "jeu" => $jeu]);
+      }
+
+      /**
+       * @Route("/liste_jeux", name="liste_jeux")
+       */
+      public function liste_jeux(Request $request)
+      {
+          if (!$this->isAdmin()) {
+            return $this->redirectToRoute('login');
+          }
+          return $this->render('gerer_jeux_list.html.twig', ["session" => $_SESSION, "jeux" => $this->getJeux()]);
+      }
+
+      private function getJeux()
+      {
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+        $repository = $em->getRepository('App:Ludotheque');
+        
+        return $repository->getListeJeux();
+      }
+
+      private function getJeu(int $id)
+      {
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+        $repository = $em->getRepository('App:Ludotheque');
+        
+        return $repository->getGame($id);
+      }
+
+     /**
+       * @Route("/liste_membres", name="liste_membres")
+       */
+        public function liste_membres(Request $request)
+        {
+            if (!$this->isAdmin()) {
+              return $this->redirectToRoute('login');
+            }
+            $em = $this->getDoctrine()->getManager();
+            $rp = $em->getRepository('App:User');
+            $users = $rp->getUsers();
+            return $this->render('gerer_membres.html.twig', ["session" => $_SESSION, "membres" => $users]);
+        }
 
       /**
        * @Route("/voir_inscrip", name="voir_inscrip")

@@ -13,10 +13,21 @@ html
   html{font-size: 1.5vw;}
 }
 .retracter { padding : 20px; }
+.fondVert { background : lightgreen; }
+.fondJaune { background : yellow; }
+.fondOrange { background : orange; }
 .fondRouge
 {
   background : red;
+  color : lightblue;
+  text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
 }
+.fondNoir
+{
+  background : black;
+  color : white;
+}
+.fondBleu { background: #428bca; }
 .fondBlanc
 {
   background : white;

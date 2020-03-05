@@ -58,6 +58,12 @@ class User implements UserInterface
      */
     private $email;
 
+    /**
+     * @ORM\Column(name="dateDentree", type="datetime", nullable=false)
+     *
+     */
+    private $dateDentree;
+
     /******************************************/
     /************* Getteurs *******************/
     /******************************************/
@@ -115,6 +121,13 @@ class User implements UserInterface
     public function getIsAdmin(): bool
     {
         return ($this->roles == 8);
+    }
+
+    /**
+     */
+    public function getDateDentree()
+    {
+        return $this->dateDentree;
     }
 
     /**

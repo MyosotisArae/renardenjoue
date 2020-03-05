@@ -14,7 +14,7 @@
   <div class='row'>
 {% for evt in soirees %}
     <div class='col-12'>
-        Soirée du&nbsp;{{evt.dateDebut|date('d')}}/{{evt.dateDebut|date('m')}}/{{evt.dateDebut|date('Y')}}&nbsp;:
+        Soirée du&nbsp;{{evt.dateDebut|date('d/m/Y')}}&nbsp;:
     </div>
     {% for joueur in evt.inscrits %}
     <div class='col-2'></div>

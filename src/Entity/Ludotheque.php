@@ -23,6 +23,7 @@ class Ludotheque
       $this->dureemin = 15;
       $this->dureemax = 60;
       $this->dominance = 3;
+      $this->meca = 0;
     }
 
     /**
@@ -311,6 +312,11 @@ class Ludotheque
         return $this;
     }
 
+    public function getMeca(): ?int
+    {
+        return $this->meca;
+    }
+
     public function getDureemin(): ?int
     {
         return $this->dureemin;
@@ -407,9 +413,9 @@ class Ludotheque
         return $this;
     }
 
-    public function getMecanismes(): ?array
+    public function getListeMecanismes(): ?array
     {
-        $mecanismes = array
+        return array
         (
             1 => "écriture d'ordres",
             2 => "pose d'ouvriers",
@@ -430,6 +436,10 @@ class Ludotheque
             65536 => "draft",
             131072 => "optimisation de paquet"
         );
+    }
+
+    public function getMecanismesActifs(): ?array
+    {
         $liste = array();
         
         $val = $this->meca * 1;
@@ -439,7 +449,7 @@ class Ludotheque
             $operation = ($val & $puis2);
             if ($operation > 0)
             {
-                $liste[] = $mecanismes[$puis2];
+                $liste[] = $this->getListeMecanismes()[$puis2];
                 $val -= $puis2;
             }
             $puis2 *= 2;

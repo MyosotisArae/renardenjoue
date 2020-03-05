@@ -60,7 +60,7 @@ class LudothequeRepository extends ServiceEntityRepository
     
     /**
       * Donne la valeur de la duree minimale attendue (les durees s'expriment en minutes).
-      Retourne 0 s'il n'y a pas de duree minimale requise.
+      * Retourne 0 s'il n'y a pas de duree minimale requise.
       */
     private function getDureeMin()
     {
@@ -76,7 +76,7 @@ class LudothequeRepository extends ServiceEntityRepository
     
     /**
       * Donne la valeur de la duree maximale attendue (les durees s'expriment en minutes).
-      Retourne 0 s'il n'y a pas de duree maximale requise.
+      * Retourne 0 s'il n'y a pas de duree maximale requise.
       */
     private function getDureeMax()
     {
@@ -115,5 +115,17 @@ class LudothequeRepository extends ServiceEntityRepository
       );
       
       return $liste;
+    }
+
+    // Retourne le jeu demandé ou null.
+    /**
+      * @return un jeu
+      */
+    public function getGame(int $id)
+    {
+      $liste = $this->findById($id);
+      if (count($liste) == 1) return $liste[0];
+      
+      return null;
     }
 }

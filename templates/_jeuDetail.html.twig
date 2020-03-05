@@ -1,0 +1,75 @@
+<form action='save_jeu_0' method='post' style='font-size : 1.5rem; height : 100%;'>
+  <div class='container-fluid' style='padding-top : 1rem; height : 100%;'>
+    <div class='row' style='height : 100%;'>
+      <div class='col-2'>
+        Nom du jeu&nbsp;:&nbsp;
+      </div>
+      <div class='col-4'>
+        <input type='text' name='chNom' placeholder="sans l'article" value="{{(jeu.id>0)?jeu.nom:''}}">
+      </div>
+      <div class='col-6'>
+        <input type='text' name='chFull' placeholder="complet" value="{{(jeu.id>0)?jeu.fullnom:''}}">
+      </div>
+      <div class='col-2'>
+        Fichier image&nbsp;:&nbsp;
+      </div>
+      <div class='col-5'>
+        <input type='text' name='chImg'  placeholder="nom (sans extension)" value="{{(jeu.id>0)?jeu.img:''}}">
+      </div>
+      <div class='col-5'>
+        <input type='file' placeholder="upload">
+      </div>
+      <div class='col-9'>
+        But&nbsp;:&nbsp;<input type='text' name='chBut' value="{{(jeu.id>0)?jeu.but:''}}">
+      </div>
+      <div class='col-3 float-right'>
+        Complexité&nbsp;:&nbsp;<select name='chDom' class='float-right w-100'>
+            					<option value='0'></option>
+        	    				<option value='1' class='fondVert' {{(jeu.dominance==1)?'selected':''}}     >famille - enfants</option>
+        			    		<option value='2' class='fondJaune' {{(jeu.dominance==2)?'selected':''}}    >abordable</option>
+      	  				    	<option value='3' class='fondOrange'  {{(jeu.dominance==3)?'selected':''}}>confirmés</option>
+    			  				<option value='4' class='fondRouge'  {{(jeu.dominance==4)?'selected':''}}     >connaisseurs</option>
+          	  					<option value='5' class='fondNoir'  {{(jeu.dominance==5)?'selected':''}}  >experts</option>
+      	    	  			   </select>
+      </div>
+      <div class='col-12'>
+        Principe&nbsp;:
+      </div>
+      <div class='col-12'>
+        <textarea name='chDesc'> {{(jeu.id>0)?jeu.ppe:''}}</textarea>
+      </div>
+      <div class='col-6'>
+        De&nbsp;<input name='chNbJmin' class='input4' value="{{(jeu.id>0)?jeu.nbjmin:2}}">&nbsp;à&nbsp;<input name='chNbJmax' class='input4' value="{{(jeu.id>0)?jeu.nbjmax:5}}">&nbsp;joueurs
+      </div>
+      <div class='col-6'>
+        Durée&nbsp;:&nbsp;de&nbsp;<input name='chDureemin' class='input4' value="{{(jeu.id>0)?jeu.dureemin:60}}">&nbsp;à&nbsp;<input name='chDureemax' class='input4' value="{{(jeu.id>0)?jeu.dureemax:60}}">&nbsp;minutes
+      </div>
+      <div class='col-12 colonnes'>
+        <u>Mécanismes et pré-requis :</u>
+      </div>
+      <div class='col-12 colonnes'>
+        {% for cle in jeu.getListeMecanismes|keys %}
+        {%   set cocher = '' %}
+        {%   if (jeu.meca b-and cle) > 0 %}
+        {%     set cocher = ' checked' %}
+        {%   endif %}
+        <table>
+          <tr>
+            <td style='width : 1.5rem;'>
+              <input name='cb{{cle}}' type='checkbox' value='{{cle}}'{{cocher}}>
+            </td>
+            <td>
+              {{jeu.getListeMecanismes[cle]}}
+            </td>
+          </tr>
+        </table>
+        <br>
+        {% endfor %}
+      </div>
+      <div class='col-10'>
+      </div>
+      <div class='col-2 enRelatif'><button class='btn-primary btn basDroite' type='submit'>Sauvegarder</button><br><br>
+      </div>
+    </div>
+  </div>
+</form>

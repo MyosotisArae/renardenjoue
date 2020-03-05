@@ -1,0 +1,32 @@
+{% extends 'gerer.html.twig' %}
+
+{% block entete %}
+  {{ parent() }}
+{% endblock %}
+
+{% block corps %}
+  {{ parent() }}
+{% endblock %}
+
+{% block laPage %}
+
+<div class='container-fluid' style='padding-top : 1rem; font-size : 1.5rem;'>
+  <div class='row'>
+    <div class='col-1'>id</div>
+    <div class='col-2'>Nom</div>
+    <div class='col-4'>E-mail</div>
+    <div class='col-5'>Arrivé le</div>
+  </div>
+  <div class='row listeD'>
+{% for joueur in membres %}
+
+    <div class='col-1'>{{ joueur.id }}</div>
+    <div class='col-2'>{{ joueur.nom }}</div>
+    <div class='col-4'>{{ joueur.email }}</div>
+    <div class='col-5'>{{ joueur.dateDentree|date('d/m/Y - H:i') }}</div>
+    
+{% endfor %}
+  </div>
+</div>
+
+{% endblock %}

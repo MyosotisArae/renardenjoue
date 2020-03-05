@@ -29,5 +29,22 @@ class UserRepository extends ServiceEntityRepository
 
         return $user;
       }
+
+      // Retourne tous les utilisateurs, en commençant par les plus récemment inscrits.
+      /**
+        * @return Users[]
+        */
+        public function getUsers(): array
+        {  
+          // Recuperer tout evenement qui se finit ou debute dans l'intervalle [$dateDebut,$dateFin[
+          $qb = $this->createQueryBuilder('u')
+                     ->orderBy('u.dateDentree', 'DESC');
+    
+          return $qb
+            ->getQuery()
+            ->getResult()
+          ;
+    
+        }
   
 }

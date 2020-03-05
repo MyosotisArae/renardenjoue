@@ -71,7 +71,6 @@ class EvenementsRepository extends ServiceEntityRepository
           ->where('e.titre = :tit')
           ->setParameter('tit', "Les renards jouent")
           ->orderBy('e.dateDebut', 'DESC');
-        ;
   
         return $qb
           ->getQuery()
