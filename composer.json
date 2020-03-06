@@ -7,18 +7,19 @@
         "ext-iconv": "*",
         "sensio/framework-extra-bundle": "^5.4",
         "suncat/mobile-detect-bundle": "^1.1",
-        "symfony/console": "4.3.*",
-        "symfony/dotenv": "4.3.*",
+        "symfony/console": "4.4.*",
+        "symfony/dotenv": "4.4.*",
         "symfony/flex": "^1.1",
-        "symfony/form": "4.3.*",
-        "symfony/framework-bundle": "4.3.*",
-        "symfony/http-kernel": "4.3.*",
-        "symfony/mailer": "4.3.*",
+        "symfony/form": "4.4.*",
+        "symfony/framework-bundle": "4.4.*",
+        "symfony/http-kernel": "4.4.*",
+        "symfony/mailer": "4.4.*",
         "symfony/orm-pack": "^1.0",
-        "symfony/security-bundle": "4.3.*",
-        "symfony/twig-bundle": "4.3.*",
-        "symfony/validator": "4.3.*",
-        "symfony/yaml": "4.3.*",
+        "symfony/security-bundle": "4.4.*",
+        "symfony/twig-bundle": "4.4.*",
+        "symfony/twig-pack": "^1.0",
+        "symfony/validator": "4.4.*",
+        "symfony/yaml": "4.4.*",
         "twig/extensions": "^1.5"
     },
     "config": {
@@ -63,7 +64,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": true,
-            "require": "4.3.*"
+            "require": "4.4.*"
         }
     },
     "require-dev": {
