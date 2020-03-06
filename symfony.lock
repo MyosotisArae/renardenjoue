@@ -163,6 +163,9 @@
     "symfony/dotenv": {
         "version": "v4.3.4"
     },
+    "symfony/error-handler": {
+        "version": "v4.4.5"
+    },
     "symfony/event-dispatcher": {
         "version": "v4.3.3"
     },
@@ -334,6 +337,9 @@
             "./templates/base.html.twig"
         ]
     },
+    "symfony/twig-pack": {
+        "version": "v1.0.0"
+    },
     "symfony/validator": {
         "version": "4.3",
         "recipe": {
@@ -346,6 +352,9 @@
             "./config/packages/test/validator.yaml",
             "./config/packages/validator.yaml"
         ]
+    },
+    "symfony/var-dumper": {
+        "version": "v4.4.5"
     },
     "symfony/var-exporter": {
         "version": "v4.3.3"
@@ -364,6 +373,9 @@
         "files": [
             "./config/packages/twig_extensions.yaml"
         ]
+    },
+    "twig/extra-bundle": {
+        "version": "v3.0.3"
     },
     "twig/twig": {
         "version": "v2.11.3"
