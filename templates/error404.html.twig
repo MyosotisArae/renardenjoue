@@ -1,0 +1,26 @@
+{% extends "main.html.twig" %}
+
+{% block entete %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{css_path}}jeux.css">
+  <link rel="stylesheet" href="{{css_path}}toolTip.css">
+  <script src="{{js_path}}jeux.js"></script>
+{% endblock %}
+
+{% block corps %}
+  {{ parent() }}
+  
+{% endblock %}
+
+{% block laPage %}
+
+      <div class='col-12'>
+        <img src="{{ img_path }}renard_404.png">
+      </div>
+
+
+      
+{% endblock %}
+
+{% block piedDePage %}
+{% endblock %}
