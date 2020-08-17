@@ -56,8 +56,21 @@
   <div class="col-12 col-md-4 encadrer cadreBleu">{# colonne 2 #}
     <div class="row">
       <div class="col-md-12 col-6">
-        <u>Prochaine soirée jeux :</u><br>
-        {{nextDate}}<br><br><br><br>
+        <u>Prochains évènements :</u><br>
+        {% if nextEvts|length > 0 %}
+          {% for evt in nextEvts %}
+          <li>Le {{evt.date}} :</li>
+          {% set titre = evt.titre %}
+          {% if titre == "Les renards jouent" %}
+            {% set titre = "Soirée-jeux de l'asso" %}
+          {% endif %}
+          <div style='margin-left : 2.5em;'><a href='afficherEvt{{evt.id}}'>{{titre}}</a></div>
+          {% endfor %}
+        {% else %}
+          Rien n'est prévu dans les prochains mois.
+          <br><br>
+        {% endif %}
+        <br><br>
       </div>
       <div class="col-md-12 col-6">
         <u>Ajouts récents :</u><br>

@@ -60,6 +60,41 @@ class EvenementsRepository extends ServiceEntityRepository
 
     }
 
+    // Retourne les 3 prochains evenements
+    /**
+      * @return Un tableau contenant des infos formatees concernant les 3 prochains evenements:
+      * - id
+      * - date
+      * - titre
+      */
+      public function getNextEvts(): array
+      {
+        // Recuperer les evenements à partir d'aujourd'hui et dans la limite de 3.
+        $qb = $this->createQueryBuilder('e')
+          ->andWhere('e.dateDebut >= CURRENT_DATE()')
+          ->orderBy('e.dateDebut');
+        ;
+        // Ne retourner que 3 résultats
+        $qb->setMaxResults($limit);
+        
+        $resultats = $qb
+                     ->getQuery()
+                     ->getResult()
+        ;
+        $liste = [];
+        foreach ($resultats as $evt)
+        {
+          $element = array
+          (
+            "id"    => $evt->getId(),
+            "date"  => date_format($evt->getDateDebut(), 'd/m/Y'),
+            "titre" => $evt->getTitre()
+          );
+          $liste[] = $element;
+        }
+        return $liste;
+  
+      }
     // Retourne les dates de nos soirées jeux, les plus récentes en premier.
     /**
       * @return Evenements[]

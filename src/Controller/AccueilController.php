@@ -23,7 +23,12 @@ class AccueilController extends ParentController
                      ->getRepository('App:Evenements')
                      ->getNextDate();
 
-
+    // Date des prochains évènements :
+    $nextEvts = $this->getDoctrine()
+                     ->getManager()
+                     ->getRepository('App:Evenements')
+                     ->getNextEvts();
+    //$nextEvts = [];
     // Liste des derniers jeux :
     $lastGames = $this->getDoctrine()
                       ->getManager()
@@ -31,7 +36,7 @@ class AccueilController extends ParentController
                       ->getLastGame();
 
 
-    return $this->render('/accueil.html.twig',["session" => $_SESSION, "nextDate" => $nextDate, "lastGames" => $lastGames]);
+    return $this->render('/accueil.html.twig',["session" => $_SESSION, "nextEvts" => $nextEvts, "nextDate" => $nextDate, "lastGames" => $lastGames]);
   }
 }
 
