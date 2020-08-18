@@ -55,8 +55,8 @@ class AdminController extends ParentController
           $jeu = new Ludotheque;
           if ($id > 0)
           {
-            $jeu = $this->getJeu($id);
-            if ($jeu == null) $jeu = new Ludotheque;
+            $jeuExistant = $this->getJeu($id);
+            if ($jeuExistant != null) $jeu = $jeuExistant;
           }
           $formulaire = $this->createForm(JeuType::class, $jeu);
           //$formulaire->submit($request->request->get($formulaire->getName()));
