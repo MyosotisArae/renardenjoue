@@ -93,6 +93,7 @@ class SecurityController extends ParentController
         if ($user == null) {
           return $this->redirectToRoute('login');
         }
+        $_SESSION['utilisateurEnCours'] = $user;
         $formulaire = $this->createForm(UserDisplayType::class, $user);
         $formulaire->handleRequest($request);
 

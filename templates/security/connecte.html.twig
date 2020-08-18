@@ -24,8 +24,8 @@
 {% set isAdmin = false %}
 {% set largeurFenetre = 7 %}
 {% set pourcentBoutons = 30 %}
-{% if 'memberConnected' in session|keys %}
-{%   if session.memberConnected.id >= 1 %}
+{% if 'utilisateurEnCours' in session|keys %}
+{%   if session.utilisateurEnCours.roles >= 8 %}
 {%     set isAdmin = true %}
 {%     set largeurFenetre = 10 %}
 {%     set pourcentBoutons = 14 %}
@@ -33,12 +33,12 @@
 {% endif %}
 <div class="col-md-{{largeurFenetre}} col-11 enBleu">
 
-  {% if 'memberConnected' in session|keys %}
+  {% if 'utilisateurEnCours' in session|keys %}
     <table class='w-100'> 
 
       <tr>
         <td style='width : 70%;'>
-          <h1 class="h3 mb-3 font-weight-normal">Compte de {{ session.memberConnected.nom }} :</h1>
+          <h1 class="h3 mb-3 font-weight-normal">Compte de {{ session.utilisateurEnCours.nom }} :</h1>
         </td>
         <td style='width : {{pourcentBoutons}}%;'>
           <form method='post' action='logout'>
