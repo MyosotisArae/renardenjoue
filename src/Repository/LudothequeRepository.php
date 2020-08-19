@@ -57,7 +57,45 @@ class LudothequeRepository extends ServiceEntityRepository
       ;
 
     }
-    
+
+    // Sauvegarde le jeu depuis qu'affiche l'editeur de l'administrateur.
+    /**
+      * @return Ludotheque
+      */
+      public function saveJeu()
+      {
+        $jeu = new Ludotheque();
+        echo " set id ... ";
+        echo $_POST["chId"];
+        $jeu->setId($_POST["chId"]);
+        echo " : ".$jeu->getId();
+        $jeu->setNom($_POST["chNom"]);
+        $jeu->setNomComplet($_POST["chFull"]);
+        $jeu->setImg($_POST["chImg"]);
+        $jeu->setBut($_POST["chBut"]);
+        $jeu->setPpe($_POST["chDesc"]);
+        $jeu->setNbjmin($_POST["chNbJmin"]);
+        $jeu->setNbjmax($_POST["chNbJmax"]);
+        $jeu->setDureemin($_POST["chDureemin"]);
+        $jeu->setDureemax($_POST["chDureemax"]);
+        $jeu->setDominance($_POST["chDom"]);
+
+        // Les mecanismes sont recuperes dans des checkbox.
+        // POST devrait être null pour celles non cochees.
+        // Les autres seront ajouteed au meca.
+        $meca = 0;
+        $listeMeca = $jeu->getListeMecanismes();
+        foreach ($listeMeca as $cle => $valeur)
+        {
+          // Checkbox existante = case cochee
+          // La cle est dans ce cas ajoutee au champ de bits $meca.
+          if ($this->postIsSet("cb".$cle)) $meca += $cle;
+        }
+        $jeu->setMeca($meca);
+
+        return $jeu;  
+      }
+  
     /**
       * Donne la valeur de la duree minimale attendue (les durees s'expriment en minutes).
       * Retourne 0 s'il n'y a pas de duree minimale requise.

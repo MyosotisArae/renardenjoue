@@ -1,8 +1,8 @@
-<form action='save_jeu{{jeu.id}}' method='post' style='font-size : 1.5rem; height : 100%;'>
+<form action='save_jeu' method='post' style='font-size : 1.5rem; height : 100%;'>
   <div class='container-fluid' style='padding-top : 1rem; height : 100%;'>
     <div class='row' style='height : 100%;'>
       <div class='col-2'>
-        Nom du jeu&nbsp;:&nbsp;
+        Nom du jeu&nbsp;:&nbsp;<input type='hidden' name='chId' value="{{jeu.id}}">
       </div>
       <div class='col-4'>
         <input type='text' name='chNom' placeholder="sans l'article" value="{{(jeu.id>0)?jeu.nom:''}}">

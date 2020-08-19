@@ -4,7 +4,7 @@
 
 {% block entete %}
   {{ parent() }}
-  {% if not('memberConnected' in session|keys) %}
+  {% if not('utilisateurEnCours' in session|keys) %}
     <meta http-equiv= "refresh" content="0; login" />
   {% endif %}
 {% endblock %}
@@ -24,7 +24,9 @@
 {% set isAdmin = false %}
 {% set largeurFenetre = 7 %}
 {% set pourcentBoutons = 30 %}
+{% set utilisateurExistant = false %}
 {% if 'utilisateurEnCours' in session|keys %}
+{%   set utilisateurExistant = true %}
 {%   if session.utilisateurEnCours.roles >= 8 %}
 {%     set isAdmin = true %}
 {%     set largeurFenetre = 10 %}
@@ -33,7 +35,7 @@
 {% endif %}
 <div class="col-md-{{largeurFenetre}} col-11 enBleu">
 
-  {% if 'utilisateurEnCours' in session|keys %}
+  {% if utilisateurExistant %}
     <table class='w-100'> 
 
       <tr>

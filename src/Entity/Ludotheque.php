@@ -178,6 +178,14 @@ class Ludotheque
         return $this->id;
     }
 
+    public function setId(int $id): self
+    {
+        if ($id == '') $this->id = 0;
+        else           $this->id = $id;
+
+        return $this;
+    }
+
     public function getNom(): ?string
     {
         return $this->nom;
@@ -197,7 +205,14 @@ class Ludotheque
 
     public function setFullnom(?string $fullnom): self
     {
-        $this->fullnom = $fullnom;
+        if ($fullnom == null)
+        {
+            $this->fullnom = '';
+        }
+        else
+        {
+            $this->fullnom = $fullnom;
+        }
 
         return $this;
     }

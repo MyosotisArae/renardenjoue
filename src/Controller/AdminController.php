@@ -58,13 +58,35 @@ class AdminController extends ParentController
             $jeuExistant = $this->getJeu($id);
             if ($jeuExistant != null) $jeu = $jeuExistant;
           }
+          /*
           $formulaire = $this->createForm(JeuType::class, $jeu);
           //$formulaire->submit($request->request->get($formulaire->getName()));
           if ($formulaire->isSubmitted() && $formulaire->isValid())
           {
             $jeu = $formulaire->getData();
           }
+          */
             
+          //return $this->render('gerer_jeu_ajout.html.twig', ["session" => $_SESSION, "formulaire" => $formulaire->createView()]);
+          return $this->render('gerer_jeu_ajout.html.twig', ["session" => $_SESSION, "jeu" => $jeu]);
+      }
+
+      /**
+       * @Route("/save_jeu", name="save_jeu")
+       */
+      public function save_jeu(Request $request)
+      {
+          if (!$this->isAdmin()) {
+            return $this->redirectToRoute('login');
+          }
+          $doctrine = $this->getDoctrine();
+          $em = $doctrine->getManager();
+          $repository = $em->getRepository('App:Ludotheque');
+
+          $jeu = $repository->saveJeu();
+          $em->persist($jeu);
+          $em->flush();
+
           //return $this->render('gerer_jeu_ajout.html.twig', ["session" => $_SESSION, "formulaire" => $formulaire->createView()]);
           return $this->render('gerer_jeu_ajout.html.twig', ["session" => $_SESSION, "jeu" => $jeu]);
       }

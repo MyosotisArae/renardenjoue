@@ -93,7 +93,6 @@ class SecurityController extends ParentController
         if ($user == null) {
           return $this->redirectToRoute('login');
         }
-        $_SESSION['utilisateurEnCours'] = $user;
         $formulaire = $this->createForm(UserDisplayType::class, $user);
         $formulaire->handleRequest($request);
 
@@ -110,6 +109,7 @@ class SecurityController extends ParentController
           }
         }
         else $this->setSss('msgAlert', "Bienvenue,".$user->getNom());
+        $_SESSION['utilisateurEnCours'] = $user;
 
         return $this->render('security/connecte.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView(), 'message' => '']);
     }
