@@ -13,7 +13,6 @@
 {% endblock %}
 
 {% block laPage %}
-
       <div class='col-12'>{# Bloc Filtrage des jeux #}
         <div class='fondOpaque cadreBleu'>
           <form  method='POST' action='jeux?operation=recherche'>
@@ -99,8 +98,7 @@
 {% set classeTaille  = random(6)  %}
 {% set classFonte    = random(10) %}
 {% for jeu in listeJeux %}
-                {#<a href='jeux?jeuChoisi={{jeu.id}}' class='confetti couleur{{classeCouleur}} taille{{classeTaille}} fonte{{classFonte}}'>{{jeu.nom}}</a>#}
-                <a href='#ancreJeu' class='confetti couleur{{classeCouleur}} taille{{classeTaille}} fonte{{classFonte}}' onclick='selectGame({{jeu.id}})'>{{jeu.nom}}</a>
+                <a href='#' class='confetti couleur{{classeCouleur}} taille{{classeTaille}} fonte{{classFonte}}' onclick='selectGame({{jeu.id}})'>{{jeu.nom}}</a>
   {% set classeCouleur = classeCouleur + 1 %}
   {% set classeTaille = classeTaille + 1 %}
   {% set classFonte = classFonte + 1 %}
@@ -122,7 +120,7 @@
         <br>
       </div>
 
-      <div id='ancreJeu' class='col-12' style='padding-top : 1em;'>{# Bloc Titre #}
+      <div class='col-12' style='padding-top : 1em;'>{# Bloc Titre #}
         <div class='fondOpaque cadreBleu'>
           <div class='row'>
             <div class='col-12'>&nbsp;</div>
