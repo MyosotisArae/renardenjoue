@@ -3,7 +3,7 @@ namespace App\Repository;
 
 use App\Entity\Evenements;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use \DateTime;
 use \DateInterval;
 
@@ -15,7 +15,7 @@ use \DateInterval;
  */
 class EvenementsRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(Registry $registry)
     {
         parent::__construct($registry, Evenements::class);
     }

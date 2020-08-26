@@ -3,13 +3,13 @@ namespace App\Repository;
 
 use App\Entity\Ludotheque;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use \DateTime;
 use \DateInterval;
 
 class LudothequeRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(Registry $registry)
     {
         parent::__construct($registry, Ludotheque::class);
     }

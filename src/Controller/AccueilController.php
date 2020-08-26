@@ -17,27 +17,20 @@ class AccueilController extends ParentController
     $util = $this->get("utilitaires");
     if ($util->estRenseigneSESSION("userPseudo")) { $nom = $_SESSION["userPseudo"]; }
 
-    // Date du prochain évènement :
-    $nextDate = $this->getDoctrine()
-                     ->getManager()
-                     ->getRepository('App:Evenements')
-                     ->getNextDate();
+    $em  = $this->getDoctrine()
+                ->getManager();
 
     // Date des prochains évènements :
-    $nextEvts = $this->getDoctrine()
-                     ->getManager()
-                     ->getRepository('App:Evenements')
-                     ->getNextEvts();
+    $nextEvts = $em->getRepository('App:Evenements')
+                   ->getNextEvts();
     //$nextEvts = [];
     // Liste des derniers jeux :
-    $lastGames = $this->getDoctrine()
-                      ->getManager()
-                      ->getRepository('App:Ludotheque')
-                      ->getLastGame();
+    $lastGames = $em->getRepository('App:Ludotheque')
+                    ->getLastGame();
 
 
-    return $this->render('/accueil.html.twig',["session" => $_SESSION, "nextEvts" => $nextEvts, "nextDate" => $nextDate, "lastGames" => $lastGames]);
+    return $this->render('/accueil.html.twig',["session" => $_SESSION, "nextEvts" => $nextEvts, "lastGames" => $lastGames]);
   }
-}
+}s
 
 ?>
