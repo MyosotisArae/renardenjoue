@@ -1,0 +1,27 @@
+{% extends "main.html.twig" %}
+
+{% block entete %}
+  {{ parent() }}
+{% endblock %}
+
+{% block corps %}
+  <div class='container-fluid'>
+    <div class='row'>
+        <div class='col-10' style='width:60vw; padding-left : 2rem; position : relative;'>
+          <form method='post' action='accueil' class='float-right' style='width:60vw;'>
+            <span class="form-error-icon badge badge-danger" style='width:100%;'>Erreur 500</span><br>
+            <img src="{{img_path}}renard_404.png" style='width:100%;'>
+            <button class='btn-primary btn float-right' type='submit'>Retour au site</button>
+          </form>
+        </div>
+    </div>
+  </div>
+  
+{% endblock %}
+
+{% block laPage %}
+
+{% endblock %}
+
+{% block piedDePage %}
+{% endblock %}
