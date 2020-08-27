@@ -68,6 +68,12 @@ function selectGame(reference)
 	{
 		document.getElementById('divMeca').innerHTML = "<label class='gauche' style='font-size : 1.4em;'>Mécanismes et prérequis :</label> " + meca.innerHTML;
 	}
+	setTimeout(atteindreBarreMenu, 200);
+}
+
+function atteindreBarreMenu()
+{
+	window.location.href = "#blocBarreMenu";
 }
 
 function dureehm(enMinutes)
