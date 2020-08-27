@@ -2,19 +2,6 @@
 
 {% block title %}Log in!{% endblock %}
 
-{% block entete %}
-  {{ parent() }}
-  {% set isUser = false %}
-  {% if not('memberConnected' in session|keys) %}
-  {%   set isUser = true %}
-       <meta http-equiv= "refresh" content="0; login" />
-  {% endif %}
-{% endblock %}
-
-{% block corps %}
-  {{ parent() }}
-{% endblock %}
-
 {% block laPage %}
 <div class="col-12">
   <br>
@@ -24,10 +11,14 @@
 </div>
 {# Si c'est l'administrateur qui est connecté, l'affichage sera différent. #}
 {% set isAdmin = false %}
+{% set role = 0 %}
 {% set largeurFenetre = 7 %}
 {% set pourcentBoutons = 30 %}
-{% if isUser %}
-{%   if session.memberConnected.roles >= 8 %}
+{% set isUser = false %}
+{% if 'memberConnected' in session|keys %}
+{%   set isUser = true %}
+{%   set role = session.memberConnected.roles %}
+{%   if role >= 8 %}
 {%     set isAdmin = true %}
 {%     set largeurFenetre = 10 %}
 {%     set pourcentBoutons = 14 %}
@@ -57,6 +48,8 @@
       </tr>
     </table>    
     {{ form(formulaire) }}
+  {% else %}
+    <meta http-equiv= "refresh" content="0; login" />
   {% endif %}
 
 </div>
