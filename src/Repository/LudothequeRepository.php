@@ -145,4 +145,44 @@ class LudothequeRepository extends ServiceEntityRepository
       
       return null;
     }
+
+    // Sauvegarde le jeu depuis qu'affiche l'editeur de l'administrateur.
+    /**
+      * @return Ludotheque
+      */
+    public function saveJeu(int $id)
+    {
+      // Récupération du jeu (en cas d'update)
+      $jeu = $this->getGame($id);
+      // Création du jeu (en cas d'insert)
+      if ($jeu == null) { $jeu = new Ludotheque(); }
+
+      // Prise en compte des infos saisies dans l'interface
+      $jeu->setNom($_POST["chNom"]);
+      $jeu->setNomComplet($_POST["chFull"]);
+      $jeu->setImg($_POST["chImg"]);
+      $jeu->setBut($_POST["chBut"]);
+      $jeu->setPpe($_POST["chDesc"]);
+      $jeu->setNbjmin($_POST["chNbJmin"]);
+      $jeu->setNbjmax($_POST["chNbJmax"]);
+      $jeu->setDureemin($_POST["chDureemin"]);
+      $jeu->setDureemax($_POST["chDureemax"]);
+      $jeu->setDominance($_POST["chDom"]);
+
+      // Les mécanismes sont récupérés dans des checkbox.
+      // POST devrait être null pour celles non cochées.
+      // Les autres seront ajoutées au meca.
+      $meca = 0;
+      $listeMeca = $jeu->getListeMecanismes();
+      foreach ($listeMeca as $cle => $valeur)
+      {
+        // Checkbox existante = case cochee
+        // La cle est dans ce cas ajoutee au champ de bits $meca.
+        if ($this->postIsSet("cb".$cle)) $meca += $cle;
+      }
+      $jeu->setMeca($meca);
+
+      return $jeu;  
+    }
+  
 }

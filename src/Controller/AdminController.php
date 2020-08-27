@@ -77,6 +77,25 @@ class AdminController extends ParentController
       }
 
       /**
+       * @Route("/save_jeu{id}", name="save_jeu", requirements={"id" = "\d+"})
+       */
+      public function save_jeu(Request $request, int $id)
+      {
+          if (!$this->isAdmin()) {
+            return $this->redirectToRoute('login');
+          }
+          $doctrine = $this->getDoctrine();
+          $em = $doctrine->getManager();
+          $repository = $em->getRepository('App:Ludotheque');
+
+          $jeu = $repository->saveJeu($id);
+          $em->persist($jeu);
+          $em->flush();
+
+          return $this->render('gerer_jeu_ajout.html.twig', ["session" => $_SESSION, "jeu" => $jeu]);
+      }
+
+      /**
        * @Route("/liste_jeux", name="liste_jeux")
        */
       public function liste_jeux(Request $request)
