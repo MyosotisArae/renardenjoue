@@ -14,6 +14,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends ParentController
 {
   /**
+   * @Route("/erreur404", name="erreur404")
+   */
+  public function erreur404(Request $request)
+  {
+    return $this->render('error404.html.twig', ["session" => $_SESSION]);
+  }
+  /**
    * @Route("/gestion", name="gestion")
    */
   public function admin(Request $request)
@@ -77,16 +84,54 @@ class AdminController extends ParentController
           if (!$this->isAdmin()) {
             return $this->redirectToRoute('login');
           }
-          return $this->render('gerer_jeux_list.html.twig', ["session" => $_SESSION, "jeux" => $this->getJeux()]);
+          $liste = $this->getJeuxOrdreAlpha();
+          return $this->render('gerer_jeux_list.html.twig', ["session" => $_SESSION, "jeux" => $liste]);
       }
 
-      private function getJeux()
+      private function getJeuxOrdreAlpha()
       {
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
         $repository = $em->getRepository('App:Ludotheque');
         
         return $repository->getListeJeux();
+      }
+
+      /**
+       * @Route("/renumeroter_jeux", name="renumeroter_jeux")
+       */
+      public function renumeroter_jeux(Request $request)
+      {
+          if (!$this->isAdmin()) {
+            return $this->redirectToRoute('login');
+          }
+
+          // Récupérer la liste des jeux dans l'ordre des id.
+          $doctrine = $this->getDoctrine();
+          $em = $doctrine->getManager();
+          $repository = $em->getRepository('App:Ludotheque');
+          $liste = $repository->getJeuxChronologiquement();
+
+          // Renumérotation
+          $idSuivant = 0;
+          foreach ($liste as $jeu)
+          {
+            $idSuivant += 1;
+            $updateJeu = $em->createQueryBuilder();
+            $updateJeu
+                ->update('App:Ludotheque', 'L')
+                ->set('L.id',  $idSuivant)
+                ->where('L.id = :id')
+                ->setParameter('id', $jeu->getId());
+            $q = $updateJeu->getQuery();
+            $p = $q->execute();
+
+            $em->flush();
+            // Pour s'assurer que la liste affichée sera bien renumérotée :
+            $jeu->setId($idSuivant);
+          }
+
+          return $this->render('gerer_jeux_list.html.twig', ["session" => $_SESSION, "jeux" => $liste]);
       }
 
       private function getJeu(int $id)

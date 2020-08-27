@@ -4,8 +4,10 @@
 
 {% block entete %}
   {{ parent() }}
+  {% set isUser = false %}
   {% if not('memberConnected' in session|keys) %}
-    <meta http-equiv= "refresh" content="0; login" />
+  {%   set isUser = true %}
+       <meta http-equiv= "refresh" content="0; login" />
   {% endif %}
 {% endblock %}
 
@@ -24,8 +26,8 @@
 {% set isAdmin = false %}
 {% set largeurFenetre = 7 %}
 {% set pourcentBoutons = 30 %}
-{% if 'memberConnected' in session|keys %}
-{%   if session.memberConnected.role >= 8 %}
+{% if isUser %}
+{%   if session.memberConnected.roles >= 8 %}
 {%     set isAdmin = true %}
 {%     set largeurFenetre = 10 %}
 {%     set pourcentBoutons = 14 %}
@@ -33,7 +35,7 @@
 {% endif %}
 <div class="col-md-{{largeurFenetre}} col-11 enBleu">
 
-  {% if 'memberConnected' in session|keys %}
+  {% if isUser %}
     <table class='w-100'> 
 
       <tr>

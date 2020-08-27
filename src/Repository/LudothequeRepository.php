@@ -22,42 +22,59 @@ class LudothequeRepository extends ServiceEntityRepository
     /**
       * @return Ludotheque[]
       */
-    public function getListeJeux()
-    {
-      $qb = $this->createQueryBuilder('j');
-      
-      // Des criteres de recherche ?
-          if ($this->postIsSet('jeuTitre'))
-          {
-            $qb->andWhere('j.nom LIKE :boutDeTitre')->setParameter('boutDeTitre', '%'.$_POST['jeuTitre'].'%');
-          }
-          if ($this->postIsSet('jeuNiveau'))
-          {
-            $qb->andWhere('j.dominance = :niveau')->setParameter('niveau', $_POST['jeuNiveau']);
-          }
-          if ($this->postIsSet('jeuDuree'))
-          {
-            $dMin = $this->getDureeMin();
-            $dMax = $this->getDureeMax();
-            if ($dMin > 0) { $qb->andWhere('j.dureemin >= :dMin')->setParameter('dMin', $dMin); }; 
-            if ($dMax > 0) { $qb->andWhere('j.dureemax <= :dMax')->setParameter('dMax', $dMax); }; 
-          }
-          if ($this->postIsSet('jeuNb'))
-          {
-            if ($_POST['jeuNb'] > 2) { $qb->andWhere('j.nbjmin <= :nb'); }
-            if ($_POST['jeuNb'] < 8) { $qb->andWhere('j.nbjmax >= :nb'); }
-            $qb->setParameter('nb', $_POST['jeuNb']);
-          }
-
-      $qb->orderBy('j.nom');
-
-      return $qb
-        ->getQuery()
-        ->getResult()
-      ;
-
-    }
+      public function getListeJeux()
+      {
+        $qb = $this->createQueryBuilder('j');
+        
+        // Des criteres de recherche ?
+            if ($this->postIsSet('jeuTitre'))
+            {
+              $qb->andWhere('j.nom LIKE :boutDeTitre')->setParameter('boutDeTitre', '%'.$_POST['jeuTitre'].'%');
+            }
+            if ($this->postIsSet('jeuNiveau'))
+            {
+              $qb->andWhere('j.dominance = :niveau')->setParameter('niveau', $_POST['jeuNiveau']);
+            }
+            if ($this->postIsSet('jeuDuree'))
+            {
+              $dMin = $this->getDureeMin();
+              $dMax = $this->getDureeMax();
+              if ($dMin > 0) { $qb->andWhere('j.dureemin >= :dMin')->setParameter('dMin', $dMin); }; 
+              if ($dMax > 0) { $qb->andWhere('j.dureemax <= :dMax')->setParameter('dMax', $dMax); }; 
+            }
+            if ($this->postIsSet('jeuNb'))
+            {
+              if ($_POST['jeuNb'] > 2) { $qb->andWhere('j.nbjmin <= :nb'); }
+              if ($_POST['jeuNb'] < 8) { $qb->andWhere('j.nbjmax >= :nb'); }
+              $qb->setParameter('nb', $_POST['jeuNb']);
+            }
+  
+        $qb->orderBy('j.nom');
+  
+        return $qb
+          ->getQuery()
+          ->getResult()
+        ;
+  
+      }
     
+    // Retourne les jeux dans l'ordre des index, donc dans l'ordre d'ajout en base.
+    // Sert pour la renumerotation des index.
+    /**
+      * @return Ludotheque[]
+      */
+      public function getJeuxChronologiquement()
+      {
+        $qb = $this->createQueryBuilder('j');
+        $qb->orderBy('j.id');
+  
+        return $qb
+          ->getQuery()
+          ->getResult()
+        ;
+  
+      }
+        
     /**
       * Donne la valeur de la duree minimale attendue (les durees s'expriment en minutes).
       * Retourne 0 s'il n'y a pas de duree minimale requise.

@@ -48,7 +48,9 @@ span
 
         {# Si c'est l'administrateur qui est connecté, l'affichage sera différent. #}
         {% set isAdmin = false %}
+        {% set isUser = false %}
         {% if 'memberConnected' in session|keys %}
+        {%   set isUser = true %}
         {%   if session.memberConnected.isAdmin %}
         {%     set isAdmin = true %}
         {%     set styleBody = '' %}
@@ -67,6 +69,7 @@ span
             <li>Jeux</li>
             <a href="ajout_jeu0">- en ajouter un</a><br>
             <a href="liste_jeux">- lister</a><br>
+            <a href="renumeroter_jeux">- renuméroter</a><br>
             <br>
             <li>Joueurs</li>
             <a href="liste_membres">- lister</a><br>
@@ -92,16 +95,8 @@ span
         </div>
 
         {% else %}
-        {# Ce n'est pas l'administrateur qui est connecté, afficher une page 404. #}
-        <div class='col-12'>
-          &nbsp;<br>
-        </div>
-        <div class='col-1'>
-        </div>
-        <div class='col-10' style='width:60vw;'>
-          <span class="form-error-icon badge badge-danger" style='width:60vw;'>Erreur 404</span><br>
-          <img src="{{img_path}}renard_404.png" style='width:60vw;'>
-        </div>
+          {# Ce n'est pas l'administrateur qui est connecté, afficher une page 404. #}
+          <meta http-equiv= "refresh" content="0; erreur404" />
         {% endif %}
 
       </div> {# div principale row #}
