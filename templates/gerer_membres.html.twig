@@ -15,15 +15,23 @@
     <div class='col-1'>id</div>
     <div class='col-2'>Nom</div>
     <div class='col-4'>E-mail</div>
-    <div class='col-5'>Arrivé le</div>
+    <div class='col-3'>Arrivé le</div>
+    <div class='col-2'></div>
   </div>
   <div class='row listeD'>
+{% set isOdd = 1 %}
 {% for joueur in membres %}
+  {% set isOdd = 1-isOdd %}
 
-    <div class='col-1'>{{ joueur.id }}</div>
-    <div class='col-2'>{{ joueur.nom }}</div>
-    <div class='col-4'>{{ joueur.email }}</div>
-    <div class='col-5'>{{ joueur.dateDentree|date('d/m/Y - H:i') }}</div>
+    <div class='col-1 styleLigne{{isOdd}}'>{{ joueur.id }}</div>
+    <div class='col-2 styleLigne{{isOdd}}'>{{ joueur.nom }}</div>
+    <div class='col-4 styleLigne{{isOdd}}'>{{ joueur.email }}</div>
+    <div class='col-3 styleLigne{{isOdd}}'>{{ joueur.dateDentree|date('d/m/Y - H:i') }}</div>
+    <div class='col-2 styleLigne{{isOdd}}'>
+      <form action='del_user{{ joueur.id }}'>
+        <button class='btn-danger btn float-right' type='submit'>Supprimer id {{ joueur.id }}</button>
+      </form>
+    </div>
     
 {% endfor %}
   </div>
