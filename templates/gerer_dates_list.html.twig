@@ -7,14 +7,14 @@
     input { font-size : 1rem; }
     .input2
     {
-      text-align : right;
-      width : 1.2rem;
+      text-align : center;
+      width : 2rem;
       border : 0;
     }
     .input4
     {
       text-align : left;
-      width : 2.5rem;
+      width : 4rem;
       border : 0;
     }
     textarea
@@ -53,11 +53,11 @@
         {% else %}
         le
         {% endif %}
-        &nbsp;<input class='input2' name='chDdeb-j' value="{{evt.dateDebut|date('d')}}">/<input class='input2' name='chDdeb-m' value="{{evt.dateDebut|date('m')}}">/<input class='input4' name='chDdeb-a' value="{{evt.dateDebut|date('Y')}}">
+        &nbsp;<input class='input2' name='chDdeb-j' value="{{evt.dateDebut|date('d')}}">/<input class='input2' name='chDdeb-m' value="{{evt.dateDebut|date('m')}}">/&nbsp;<input class='input4' name='chDdeb-a' value="{{evt.dateDebut|date('Y')}}">
         &nbsp;dès&nbsp;<input class='input2' name='chHdeb-h' value="{{evt.heureDebut|date('H')}}">:
         <input class='input2' name='chHdeb-m' value="{{evt.heureDebut|date('i')}}" style='text-align:left;'>
         {% if evt.dateFin %}
-        &nbsp;au&nbsp;<input class='input2' name='chDfin-j' value="{{evt.dateFin|date('d')}}">/<input class='input2' name='chDfin-m' value="{{evt.dateFin|date('m')}}">/<input class='input4' name='chDfin-a' value="{{evt.dateFin|date('Y')}}">
+        &nbsp;au&nbsp;<input class='input2' name='chDfin-j' value="{{evt.dateFin|date('d')}}">/<input class='input2' name='chDfin-m' value="{{evt.dateFin|date('m')}}">/&nbsp;<input class='input4' name='chDfin-a' value="{{evt.dateFin|date('Y')}}">
         {% endif %}
         {% if evt.heureFin %}
         &nbsp;jusqu'à&nbsp;<input class='input2' name='chHfin-h' value="{{evt.heureFin|date('H')}}">:
