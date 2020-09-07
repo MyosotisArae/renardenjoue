@@ -17,6 +17,17 @@ class ContactController extends ParentController
     $_SESSION["messageAlert"] = "";
   }
 
+  /**
+   * @Route("/infos", name="infos")
+   */
+  public function infos()
+  {
+    $_SESSION["ongletActif"] = "CTC";
+
+    return $this->render('/infos.html.twig',["session" => $_SESSION]);
+    $_SESSION["messageAlert"] = "";
+  }
+
   public function envoi()
   {
     $_SESSION["ongletActif"] = "CTC";
