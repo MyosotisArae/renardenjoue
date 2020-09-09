@@ -70,6 +70,7 @@ class SecurityController extends ParentController
           if ($encoder->isPasswordValid($userEnBase, $user->getPlainPassword()))
           {
             $this->setUser($userEnBase);
+            $this->setSss('msgAlert', "Bienvenue,".$user->getNom());
             $formulaire = $this->createForm(UserDisplayType::class, $userEnBase, ['action' => 'compte']);
             return $this->render('security/connecte.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView()]);
           }
@@ -108,7 +109,6 @@ class SecurityController extends ParentController
             $this->setSss('msgAlert', "Une erreur s'est produite. Vos modifications n'ont pas été prises en compte.");
           }
         }
-        else $this->setSss('msgAlert', "Bienvenue,".$user->getNom());
 
         return $this->render('security/connecte.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView(), 'message' => '']);
     }
