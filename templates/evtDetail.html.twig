@@ -67,12 +67,12 @@
               Vous devez vous connecter pour vous inscrire.<br><br>
               <a href='login' class='bouton bg-primary'>Page de connexion</a>
             {% elseif cas == 211 %}
-              Vous êtes déjà inscrit.<br><br>
+              Vous êtes déjà inscrit{% if nbInvites > 1 %}, pour {{nbInvites}} personnes{% endif %}.<br><br>
               <a href='desinscription{{evt.id}}' class='bouton bg-primary'>Désinscription</a>
             {% elseif cas == 2124 %}
               Inscriptions ouvertes jusqu'au {{limite|date('d/m/Y')}} au soir.<br>
               Venez jouer !<br><br>
-              <a href='inscription{{evt.id}}' class='bouton bg-primary'>Inscription</a>
+              <a href='inscription{{evt.id}}' class='bouton bg-primary'>Inscription{% if nbInvites > 1 %} de {{nbInvites}} personnes{% endif %}</a>
             {% endif %}
 
           {% endif %}

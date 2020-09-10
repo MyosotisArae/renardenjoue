@@ -124,6 +124,7 @@ class CalendrierController extends ParentController
     $combien = 0;
     $cas = 0;
     $surcharge = '';
+    $nbInvites = 1;
     /* Cas à gérer :
       0. C'est un évènement sans inscription (Le titre n'est pas Les renards jouent).
          => Ne pas exécuter ce qui suit.
@@ -252,7 +253,7 @@ class CalendrierController extends ParentController
       }
     }
 
-    return $this->render('/evtDetail.html.twig',["listeDates" => $this->getDates(),"session" => $_SESSION, "cas" => $cas, "evt" => $evt, "limite" => $limiteInscription, "combien" => $combien, "capacite" => $capacite, "surcharge" => $surcharge]);
+    return $this->render('/evtDetail.html.twig',["listeDates" => $this->getDates(),"session" => $_SESSION, "cas" => $cas, "evt" => $evt, "limite" => $limiteInscription, "combien" => $combien, "capacite" => $capacite, "surcharge" => $surcharge, "nbInvites" => $nbInvites]);
   }
 
   private function getEvenement($idEvt)
