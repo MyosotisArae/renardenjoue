@@ -221,7 +221,15 @@ class AdminController extends ParentController
         $listeInscrits = [];
         foreach ($inscrits as $p)
         {
-          $listeInscrits[] = $rpUser->findOneBy(array('id' => $p->getIdUser()));
+          // Récupérer l'utilisateur et en créer un dont le nombre de joueurs
+          // est celui de la table Participant (et non celui de la table User).
+          $userAchercher = $rpUser->findOneBy(array('id' => $p->getIdUser()));
+          if ($userAchercher != null)
+          {
+            $userInscrit = clone $userAchercher;
+            $userInscrit->setNbJoueurs($p->getNbJoueurs());
+            $listeInscrits[] = $userInscrit;
+          }
         }
         $evt->setInscrits($listeInscrits);
         $soireesConfirmees[] = $evt;
@@ -250,6 +258,7 @@ class AdminController extends ParentController
     }
 
     $evt->setTitre($_POST['chTitre']);
+    $evt->setCapacite($_POST['chCapacite']);
     $evt->setDescription($_POST['chDesc']);
     $evt->setDateDebutFromString($_POST['chDdeb-j'].'-'.$_POST['chDdeb-m'].'-'.$_POST['chDdeb-a']);
     $evt->setHeureDebutFromString($_POST['chHdeb-h'].':'.$_POST['chHdeb-m']);

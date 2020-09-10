@@ -14,12 +14,12 @@
   <div class='row'>
 {% for evt in soirees %}
     <div class='col-12'>
-        Soirée du&nbsp;{{evt.dateDebut|date('d/m/Y')}}&nbsp;:
+        Soirée {{evt.id}}, en date du {{evt.dateDebut|date('d/m/Y')}} ({{evt.capacite}} joueurs max) :
     </div>
     {% for joueur in evt.inscrits %}
     <div class='col-2'></div>
     <div class='col-1'>{{ joueur.id }}</div>
-    <div class='col-3'>{{ joueur.nom }}</div>
+    <div class='col-3'>{{ joueur.nom }} ({{joueur.nbJoueurs}})</div>
     <div class='col-6'>{{ joueur.email }}</div>
     {% endfor %}
     <br>

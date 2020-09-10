@@ -13,10 +13,11 @@ class User implements UserInterface
 {
     public function __construct()
     {
-        $id = 0;
-        $nom = 'a';
-        $plainPassword = 'b';
-        $password = 'c';
+        $this->id = 0;
+        $this->nom = 'a';
+        $this->plainPassword = 'b';
+        $this->password = 'c';
+        $this->nbJoueurs = 1;
     }
     /**
      * @ORM\Id()
@@ -35,6 +36,11 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $roles = 0;
+
+    /**
+     * @ORM\Column(name="nbJoueurs", type="integer", nullable=false)
+     */
+    private $nbJoueurs = 1;
 
     /**
      * @var bool Est-ce un administrateur ?
@@ -110,6 +116,14 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
+    public function getNbJoueurs(): int
+    {
+        return $this->nbJoueurs;
+    }
+
+    /**
+     * @see UserInterface
+     */
     public function getRoles(): int
     {
         return $this->roles;
@@ -144,6 +158,13 @@ class User implements UserInterface
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function setNbJoueurs(int $nb): self
+    {
+        $this->nbJoueurs = $nb;
 
         return $this;
     }

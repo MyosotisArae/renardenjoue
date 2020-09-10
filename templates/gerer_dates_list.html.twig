@@ -44,6 +44,7 @@
     <div class='row'>
       <div class='col-3'>
         <input name='chTitre' value="{{evt.titre|raw}}" style='width : 100%; margin-bottom : 1.2rem;'><br>
+        <input name='chCapacite' value="{{evt.capacite}}" style='width : 2em; margin-bottom : 1.2rem;'>&nbsp;joueurs
         <a href='del_evt_{{evt.id}}'><button class='btn-danger btn float-right' type='button'>Supprimer id {{evt.id}}</button></a>
       </div>
       <div class='col-9'><textarea name='chDesc'>{{evt.description|retourChariot|raw}}</textarea></div>

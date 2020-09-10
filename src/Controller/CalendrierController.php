@@ -50,12 +50,14 @@ class CalendrierController extends ParentController
         return $this->redirect('afficherEvt'.$evt->getId());
       }
 
-      $p  = new Participant($user->getId(), $evt->getId());
+      $p  = new Participant($user->getId(), $evt->getId(), $user->getNbJoueurs());
       $em = $this->getDoctrine()
                  ->getManager();
       $em->persist($p);
       $em->flush();
-      $this->setSss('msgAlert', "Vous voilà inscrit à la session du ".$evt->getDateDebut()->format('d/m/Y'));
+      $precisionNombre = "Vous voilà inscrit";
+      if ($user->getNbJoueurs() > 1) $precisionNombre = "Les ".$user->getNbJoueurs()." personnes sont inscrites";
+      $this->setSss('msgAlert', $precisionNombre." à la session du ".$evt->getDateDebut()->format('d/m/Y'));
       return $this->redirect('afficherEvt'.$evt->getId());
     }
     else
@@ -121,6 +123,7 @@ class CalendrierController extends ParentController
     $_SESSION["ongletActif"] = "CAL";
     $combien = 0;
     $cas = 0;
+    $surcharge = '';
     /* Cas à gérer :
       0. C'est un évènement sans inscription (Le titre n'est pas Les renards jouent).
          => Ne pas exécuter ce qui suit.
@@ -133,9 +136,20 @@ class CalendrierController extends ParentController
               2.1.1. Il y participe déjà.
                      => Mettre un bouton de désinscription.
               2.1.2. Il n'y participe pas encore.
-                     => Mettre un bouton d'inscription.
+                     2.1.2.1. Le nombre max de joueurs est dépassé
+                              => Signaler la surcharge
+                     2.1.2.2. Le nombre max de joueurs est atteint (pile)
+                              => Afficher "Plus de place"
+                     2.1.2.3. Le nombre de places est inférieur au nombre d'invités de l'utilisateur
+                              => L'en avertir.
+                     2.1.2.4. Il reste assez de place pour qu'il s'inscrive.
+                              => Mettre un bouton d'inscription.
          2.2. L'utilisateur n'est pas connecté
-              => Mettre un bouton pour le rediriger vers la page de connexion.
+              2.2.1. Il n'y a plus de place
+                     => Message d'avertissement
+              2.2.2. Il reste de la place
+              => Indiquer combien de places il reste et mettre un bouton
+                 pour le rediriger vers la page de connexion.
     */
 
     $evt = $this->getEvenement($num);
@@ -148,21 +162,49 @@ class CalendrierController extends ParentController
 
     // Vérifier la date de l'évènement.
     $dateDebut = new Datetime(date_format($evt->getDateDebut(), 'Y-m-d'));
-    $limiteInscription = new Datetime(date_format($dateDebut, 'Y-m-d'));
+
+    // Le dimanche, comme le samedi, la date limite doit être le jeudi.
+    // Donc il faut un jour de délai de plus si la soirée est le dimanche.
+    $jourSemaine = date_format($dateDebut,'D');
     $delai = new DateInterval("P3D");
+    if ($jourSemaine == 'Sun') $delai = new DateInterval("P4D");
+
+    $limiteInscription = new Datetime(date_format($dateDebut, 'Y-m-d'));
     $now = new Datetime(date_format(new DateTime('now'), 'Y-m-d'));
     $limiteInscription = $limiteInscription->sub($delai);
 
     $this->util = $this->get("utilitaires");
+    $combien = $this->combienDeParticipants($num);
+    $capacite = $evt->getCapacite();
+    $nbPlacesDispo = $capacite - $combien;
+    $chiffreEnLettres = ['','','deux','trois','quatre','cinq','six','sept','huit'];
+
+    if ($nbPlacesDispo < 0)
+    {
+      $surcharge = "Attention, nous sommes en surnombre.";
+    }
+    else if ($nbPlacesDispo == 0)
+    {
+      $surcharge = "Il n'y a plus de place.";
+    }
+    else if ($nbPlacesDispo == 1)
+    {
+      $surcharge = "Il ne reste qu'une place.";
+    }
+    else
+    {
+      $surcharge = "Il reste ".$chiffreEnLettres[$nbPlacesDispo]." places.";
+    }
 
     if ($evt->getTitre() == 'Les renards jouent')
     {
 
-      if ($now < $limiteInscription)
+      if ($now <= $limiteInscription)
       {
         // Cas 2. Inscription possible
         if ($this->util->estRenseigneSESSION('memberConnected'))
         {
+          $nbInvites = $_SESSION["memberConnected"]->getNbJoueurs();
           // Cas 2.1. Utilisateur connecté
           if ($this->isParticipant($num))
           {
@@ -171,27 +213,46 @@ class CalendrierController extends ParentController
           else
           {
             $cas = 212;
+            if ($nbPlacesDispo < 0)
+            {
+              $cas = 2121;
+              $surcharge = "Désolé, mais nous sommes déjà en surnombre.";
+            }
+            else if ($nbPlacesDispo == 0)
+            {
+              $cas = 2122;       
+            }
+            else if ($nbPlacesDispo < $nbInvites)
+            {
+              $cas = 2123;
+              $surcharge .= " Impossible de vous inscrire tous les ".$chiffreEnLettres[$nbInvites].".";
+            }
+            else $cas = 2124;
           }
         }
         else
         {
           // Cas 2.2. Utilisateur non connecté
-          $cas = 22;
+          $cas = 221;
+          if ($nbPlacesDispo > 0) { $cas = 222; }
         }
       }
       else // Cas 1. Trop tard pour s'inscrire
       {
-        if ($dateDebut < $now) { $cas = 11; }
+        $surcharge = '';
+        if ($dateFin < $now)
+        {
+          $cas = 11; // L'evt est déjà terminé.
+        }
         else
         {
-          $cas = 12;
+          $cas = 12; // Evt en cours ou très proche.
           // Indiquer combien on sera.
-          $combien = $this->combienDeParticipants($num);
         }
       }
     }
 
-    return $this->render('/evtDetail.html.twig',["listeDates" => $this->getDates(),"session" => $_SESSION, "cas" => $cas, "evt" => $evt, "limite" => $limiteInscription, "combien" => $combien]);
+    return $this->render('/evtDetail.html.twig',["listeDates" => $this->getDates(),"session" => $_SESSION, "cas" => $cas, "evt" => $evt, "limite" => $limiteInscription, "combien" => $combien, "capacite" => $capacite, "surcharge" => $surcharge]);
   }
 
   private function getEvenement($idEvt)

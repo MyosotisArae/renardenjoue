@@ -67,7 +67,7 @@ class ParticipantRepository extends ServiceEntityRepository
     }
 
     /**
-     * Compte les participants à la soirée jeux
+     * Compte les participants à la soirée jeux (Lionel et moi non inclus)
      * @return int
      */
     public function combienDeParticipants(int $idEvt)
@@ -77,9 +77,15 @@ class ParticipantRepository extends ServiceEntityRepository
 
       $part = $qb->getQuery()
                  ->getResult();
-      if (count($part) == 0) return 0;
+      $nb = 0;
+      // Certains viendront à plusieurs.
+      // Comptons le nombre de joueurs réel et non le nombre de groupes.
+      foreach ($part as $p)
+      {
+        $nb += $p->getNbJoueurs();
+      }
 
-      return count($part) + 2;
+      return $nb;
     }
 
     /**

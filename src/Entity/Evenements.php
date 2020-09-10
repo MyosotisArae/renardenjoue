@@ -65,6 +65,14 @@ class Evenements
     private $heureFin;
 
     /**
+     * @var \int
+     *
+     * @ORM\Column(name="capacite", type="integer", nullable=false)
+     *
+     */
+    private $capacite;
+
+    /**
      * @var \DateTime|null
      *
      */
@@ -114,9 +122,21 @@ class Evenements
        else $this->inscrits = $inscrits;
     }
 
-     public function getId(): ?int
+    public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getCapacite(): ?int
+    {
+        return $this->capacite;
+    }
+
+    public function setCapacite(int $cap): self
+    {
+        $this->capacite = $cap;
+
+        return $this;
     }
 
     public function getTitre(): ?string

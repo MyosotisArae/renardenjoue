@@ -103,6 +103,7 @@ class SecurityController extends ParentController
           if ($this->updateUser($user, $encoder))
           {
             $this->setSss('msgAlert', "Les modifications ont bien été enregistrées.");
+            $_SESSION["memberConnected"] = $user;
           }
           else
           {
@@ -302,6 +303,7 @@ class SecurityController extends ParentController
       $pwd = $user->getPlainPassword();
       $pwdEncoded = $encoder->encodePassword($user, $pwd);
       $user->setPassword($pwdEncoded);
+      $_SESSION["memberConnected"] = $user;
 
       $em = $this->getDoctrine()->getManager();
       $em->persist($user);

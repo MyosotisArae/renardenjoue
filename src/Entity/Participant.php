@@ -13,10 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Participant
 {
-    public function __construct($idUser, $idEvt)
+    public function __construct($idUser, $idEvt, $nb)
     {
         $this->idUser = $idUser;
         $this->idEvt = $idEvt;
+        $this->nbJoueurs = $nb;
     }
 
     /**
@@ -35,6 +36,13 @@ class Participant
      */
     private $idEvt;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nbJoueurs", type="integer", nullable=false)
+     */
+    private $nbJoueurs;
+
     public function getIdUser(): ?int
     {
         return $this->idUser;
@@ -43,6 +51,11 @@ class Participant
     public function getIdEvt(): ?int
     {
         return $this->idEvt;
+    }
+
+    public function getNbJoueurs(): ?int
+    {
+        return $this->nbJoueurs;
     }
 
     public function setIdUser(int $idUser): self
@@ -55,6 +68,13 @@ class Participant
     public function setIdEvt(int $idEvt): self
     {
         $this->idEvt = $idEvt;
+
+        return $this;
+    }
+
+    public function setNbJoueurs(int $nbJoueurs): self
+    {
+        $this->nbJoueurs = $nbJoueurs;
 
         return $this;
     }

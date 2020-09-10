@@ -20,7 +20,8 @@ class UserRepository extends ServiceEntityRepository
       public function getUser(User $user)
       {
         $qb = $this->createQueryBuilder('u')
-                   ->andWhere('LOWER(u.nom) = LOWER(:pseudo)')->setParameter('pseudo',$user->getNom());
+                   ->andWhere('LOWER(u.nom) = LOWER(:pseudo)')
+                   ->setParameter('pseudo',$user->getNom());
   
         $users = $qb->getQuery()
                     ->getResult();
@@ -36,15 +37,13 @@ class UserRepository extends ServiceEntityRepository
         */
         public function getUsers(): array
         {  
-          // Recuperer tout evenement qui se finit ou debute dans l'intervalle [$dateDebut,$dateFin[
           $qb = $this->createQueryBuilder('u')
                      ->orderBy('u.dateDentree', 'DESC');
     
           return $qb
             ->getQuery()
             ->getResult()
-          ;
-    
+          ;    
         }
   
 }
