@@ -240,7 +240,7 @@ class CalendrierController extends ParentController
       else // Cas 1. Trop tard pour s'inscrire
       {
         $surcharge = '';
-        if ($dateFin < $now)
+        if ($dateDebut < $now)
         {
           $cas = 11; // L'evt est déjà terminé.
         }
