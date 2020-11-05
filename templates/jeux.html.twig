@@ -144,8 +144,43 @@
       </div>
 
       <div class='col-md-4 col-12 camembert'>{# Bloc Nom, image et durée #}
+        <div class='fondOpaque cadreBleu'>
+          {# Traiter le cas où le jeu a plusieurs photos. #}
+          {% if (session.jeuChoisi.nbImg > 1) %}
+          <script>
+          numActuel = 0;
+          nbImg = {{session.jeuChoisi.nbImg}};
+          function nextImg(sens)
+          {
+            divImage = document.getElementById('divImg');
+            numActuel = (numActuel + sens + nbImg) % nbImg;
+            numero = numActuel;
+            if (numActuel < 10)  { numero = "0" + numActuel; }
+            nombre = nbImg;
+            if (nbImg < 10)  { nombre = "0" + nbImg; }
+            nouveauNom = "{{session.jeuChoisi.img}}".substr(0,{{session.jeuChoisi.img|length}}-5) + numero + 'i' + nombre;
+            divImage.innerHTML = "<img id='imageDuJeu' class='grandeImage img-fluid cadreBleu' src='{{ img_path }}imagesJeux/"+nouveauNom+".jpg'>";
+	          setTimeout(atteindreBarreMenu, 200);
+          }
+          </script>
+          <table class='w-100'>
+            <tr>
+              <td>
+                <a onclick='nextImg(-1)'>
+                  <img src='{{ img_path }}fleche_avant.gif'> 
+                </a>
+              </td>
+              <td class='float-right'>
+                <a onclick='nextImg(1)'>
+                  <img src='{{ img_path }}fleche_apres.gif'> 
+                </a>
+                </td>
+            </tr>
+          </table>
+          {% endif %}
+        </div>
         <div id='divImg'>
-          <img class='grandeImage img-fluid cadreBleu' src='{{ img_path }}imagesJeux/{{session.jeuChoisi.img}}.jpg'>
+          <img id='imageDuJeu' class='grandeImage img-fluid cadreBleu' src='{{ img_path }}imagesJeux/{{session.jeuChoisi.img}}.jpg'>
         </div>
         <br>
         <div class='fondOpaque cadreBleu'>

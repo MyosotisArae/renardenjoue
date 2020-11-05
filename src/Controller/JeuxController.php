@@ -34,6 +34,33 @@ class JeuxController extends ParentController
 	//return $this->render('/test.html.twig',["session" => $_SESSION,"listeJeux" => $listeJeux]);
   }
 
+	/**
+	 * @Route("/jeux", name="jeux")
+	 */
+	public function changeImage()
+	{
+	  $_SESSION["ongletActif"] = "JEU";
+	  $listeJeux = $this->getJeux();
+  
+	  $util = $this->get("utilitaires");
+	  if ($util->estRenseigneGET("jeuChoisi"))
+	  {
+		// L'utilisateur a choisi le jeu à afficher
+		$_SESSION["jeuChoisi"] = $this->getJeuChoisi($listeJeux);
+	  }
+	  else
+	  {
+		// On choisit au hasard un jeu à afficher.
+		$_SESSION["jeuChoisi"] = $this->getJeuAuHasard($listeJeux);
+	  }
+  
+	  // Calculer le code HTML pour afficher la duree du jeu choisi.
+	  //$_SESSION["htmlDuree"] = $this->getDuree($_SESSION["jeuChoisi"]);
+  
+	  return $this->render('/jeux.html.twig',["session" => $_SESSION,"listeJeux" => $listeJeux]);
+	  //return $this->render('/test.html.twig',["session" => $_SESSION,"listeJeux" => $listeJeux]);
+	}
+  
   private function getJeux()
   {
     $doctrine = $this->getDoctrine();

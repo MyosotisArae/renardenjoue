@@ -185,4 +185,21 @@ class LudothequeRepository extends ServiceEntityRepository
       return $jeu;  
     }
   
+    /**
+     * Passe à l'image suivante si c'est possible.
+     */
+    public function nextImage()
+    {
+      // Changer le numero de l'image courante.
+      $nb = $this->getNbImg();
+      if ($nb = 1) return; // Pas d'autre image.
+      $numero = $this->getIndiceImg();
+      $numero = ($numero + 1) % $nb;
+      $this->setIndiceImg($numero);
+      // Changer le nom du fichier image.
+      $nomFichierImage = $this->getImg();               // ancien nom
+      $nomFichierImage = substr($nomFichierImage,0,-5); // moins le xxixx de la fin
+      $nomFichierImage .= $numero . 'i' . $nb;          // plus xxixx avec le numero suivant.
+      $nomFichierImage = $this->setImg($nomFichierImage);
+    }
 }

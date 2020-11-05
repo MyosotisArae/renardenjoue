@@ -24,6 +24,8 @@ class Ludotheque
       $this->dureemax = 60;
       $this->dominance = 3;
       $this->meca = 0;
+      $this->nbImg = -1;
+      $this->indiceImg = 0;
     }
 
     /**
@@ -120,6 +122,18 @@ class Ludotheque
      * @var string
      */
     private $duree;
+
+    /**
+     * Indique le nombre d'images disponibles pour ce jeu
+     * (calculé à partir du nom de fichier)
+     */
+    private $nbImg;
+
+    /**
+     * Indique le numéro de l'image affichée en ce moment
+     * (0 s'il n'y en a qu'une)
+     */
+    private $indiceImg;
 
     /**
      * @var int
@@ -356,6 +370,62 @@ class Ludotheque
     public function setDuree(string $duree): self
     {
         $this->duree = $duree;
+
+        return $this;
+    }
+
+    /**
+     * Cette méthode calcule nbImg la première fois qu'elle est appelée,
+     * et met dans ce cas indiceImg à 0 (première image).
+     */
+    public function getNbImg(): ?int
+    {
+        // Si $this->nbImg n'est pas setté ou s'il est négatif
+        // le calculer.
+        if ($this->nbImg < 0 || !isset($this->nbImg))
+        {
+            // Valeurs par défaut :
+            $this->nbImg = 1;
+            $this->indiceImg = 0;
+
+            // S'il y a plusieurs images pour ce jeu,
+            // le nom du fichier image se termine par
+            // _00i+un nombre indiquant le nombre d'images (sur 2 chiffres).
+            $nomFichier = $this->img;
+            if (strlen($nomFichier) > 6)
+            {
+                // S'il y a plusieurs images, le nom du fichier image
+                // se termine par _00ixx où xx est le nombre d'images.
+                // Parmi les 6 derniers caractères, récupérer les
+                // 4 premiers, et vérifier si c'est bien "_00i".
+                $finDuNom = substr($nomFichier,-6,4);
+                if ($finDuNom == "_00i")
+                {
+                    // Lire le nombre d'images : les 2 derniers caractères.
+                    $fin = substr($nomFichier,-2);
+                    $this->nbImg = intval($fin);
+                    $this->indiceImg = 0;
+                }
+            }
+        }
+        return $this->nbImg;
+    }
+
+    public function setNbImg(int $nb): self
+    {
+        $this->nbImg = $nb;
+
+        return $this;
+    }
+
+    public function getIndiceImg(): ?int
+    {
+        return $this->indiceImg;
+    }
+
+    public function setIndiceImg(int $no): self
+    {
+        $this->indiceImg = $no;
 
         return $this;
     }
