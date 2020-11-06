@@ -27,12 +27,21 @@ class JeuxController extends ParentController
       $_SESSION["jeuChoisi"] = $this->getJeuAuHasard($listeJeux);
     }
 
-    // Calculer le code HTML pour afficher la duree du jeu choisi.
-    //$_SESSION["htmlDuree"] = $this->getDuree($_SESSION["jeuChoisi"]);
-
 	return $this->render('/jeux.html.twig',["session" => $_SESSION,"listeJeux" => $listeJeux]);
-	//return $this->render('/test.html.twig',["session" => $_SESSION,"listeJeux" => $listeJeux]);
   }
+
+	/**
+	 * Sélection d'un leu dans la liste confetti.
+	 * @Route("/choisirJeu{idJeu}", name="choisirJeu", requirements={"idJeu" = "\d+"})
+	 */
+	public function choisirJeu($idJeu)
+	{
+      $_SESSION["ongletActif"] = "JEU";
+	  $listeJeux = $this->getJeux();
+	  $_SESSION["jeuChoisi"] = $this->getJeuById($idJeu,$listeJeux);
+  
+	  return $this->render('/jeux.html.twig',["session" => $_SESSION,"listeJeux" => $listeJeux]);
+	}
   
   private function getJeux()
   {
@@ -46,6 +55,7 @@ class JeuxController extends ParentController
 	foreach ($jeux as $jeu)
 	{
 		$jeu->setDuree($this->getDuree($jeu));
+		$jeu->getNbImg();
 	}
 
     return $jeux;
@@ -53,7 +63,12 @@ class JeuxController extends ParentController
   
   private function getJeuChoisi($listeJeux)
   {
-      $idJeu = $_GET["jeuChoisi"];
+	  $idJeu = $_GET["jeuChoisi"];
+	  return getJeuById($idJeu, $listeJeux);
+  }
+  
+  private function getJeuById($idJeu, $listeJeux)
+  {
       $i = count($listeJeux);
       while ($i > 0)
       {

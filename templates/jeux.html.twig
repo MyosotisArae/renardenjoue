@@ -98,7 +98,7 @@
 {% set classeTaille  = random(6)  %}
 {% set classFonte    = random(10) %}
 {% for jeu in listeJeux %}
-                <a href='#blocDetailJeu' class='confetti couleur{{classeCouleur}} taille{{classeTaille}} fonte{{classFonte}}' onclick='selectGame({{jeu.id}})'>{{jeu.nom}}</a>
+                <a href='choisirJeu{{jeu.id}}' class='confetti couleur{{classeCouleur}} taille{{classeTaille}} fonte{{classFonte}}' onclick=''>{{jeu.nom}}</a>
   {% set classeCouleur = classeCouleur + 1 %}
   {% set classeTaille = classeTaille + 1 %}
   {% set classFonte = classFonte + 1 %}
@@ -288,30 +288,14 @@
 
       <div class='col-12'>
         <br><br><br>
+  {% set currentPath = path(app.request.attributes.get('_route'),
+                       app.request.attributes.get('_route_params')) %}
+  {% if currentPath|slice(1,10) == "choisirJeu" %}
+  <script>
+    window.location.href = "#blocDetailJeu";
+    setTimeout(atteindreBarreMenu, 200);
+  </script>
+  {% endif %}
       </div>
-
       
-{% endblock %}
-
-{% block piedDePage %}
-    <div id='RangementDesJeux' class='jeSuisInvisible'>
-{% for jeu in listeJeux %}
-      <div id='jeuNo{{jeu.id}}_nom'>{{jeu.nom}}</div>
-      <div id='jeuNo{{jeu.id}}_nmc'>{{jeu.fullnom}}</div>
-      <div id='jeuNo{{jeu.id}}_but'>{{jeu.but}}</div>
-      <div id='jeuNo{{jeu.id}}_ppe'>{{jeu.ppe}}</div>
-      <div id='jeuNo{{jeu.id}}_niv'>{{jeu.dominance}}</div>
-      <div id='jeuNo{{jeu.id}}_min'>{{jeu.dureemin}}</div>
-      <div id='jeuNo{{jeu.id}}_max'>{{jeu.dureemax}}</div>
-      <div id='jeuNo{{jeu.id}}_dur'>{{jeu.duree}}</div>
-      <div id='jeuNo{{jeu.id}}_nbj'>{{jeu.nbJoueurs}}</div>
-      <div id='jeuNo{{jeu.id}}_imj'>{{jeu.imgNbJoueurs}}</div>
-      <div id='jeuNo{{jeu.id}}_img'>{{jeu.img}}</div>
-      <div id='jeuNo{{jeu.id}}_mca'>
-                {% for meca in jeu.mecanismes %}
-                <li>{{meca}}</li>
-                {% endfor %}
-      </div>
-{% endfor %}
-    </div>
 {% endblock %}
