@@ -75,7 +75,7 @@
       <div class="col-md-12 col-6">
         <u>Ajouts récents :</u><br>
         {% for jeu in lastGames %}
-        <li><a href="jeux?jeuChoisi={{jeu.id}}">{{jeu.nomComplet}}</a></li>
+        <li><a href="jeux?choisirJeu{{jeu.id}}">{{jeu.nomComplet}}</a></li>
         {% endfor %}
         <br>
         Venez les tester !<br>
