@@ -511,7 +511,11 @@ class Ludotheque
             16384 => "sens de l'observation",
             32768 => "déduction",
             65536 => "draft",
-            131072 => "optimisation de paquet"
+            131072 => "optimisation de paquet",
+            262144 => "stratégie",
+            524288 => "mémoire",
+            1048576 => "vivacité",
+            2097152 => "habileté, adresse"
         );
     }
 
@@ -530,7 +534,7 @@ class Ludotheque
                 $val -= $puis2;
             }
             $puis2 *= 2;
-            if ($puis2 > 131072) return $liste; // Sécurité
+            if ($val < $puis2) return $liste; // Sécurité
         }
         
         return $liste;
