@@ -266,12 +266,12 @@ class Ludotheque
 
     public function getPpe(): ?string
     {
-        return $this->ppe;
+        return trim($this->ppe);
     }
 
     public function setPpe(string $ppe): self
     {
-        $this->ppe = $ppe;
+        $this->ppe = trim($ppe);
 
         return $this;
     }

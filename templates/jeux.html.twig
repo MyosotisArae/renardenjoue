@@ -98,7 +98,7 @@
 {% set classeTaille  = random(6)  %}
 {% set classFonte    = random(10) %}
 {% for jeu in listeJeux %}
-                <a href='choisirJeu{{jeu.id}}' class='confetti couleur{{classeCouleur}} taille{{classeTaille}} fonte{{classFonte}}' onclick=''>{{jeu.nom}}</a>
+                <a href='choisirJeu{{jeu.id}}' class='confetti couleur{{classeCouleur}} taille{{classeTaille}} fonte{{classFonte}}'>{{jeu.nom}}</a>
   {% set classeCouleur = classeCouleur + 1 %}
   {% set classeTaille = classeTaille + 1 %}
   {% set classFonte = classFonte + 1 %}
