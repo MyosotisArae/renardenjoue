@@ -74,7 +74,8 @@ class EvenementsRepository extends ServiceEntityRepository
           ->andWhere('e.dateDebut >= CURRENT_DATE()')
           ->orderBy('e.dateDebut');
         ;
-        // Ne retourner que 3 résultats
+        // Ne retourner que 4 résultats
+        $limit = 4;
         $qb->setMaxResults($limit);
         
         $resultats = $qb
