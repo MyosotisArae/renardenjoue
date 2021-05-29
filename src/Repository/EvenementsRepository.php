@@ -104,8 +104,7 @@ class EvenementsRepository extends ServiceEntityRepository
       {  
         // Recuperer tout evenement qui se finit ou debute dans l'intervalle [$dateDebut,$dateFin[
         $qb = $this->createQueryBuilder('e')
-          ->where('e.titre = :tit')
-          ->setParameter('tit', "Les renards jouent")
+          ->where('e.capacite > 0')
           ->orderBy('e.dateDebut', 'DESC');
   
         return $qb

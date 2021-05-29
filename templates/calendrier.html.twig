@@ -71,7 +71,7 @@
                        id : {{evt.id}},
                        allDay : false,
                        textColor : '#FFFFFF',
-                       {% if evt.titre=="Les renards jouent" %}backgroundColor: '#ff0000',{% endif %}
+                       {% if evt.capacite > 0 %}backgroundColor: '#ff0000',{% endif %}
                        title : "{{evt.titre|raw}}",
                        start : "{{evt.dateDebut|date('Y-m-d')}} {{evt.heureDebut|date('H:i')}}"
                        {% if evt.aUneDateDeFin %},end : "{{evt.dateFin|date('Y-m-d')}}"

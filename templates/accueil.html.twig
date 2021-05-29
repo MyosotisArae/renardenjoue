@@ -61,8 +61,8 @@
           {% for evt in nextEvts %}
           <li>Le {{evt.date}} :</li>
           {% set titre = evt.titre %}
-          {% if titre == "Les renards jouent" %}
-            {% set titre = "Soirée-jeux de l'asso" %}
+          {% if evt.capacite > 0 %}
+            {% set titre = "Aprèm-jeux de l'asso" %}
           {% endif %}
           <div style='margin-left : 2.5em;'><a href='afficherEvt{{evt.id}}'>{{titre}}</a></div>
           {% endfor %}

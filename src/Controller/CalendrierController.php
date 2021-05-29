@@ -125,7 +125,7 @@ class CalendrierController extends ParentController
     $cas = 0;
     $surcharge = '';
     /* Cas à gérer :
-      0. C'est un évènement sans inscription (Le titre n'est pas Les renards jouent).
+      0. C'est un évènement sans inscription (capacité nulle).
          => Ne pas exécuter ce qui suit.
       1. L'évènement est passé (date de début inférieure à aujourd'hui moins 2 jours)
          => Afficher l'évènement sans bouton d'inscription.
@@ -196,7 +196,7 @@ class CalendrierController extends ParentController
       $surcharge = "Il reste ".$chiffreEnLettres[$nbPlacesDispo]." places.";
     }
 
-    if ($evt->getTitre() == 'Les renards jouent')
+    if ($evt->getCapacite() > 0)
     {
 
       if ($now <= $limiteInscription)
