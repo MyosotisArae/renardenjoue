@@ -31,6 +31,6 @@ class AccueilController extends ParentController
 
     return $this->render('/accueil.html.twig',["session" => $_SESSION, "nextEvts" => $nextEvts, "lastGames" => $lastGames]);
   }
-}s
+}
 
 ?>
