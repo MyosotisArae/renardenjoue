@@ -1,0 +1,40 @@
+<?php
+
+include 'vendor/autoload.php';
+
+use Discord\Discord;
+use Discord\Voice\VoiceClient;
+use Discord\Parts\Channel\Channel;
+use Discord\Parts\User\Game;
+use Discord\Parts\Embed;
+use Discord\Factory\Factory;
+
+$token='ODg4NzA1MTg5Nzk4ODkxNTMw.YUWlNA.wDX-u0wi2CygtGLjTFdMccRt5WE';
+
+$bot_id='888'; //$_ENV['BOT_ID'];
+echo "Demarrage de {$bot_id}";
+ 
+
+$discord = new Discord([
+'token' => $token,
+]);
+
+ 
+
+
+$discord->on('ready', function ($discord) {
+    global $bot_id;
+    echo "Bot {$bot_id} is ready!", PHP_EOL;
+
+    // Listen for messages.
+    $discord->on('message', function ($message, $discord) {
+	    global $bot_id;
+	    echo "{$message->author->username} a dit : {$message->content}",PHP_EOL;
+	    var_dump($message);
+	    if ($message->author->id !== $bot_id) {
+		    $message->channel->sendMessage('Bien le bonjour !');
+	    }
+    });
+});
+
+$discord->run();

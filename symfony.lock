@@ -501,6 +501,9 @@
     "twig/twig": {
         "version": "v2.11.3"
     },
+    "wrep/daemonizable-command": {
+        "version": "3.1.0"
+    },
     "zendframework/zend-code": {
         "version": "3.3.1"
     },
