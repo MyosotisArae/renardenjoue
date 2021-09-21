@@ -25,8 +25,8 @@ class TestCde extends Command
     {
 	// ...
 	    $this->setDescription("Notre test")
-	         ->setHelp("de l'aide ?")
-                 ->addArgument("unArg", InputArgument::REQUIRED,"requis");
+              ->setHelp("de l'aide ?")
+              ->addArgument("unArg", InputArgument::REQUIRED,"requis");
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

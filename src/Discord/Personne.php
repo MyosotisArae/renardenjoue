@@ -1,14 +1,15 @@
 <?php
-namespace App\Service;
+namespace App\Discord;
 
 use \DateTime;
 use \DateInterval;
 
 class Personne
 {
-    public const VU_RECEMMENT = 1;
-    public const VU_AVANT = 2;
-    public const JAMAIS_VU = 3;
+    // Ces indicateurs se rapportent à la date du dernier message de la personne.
+    private const VU_RECEMMENT = 1; // message posté aujourd'hui
+    private const VU_AVANT = 2;     // message posté il y a plus longtemps
+    private const JAMAIS_VU = 3;    // aucun message posté
 
     private $id, $nom, $dateMsg, $vu;
 
@@ -52,9 +53,9 @@ class Personne
     public function posteMsg()
     {
         $now = new DateTime();
-        $delai = new DateInterval("PT10H"); // intervalle de 10h
+        $delai = new DateInterval("P1D"); // intervalle de 10h
         // Date il y a 10h :
-        $dateAvantDelai = $now->sub($delai);
+        $dateAvantDelai = (new DateTime())->sub($delai);
         // Si le dernier message était avant ça, alors oui, ça fait longtemps.
         if ($this->dateMsg < $dateAvantDelai) $this->vu = Personne::VU_AVANT;
         else $this->vu = Personne::VU_RECEMMENT;

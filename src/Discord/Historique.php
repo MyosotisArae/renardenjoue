@@ -1,7 +1,7 @@
 <?php
-namespace App\Service;
+namespace App\Discord;
 
-use App\Service\Personne;
+use App\Discord\Personne;
 
 class Historique
 {
