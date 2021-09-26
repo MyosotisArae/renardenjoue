@@ -16,6 +16,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use App\Discord\MessagesBot;
+use App\Discord\Evt;
 
 class ServiceDiscord extends Command
 {
@@ -25,17 +26,18 @@ class ServiceDiscord extends Command
     private $discord;
     private $messages;
     private $container;
+    private $manager;
 
     public function __construct(string $token, string $botId,ContainerInterface $container) {
 	    $this->discord = new Discord([
 		    'token' => $token,
 	    ]);
         $this->botId = $botId;
-        // Pour gérer les messages qu'envoie le bot :
-        $this->messages = new MessagesBot($botId, $this->discord);
         // Pour accéder à la base de données :
         parent::__construct();
-        $this->container = $container;
+        $this->manager = $container->get('doctrine')->getManager();
+        // Pour gérer les messages qu'envoie le bot :
+        $this->messages = new MessagesBot($botId, $this->discord, $this->manager);
     }
 
     public function discordOn() {
@@ -43,7 +45,7 @@ class ServiceDiscord extends Command
 		    echo "Bot {$this->botId} is ready!", PHP_EOL;
             // Messages à écoute
             $discord->on(EVENT::MESSAGE_CREATE, function($message,$discord){
-                return $this->messages->salut($message,$discord);
+                return $this->messages->salut($message);
             });
 		});
 		$this->discord->run();
@@ -51,11 +53,7 @@ class ServiceDiscord extends Command
 
     // Parce que c'est une commande, il faut implémenter execute :
     public function execute(InputInterface $input, OutputInterface $output): int {
-        $em = $this->container->get('doctrine')->getManager();
-        $nextEvts = $em->getRepository('App:Evenements')
-                       ->getNextEvts();
-        echo "Prochains evts :", PHP_EOL;
-        var_dump($nextEvts);
+        Evt::afficherProchainsEvts($this->manager);
         return Command::SUCCESS;
 
         // Some error happened during the execution

@@ -30,3 +30,9 @@ services:
            $token: '%env(TOKEN)%'
            $botId: '%env(BOT_ID)%'
 
+    #
+    App\Service\CreerCommande:
+       arguments:
+           $token: '%env(TOKEN)%'
+           $botId: '%env(BOT_ID)%'
+

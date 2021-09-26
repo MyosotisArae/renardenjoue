@@ -1,4 +1,13 @@
 {
+    "discord-php/http": {
+        "version": "v9.0.4"
+    },
+    "discord-php/slash": {
+        "version": "v1.0.5"
+    },
+    "discord/interactions": {
+        "version": "2.0.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -88,6 +97,12 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
+    "guzzlehttp/guzzle": {
+        "version": "7.3.0"
+    },
+    "guzzlehttp/promises": {
+        "version": "1.4.1"
+    },
     "guzzlehttp/psr7": {
         "version": "1.8.2"
     },
@@ -132,6 +147,9 @@
     },
     "psr/event-dispatcher": {
         "version": "1.0.0"
+    },
+    "psr/http-client": {
+        "version": "1.0.1"
     },
     "psr/http-message": {
         "version": "1.0.1"
@@ -195,6 +213,15 @@
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "simplito/bigint-wrapper-php": {
+        "version": "1.0.0"
+    },
+    "simplito/bn-php": {
+        "version": "1.1.2"
+    },
+    "simplito/elliptic-php": {
+        "version": "1.0.8"
     },
     "suncat/mobile-detect-bundle": {
         "version": "1.0",

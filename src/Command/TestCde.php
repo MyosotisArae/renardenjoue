@@ -23,7 +23,6 @@ class TestCde extends Command
 
     protected function configure(): void
     {
-	// ...
 	    $this->setDescription("Notre test")
               ->setHelp("de l'aide ?")
               ->addArgument("unArg", InputArgument::REQUIRED,"requis");
@@ -31,7 +30,7 @@ class TestCde extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-	$output->writeln(["fct execute","bla"]);
+	    $output->writeln(["fct execute","bla"]);
         $this->discord->discordOn();
         // ... put here the code to create the user
 
