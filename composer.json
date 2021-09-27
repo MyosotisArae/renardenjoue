@@ -24,7 +24,7 @@
         "symfony/twig-bundle": "5.3.*",
         "symfony/validator": "5.3.*",
         "symfony/yaml": "5.3.*",
-        "team-reflex/discord-php": "^5.1",
+        "team-reflex/discord-php": "^6.0",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
         "wrep/daemonizable-command": "^3.1"

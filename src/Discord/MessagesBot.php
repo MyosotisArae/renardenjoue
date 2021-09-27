@@ -3,6 +3,8 @@ namespace App\Discord;
 
 use App\Discord\Historique;
 use App\Discord\Personne;
+use Symfony\Component\Form\Button;
+use Symfony\Component\Form\FormInterface;
 
 class MessagesBot
 {
@@ -41,6 +43,14 @@ class MessagesBot
     	echo "{$aQui} (id={$id}) a dit : {$txt} sur le canal {$message->channel}",PHP_EOL;
     	// Ne pas répondre si c'est le bot qui a parlé.
         if ($id != $this->botId) {
+            echo "Component : ";
+            var_dump($message->component);
+            echo "Fin Component : ";
+            $button = new Button();
+            $button->setLabel('push me!');
+            $message->addComponent($button);
+            $message->reply("Salut !");
+            /*
             // S'agit-il d'une commande ?
             if ($this->isCommande($message))
             {
@@ -51,6 +61,7 @@ class MessagesBot
             $p = $this->fichePresence->kelkinParle($message);
             if ($p->jamaisVue()) $message->channel->sendMessage("Bienvenue, {$aQui} !");
             else if ($p->vueAvant()) $message->channel->sendMessage("Bien le bonjour, {$aQui} !");
+             */
         }
         return 1;
     }
@@ -87,15 +98,15 @@ class MessagesBot
     }
 
     private function cd_lireEvts($message) {
-        $json="{
-            'Titre': 'Jeux chez Michel',
-    		'Texte': 'Je vous propose une après-midi sur des petits jeux, comme Zak&Pak, The city et autres.',
-		    'Date' : '2021-11-27',
-	    	'hd'   : '13:30',
-    		'nb'   : '6'
-        }";
+        $data=[
+            'Titre' => 'Jeux chez Michel',
+    		'Texte' => 'Je vous propose une après-midi sur des petits jeux, comme Zak&Pak, The city et autres.',
+		    'Date'  => '2021-11-27',
+	    	'hd'    => '13:30',
+    		'nb'    => '6'
+        ];
         $message->channel->sendMessage("Voici la liste des prochains événements :");
-        var_dump(json_decode($json));
+        var_dump($data);
         return 1;
     }
 

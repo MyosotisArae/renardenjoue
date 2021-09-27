@@ -15,6 +15,10 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+use Discord\Slash\Parts\Interaction;
+use Discord\Slash\Parts\Choices;
+
+use Discord\Slash\Client;
 use App\Discord\MessagesBot;
 use App\Discord\Evt;
 
@@ -26,15 +30,20 @@ class ServiceDiscord extends Command
     private $discord;
     private $messages;
     private $container;
+    private $client;
     private $manager;
 
     public function __construct(string $token, string $botId,ContainerInterface $container) {
+        parent::__construct();
+        $this->botId = $botId;
 	    $this->discord = new Discord([
 		    'token' => $token,
-	    ]);
-        $this->botId = $botId;
+        ]);
+        $this->client = new Client([
+            'loop' => $this->discord->getLoop(), // Discord and Client MUST share event loops
+        ]);
+        $this->client->linkDiscord($this->discord);
         // Pour accéder à la base de données :
-        parent::__construct();
         $this->manager = $container->get('doctrine')->getManager();
         // Pour gérer les messages qu'envoie le bot :
         $this->messages = new MessagesBot($botId, $this->discord, $this->manager);
@@ -43,12 +52,36 @@ class ServiceDiscord extends Command
     public function discordOn() {
 		$this->discord->on('ready', function ($discord) {
 		    echo "Bot {$this->botId} is ready!", PHP_EOL;
-            // Messages à écoute
+            // Messages à écouter
             $discord->on(EVENT::MESSAGE_CREATE, function($message,$discord){
                 return $this->messages->salut($message);
             });
+          /*  $discord->on('interactionCreate', function($message,$discord){
+                if ($message->isCommand()) {
+                    echo "Une commande ? Je passe.";
+                    return;
+                }
+                echo "Ce n'est pas une commande";
+          });*/
 		});
-		$this->discord->run();
+    }
+
+    public function slashOn() {
+        //$discord = $this->discord;
+        //$this->client->registerCommand('creer', function (Interaction $interaction, Choices $choices) use ($discord) {
+        $this->client->registerCommand('creer', function (Interaction $interaction, Choices $choices) {
+            echo 'Ma commande marche. ';
+            echo 'Interaction : ';
+            var_dump($interaction);
+            echo 'Choix : ';
+            var_dump($choices);
+
+            $interaction->acknowledge();
+        });
+    }
+
+    public function runLoop() {
+        $this->discord->run();
     }
 
     // Parce que c'est une commande, il faut implémenter execute :

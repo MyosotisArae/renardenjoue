@@ -7,31 +7,32 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use App\Service\ServiceDiscord;
 
-class TestCde extends Command
+class StartBot extends Command
 {
     // the name of the command (the part after "bin/console")
-    protected static $defaultName = 'app:test';
+    protected static $defaultName = 'bot:run';
 
     private $discord;
 
     public function __construct(ServiceDiscord $discord)
     {
-	$this->discord = $discord;
-	
+        $this->discord = $discord;	
         parent::__construct();
     }
 
     protected function configure(): void
     {
 	    $this->setDescription("Notre test")
-              ->setHelp("de l'aide ?")
-              ->addArgument("unArg", InputArgument::REQUIRED,"requis");
+             ->setHelp("de l'aide ?");
+            //  ->addArgument("unArg", InputArgument::REQUIRED,"requis");
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
 	    $output->writeln(["fct execute","bla"]);
+        $this->discord->slashOn();
         $this->discord->discordOn();
+        $this->discord->runLoop();
         // ... put here the code to create the user
 
         // this method must return an integer number with the "exit status code"
