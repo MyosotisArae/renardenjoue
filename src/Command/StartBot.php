@@ -16,8 +16,8 @@ class StartBot extends Command
 
     public function __construct(ServiceDiscord $discord)
     {
-        $this->discord = $discord;	
         parent::__construct();
+        $this->discord = $discord;	
     }
 
     protected function configure(): void
@@ -29,7 +29,7 @@ class StartBot extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-	    $output->writeln(["fct execute","bla"]);
+	    //$output->writeln(["fct execute","bla"]);
         $this->discord->slashOn();
         $this->discord->discordOn();
         $this->discord->runLoop();

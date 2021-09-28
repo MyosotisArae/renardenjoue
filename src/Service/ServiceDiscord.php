@@ -67,16 +67,31 @@ class ServiceDiscord extends Command
     }
 
     public function slashOn() {
-        //$discord = $this->discord;
-        //$this->client->registerCommand('creer', function (Interaction $interaction, Choices $choices) use ($discord) {
         $this->client->registerCommand('creer', function (Interaction $interaction, Choices $choices) {
             echo 'Ma commande marche. ';
-            echo 'Interaction : ';
-            var_dump($interaction);
+            //echo 'Interaction : ';
+            //var_dump($interaction);
             echo 'Choix : ';
             var_dump($choices);
 
-            $interaction->acknowledge();
+            //$interaction->acknowledge();
+            $interaction->reply("La date est créée !");
+            // Réponse obligatoire pour éviter le message "Echec de l'interaction"
+            /*
+            return [
+                "type" => 4,
+                "data" => [
+                    "tts" => False,
+                    "content" => "La date a été créée.",
+                    "embeds" => [],
+                    "allowed_mentions" => [ parse => [] ]
+                ]
+            ];
+             */
+        });
+        $this->client->registerCommand('lire', function (Interaction $interaction, Choices $choices) {
+            Evt::afficherProchainsEvts($this->manager);
+            return Command::SUCCESS;
         });
     }
 
@@ -86,7 +101,6 @@ class ServiceDiscord extends Command
 
     // Parce que c'est une commande, il faut implémenter execute :
     public function execute(InputInterface $input, OutputInterface $output): int {
-        Evt::afficherProchainsEvts($this->manager);
         return Command::SUCCESS;
 
         // Some error happened during the execution

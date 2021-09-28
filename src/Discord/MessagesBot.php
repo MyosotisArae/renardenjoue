@@ -46,9 +46,9 @@ class MessagesBot
             echo "Component : ";
             var_dump($message->component);
             echo "Fin Component : ";
-            $button = new Button();
-            $button->setLabel('push me!');
-            $message->addComponent($button);
+            //$button = new Button();
+            //$button->setLabel('push me!');
+            //$message->addComponent($button);
             $message->reply("Salut !");
             /*
             // S'agit-il d'une commande ?

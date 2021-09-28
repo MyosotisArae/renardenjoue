@@ -24,14 +24,21 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    # Service du discord
+    # Service du discord bot:run
     App\Service\ServiceDiscord:
        arguments:
            $token: '%env(TOKEN)%'
            $botId: '%env(BOT_ID)%'
 
-    #
-    App\Service\CreerCommande:
+    # Creation d'une date app:creer
+    App\Command\CommandeCreer:
+       arguments:
+           $token: '%env(TOKEN)%'
+           $botId: '%env(BOT_ID)%'
+
+
+    # Affichage des prochains evts app:lire
+    App\Command\CommandeRead:
        arguments:
            $token: '%env(TOKEN)%'
            $botId: '%env(BOT_ID)%'
