@@ -1,6 +1,8 @@
 <?php
 namespace App\Service;
 
+use \DateTime;
+
 class Utilitaires
 {
     /**
@@ -45,6 +47,36 @@ class Utilitaires
     	$resultat = str_replace("'","&#39;",$resultat);
     	$resultat = str_replace('"',"&quot;",$resultat);
     	return $resultat;
+    }
+
+    public static function traduireDate($chaine)
+    {
+        $laDate= new DateTime($chaine);
+        $resultat = $laDate->format("l d F Y");
+        // Traduction du jour
+        $resultat = str_ireplace("Monday","Lundi",$resultat);
+        $resultat = str_ireplace("Tuesday","Mardi",$resultat);
+        $resultat = str_ireplace("Wednesday","Mercredi",$resultat);
+        $resultat = str_ireplace("Thursday","Jeudi",$resultat);
+        $resultat = str_ireplace("Friday","Vendredi",$resultat);
+        $resultat = str_ireplace("Saturday","Samedi",$resultat);
+        $resultat = str_ireplace("Sunday","Dimanche",$resultat);
+
+        // Traduction du mois
+        $resultat = str_ireplace("January","Janvier",$resultat);
+        $resultat = str_ireplace("February","Février",$resultat);
+        $resultat = str_ireplace("March","Mars",$resultat);
+        $resultat = str_ireplace("April","Avril",$resultat);
+        $resultat = str_ireplace("May","Mai",$resultat);
+        $resultat = str_ireplace("June","Juin",$resultat);
+        $resultat = str_ireplace("July","Juillet",$resultat);
+        $resultat = str_ireplace("August","Août",$resultat);
+        $resultat = str_ireplace("ber","bre",$resultat);
+
+        // Si on est le premier du mois, changer 1 en 1er
+        $resultat = str_ireplace(" 1 "," 1er",$resultat);
+
+        return $resultat;
     }
 }
 ?>
