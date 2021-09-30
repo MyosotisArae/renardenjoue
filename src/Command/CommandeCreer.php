@@ -50,17 +50,35 @@ class CommandeCreer extends Command
             [
               [
                   "name" => "date",
-                  "description" => "date au format yyyy-mm-dd. Ex : 2021-10-23",
+                  "description" => "(REQUIS) date au format yyyy-mm-dd. Ex : 2021-10-23",
                   "type" => 3,
                   "required" => True
               ],
               [
                   "name" => "titre",
-                  "description" => "Tapez votre titre ici, sans guillemets.",
+                  "description" => "(REQUIS) Tapez votre titre ici, sans guillemets.",
                   "type" => 3,
                   "required" => True
+              ],
+              [
+                  "name" => "heure",
+                  "description" => "(FACULTATIF) Ex : 14:00 pour accueillir vos invités à 14 h.",
+                  "type" => 3,
+                  "required" => False
+              ],
+              [
+                  "name" => "nombre",
+                  "description" => "(FACULTATIF) Nombre maximum de personnes que vous recevrez. Tapez un chiffre.",
+                  "type" => 3,
+                  "required" => False
+              ],
+              [
+                  "name" => "description",
+                  "description" => "(FACULTATIF) Texte (court et sans retour à la ligne) pour décrire votre séance.",
+                  "type" => 3,
+                  "required" => False
               ]
-            ] 
+            ]
         );
         return Command::SUCCESS;
     }
