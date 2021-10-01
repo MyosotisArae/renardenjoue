@@ -73,6 +73,22 @@ class Evenements
     private $capacite;
 
     /**
+     * @var \string|null
+     *
+     * @ORM\Column(name="channel_id", type="string", nullable=true)
+     *
+     */
+    private $channelId;
+
+    /**
+     * @var \string|null
+     *
+     * @ORM\Column(name="user_id", type="string", nullable=true)
+     *
+     */
+    private $userId;
+
+    /**
      * @var \DateTime|null
      *
      */
@@ -125,6 +141,31 @@ class Evenements
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUserId(): ?string
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(string $u): self
+    {
+        $this->userId= $u;
+
+        return $this;
+    }
+
+
+    public function getCanal(): ?string
+    {
+        return $this->channelId;
+    }
+
+    public function setCanal(string $c): self
+    {
+        $this->channelId = $c;
+
+        return $this;
     }
 
     public function getCapacite(): ?int

@@ -50,31 +50,37 @@ class CommandeCreer extends Command
             [
               [
                   "name" => "date",
-                  "description" => "(REQUIS) date au format yyyy-mm-dd. Ex : 2021-10-23",
+                  "description" => "(REQUIS) date de votre séance (année-mois-jour). Ex : 2021-10-23",
                   "type" => 3,
                   "required" => True
               ],
               [
                   "name" => "titre",
-                  "description" => "(REQUIS) Tapez votre titre ici, sans guillemets.",
+                  "description" => "(REQUIS) Tapez votre titre ici, sans guillemets ni saut de ligne.",
                   "type" => 3,
                   "required" => True
               ],
               [
                   "name" => "heure",
-                  "description" => "(FACULTATIF) Ex : 14:00 pour accueillir vos invités à 14 h.",
+                  "description" => "(FACULTATIF) Tapez l'heure de début (heure:minute). 14h par défaut. Ex : 15:30 pour 15h30.",
                   "type" => 3,
                   "required" => False
               ],
               [
                   "name" => "nombre",
-                  "description" => "(FACULTATIF) Nombre maximum de personnes que vous recevrez. Tapez un chiffre.",
+                  "description" => "(FACULTATIF) Nombre maximum de personnes que vous recevrez (4 par défaut).",
                   "type" => 3,
                   "required" => False
               ],
               [
                   "name" => "description",
                   "description" => "(FACULTATIF) Texte (court et sans retour à la ligne) pour décrire votre séance.",
+                  "type" => 3,
+                  "required" => False
+              ],
+              [
+                  "name" => "fin",
+                  "description" => "(FACULTATIF) Heure de fin de partie (par défaut, 3h après l'heure de début). Ex : 18:00 pour 18h",
                   "type" => 3,
                   "required" => False
               ]

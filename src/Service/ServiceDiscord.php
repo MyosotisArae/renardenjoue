@@ -37,7 +37,7 @@ class ServiceDiscord extends Command
     private $container;
     private $client;
     private $manager;
-    private $derniereCommande;
+    private $cmdEnCours;
     private $auteurDerniereCommande;
     private $channelParties;
     private $channelAnnonces;
@@ -57,8 +57,8 @@ class ServiceDiscord extends Command
         $this->manager = $container->get('doctrine')->getManager();
         // Pour gérer les messages qu'envoie le bot :
         $this->messages = new MessagesBot($botId, $this->discord, $this->manager);
-        // Dernière commande tapée, son auteur et l'événement associé :
-        $this->derniereCommande = null;
+        // Indicateur commade en cours, son auteur et l'événement associé :
+        $this->cmdEnCours = false;
         $this->auteurDerniereCommande = null;
         $this->evt = null;
     }
@@ -70,30 +70,44 @@ class ServiceDiscord extends Command
             $discord->on(EVENT::MESSAGE_CREATE, function($message,$discord){
                 return $this->messages->salut($message);
             });
+            $discord->on(EVENT::INTERACTION_CREATE, function($interaction){
+                echo "L'auteur de cette action est : ".$interaction->member->user->username.'\n';
+                if ($this->cmdEnCours) { 
+
+                    $this->evt->setUserId(strval($interaction->member->user->id));
+                    //$this->manager->persist($this->evt);
+                    //$this->manager->flush();
+
+                    $this->auteurDerniereCommande = $interaction->member->user->username;
+                    $this->cmdEnCours = false;
+                }
+            });
             $discord->on(EVENT::CHANNEL_CREATE, function($channel){
                 echo 'Création du channel '.$channel->id.'\n';
                 if ($channel->parent_id == $this->channelParties->id)
                 {
-                    if ($this->auteurDerniereCommande != null) {
+                    if (isset($this->auteurDerniereCommande) && isset($this->evt)) {
                         // Si le canal a été créé dans Parties,
                         // - ajouter, dans annonces, un message contenant un lien vers ce canal
                         // - ajouter un message dans ce nouveau canal.
-                        $entete = $auteurDerniereCommande." a ajouté un événement :";
+                        $entete = $this->auteurDerniereCommande." a ajouté un événement :";
                         $texte = $this->formaterEvt();
-                        $url = '\nVous pouvez le retrouver ici : https://discord.com/channels/'.$channel->guild_id.'/'.$channel->id;
+                        $url = ' \n Vous pouvez le retrouver ici : https://discord.com/channels/'.$channel->guild_id.'/'.$channel->id;
                         $this->channelAnnonces->sendMessage($entete.$texte.$url);
+
+                        echo "\n ------------------------ Enregistrement du canal ";
+                        echo $channel->id;
+                        $this->evt->setCanal(strval($channel->id));
+                        echo "  -  evt : ";
+                        var_dump($this->evt);
+                        $this->manager->persist($this->evt);
+                        $this->manager->flush();
 
                         $entete = $this->auteurDerniereCommande." vous invite :";
                         $channel->sendMessage($entete.$texte);
                         $this->auteurDerniereCommande = null;
+                        $this->evt = null;
                     }
-                }
-            });
-            $discord->on(EVENT::INTERACTION_CREATE, function($message,$discord){
-                echo "L'auteur de cette action est : ".$message->member->user->username.'\n';
-                if ($this->derniereCommande != null) { 
-                    $this->auteurDerniereCommande = $message->member->user->username;
-                    $this->derniereCommande = null;
                 }
             });
 		});
@@ -178,7 +192,10 @@ class ServiceDiscord extends Command
 
         // Heure de fin par défaut : 3h après.
         $troisHeures = new DateInterval('PT3H');
-        $this->evt->setHeureFin($this->evt->getHeureDebut()->add($troisHeures));
+        $hF = new DateTime($this->evt->getHeureDebut()->format('H:i'));
+        $hF->add($troisHeures);
+        $this->evt->setHeureFin($hF);
+        // Contrôle de l'heure de fin saisie
         $heureF= $choices->fin;
         if (isset($heureF)) {
             $dateTestText = "2021-09-30 ".$heureF.":00";
@@ -204,8 +221,8 @@ class ServiceDiscord extends Command
         }
 
         // Enregistrement de l'événement en base de données
-        $this->manager->persist($this->evt);
-        $this->manager->flush();
+        //$this->manager->persist($this->evt);
+        //$this->manager->flush();
 
         // Création d'un canal dans la catégorie Parties
         $newChannel = $interaction->guild->channels->create([
@@ -218,15 +235,13 @@ class ServiceDiscord extends Command
         ]);
         $interaction->guild->channels->save($newChannel)->done(function (Channel $channel) { });
 
-        $this->derniereCommande = $dateAfficheeText;
+        $this->cmdEnCours = true;
         // Valeurs par défaut éventuelles à signaler.
         if (strlen($parDefaut) > 0) {
             $remarques = "\n Comme ce n'était pas précisé, j'ai ajouté : ".$parDefaut.".";
         }
         
-        // Sauvegarde en base de données de cet evt.
-
-        $interaction->reply("Un événement a été ajouté pour le ".$dateAfficheeText.".".$remarques);
+        $interaction->reply($interaction->member->member->user->username." a ajouté un événement pour le ".$dateAfficheeText.".".$remarques);
     }
 
     public function slashOn() {
