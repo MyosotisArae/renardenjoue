@@ -113,34 +113,54 @@ class EvenementsRepository extends ServiceEntityRepository
         ;
   
       }
-  
-    // Retourne la prochaine date
-    /**
-      * @return Evenement sous forme de texte
-      */
-    public function getNextDate(): string
-    {
-      $today = new Datetime("now"); // new Datetime(date('Y-M-d'));
-      $septMois = new DateInterval("P7M");
-      $dateFin = $today->add($septMois);
 
-      // Recuperer le 1er evenement qui debute après $today
-      $qb = $this->createQueryBuilder('e')
-        ->andWhere('e.dateDebut >= CURRENT_DATE()')
-        /*
-        ->andWhere('e.dateDebut >= :dd')
-        ->setParameter('dd', $today)
-        ->andWhere('e.dateDebut <= :df')
-        ->setParameter('df', $dateFin)
+      // Retourne la prochaine date
+      /**
+        * @return Evenement sous forme de texte
         */
-      ;
-      // $_SESSION['requeteSQL'] = $qb->getQuery()->getSQL();
-      $resultat = $qb->getQuery()
-                     ->getResult();
-      if (count($resultat) == 0) return "Rien n'est prévu dans les prochains mois.";
+      public function getNextDate(): string
+      {
+        $today = new Datetime("now"); // new Datetime(date('Y-M-d'));
+        $septMois = new DateInterval("P7M");
+        $dateFin = $today->add($septMois);
+
+        // Recuperer le 1er evenement qui debute après $today
+        $qb = $this->createQueryBuilder('e')
+                   ->andWhere('e.dateDebut >= CURRENT_DATE()')
+          /*
+          ->andWhere('e.dateDebut >= :dd')
+          ->setParameter('dd', $today)
+          ->andWhere('e.dateDebut <= :df')
+          ->setParameter('df', $dateFin)
+          */
+        ;
+        // $_SESSION['requeteSQL'] = $qb->getQuery()->getSQL();
+        $resultat = $qb->getQuery()
+                       ->getResult();
+        if (count($resultat) == 0) return "Rien n'est prévu dans les prochains mois.";
       
-      // Formatage de la première date du tableau
-      $prem = $resultat[0];
-      return "le ".date_format( $prem->getDateDebut(), 'd/m/Y')." : ".$prem->getTitre();
-    }
+        // Formatage de la première date du tableau
+        $prem = $resultat[0];
+        return "le ".date_format( $prem->getDateDebut(), 'd/m/Y')." : ".$prem->getTitre();
+      }
+
+      /********************************************************* DISCORD *********************************************************/
+
+      /*
+       * @return L'evt dont le channel_id est $channelId, ou null s'il n'existe pas
+       */
+      public function getByChannel($channelId)
+      {
+        $qb = $this->createQueryBuilder('e')
+                   ->andWhere('e.channelId = :ci')
+                   ->setParameter('ci', strval($channelId));
+
+        $resultats = $qb->getQuery()
+                        ->getResult();
+        if (count($resultats) == 0) return null;
+
+        $evt = $resultats[0];
+        return $evt;
+      }
+
 }

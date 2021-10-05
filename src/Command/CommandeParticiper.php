@@ -18,10 +18,9 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CommandeRead extends Command
+class CommandeParticiper extends Command
 {
-    // Parce que c'est une commande, il lui faut un nom :
-    protected static $defaultName = 'app:lire';
+    protected static $defaultName = 'app:inscription';
     private $botId;
     private $client;
 
@@ -29,28 +28,32 @@ class CommandeRead extends Command
         parent::__construct();
         $this->botId = $botId;
         $this->client = new RegisterClient($token);
-
-
-        echo "READ";
     }
 
-    // Parce que c'est une commande, il faut implémenter execute :
     public function execute(InputInterface $input, OutputInterface $output): int {
         $commands = $this->client->getCommands();
         // Suppression de cette commande
         foreach ($commands as $cmd) {
-            if ($cmd->name == "lire") {
+            if ($cmd->name == "inscription") {
                 $this->client->deleteCommand($cmd);
                 break;
             }
         }
         // Création de la commande
         $command = $this->client->createGlobalCommand(
-            'read',
-            'Affiche les prochains événements',
-            []
+            'inscription',
+            'Pour participer à une séance de jeu.', // Cette commande doit être faite dans le channel de la séance, dans Parties.',
+            [
+              [
+                  "name" => "nb",
+                  "description" => "(FACULTATIF, 1 par défaut) Nombre de participants que vous voulez inscrire.",
+                  "type" => 4,
+                  "required" =>False 
+              ]
+            ]
         );
         return Command::SUCCESS;
     }
 }
 ?>
+

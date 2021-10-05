@@ -103,5 +103,22 @@ class ParticipantRepository extends ServiceEntityRepository
 
       return $part;
     }
-  
+
+    /********************************************************* DISCORD *********************************************************/
+
+    /*
+     * @return Un tableau contenant les participants ayant ce numéro d'utilisateur et cet evt.
+     */
+    public function get($idUser, $idEvt)
+    {
+        $qb = $this->createQueryBuilder('p')
+                   ->andWhere('p.idUser= :iu')
+                   ->setParameter('iu', $idUser)
+                   ->andWhere('p.idEvt = :ie')
+                   ->setParameter('ie', $idEvt);
+
+        $resultats = $qb->getQuery()
+                        ->getResult();
+        return $resultats;
+    }
 }

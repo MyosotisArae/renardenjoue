@@ -30,15 +30,26 @@ services:
            $token: '%env(TOKEN)%'
            $botId: '%env(BOT_ID)%'
 
-    # Creation d'une date app:creer
+    # Création d'une date app:creer
     App\Command\CommandeCreer:
        arguments:
            $token: '%env(TOKEN)%'
            $botId: '%env(BOT_ID)%'
 
+    # Inscription a une séance app:inscription
+    App\Command\CommandeParticiper:
+       arguments:
+           $token: '%env(TOKEN)%'
+           $botId: '%env(BOT_ID)%'
 
-    # Affichage des prochains evts app:lire
-    App\Command\CommandeRead:
+    # Désinscription d'une séance app:desinscription
+    App\Command\CommandeDesinscription:
+       arguments:
+           $token: '%env(TOKEN)%'
+           $botId: '%env(BOT_ID)%'
+
+    # Affichage des prochains evts app:maj
+    App\Command\CommandeMaj:
        arguments:
            $token: '%env(TOKEN)%'
            $botId: '%env(BOT_ID)%'

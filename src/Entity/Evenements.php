@@ -75,7 +75,7 @@ class Evenements
     /**
      * @var \string|null
      *
-     * @ORM\Column(name="channel_id", type="string", nullable=true)
+     * @ORM\Column(name="channel_id", type="string", length=20, nullable=true)
      *
      */
     private $channelId;
@@ -83,7 +83,7 @@ class Evenements
     /**
      * @var \string|null
      *
-     * @ORM\Column(name="user_id", type="string", nullable=true)
+     * @ORM\Column(name="user_id", type="string", length=20, nullable=true)
      *
      */
     private $userId;
@@ -156,12 +156,12 @@ class Evenements
     }
 
 
-    public function getCanal(): ?string
+    public function getChannelId(): ?string
     {
         return $this->channelId;
     }
 
-    public function setCanal(string $c): self
+    public function setChannelId(string $c): self
     {
         $this->channelId = $c;
 

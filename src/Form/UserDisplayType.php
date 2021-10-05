@@ -20,6 +20,7 @@ class UserDisplayType extends AbstractType
             ->add('nom',           TextType::class,     ['label' => "Nom d'utilisateur", 'attr' => array('readonly' => true)])
             ->add('plainPassword', PasswordType::class, ['label' => 'Mot de passe'])
             ->add('email',         EmailType::class,    ['label' => 'Adresse mail', 'required' => false])
+            ->add('idDiscord',     TextType::class,     ['label' => "Identifiant Discord"])
             ->add('nbJoueurs',     IntegerType::class,  ['label' => 'Nombre de joueurs pour votre prochaine inscription', 'required' => true, 'attr' => ['min' => 1, 'max' => 6]])
             ->add('submit',        SubmitType::class,   ['label' => 'Enregistrer les modifications'])
         ;

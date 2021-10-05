@@ -70,6 +70,14 @@ class User implements UserInterface
      */
     private $dateDentree;
 
+    /**
+     * @var \string|null
+     *
+     * @ORM\Column(name="user_id", type="string", length=20, nullable=true)
+     *
+     */
+    private $userId;
+
     /******************************************/
     /************* Getteurs *******************/
     /******************************************/
@@ -152,6 +160,11 @@ class User implements UserInterface
         // not needed when using the "bcrypt" algorithm in security.yaml
     }
 
+    public function getUserId(): ?string
+    {
+        return $this->userId;
+    }
+
     /******************************************/
     /************* Setteurs *******************/
     /******************************************/
@@ -193,6 +206,13 @@ class User implements UserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function setUserId(string $u): self
+    {
+        $this->userId= $u;
 
         return $this;
     }

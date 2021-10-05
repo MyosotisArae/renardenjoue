@@ -18,10 +18,9 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CommandeCreer extends Command
+class CommandeMaj extends Command
 {
-    // Parce que c'est une commande, il lui faut un nom :
-    protected static $defaultName = 'app:creer';
+    protected static $defaultName = 'app:maj';
     private $botId;
     private $client;
 
@@ -29,58 +28,49 @@ class CommandeCreer extends Command
         parent::__construct();
         $this->botId = $botId;
         $this->client = new RegisterClient($token);
-
-        echo "CREER";
     }
 
-    // Parce que c'est une commande, il faut implémenter execute :
     public function execute(InputInterface $input, OutputInterface $output): int {
         $commands = $this->client->getCommands();
         // Suppression de cette commande
         foreach ($commands as $cmd) {
-            if ($cmd->name == "creer") {
+            if ($cmd->name == "maj") {
                 $this->client->deleteCommand($cmd);
                 break;
             }
         }
         // Création de la commande
         $command = $this->client->createGlobalCommand(
-            'creer',
-            'Pour créer une nouvelle séance de jeu.',
+            'maj',
+            'Pour mettre à jour votre une séance de jeu.',
             [
               [
-                  "name" => "date",
-                  "description" => "(REQUIS) date de votre séance (année-mois-jour). Ex : 2021-10-23",
-                  "type" => 3,
-                  "required" => True
-              ],
-              [
                   "name" => "titre",
-                  "description" => "(REQUIS) Tapez votre titre ici, sans guillemets ni saut de ligne.",
+                  "description" => "Titre affiché dans le calendrier du site",
                   "type" => 3,
-                  "required" => True
+                  "required" => False
               ],
               [
                   "name" => "heure",
-                  "description" => "(FACULTATIF, 14h par défaut) Tapez l'heure de début (heure:minute). Ex : 15:30 pour 15h30.",
+                  "description" => "Heure de début de votre séance",
                   "type" => 3,
                   "required" => False
               ],
               [
                   "name" => "nombre",
-                  "description" => "(FACULTATIF, 4 par défaut) Nombre maximum de personnes que vous recevrez (4 par défaut).",
+                  "description" => "Nombre maximum de personnes que vous recevrez",
                   "type" => 3,
                   "required" => False
               ],
               [
                   "name" => "description",
-                  "description" => "(FACULTATIF) Texte (court et sans retour à la ligne) pour décrire votre séance.",
+                  "description" => "Texte (court et sans retour à la ligne) pour décrire votre séance.",
                   "type" => 3,
                   "required" => False
               ],
               [
                   "name" => "fin",
-                  "description" => "(FACULTATIF, 3h après l'heure de début, par défaut) Heure de fin de partie. Ex : 18:00 pour 18h",
+                  "description" => "Heure à laquelle vous pensez terminer cette séance",
                   "type" => 3,
                   "required" => False
               ]
