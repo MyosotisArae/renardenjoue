@@ -46,6 +46,17 @@ class BDD
         if (count($p) > 0) return $p[0];
         return null;
     }
+
+    /*
+     * Indique le nombre de places déjà prises pour un événement.
+     */
+    public static function nbPlacesPrises($em, $idEvt)
+    {
+        $nb = $em->getRepository('App:Participant')
+                 ->combienDeParticipants($idEvt);
+        return $nb;
+    }
+
     /*
      * Retourne l'événement correspondant à ce canal.
      */

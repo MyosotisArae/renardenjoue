@@ -196,12 +196,29 @@ class ServiceDiscord extends Command
         // Vérifier que cet utilisateur n'est pas déjà inscrit
         $participant = BDD::ctrlParticipant($this->manager, $idUser, $idEvt);
         if ( ($participant!=null) && $inscrire) { // La personne cherche à s'inscrire mais elle l'est déjà.
-            $interaction->reply("\nVous êtiez déjà inscrit.");
+            $nbInscrits = $participant->getNbJoueurs();
+            $precision  = "."; 
+            if ($nbInscrits > 1) { $precision = " (pour ".$nbInscrits." personnes)."; } 
+            $interaction->reply("\nVous êtiez déjà inscrit".$precision);
             return;
         }
         if ( ($participant==null) && !$inscrire) { // La personne cherche à se désinscrire mais elle ne l'est pas encore.
             $interaction->reply("\nVous n'êtiez pas encore inscrit, de toute façon.");
             return;
+        }
+
+        // Contrôle du nombre de places restantes
+        if ($inscrire) {
+            $nbPlacesPrises = BDD::nbPlacesPrises($this->manager, $idEvt);
+            $nbPlacesDispo  = $evt->getCapacite() - $nbPlacesPrises;
+            if ($nbPlacesDispo < 1) {
+                $interaction->reply("Navré, mais cette séance affiche déjà complet.");
+                return;
+            }
+            if ($nbPlacesDispo < $nb) {
+                $interaction->reply("Désolé, il ne reste que ".$nbPlacesDispo ." places pour cette séance.");
+                return;
+            }
         }
 
         if ($inscrire) {
