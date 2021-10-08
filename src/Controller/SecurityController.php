@@ -326,6 +326,9 @@ class SecurityController extends ParentController
       // Si l'email est renseigné, l'enregistrer (ainsi, on empèche la suppression accidentelle de l'email)
       $email = $user->getEmail();
       if (strlen($email) > 3) $userEnBase->setEmail($email);
+      // Identifiant Discord
+      $idDiscord = $user->getUserId();
+      if (strlen($idDiscord) > 10) $userEnBase->setUserId($idDiscord);
       $em = $this->getDoctrine()->getManager();
       $em->flush();
       $this->setUser($userEnBase);
