@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -18,6 +19,10 @@ class User implements UserInterface
         $this->plainPassword = 'b';
         $this->password = 'c';
         $this->nbJoueurs = 1;
+        // Date d'entrée
+        $this->dateDentree = new DateTime();
+        // identifiant Discord
+        $this->userId = '';
     }
     /**
      * @ORM\Id()

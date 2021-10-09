@@ -49,7 +49,7 @@ class UserRepository extends ServiceEntityRepository
       /********************************************************* DISCORD *********************************************************/
 
       /*
-       * @return Id de l'User dont l'identifiant discord est id
+       * @return Id du User dont l'identifiant discord est id
        */
       public function getByDiscordId($id): int
       {
@@ -63,6 +63,23 @@ class UserRepository extends ServiceEntityRepository
 
         $user = $resultats[0];
         return $user->getId();
+      }
+  
+      /*
+       * @return User dont l'identifiant est id
+       */
+      public function getById($id)
+      {
+        $qb = $this->createQueryBuilder('u')
+                   ->andWhere('u.id = :ui')
+                   ->setParameter('ui', $id);
+
+        $resultats = $qb->getQuery()
+                        ->getResult();
+        if (count($resultats) == 0) return null;
+
+        $user = $resultats[0];
+        return $user;
       }
   
 }

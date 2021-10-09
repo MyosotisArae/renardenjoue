@@ -48,6 +48,27 @@ class BDD
     }
 
     /*
+     * Récupère la liste des participants à l'événement
+     * dans un tableau
+     */
+    public static function getParticipants($em, $idEvt)
+    {
+        $t = $em->getRepository('App:Participant')
+                ->getParticipants($idEvt);
+        return $t;
+    }
+
+    /*
+     * Récupère l'utilisateur
+     */
+    public static function getUser($em, $id)
+    {
+        $user = $em->getRepository('App:User')
+                   ->getById($id);
+        return $user;
+    }
+
+    /*
      * Indique le nombre de places déjà prises pour un événement.
      */
     public static function nbPlacesPrises($em, $idEvt)

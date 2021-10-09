@@ -22,11 +22,14 @@ use Discord\WebSockets\Intents;
 
 use Discord\Slash\Client;
 use App\Discord\MessagesBot;
+use App\Discord\Inscription;
+use App\Discord\ListeInscriptions;
 use App\Discord\BDD;
 use \DateTime;
 use \DateInterval;
 use App\Service\Utilitaires;
 use App\Entity\Evenements;
+use React\EventLoop\Factory as attendre;
 
 class ServiceDiscord extends Command
 {
@@ -57,7 +60,7 @@ class ServiceDiscord extends Command
         $this->manager = $container->get('doctrine')->getManager();
         // Pour gérer les messages qu'envoie le bot :
         $this->messages = new MessagesBot($botId, $this->discord, $this->manager);
-        // Indicateur "commande creer en cours", son auteur et l'événement associé :
+        // Evenement à mémoriser pour la fonction formaterEvt
         $this->evt = null;
     }
 
@@ -67,25 +70,19 @@ class ServiceDiscord extends Command
      */
     public function discordOn() {
 		$this->discord->on('ready', function ($discord) {
-		    echo "Bot {$this->botId} is ready!", PHP_EOL;
+		    //echo "Bot {$this->botId} is ready!", PHP_EOL;
             // Messages à écouter
             $discord->on(EVENT::MESSAGE_CREATE, function($message,$discord){
                 //return $this->messages->salut($message);
-                echo "\nMessage détecté\n";
-                //var_dump($message->interaction);
                 // Effacer les messages de commande après 5s.
                 if ($message->interaction->type == 2) {
                     $nomCmd = $message->interaction->name; 
                     $nosCommandes = ['creer','maj','inscription','desinscription']; 
                     if (in_array($nomCmd,$nosCommandes)) {
-                        // Envoyer ce message en privé à l'utilisateur
-                        /*
-                        $guild = $this->discord->guilds->get('id',$message->guild_id);
-                        $user = $guild->members->get('id',$message->author->id);
-                        $user->sendMessage($message->content);
-                         */
-                        sleep(5);
-                        $message->delete();
+                        $this->discord->getLoop()->addTimer(5, function () use ($message) {
+                            echo "\n5 seconds passed\n";
+                            $message->delete();
+                        });
                     }
                 }
             });
@@ -129,21 +126,161 @@ class ServiceDiscord extends Command
         $this->client->registerCommand('desinscription', function (Interaction $interaction, Choices $choices) {
             $this->commandeParticiper($interaction, $choices, false);
         });
+        // Affichage des personnes inscrites à une séance
+        $this->client->registerCommand('qui', function (Interaction $interaction, Choices $choices) {
+            $this->commandeQui($interaction);
+        });
     }
 
-    private function formaterEvt($nom) {
-        $texte  = $nom." vous convie à un événement:";
-        $texte.= "\nTitre : ".$this->evt->getTitre();
-        $texte .= "\nDate  : le ".Utilitaires::traduireDate($this->evt->getDateDebut()->format('Y-m-d'));
+    private function formaterEvt($interaction) {
+        $nom = $interaction->member->user->username;
+        // Titre en gras
+        $texte = "🎲\n";
+        $texte .= "♟                                  __°°° **".$this->evt->getTitre()."** °°°__\n";
+        $texte .= ucfirst($nom)." invite ".$this->evt->getCapacite()." personnes le ";
+        $texte .= Utilitaires::traduireDate($this->evt->getDateDebut()->format('Y-m-d'))." ";
         if ($this->evt->getHeureFin() > $this->evt->getHeureDebut()) { 
-            $texte .= "\nHoraire: de ".$this->evt->getHeureDebut()->format('H:i');
+            $texte .= "de ".$this->evt->getHeureDebut()->format('H:i');
             $texte .= " à ".$this->evt->getHeureFin()->format('H:i');
         } else {
-            $texte .= "\nHeure : dès ".$this->evt->getHeureDebut()->format('H:i');
+            $texte .= "dès ".$this->evt->getHeureDebut()->format('H:i');
         }
-        $texte .= "\n".$this->evt->getCapacite()." joueurs peuvent s'inscrire.";
-        $texte .= "\nDescription :\n"; 
-        $texte .= $this->evt->getDescription();
+        $texte .= ".\n\n```".$this->evt->getDescription()."```\n";
+
+        $listeParticipants = $this->getQui($interaction);
+        if ($listeParticipants->isErreur()) {
+            $texte .= "\n*Nombre d'invités attendu : ".$this->evt->getCapacite()."*";
+        } else {
+            $texte .= $this->formaterInscriptionsEnListe($listeParticipants);
+            $reste = $this->evt->getCapacite() - $listeParticipants->combienDePersonnes();
+            $texte .= "\n*";
+            if ($reste == 0) {
+                $texte .= "C'est complet !";
+            } else {
+                if ($reste == 1) {
+                    $texte .= "Il reste une place.";
+                } else {
+                    $texte .= "Il reste ".$reste." places.";
+                }
+            }
+            $texte .= "*";
+        }
+
+        return $texte;
+    }
+
+    /*
+     * Affiche la liste des personnes qui sont inscrites à la séance associée au channel où l'on se trouve.
+     */
+    private function commandeQui(Interaction $interaction) {
+        $listeParticipants = $this->getQui($interaction);
+        if ($listeParticipants->isErreur()) {
+            $interaction->reply($listeParticipants->getErreur());
+            return;
+        }
+        $interaction->reply($this->formaterInscriptionsEnTableau($listeParticipants));
+    }
+
+    /*
+     * Retourne un tableau contenant la liste des personnes qui sont inscrites à la séance associée au channel où l'on se trouve.
+     * Les éléments sont des tableaux :
+     * - colonne 1 : nombre de participants
+     * - colonne 2 : nom du participant sur le site
+     * - colonne 3 : nom du participant sur discord
+     * En cas d'erreur (le canal dans lequel la commande a été faite n'est pas associé à un événement), la fonction retourne
+     * une ligne d'un seul élément : ['erreur','...message...','']
+     */
+    private function getQui(Interaction $interaction) {
+        $listeParticipants = new ListeInscriptions();
+        $channelId = $interaction->channel_id;
+        $evt = BDD::getEvtByChannel($this->manager, $channelId);
+        if ($evt == null) {
+            $listeParticipants->setErreur("Ce canal n'est associé à aucun événement. Soit vous n'êtes pas au bon endroit, soit l'événement a été annulé.");
+            return $listeParticipants;
+        }
+        // L'événement existe. Récupérer la liste de ses inscrits.
+        $tableauParticipants = BDD::getParticipants($this->manager,$evt->getId());
+        if (count($tableauParticipants ) == 0) {
+            // Aucune inscription
+            return $listeParticipants;
+        }
+
+        // Liste des membres de la guilde
+        $guild = $this->discord->guilds->get('id',$interaction->guild_id);
+        $listeMembres = $guild->members;
+        
+        // Alimentation du tableau listant les participants
+        foreach ($tableauParticipants as $p) {
+            // Utilisateur du site
+            $idUserSite = $p->getIdUser();
+            $userSite = BDD::getUser($this->manager,$idUserSite);
+            if ($userSite == null) { continue; } // Théoriquement, il est impossible que cet utilisateur n'existe pas, mais restons prudents.
+            // Création de l'objet Inscription
+            $ins = new Inscription();
+            $ins->nomSite = $userSite->getNom();
+            // Utilisateur de Discord
+            $userDiscord = $listeMembres->get('id',$userSite->getUserId());
+            $ins->nomDiscord = $userDiscord->user->username;
+            // Nombre d'inscrits pour ce participant
+            $ins->nb = strval($p->getNbJoueurs());
+            // Ajout de cette ligne à la liste
+            $listeParticipants->add($ins);
+        }
+
+        return $listeParticipants;
+    }
+
+    private function formaterInscriptionsEnListe($listeParticipants) {
+        $tailleTableau = $listeParticipants->combienDeMembres();
+        if ($tailleTableau == 0) {
+            return "\nPersonne ne s'est encore inscrit.";
+        }
+        $texte = "\nParticipants :";
+        while ($tailleTableau > 0) {
+            $tailleTableau -= 1;
+            $p = $listeParticipants->get($tailleTableau);
+            $texte .= "\n- ".$p->nomDiscord;
+            // Si les 2 pseudos sont différents, préciser celui du site (comparaison Case unsensitive)
+            if (strcasecmp($p->nomDiscord,$p->nomSite) != 0) {
+                $texte .= " (".$p->nomSite." sur le site)";
+            }
+            $n = intval($p->nb) - 1;
+            $autre = "";
+            while ($n > 0) {
+                $n -= 1;
+                $texte .= "\n- un".$autre." ami de ".$p->nomDiscord;
+                $autre = " autre";
+            }
+        }
+        return $texte;
+    }
+
+    private function formaterInscriptionsEnTableau($listeParticipants) {
+        $tailleColonne1 = 4;
+        $tailleColonne2 = 30;
+        $tailleColonne3 = 30;
+        $texte  = "\n`| ";
+        $texte .= str_pad("nom (sur le site) ", $tailleColonne2," ", STR_PAD_BOTH)." | " ;
+        $texte .= str_pad("nom (sur Discord) ", $tailleColonne3," ", STR_PAD_BOTH)." |`" ;
+        $tailleTableau = $listeParticipants->combienDeMembres();
+        if ($tailleTableau == 0) {
+            return "Il n'y a pas encore eu d'inscription.";
+        } 
+        while ($tailleTableau > 0) {
+            $tailleTableau -= 1;
+            $p = $listeParticipants->get($tailleTableau);
+            // Texte à afficher
+            $texte .= "\n`| ";
+            $texte .= str_pad($p->nomSite, $tailleColonne2," ", STR_PAD_BOTH)." | " ;
+            $texte .= str_pad($p->nomDiscord, $tailleColonne3," ", STR_PAD_BOTH)." |`" ;
+            $n = intval($p->nb) - 1;
+            while ($n > 0) {
+                $n -= 1;
+                $texte .= "\n`| ";
+                $texte .= str_pad('"', $tailleColonne2," ", STR_PAD_BOTH)." | " ;
+                $texte .= str_pad('"', $tailleColonne3," ", STR_PAD_BOTH)." |`" ;
+            }
+        }
         return $texte;
     }
 
@@ -229,6 +366,7 @@ class ServiceDiscord extends Command
             BDD::delParticipant($this->manager, $participant);
             $txt = "Vous n'êtes plus inscrit.";
         }
+        $this->updatePinnedMessage($interaction);
 
         $interaction->reply($txt);
     }
@@ -354,7 +492,7 @@ class ServiceDiscord extends Command
         if (isset($description) && strlen($description)>0) {
             $this->evt->setDescription($description);
         } else {
-            $this->evt->setDescription("Pas d'infos pour l'instant.");
+            $this->evt->setDescription("Pas de description pour l'instant.");
         }
 
         if ($maj) {
@@ -368,10 +506,11 @@ class ServiceDiscord extends Command
                  'owner_id'  => $auteur->id,
                  'name'      => $dateAffichee->format('Y m d')." ".$this->evt->getTitre(),
                  'type'      => Channel::TYPE_TEXT,
-                 'topic'     => $titre,
+                 'topic'     => "",
                  'nsfw'      => false
              ]);
-             $interaction->guild->channels->save($newChannel)->done(function (Channel $channel) use ($auteur) {
+             $interaction->guild->channels->save($newChannel)->done(function (Channel $channel) use ($interaction) {
+                        $auteur  = $interaction->member->user;
                         $texte = $auteur->username." a ajouté un événement : ".$this->evt->getTitre().".";
                         $url = "\nVous pouvez vous y inscrire et voir les détails ici : https://discord.com/channels/".$channel->guild_id.'/'.$channel->id;
                         $url.= "\n(Prérequis : renseigner votre identifiant discord sur le site de l'asso)";
@@ -380,7 +519,7 @@ class ServiceDiscord extends Command
                         $this->evt->setChannelId(strval($channel->id)); 
                         BDD::saveEvt($this->manager,$this->evt);
 
-                        $texte = $this->formaterEvt($auteur->username);
+                        $texte = $this->formaterEvt($interaction);
                         $channel->sendMessage($entete.$texte)->done( function ($msg) use ($channel) {
                             // Une fois le message créé, on l'épingle.
                             $channel->pinMessage($msg)->done( function ($x) {} );
@@ -397,23 +536,29 @@ class ServiceDiscord extends Command
         }
 
         // Cas de la mise à jour : il faut aussi modifier le message dans Parties.
-        // Récupération de l'objet channel
-        $channel = $interaction->guild->channels->get('id', $canal);
-        // Lecture des messages du channel : récupérer le premier message.
-        $channel->getPinnedMessages()->done(function ($liste) use ($channel, $auteur) {
+        $this->updatePinnedMessage($interaction);
+ 
+        $interaction->reply("Evénement du ".$dateAffichee->format('d/m/Y')." modifié.".$remarques);
+    }
+
+    /*
+     * Parcourir les messages épinglés dans ce canal et mettre à jour celui du bot.
+     */
+    private function updatePinnedMessage($interaction) {
+        $channel = $interaction->guild->channels->get('id', $interaction->channel_id);
+        $channel->getPinnedMessages()->done(function ($liste) use ($interaction, $channel) {
             foreach ($liste as $msg) {
                 // Parcourir les messages pour changer celui du bot.
                 if ($msg->author->id == $this->botId) {
-                    $channel->getMessage($msg->id)->done( function ($pinnedMsg) use ($channel, $auteur) {
-                        $pinnedMsg->content = $this->formaterEvt($auteur->username);
-                        $channel->messages->save($pinnedMsg)->done(function ($x) { });
+                    $msg->content = $this->formaterEvt($interaction);
+                        echo "\nAppel de save()\n";
+                    $channel->messages->save($msg)->done(function ($x) {
+                        echo "\nLe message a été modifié :\n";
                     });
                     break;
                 }
             }
         });
- 
-        $interaction->reply("Evénement du ".$dateAffichee->format('d/m/Y')." modifié.".$remarques);
     }
 
     public function runLoop() {

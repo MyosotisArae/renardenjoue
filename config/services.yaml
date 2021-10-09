@@ -54,3 +54,9 @@ services:
            $token: '%env(TOKEN)%'
            $botId: '%env(BOT_ID)%'
 
+    # Affichage des noms des inscrits
+    App\Command\CommandeQui:
+       arguments:
+           $token: '%env(TOKEN)%'
+           $botId: '%env(BOT_ID)%'
+
