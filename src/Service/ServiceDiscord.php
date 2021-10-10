@@ -260,8 +260,8 @@ class ServiceDiscord extends Command
         $tailleColonne2 = 30;
         $tailleColonne3 = 30;
         $texte  = "\n`| ";
-        $texte .= str_pad("nom (sur le site) ", $tailleColonne2," ", STR_PAD_BOTH)." | " ;
-        $texte .= str_pad("nom (sur Discord) ", $tailleColonne3," ", STR_PAD_BOTH)." |`" ;
+        $texte .= str_pad("nom (site) ", $tailleColonne2," ", STR_PAD_BOTH)." | " ;
+        $texte .= str_pad("nom (Discord) ", $tailleColonne3," ", STR_PAD_BOTH)." |`" ;
         $tailleTableau = $listeParticipants->combienDeMembres();
         if ($tailleTableau == 0) {
             return "Il n'y a pas encore eu d'inscription.";
