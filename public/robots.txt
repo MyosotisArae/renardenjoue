@@ -1,0 +1,8 @@
+# Autoriser l'accès à tous
+User-agent: *
+Allow:/accueil
+Allow:/calendrier
+Allow:/jeux
+Allow:/login
+Allow:/contact
+Allow:/infos
