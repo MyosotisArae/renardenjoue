@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Date;
+use \DateTime;
 
 /**
  * Evenements
@@ -49,6 +50,13 @@ class Evenements
      * @ORM\Column(name="date_fin", type="date", nullable=true)
      */
     private $dateFin;
+
+    /**
+     * @var \Date
+     *
+     * @ORM\Column(name="limite", type="date", nullable=true)
+     */
+    private $limite;
 
     /**
      * @var \Time|null
@@ -217,6 +225,10 @@ class Evenements
     public function setDateDebutFromString(string $dateDebut): self
     {
         $this->dateDebut = date_create_from_format('d-m-Y',$dateDebut);
+        $this->dateDebut->setTime(23,59,59,0);
+        if ($this->limite == null) {
+            $this->limite = $this->dateDebut;
+        }
 
         return $this;
     }
@@ -224,6 +236,10 @@ class Evenements
     public function setDateDebut(\DateTimeInterface $dateDebut): self
     {
         $this->dateDebut = $dateDebut;
+        $this->dateDebut->setTime(23,59,59,0);
+        if ($this->limite == null) {
+            $this->limite = $this->dateDebut;
+        }
 
         return $this;
     }
@@ -252,6 +268,18 @@ class Evenements
         return $this;
     }
 
+    public function getLimite(): ?\DateTimeInterface
+    {
+        return $this->limite;
+    }
+
+    public function setLimite(?\DateTimeInterface $limite): self
+    {
+        $this->limite = $limite;
+
+        return $this;
+    }
+
     public function getHeureDebut(): ?\DateTimeInterface
     {
         return $this->heureDebut;
@@ -260,6 +288,7 @@ class Evenements
     public function setHeureDebutFromString(string $heureDebut): self
     {
         $this->heureDebut = date_create_from_format('H:i',$heureDebut);
+        $this->dateDebut = $this->changerHeure($this->dateDebut,$this->heureDebut);
 
         return $this;
     }
@@ -267,6 +296,7 @@ class Evenements
     public function setHeureDebut(?\DateTimeInterface $heureDebut): self
     {
         $this->heureDebut = $heureDebut;
+        $this->dateDebut = $this->changerHeure($this->dateDebut,$this->heureDebut);
 
         return $this;
     }
@@ -294,6 +324,7 @@ class Evenements
     {
         $this->dateDebut = strtotime($debut->format('Y-m-d'));
         $this->heureDebut = strtotime($debut->format('H:i:s'));
+        $this->dateDebut = $this->changerHeure($this->dateDebut,$this->heureDebut);
 
         return $this;
     }
@@ -369,6 +400,17 @@ class Evenements
       $minutes = $horaire->format("i");
       $minutes = ltrim($minutes,'0');
       return $heure."h".$minutes;
+    }
+
+    /*
+     * Retourne la première date en lui donnant les h:m:s de la seconde.
+     */
+    private function changerHeure(DateTime $dateAchanger, DateTime $heure) {
+        $h = $heure->format("H");
+        $m = $heure->format("m");
+        $s = $heure->format("s");
+        $dateAchanger->setTime($h,$m,$s,0);
+        return $dateAchanger;
     }
 
 }

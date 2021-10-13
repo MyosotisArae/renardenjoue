@@ -29,8 +29,6 @@ class CommandeCreer extends Command
         parent::__construct();
         $this->botId = $botId;
         $this->client = new RegisterClient($token);
-
-        echo "CREER";
     }
 
     // Parce que c'est une commande, il faut implémenter execute :
@@ -50,37 +48,43 @@ class CommandeCreer extends Command
             [
               [
                   "name" => "date",
-                  "description" => "(REQUIS) date de votre séance (année-mois-jour). Ex : 2021-10-23",
+                  "description" => "* date de votre séance (année-mois-jour). Ex : 2021-10-23",
                   "type" => 3,
                   "required" => True
               ],
               [
                   "name" => "titre",
-                  "description" => "(REQUIS) Tapez votre titre ici, sans guillemets ni saut de ligne.",
+                  "description" => "* Tapez votre titre ici, sans guillemets ni saut de ligne (100 caractères max).",
                   "type" => 3,
                   "required" => True
               ],
               [
                   "name" => "heure",
-                  "description" => "(FACULTATIF, 14h par défaut) Tapez l'heure de début (heure:minute). Ex : 15:30 pour 15h30.",
+                  "description" => "(14h) Tapez l'heure de début. Ex : 15:30 pour 15h30.",
                   "type" => 3,
                   "required" => False
               ],
               [
                   "name" => "nombre",
-                  "description" => "(FACULTATIF, 4 par défaut) Nombre maximum de personnes que vous recevrez (4 par défaut).",
+                  "description" => "(4) Nombre maximum de personnes que vous recevrez (4 par défaut).",
                   "type" => 3,
                   "required" => False
               ],
               [
                   "name" => "description",
-                  "description" => "(FACULTATIF) Texte (court et sans retour à la ligne) pour décrire votre séance.",
+                  "description" => "Texte (sans retour à la ligne) pour décrire votre séance.",
                   "type" => 3,
                   "required" => False
               ],
               [
                   "name" => "fin",
-                  "description" => "(FACULTATIF, 3h après l'heure de début, par défaut) Heure de fin de partie. Ex : 18:00 pour 18h",
+                  "description" => "(3h après l'heure de début) Heure de fin de partie. Ex : 18:00 pour 18h",
+                  "type" => 3,
+                  "required" => False
+              ],
+              [
+                  "name" => "limite",
+                  "description" => "(aucune) Date du dernier jour où les inscriptions sont autorisées.",
                   "type" => 3,
                   "required" => False
               ]

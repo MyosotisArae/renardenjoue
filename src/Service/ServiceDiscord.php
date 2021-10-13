@@ -21,6 +21,7 @@ use Discord\Slash\Parts\Choices;
 use Discord\WebSockets\Intents;
 
 use Discord\Slash\Client;
+use App\Discord\MsgErreur;
 use App\Discord\MessagesBot;
 use App\Discord\Inscription;
 use App\Discord\ListeInscriptions;
@@ -156,6 +157,7 @@ class ServiceDiscord extends Command
             $texte .= "\n*";
             if ($reste == 0) {
                 $texte .= "C'est complet !";
+                return $texte;
             } else {
                 if ($reste == 1) {
                     $texte .= "Il reste une place.";
@@ -164,6 +166,19 @@ class ServiceDiscord extends Command
                 }
             }
             $texte .= "*";
+        }
+        // Date limite
+        // Si c'est le jour même, on ne l'indique pas.
+        $dateLimite = $this->evt->getLimite();
+        if (MsgErreur::isSameDates($dateLimite, $this->evt->getDateDebut())) {
+            return $texte;
+        }
+        // Si la date limite est passée, indiquer qu'on ne peut plus s'inscrire.
+        if (MsgErreur::isPasse($dateLimite)) {
+            $texte .= "\n*Il est trop tard pour s'inscrire.*";
+        } else {
+            $dateBienPresentee = Utilitaires::traduireDate($dateLimite->format('Y-m-d'));
+            $texte .= "\n*Date limite d'inscription : le ".$dateBienPresentee."*";
         }
 
         return $texte;
@@ -307,9 +322,29 @@ class ServiceDiscord extends Command
         $idEvt = 0;
         if ($evt != null) { $idEvt = $evt->getId(); }
         if ($idEvt === 0) {
-            $texte  = "Pour vous inscrire ou vous désinscrire d'une séance, placez-vous dans son canal, que vous trouverez dans le salon Parties. ";
+            $texte  = "Pour vous inscrire ou vous désinscrire d'une séance, placez-vous dans son canal, que vous trouverez dans la catégorie Parties. ";
             $texte .= "Puis tapez /inscription (suivi d'un chiffre, si vous ne venez pas seul) ou /desinscription. \n ";
             $texte .= "Vous devez pour cela être enregistré sur le site et avoir y renseigné votre identifiant Discord.";
+            $interaction->reply($texte);
+            return;
+        }
+
+        $dateDuJour = new DateTime();
+        // Vérifier si l'événement est passé ou non.
+        if ($dateDuJour > $evt->getDateDebut()) {
+            $texte = "Il est trop tard, cette séance est ";
+            // Est-ce quand même aujourd'hui (si on ne tient pas compte de l'heure) ?
+            if (MsgErreur::isSameDates($dateDuJour,$evt->getDateDebut())) {
+                $texte .= "en cours.";
+            } else {
+                $texte .= "terminée.";
+            }
+            $interaction->reply($texte);
+            return;
+        }
+        // Vérifier si la date d'inscription est passée ou non.
+        if ($dateDuJour > $evt->getLimite()) {
+            $texte = "La date limite d'inscription est dépassée, désolé.";
             $interaction->reply($texte);
             return;
         }
@@ -384,6 +419,7 @@ class ServiceDiscord extends Command
         $this->channelAnnonces = $interaction->guild->channels->get('id',$_ENV['ID_ANNONCES']);
         // Ce texte signalera les anomalies de saisie et la manière dont elles ont été corrigées.
         $remarques = ' ';
+        $msgErr = new MsgErreur();
 
         if ($maj) {
             // En cas de mise à jour, récupérer l'événement en base.
@@ -412,10 +448,8 @@ class ServiceDiscord extends Command
 
             // Controle de validité de la date
             $dateText = $choices->date;
-            if ( (strlen($dateText) < 10) || ((strtotime($dateText)) === false) ) {
-                $dateDuJour = new DateTime();
-                $dateDuJourText = "Ex : aujourd'hui=".$dateDuJour->format("Y-m-d");
-                $interaction->reply($dateText . " n'est pas au format attendu.\nTapez année(4 chiffres)-mois(2 chiffres)-jour(2 chiffres) sans oublier les tirets.\n" . $dateDuJourText);
+            if (!$msgErr->isDateValide($dateText)) {
+                $interaction->reply($msgErr->msg);
                 return;
             }
             $dateAffichee = new DateTime($dateText);
@@ -429,6 +463,38 @@ class ServiceDiscord extends Command
         $virgule = '';
         // Un 's' sera ajouté à chaque valeur par défaut : à la fin, l'avant dernier élément du tableau sera 's' s'il y a plusieurs valeurs par défaut, '' sinon.
         $pluriel = ['',''];
+
+        // Date limite
+        // Remarque : Si la date limite de l'événement n'était pas encore settée dans $this->evt,
+        // le setDateDebut que l'on vient d'appeler l'aura fait. Donc, ci-après, on ne va traiter
+        // que le cas où elle vient d'être renseignée dans la commande slash.
+        $dateLimite = $choices->limite;
+        if (strlen($dateLimite) > 0) {
+            // Date limite renseignée. On doit la contrôler.
+            $msgErr->isDateLimiteOk($dateLimite, $this->evt->getDateDebut());
+            if ($msgErr->code == $msgErr->NOK) {
+                $interaction->reply($msgErr->msg);
+                return;
+            }
+            if ($msgErr->code == $msgErr->DEPASSEE) {
+                // La date limite tombe plus tard que l'événement.
+                // Signaler l'erreur, corriger et continuer.
+                $dateLimite = $this->evt->getDateDebut()->format("Y-m-d");
+                $remarques .= $msgErr->msg;
+                $parDefaut = $virgule."date limite=".$dateLimite;
+                $virgule = ', ';
+                $pluriel[] = 's';
+            }
+            if ($msgErr->code == $msgErr->AUJOURDHUI) {
+                // On ne peut s'inscrire qu'aujourd'hui. Le signaler et continuer.
+                $remarques .= $msgErr->msg;
+            }
+            if ($msgErr->code == $msgErr->HIER) {
+                // On ne peut même plus s'inscrire, la date est passée. Le signaler et continuer.
+                $remarques .= $msgErr->msg;
+            }
+            $this->evt->setLimite(new DateTime($dateLimite));
+        }
 
         // Nombre de participants
         $nb = intval($choices->nombre);

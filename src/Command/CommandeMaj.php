@@ -46,13 +46,13 @@ class CommandeMaj extends Command
             [
               [
                   "name" => "titre",
-                  "description" => "Titre affiché dans le calendrier du site",
+                  "description" => "Titre affiché dans le calendrier du site (100 caractères max)",
                   "type" => 3,
                   "required" => False
               ],
               [
                   "name" => "heure",
-                  "description" => "Heure de début de votre séance",
+                  "description" => "Heure de début de votre séance (Ex : 10:20 pour 10h20)",
                   "type" => 3,
                   "required" => False
               ],
@@ -64,13 +64,19 @@ class CommandeMaj extends Command
               ],
               [
                   "name" => "description",
-                  "description" => "Texte (court et sans retour à la ligne) pour décrire votre séance.",
+                  "description" => "Texte (sans retour à la ligne) pour décrire votre séance.",
                   "type" => 3,
                   "required" => False
               ],
               [
                   "name" => "fin",
                   "description" => "Heure à laquelle vous pensez terminer cette séance",
+                  "type" => 3,
+                  "required" => False
+              ],
+              [
+                  "name" => "limite",
+                  "description" => "Date limite pour s'inscrire.",
                   "type" => 3,
                   "required" => False
               ]

@@ -97,7 +97,5 @@ class BDD
                      ->getByDiscordId($userId);
         return $idUser;
     }
-
 }
-
 ?>
