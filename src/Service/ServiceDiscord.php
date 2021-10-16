@@ -162,7 +162,7 @@ class ServiceDiscord extends Command
             $reste = $this->evt->getCapacite() - $listeParticipants->combienDePersonnes();
             $texte .= "\n*";
             if ($reste == 0) {
-                $texte .= "C'est complet !";
+                $texte .= "C'est complet !*";
                 return $texte;
             } else {
                 if ($reste == 1) {
@@ -592,7 +592,7 @@ class ServiceDiscord extends Command
                         BDD::saveEvt($this->manager,$this->evt);
 
                         $texte = $this->formaterEvt($interaction);
-                        $channel->sendMessage($entete.$texte)->done( function ($msg) use ($channel) {
+                        $channel->sendMessage($texte)->done( function ($msg) use ($channel) {
                             // Une fois le message créé, on l'épingle.
                             $channel->pinMessage($msg)->done( function ($x) {} );
                         });
