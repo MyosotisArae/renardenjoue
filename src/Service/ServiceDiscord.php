@@ -419,8 +419,8 @@ class ServiceDiscord extends Command
      * - La date ne peut pas être modifiée.
      */
     private function commandeCreer(Interaction $interaction, Choices $choices, bool $maj) {
-        $this->channelParties  = $this->interaction->channels->get('id',$this->idParties);
-        $this->channelAnnonces = $this->interaction->channels->get('id',$this->idAnnonces);
+        $this->channelParties  = $interaction->guild->channels->get('id',$this->idParties);
+        $this->channelAnnonces = $interaction->guild->channels->get('id',$this->idAnnonces);
         $auteur  = $interaction->member->user;
         $canal = $interaction->channel_id;
         // Ce texte signalera les anomalies de saisie et la manière dont elles ont été corrigées.
