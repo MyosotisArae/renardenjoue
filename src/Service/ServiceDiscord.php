@@ -44,19 +44,25 @@ class ServiceDiscord extends Command
     private $channelParties;
     private $channelAnnonces;
     private $evt;
+    private $idParties;
+    private $idAnnonces;
 
-    public function __construct(string $token, string $botId,ContainerInterface $container) {
+    public function __construct(string $token, string $botId, string $idParties, string $idAnnonces, ContainerInterface $container) {
         parent::__construct();
         $this->botId = $botId;
 	    $this->discord = new Discord([
             'token' => $token,
             'loadAllMembers' => true,
+            //'pmChannels' => true,
             'intents' => Intents::getDefaultIntents() | Intents::GUILD_MEMBERS // Enable the GUILD_MEMBERS intent
         ]);
         $this->client = new Client([
             'loop' => $this->discord->getLoop(), // Discord and Client MUST share event loops
         ]);
         $this->client->linkDiscord($this->discord);
+        // Canaux sur lesquels le bot écrit
+        $this->idParties = $idParties;
+        $this->idAnnonces = $idAnnonces;
         // Pour accéder à la base de données :
         $this->manager = $container->get('doctrine')->getManager();
         // Pour gérer les messages qu'envoie le bot :
@@ -413,10 +419,10 @@ class ServiceDiscord extends Command
      * - La date ne peut pas être modifiée.
      */
     private function commandeCreer(Interaction $interaction, Choices $choices, bool $maj) {
+        $this->channelParties  = $this->interaction->channels->get('id',$this->idParties);
+        $this->channelAnnonces = $this->interaction->channels->get('id',$this->idAnnonces);
         $auteur  = $interaction->member->user;
         $canal = $interaction->channel_id;
-        $this->channelParties  = $interaction->guild->channels->get('id',$_ENV['ID_PARTIES']);
-        $this->channelAnnonces = $interaction->guild->channels->get('id',$_ENV['ID_ANNONCES']);
         // Ce texte signalera les anomalies de saisie et la manière dont elles ont été corrigées.
         $remarques = ' ';
         $msgErr = new MsgErreur();

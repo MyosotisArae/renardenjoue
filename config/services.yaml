@@ -29,6 +29,8 @@ services:
        arguments:
            $token: '%env(TOKEN)%'
            $botId: '%env(BOT_ID)%'
+           $idParties: '%env(ID_PARTIES)%'
+           $idAnnonces: '%env(ID_ANNONCES)%'
 
     # Création d'une date app:creer
     App\Command\CommandeCreer:
