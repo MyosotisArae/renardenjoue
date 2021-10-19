@@ -251,10 +251,10 @@ class ServiceDiscord extends Command
             $ins = new Inscription();
             $ins->nomSite = $userSite->getNom();
             // Utilisateur de Discord
-            $userDiscord = $listeMembres->get('id',$userSite->getUserId());
-            $ins->nomDiscord = $userDiscord->user->username;
+            $mbDiscord = $listeMembres->get('id',$userSite->getUserId());
+            $ins->nomDiscord = $mbDiscord->user->username;
             // Nombre d'inscrits pour ce participant
-            $ins->nb = strval($p->getNbJoueurs());
+            $ins->nb = intval($p->getNbJoueurs());
             // Ajout de cette ligne à la liste
             $listeParticipants->add($ins);
         }
