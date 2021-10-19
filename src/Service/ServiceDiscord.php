@@ -29,6 +29,7 @@ use App\Discord\BDD;
 use \DateTime;
 use \DateInterval;
 use App\Service\Utilitaires;
+use App\Entity\User;
 use App\Entity\Evenements;
 use React\EventLoop\Factory as attendre;
 
@@ -86,8 +87,10 @@ class ServiceDiscord extends Command
                     $nomCmd = $message->interaction->name; 
                     $nosCommandes = ['creer','maj','inscription','desinscription']; 
                     if (in_array($nomCmd,$nosCommandes)) {
-                        $this->discord->getLoop()->addTimer(5, function () use ($message) {
-                            echo "\n5 seconds passed\n";
+                        // Durée proportionelle à la taille du message : 1s pour 15 lettres
+                        $duree = intval(strlen($message->content) / 15);
+                        echo "\nAttente de ".$duree."s\n";
+                        $this->discord->getLoop()->addTimer($duree, function () use ($message) {
                             $message->delete();
                         });
                     }
@@ -97,7 +100,6 @@ class ServiceDiscord extends Command
                 /*
             $discord->on(EVENT::INTERACTION_CREATE, function($interaction){
                 echo "\nInteraction détectée\n";
-                //var_dump($interaction);
                 $typeAction = $interaction->type; // =2 pour une commande
                 $donnees = $interaction->data;    // Contenu de la commande
                 $nomCmd  = $donnees->name;        // nom de la commande
@@ -125,7 +127,7 @@ class ServiceDiscord extends Command
         $this->client->registerCommand('maj', function (Interaction $interaction, Choices $choices) {
             $this->commandeCreer($interaction, $choices, true);
         });
-        // Inscription à une séance
+        /// Inscription à une séance
         $this->client->registerCommand('inscription', function (Interaction $interaction, Choices $choices) {
             $this->commandeParticiper($interaction, $choices, true);
         });
@@ -141,6 +143,22 @@ class ServiceDiscord extends Command
 
     private function formaterEvt($interaction) {
         $nom = $interaction->member->user->username;
+        /*
+        $prenom = "";
+        echo "\nformaterEvt : début\n";
+        $guild = $this->discord->guilds->get('id',$interaction->guild_id);
+        echo "\nformaterEvt : guild:\n";
+        var_dump($guild);
+        $mb = $guild->members->get('id',$interaction->member->id);
+        echo "\nformaterEvt : membre:\n";
+        var_dump($mb);
+        $prenom = $mb->nick;
+        echo "\nPrenom : '".$prenom."'\n";
+        if ($prenom != null) {
+            if (strlen($prenom) > 0) { $nom = $prenom; }
+        }
+        echo "\nFinalement, nom = '".$nom."'\n";
+         */
         // Titre en gras
         $texte = "🎲\n";
         $texte .= "♟                                  __°°° **".$this->evt->getTitre()."** °°°__\n";
@@ -334,6 +352,7 @@ class ServiceDiscord extends Command
             $interaction->reply($texte);
             return;
         }
+        $this->evt = $evt;
 
         $dateDuJour = new DateTime();
         // Vérifier si l'événement est passé ou non.
@@ -358,16 +377,30 @@ class ServiceDiscord extends Command
         // Trouver l'utilisateur en base en fonction de son id.
         $idUser = BDD::findUserByDiscordId($this->manager, $auteur->id);
         if ($idUser === 0) {
-            $texte  = "Vous n'êtes pas enregistré sur le site, ou votre identifiant Discord n'a pas été mis à jour.\n ";
-            $texte .= "Connectez-vous à votre compte (ou créez-en un) sur : https://renardenjoue.araetech.eu\n ";
-            $texte .= "puis renseignez votre id discord (que vous trouverez en cliquant sur votre nom, dans discord, avec le bouton droit de la souris, ";
-            $texte .= "puis en cliquant sur Copier l'identifiant en bas du menu).";
-            $texte .= "\nRevenez ici quand c'est fait, ou ";
-            if ($inscrire) { $texte .= "inscrivez-vous"; }
-            else { $texte .= "désinscrivez-vous"; }
-            $texte .= " depuis le site.";
-            $interaction->reply($texte);
-            return;
+            // Ce joueur n'est pas enregistré sur le site. On le crée.
+            $user = new User();
+            $nom = $auteur->username.$auteur->discriminator;
+            $user->setNom($nom);
+            $user->setUserId($auteur->id);
+            $user->setEmail("myosotis.arae@gmail.com");
+            BDD::save($this->manager, $user);
+            $idUser = $user->getId();
+
+            $texte  = "Vous n'étiez pas enregistré sur le site, ou bien votre identifiant Discord n'a pas été mis à jour.\n ";
+            $texte .= "L'utilisateur ".$nom." a été créé pour vous.";
+            $texte .= "Contactez myosotis.arae@gmail.com pour :\n";
+            $texte .= "- supprimer ce nouveau compte si vous en aviez déjà un (mentionnez votre nom et votre identifiant sur discord)";
+            $texte .= "\nou\n- obtenir le mot de passe de ce nouveau compte afin d'être en mesure de vous y connecter.";
+            $texte .= "\nSi vous n'aviez pas de compte sur le site et ne souhaitez jamais y aller, vous n'avez rien à faire.";
+            if ($inscrire) {
+                $texte .= "\nEn attendant, l'inscription est faite avec ce nouveau compte."; 
+                $auteur->sendMessage($texte);
+            }
+            else {
+                $texte .= "La désinscription n'a pas été possible."; 
+                $auteur->sendMessage($texte);
+                $interaction->reply("Vous n'étiez pas enregistré. Veuillez lire le mp qui vous a été transmis.");
+            }
         }
 
 
@@ -569,7 +602,7 @@ class ServiceDiscord extends Command
 
         if ($maj) {
             // Mise à jour de l'événement en base de données
-            BDD::saveEvt($this->manager,$this->evt);
+            BDD::save($this->manager,$this->evt);
         } else {
             // Création d'un canal dans la catégorie Parties
             $newChannel = $interaction->guild->channels->create([
@@ -589,7 +622,7 @@ class ServiceDiscord extends Command
                         $this->channelAnnonces->sendMessage($texte.$url);
 
                         $this->evt->setChannelId(strval($channel->id)); 
-                        BDD::saveEvt($this->manager,$this->evt);
+                        BDD::save($this->manager,$this->evt);
 
                         $texte = $this->formaterEvt($interaction);
                         $channel->sendMessage($texte)->done( function ($msg) use ($channel) {
@@ -623,9 +656,7 @@ class ServiceDiscord extends Command
                 // Parcourir les messages pour changer celui du bot.
                 if ($msg->author->id == $this->botId) {
                     $msg->content = $this->formaterEvt($interaction);
-                        echo "\nAppel de save()\n";
                     $channel->messages->save($msg)->done(function ($x) {
-                        echo "\nLe message a été modifié :\n";
                     });
                     break;
                 }

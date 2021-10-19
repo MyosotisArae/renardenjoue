@@ -8,11 +8,11 @@ use App\Entity\Participant;
 class BDD 
 {
     /*
-     * Sauvegarde en base de l'événement evt
+     * Sauvegarde en base de l'objet obj (Evenement / User)
      */
-    public static function saveEvt($em, $evt)
+    public static function save($em, $obj)
     {
-        $em->persist($evt);
+        $em->persist($obj);
         $em->flush();
     }
 

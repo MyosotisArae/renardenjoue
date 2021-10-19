@@ -14,7 +14,6 @@ class User implements UserInterface
 {
     public function __construct()
     {
-        $this->id = 0;
         $this->nom = 'a';
         $this->plainPassword = 'b';
         $this->password = 'c';
