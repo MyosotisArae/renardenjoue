@@ -142,23 +142,16 @@ class ServiceDiscord extends Command
     }
 
     private function formaterEvt($interaction) {
-        $nom = $interaction->member->user->username;
-        /*
-        $prenom = "";
-        echo "\nformaterEvt : début\n";
+        // L'organisateur de la séance n'est pas forcément l'auteur de cette commande.
+        // C'est l'idUser de l'événement qu'il faut utiliser.
         $guild = $this->discord->guilds->get('id',$interaction->guild_id);
-        echo "\nformaterEvt : guild:\n";
-        var_dump($guild);
-        $mb = $guild->members->get('id',$interaction->member->id);
-        echo "\nformaterEvt : membre:\n";
+        $mb = $guild->members->get('id',$this->evt->getUserId());
         var_dump($mb);
+        $nom = $mb->user->username;
         $prenom = $mb->nick;
-        echo "\nPrenom : '".$prenom."'\n";
         if ($prenom != null) {
             if (strlen($prenom) > 0) { $nom = $prenom; }
         }
-        echo "\nFinalement, nom = '".$nom."'\n";
-         */
         // Titre en gras
         $texte = "🎲\n";
         $texte .= "♟                                  __°°° **".$this->evt->getTitre()."** °°°__\n";
