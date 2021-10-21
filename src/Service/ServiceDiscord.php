@@ -616,7 +616,9 @@ class ServiceDiscord extends Command
         if (strlen($description) > 0) {
             $this->evt->setDescription($description);
         } else {
-            $this->evt->setDescription("Pas de description pour l'instant.");
+            if (strlen($this->evt->getDescription()) < 1) {
+                $this->evt->setDescription("Pas de description pour l'instant.");
+            }
         }
 
         if ($maj) {
