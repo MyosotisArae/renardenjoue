@@ -35,7 +35,7 @@ class MsgErreur
     /*
      * Retourne true si la date est interprétable en DateTime, false sinon.
      */
-    public function isDateValide($uneDate) {
+    public function isDateValide($uneDate=null) {
         if ( (strlen($uneDate) < 10) || ((strtotime($uneDate)) === false) ) {
             $dateDuJour = new DateTime();
             $dateDuJourText = "Ex : aujourd'hui=".$dateDuJour->format("Y-m-d");
@@ -49,6 +49,48 @@ class MsgErreur
     }
 
     /*
+     * Retourne true si $uneHeure est correctement renseignée (non nulle, non vide)
+     */
+    public static function isHeureRenseignee(DateTime $uneHeure=null) {
+        if ($uneHeure == null) { return false; } // heure nulle => non renseignée
+        else {
+            // L'heure n'est pas nulle.
+            $heureString = $uneHeure->format('H:i');
+            // Ce format retourne au moins 1 caractère. Est-ce le cas ?
+            if (strlen($heureString) < 1) { return false; } // Ceci n'est pas une heure valide => non renseignée
+            else {
+                // Est-ce que c'est 00:00 ? C'est surement une valeur par défaut, dans ce cas.
+                if ($heureString == '00:00') { return false; } // Ceci n'est pas une heure valide => non renseignée
+            }
+        }
+        return true;
+    }
+
+    /*
+     * Retourne true si $uneHeure est une heure valide et non nulle
+     */
+    public static function isHeureValide(string $uneHeure=null) {
+        // Déjà,elle ne doit pas être nulle.
+        if ($uneHeure == null) { return false; }
+        if (strlen($uneHeure) < 1) { return false; }
+        $dateTestText = "2021-09-30 ".$uneHeure.":00";
+        if (strtotime($dateTestText) === false) { return false; }
+        return true;
+    }
+
+    /*
+     * Retourne true si l'heure h1 est supérieure à l'heure h2, et false sinon.
+     */
+    public static function isSuperieurH(DateTime $h1, DateTime $h2) {
+        // Mettre des dates identiques afin de ne comparer que les heures.
+        $date1String = "2021-10-21 ".$h1->format('H:i').":00";
+        $date2String = "2021-10-21 ".$h2->format('H:i').":00";
+        $d1 = new DateTime($date1String);
+        $d2 = new DateTime($date2String);
+        return ($d1 > $d2);
+    }
+
+    /*
      * Indique si la date limite :
      * - est mal formatée (NOK),
      * - tombe après la date de début de l'événement (DEPASSEE),
@@ -56,7 +98,7 @@ class MsgErreur
      * - est aujourd'hui (AUJOURDHUI),
      * - n'est dans aucun de ces cas (OK).
      */
-    public function isDateLimiteOk(string $dateLim, DateTime $dateEvt) {
+    public function isDateLimiteOk(string $dateLim, DateTime $dateEvt=null) {
         // Contrôle de validité de la date limite.
         if (!$this->isDateValide($dateLim)) { return; }
         $dateLimite = new DateTime($dateLim);

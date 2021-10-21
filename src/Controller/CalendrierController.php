@@ -163,15 +163,9 @@ class CalendrierController extends ParentController
     // Vérifier la date de l'évènement.
     $dateDebut = new Datetime(date_format($evt->getDateDebut(), 'Y-m-d'));
 
-    // Le dimanche, comme le samedi, la date limite doit être le jeudi.
-    // Donc il faut un jour de délai de plus si la soirée est le dimanche.
-    $jourSemaine = date_format($dateDebut,'D');
-    $delai = new DateInterval("P3D");
-    if ($jourSemaine == 'Sun') $delai = new DateInterval("P4D");
-
-    $limiteInscription = new Datetime(date_format($dateDebut, 'Y-m-d'));
+    // Date limite d'inscription
+    $limiteInscription = $evt->getLimite();
     $now = new Datetime(date_format(new DateTime('now'), 'Y-m-d'));
-    $limiteInscription = $limiteInscription->sub($delai);
 
     $this->util = $this->get("utilitaires");
     $combien = $this->combienDeParticipants($num);

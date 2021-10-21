@@ -146,7 +146,6 @@ class ServiceDiscord extends Command
         // C'est l'idUser de l'événement qu'il faut utiliser.
         $guild = $this->discord->guilds->get('id',$interaction->guild_id);
         $mb = $guild->members->get('id',$this->evt->getUserId());
-        var_dump($mb);
         $nom = $mb->user->username;
         $prenom = $mb->nick;
         if ($prenom != null) {
@@ -157,7 +156,7 @@ class ServiceDiscord extends Command
         $texte .= "♟                                  __°°° **".$this->evt->getTitre()."** °°°__\n";
         $texte .= ucfirst($nom)." invite ".$this->evt->getCapacite()." personnes le ";
         $texte .= Utilitaires::traduireDate($this->evt->getDateDebut()->format('Y-m-d'))." ";
-        if ($this->evt->getHeureFin() > $this->evt->getHeureDebut()) { 
+        if (MsgErreur::isSuperieurH($this->evt->getHeureFin(), $this->evt->getHeureDebut())) { 
             $texte .= "de ".$this->evt->getHeureDebut()->format('H:i');
             $texte .= " à ".$this->evt->getHeureFin()->format('H:i');
         } else {
@@ -530,64 +529,91 @@ class ServiceDiscord extends Command
 
         // Nombre de participants
         $nb = intval($choices->nombre);
-        if ($nb == 0) {
-            $nb = 4;
-            $parDefaut .= $virgule."4 invités";
-            $virgule = ', ';
-            $pluriel[] = 's';
+        if ($nb < 1) {
+            $nb = $this->evt->getCapacite();
+            if ($nb < 1) {
+                $nb = 4;
+                $parDefaut .= $virgule."4 invités";
+                $virgule = ', ';
+                $pluriel[] = 's';
+            } else {
+                $nb = $this->evt->getCapacite();
+            }
         }
         $this->evt->setCapacite($nb);
 
         // Heure de début
-        $heureD = $choices->heure;
-        if (isset($heureD)) {
-            $dateTestText = "2021-09-30 ".$heureD.":00";
+        $heureDebutRenseignee = MsgErreur::isHeureRenseignee($this->evt->getHeureDebut());
+        $heureDebutSaisie = $choices->heure;
+        if (strlen($heureDebutSaisie ) > 0) {
+            $dateTestText = "2021-09-30 ".$heureDebutSaisie .":00";
             if (strtotime($dateTestText) === false) {
                 // L'heure saisie n'est pas valide. On met 14h à la place.
-                $heureD = "14:00";
-                $remarques .= "\n Pour l'heure d'arrivée, on va mettre 14h plutôt que '".$heureD."'.";
+                $remarques .= "\nJe ne comprend pas cette heure : '".$heureDebutSaisie ."'. ";
+                if ($heureDebutRenseignee) {
+                    $remarques .= "Je vais garder l'heure d'avant : '".$this->evt->getHeureDebut()->format('H:i')."'.";
+                } else {
+                    $remarques .= "Pour l'heure d'arrivée, on va plutôt mettre 14h.";
+                    $this->evt->setHeureDebutFromString('14:00');
+                }
             } else {
-                $heureD = (new DateTime($dateTestText))->format('H:i');
+                $h = (new DateTime($dateTestText))->format('H:i');
+                $this->evt->setHeureDebutFromString($h);
             }
         } else {
-            $heureD = "14:00";
-            $parDefaut .= $virgule."arrivée à 14h";
-            $virgule = ', ';
-            $pluriel[] = 's';
+            if (!$heureDebutRenseignee) {
+                $this->evt->setHeureDebutFromString('14:00');
+                $heureD = "14:00";
+                $parDefaut .= $virgule."arrivée à 14h";
+                $virgule = ', ';
+                $pluriel[] = 's';
+            }
         }
 
-        $this->evt->setHeureDebutFromString($heureD);
 
-        // Heure de fin par défaut : 3h après.
+        // Heure de fin par défaut : 3h après l'heure de début.
         $troisHeures = new DateInterval('PT3H');
         $hF = new DateTime($this->evt->getHeureDebut()->format('H:i'));
         $hF->add($troisHeures);
-        $this->evt->setHeureFin($hF);
+        // Est-ce que l'événement a déjà une heure de fin ?
+        $heureFinRenseignee = MsgErreur::isHeureRenseignee($this->evt->getHeureFin());
         // Contrôle de l'heure de fin saisie
-        $heureF= $choices->fin;
-        if (isset($heureF)) {
-            $dateTestText = "2021-09-30 ".$heureF.":00";
+        $heureFinSaisie = $choices->fin;
+        if (strlen($heureFinSaisie) > 0) {
+            // Une heure de fin a été saisie. Il faut la vérifier.
+            $dateTestText = "2021-09-30 ".$heureFinSaisie .":00";
             if (strtotime($dateTestText) === false) {
-                // L'heure saisie n'est pas valide. On conserve l'heure de fin par défaut.
-                $remarques .= "\n Je ne comprends pas cette heure : '".$heureF."'. Je vais plutôt enregistrer '".$this->evt->getHeureFin()->format('H:i')."'."; 
+                // Ce format d'heure n'est pas valide.
+                $remarques .= "\nJe ne comprends pas cette heure : '".$heureFinSaisie ."'.";
+                // Si on avait déjà une heure de fin, on la garde.
+                // Sinon, on met par défaut : heure de fin = heure de début + 3h
+                if ($heureFinRenseignee) {
+                    $remarques .= " Je vais conserver l'ancienne : ".$this->evt->getHeureFin()->format('H:i').".";
+                } else {
+                    $this->evt->setHeureFin($hF);
+                    $remarques .= " Je vais plutôt enregistrer '".$hF->format('H:i')."'."; 
+                }
             } else {
-                // Cette date est correcte, on l'enregistre.
+                // Cette heure est correcte, on l'enregistre.
                 $this->evt->setHeureFin(new Datetime($dateTestText));
             }
         } else {
-            $parDefaut .= $virgule."fin vers ".$hF->format('H:i');
-            $virgule = ', ';
-            $pluriel[] = 's';
+            if (!$heureFinRenseignee) {
+                $this->evt->setHeureFin($hF);
+                $parDefaut .= $virgule."fin vers ".$hF->format('H:i');
+                $virgule = ', ';
+                $pluriel[] = 's';
+            }
         }
         
         // Titre
         $titre = $choices->titre;
-        if (isset($titre)) {
+        if (strlen($titre) > 0) {
             $this->evt->setTitre($titre);
         }
 
         $description = $choices->description;
-        if (isset($description) && strlen($description)>0) {
+        if (strlen($description) > 0) {
             $this->evt->setDescription($description);
         } else {
             $this->evt->setDescription("Pas de description pour l'instant.");
@@ -596,6 +622,7 @@ class ServiceDiscord extends Command
         if ($maj) {
             // Mise à jour de l'événement en base de données
             BDD::save($this->manager,$this->evt);
+            $this->formaterEvt($interaction);
         } else {
             // Création d'un canal dans la catégorie Parties
             $newChannel = $interaction->guild->channels->create([
