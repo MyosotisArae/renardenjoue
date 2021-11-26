@@ -141,6 +141,13 @@ class ServiceDiscord extends Command
         });
     }
 
+    function changerBRenRetourChariot($chaine)
+    {
+    	$resultat = trim($chaine);
+    	$resultat = str_replace("<br>","\n",$resultat);
+    	return $resultat;
+    }
+
     private function formaterEvt($interaction) {
         // L'organisateur de la séance n'est pas forcément l'auteur de cette commande.
         // C'est l'idUser de l'événement qu'il faut utiliser.
@@ -162,7 +169,7 @@ class ServiceDiscord extends Command
         } else {
             $texte .= "dès ".$this->evt->getHeureDebut()->format('H:i');
         }
-        $texte .= ".\n\n```".$this->evt->getDescription()."```\n";
+        $texte .= ".\n\n```".$this->changerBRenRetourChariot($this->evt->getDescription())."```\n";
 
         $listeParticipants = $this->getQui($interaction);
         if ($listeParticipants->isErreur()) {
