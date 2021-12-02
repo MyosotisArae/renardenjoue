@@ -83,6 +83,7 @@ class ServiceDiscord extends Command
             $discord->on(EVENT::MESSAGE_CREATE, function($message,$discord){
                 //return $this->messages->salut($message);
                 // Effacer les messages de commande après 5s.
+              if ($message->interaction) {
                 if ($message->interaction->type == 2) {
                     $nomCmd = $message->interaction->name; 
                     $nosCommandes = ['creer','maj','inscription','desinscription']; 
@@ -95,6 +96,7 @@ class ServiceDiscord extends Command
                         });
                     }
                 }
+              }
             });
 
                 /*
@@ -171,7 +173,7 @@ class ServiceDiscord extends Command
         }
         $texte .= ".\n\n```".$this->changerBRenRetourChariot($this->evt->getDescription())."```\n";
 
-        $listeParticipants = $this->getQui($interaction);
+        $listeParticipants = $this->getQui($this->evt);
         if ($listeParticipants->isErreur()) {
             $texte .= "\n*Nombre d'invités attendu : ".$this->evt->getCapacite()."*";
         } else {
@@ -211,7 +213,7 @@ class ServiceDiscord extends Command
      * Affiche la liste des personnes qui sont inscrites à la séance associée au channel où l'on se trouve.
      */
     private function commandeQui(Interaction $interaction) {
-        $listeParticipants = $this->getQui($interaction);
+        $listeParticipants = $this->getQui($this->evt);
         if ($listeParticipants->isErreur()) {
             $interaction->reply($listeParticipants->getErreur());
             return;
@@ -228,10 +230,10 @@ class ServiceDiscord extends Command
      * En cas d'erreur (le canal dans lequel la commande a été faite n'est pas associé à un événement), la fonction retourne
      * une ligne d'un seul élément : ['erreur','...message...','']
      */
-    private function getQui(Interaction $interaction) {
+    private function getQui($evt) {
         $listeParticipants = new ListeInscriptions();
-        $channelId = $interaction->channel_id;
-        $evt = BDD::getEvtByChannel($this->manager, $channelId);
+        //$channelId = $interaction->channel_id;
+        //$evt = BDD::getEvtByChannel($this->manager, $channelId);
         if ($evt == null) {
             $listeParticipants->setErreur("Ce canal n'est associé à aucun événement. Soit vous n'êtes pas au bon endroit, soit l'événement a été annulé.");
             return $listeParticipants;
@@ -654,7 +656,7 @@ class ServiceDiscord extends Command
                         BDD::save($this->manager,$this->evt);
 
                         $texte = $this->formaterEvt($interaction);
-                        $channel->sendMessage($texte)->done( function ($msg) use ($channel) {
+                        $channel->sendMessage($texte)->done( function ($msg) {
                             // Une fois le message créé, on l'épingle.
                             $channel->pinMessage($msg)->done( function ($x) {} );
                         });
