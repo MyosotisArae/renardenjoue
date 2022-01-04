@@ -127,7 +127,7 @@ class LudothequeRepository extends ServiceEntityRepository
       $liste = $this->findBy(
         array(),              // Critère
         array('id' => 'desc'),// Tri
-        3,                    // Limite : les 3 premiers (donc les 3 derniers car la liste est en ordre inverse)
+        4,                    // Limite : les 4 premiers (donc les 4 derniers car la liste est en ordre inverse)
         0                     // Offset
       );
       
