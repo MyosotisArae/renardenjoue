@@ -54,6 +54,7 @@ class ServiceDiscord extends Command
 	    $this->discord = new Discord([
             'token' => $token,
             'loadAllMembers' => true,
+            //'logger' => new \Monolog\Logger('New logger'),
             //'pmChannels' => true,
             'intents' => Intents::getDefaultIntents() | Intents::GUILD_MEMBERS // Enable the GUILD_MEMBERS intent
         ]);
@@ -61,6 +62,8 @@ class ServiceDiscord extends Command
             'loop' => $this->discord->getLoop(), // Discord and Client MUST share event loops
         ]);
         $this->client->linkDiscord($this->discord);
+        // Pour réduire la taille des fichiers de debug :
+        //$this->discord->logger->pushHandler(new DiscordHandler\DiscordHandler('Discord Webhook url', 'name', 'subname', 'ERROR'));
         // Canaux sur lesquels le bot écrit
         $this->idParties = $idParties;
         $this->idAnnonces = $idAnnonces;
@@ -78,7 +81,7 @@ class ServiceDiscord extends Command
      */
     public function discordOn() {
 		$this->discord->on('ready', function ($discord) {
-		    //echo "Bot {$this->botId} is ready!", PHP_EOL;
+		    echo "Bot {$this->botId} is ready!", PHP_EOL;
             // Messages à écouter
             $discord->on(EVENT::MESSAGE_CREATE, function($message,$discord){
                 //return $this->messages->salut($message);
@@ -90,7 +93,7 @@ class ServiceDiscord extends Command
                     if (in_array($nomCmd,$nosCommandes)) {
                         // Durée proportionelle à la taille du message : 1s pour 15 lettres
                         $duree = intval(strlen($message->content) / 15);
-                        echo "\nAttente de ".$duree."s\n";
+                        //echo "\nAttente de ".$duree."s\n";
                         $this->discord->getLoop()->addTimer($duree, function () use ($message) {
                             $message->delete();
                         });
@@ -173,7 +176,7 @@ class ServiceDiscord extends Command
         }
         $texte .= ".\n\n```".$this->changerBRenRetourChariot($this->evt->getDescription())."```\n";
 
-        $listeParticipants = $this->getQui($this->evt);
+        $listeParticipants = $this->getQui($this->evt, $interaction);
         if ($listeParticipants->isErreur()) {
             $texte .= "\n*Nombre d'invités attendu : ".$this->evt->getCapacite()."*";
         } else {
@@ -213,7 +216,7 @@ class ServiceDiscord extends Command
      * Affiche la liste des personnes qui sont inscrites à la séance associée au channel où l'on se trouve.
      */
     private function commandeQui(Interaction $interaction) {
-        $listeParticipants = $this->getQui($this->evt);
+        $listeParticipants = $this->getQui($this->evt, $interaction);
         if ($listeParticipants->isErreur()) {
             $interaction->reply($listeParticipants->getErreur());
             return;
@@ -230,7 +233,7 @@ class ServiceDiscord extends Command
      * En cas d'erreur (le canal dans lequel la commande a été faite n'est pas associé à un événement), la fonction retourne
      * une ligne d'un seul élément : ['erreur','...message...','']
      */
-    private function getQui($evt) {
+    private function getQui($evt, $interaction) {
         $listeParticipants = new ListeInscriptions();
         //$channelId = $interaction->channel_id;
         //$evt = BDD::getEvtByChannel($this->manager, $channelId);
@@ -464,7 +467,6 @@ class ServiceDiscord extends Command
         if ($maj) {
             // En cas de mise à jour, récupérer l'événement en base.
             $this->evt = BDD::getEvtByChannel($this->manager, $canal);
-
             if ($this->evt == null) {
                 // Ce canal ne correspond à aucun événement.
                 $remarques  = "Aucun événement de la base de donnée n'est associé au canal dans lequel vous vous trouvez.\n";
@@ -473,6 +475,7 @@ class ServiceDiscord extends Command
                 $interaction->reply($remarques);
                 return;
             }
+            
             // L'événement existe. L'auteur est-il le même que celui de cette action de mise à jour ?
             if ($this->evt->getUserId() != $auteur->id) {
                 // Impossible de modifier l'événement d'un autre.
@@ -503,7 +506,6 @@ class ServiceDiscord extends Command
         $virgule = '';
         // Un 's' sera ajouté à chaque valeur par défaut : à la fin, l'avant dernier élément du tableau sera 's' s'il y a plusieurs valeurs par défaut, '' sinon.
         $pluriel = ['',''];
-
         // Date limite
         // Remarque : Si la date limite de l'événement n'était pas encore settée dans $this->evt,
         // le setDateDebut que l'on vient d'appeler l'aura fait. Donc, ci-après, on ne va traiter
@@ -579,7 +581,6 @@ class ServiceDiscord extends Command
             }
         }
 
-
         // Heure de fin par défaut : 3h après l'heure de début.
         $troisHeures = new DateInterval('PT3H');
         $hF = new DateTime($this->evt->getHeureDebut()->format('H:i'));
@@ -614,7 +615,7 @@ class ServiceDiscord extends Command
                 $pluriel[] = 's';
             }
         }
-        
+
         // Titre
         $titre = $choices->titre;
         if (strlen($titre) > 0) {
@@ -654,9 +655,8 @@ class ServiceDiscord extends Command
 
                         $this->evt->setChannelId(strval($channel->id)); 
                         BDD::save($this->manager,$this->evt);
-
                         $texte = $this->formaterEvt($interaction);
-                        $channel->sendMessage($texte)->done( function ($msg) {
+                        $channel->sendMessage($texte)->done( function ($msg) use ($channel) {
                             // Une fois le message créé, on l'épingle.
                             $channel->pinMessage($msg)->done( function ($x) {} );
                         });
@@ -673,7 +673,6 @@ class ServiceDiscord extends Command
 
         // Cas de la mise à jour : il faut aussi modifier le message dans Parties.
         $this->updatePinnedMessage($interaction);
- 
         $interaction->reply("Evénement du ".$dateAffichee->format('d/m/Y')." modifié.".$remarques);
     }
 
@@ -682,7 +681,9 @@ class ServiceDiscord extends Command
      */
     private function updatePinnedMessage($interaction) {
         $channel = $interaction->guild->channels->get('id', $interaction->channel_id);
-        $channel->getPinnedMessages()->done(function ($liste) use ($interaction, $channel) {
+        //$channel->getPinnedMessages()->done(function ($liste) use ($interaction, $channel) {
+        $channel->getMessages()->done(function ($liste) use ($interaction, $channel) {
+        //$channel = $interaction->guild->channels->get('id', $interaction->channel_id);
             foreach ($liste as $msg) {
                 // Parcourir les messages pour changer celui du bot.
                 if ($msg->author->id == $this->botId) {
