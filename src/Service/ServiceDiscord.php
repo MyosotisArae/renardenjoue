@@ -681,8 +681,7 @@ class ServiceDiscord extends Command
      */
     private function updatePinnedMessage($interaction) {
         $channel = $interaction->guild->channels->get('id', $interaction->channel_id);
-        //$channel->getPinnedMessages()->done(function ($liste) use ($interaction, $channel) {
-        $channel->getMessages()->done(function ($liste) use ($interaction, $channel) {
+        $channel->getPinnedMessages()->done(function ($liste) use ($interaction, $channel) {
         //$channel = $interaction->guild->channels->get('id', $interaction->channel_id);
             foreach ($liste as $msg) {
                 // Parcourir les messages pour changer celui du bot.
