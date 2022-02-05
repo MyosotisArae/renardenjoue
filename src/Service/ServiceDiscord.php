@@ -648,9 +648,8 @@ class ServiceDiscord extends Command
              ]);
              $interaction->guild->channels->save($newChannel)->done(function (Channel $channel) use ($interaction) {
                         $auteur  = $interaction->member->user;
-                        $texte = $auteur->username." a ajouté un événement : ".$this->evt->getTitre().".";
-                        $url = "\nVous pouvez vous y inscrire et voir les détails ici : https://discord.com/channels/".$channel->guild_id.'/'.$channel->id;
-                        $url.= "\n(Prérequis : renseigner votre identifiant discord sur le site de l'asso)";
+                        $texte = $auteur->username." a ajouté : ".$this->evt->getTitre()." dans le salon PARTIES.";
+                        $url = "\nInscription et détails ici : https://discord.com/channels/".$channel->guild_id.'/'.$channel->id;
                         $this->channelAnnonces->sendMessage($texte.$url);
 
                         $this->evt->setChannelId(strval($channel->id)); 
