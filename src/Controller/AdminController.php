@@ -256,7 +256,6 @@ class AdminController extends ParentController
       $rp = $em->getRepository('App:Evenements');
       $evt = $rp->findOneBy(array('id' => $id));
     }
-
     $evt->setTitre($_POST['chTitre']);
     $evt->setCapacite($_POST['chCapacite']);
     $evt->setDescription($_POST['chDesc']);
@@ -264,14 +263,20 @@ class AdminController extends ParentController
     $evt->setHeureDebutFromString($_POST['chHdeb-h'].':'.$_POST['chHdeb-m']);
     // Date et heure de fin sont facultatives
     $jour = $_POST['chDfin-j'];
-    if ($jour != null && count($jour)>0)
+    if ($jour != null)
     {
-      $evt->setDateFinFromString($jour.'-'.$_POST['chDfin-m'].'-'.$_POST['chDfin-a']);
+        if (strlen($jour)>0)
+        {
+            $evt->setDateFinFromString($jour.'-'.$_POST['chDfin-m'].'-'.$_POST['chDfin-a']);
+        }
     }
     $heure = $_POST['chHfin-h'];
-    if ($heure != null && count($heure)>0)
+    if ($heure != null)
     {
-      $evt->setHeureFinFromString($heure.':'.$_POST['chHfin-m']);
+        if (strlen($heure)>0)
+        {
+           $evt->setHeureFinFromString($heure.':'.$_POST['chHfin-m']);
+        }
     }
 
     $this->saveDate($evt);
