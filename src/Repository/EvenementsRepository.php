@@ -49,6 +49,7 @@ class EvenementsRepository extends ServiceEntityRepository
         ->orWhere('e.dateFin is null')
         ->andWhere('e.dateDebut < :df')
         ->setParameter('df', $dateFin)
+        ->andWhere('e.dateDebut > :dd')
         ->orderBy('e.dateDebut', 'DESC');
       ;
       //$_SESSION['requeteSQL'] = $qb->getQuery()->getSQL();
