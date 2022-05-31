@@ -1,4 +1,7 @@
 {
+    "composer/package-versions-deprecated": {
+        "version": "1.11.99.4"
+    },
     "discord-php/http": {
         "version": "v9.0.4"
     },
@@ -94,6 +97,9 @@
     "evenement/evenement": {
         "version": "v3.0.1"
     },
+    "fig/http-message-util": {
+        "version": "1.1.5"
+    },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
@@ -109,9 +115,6 @@
     "laminas/laminas-code": {
         "version": "3.4.1"
     },
-    "mobiledetect/mobiledetectlib": {
-        "version": "2.8.33"
-    },
     "mollie/polyfill-libsodium": {
         "version": "v1.1.1"
     },
@@ -124,15 +127,6 @@
     "nikic/php-parser": {
         "version": "v4.2.3"
     },
-    "ocramius/package-versions": {
-        "version": "1.4.0"
-    },
-    "ocramius/proxy-manager": {
-        "version": "2.2.3"
-    },
-    "php": {
-        "version": "7.3"
-    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -143,6 +137,9 @@
         "version": "1.0.0"
     },
     "psr/http-client": {
+        "version": "1.0.1"
+    },
+    "psr/http-factory": {
         "version": "1.0.1"
     },
     "psr/http-message": {
@@ -220,18 +217,6 @@
     "simplito/elliptic-php": {
         "version": "1.0.8"
     },
-    "suncat/mobile-detect-bundle": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "8284b33273c99974ef84c7e544e94aefac1a4c7f"
-        },
-        "files": [
-            "./config/packages/mobile_detect.yaml"
-        ]
-    },
     "symfony/cache": {
         "version": "v4.3.3"
     },
@@ -253,9 +238,6 @@
             "./bin/console",
             "./config/bootstrap.php"
         ]
-    },
-    "symfony/debug": {
-        "version": "v4.3.3"
     },
     "symfony/dependency-injection": {
         "version": "v4.3.3"
@@ -383,9 +365,6 @@
     },
     "symfony/polyfill-php81": {
         "version": "v1.23.0"
-    },
-    "symfony/profiler-pack": {
-        "version": "v1.0.5"
     },
     "symfony/property-access": {
         "version": "v4.3.3"
@@ -527,11 +506,5 @@
     },
     "wrep/daemonizable-command": {
         "version": "3.1.0"
-    },
-    "zendframework/zend-code": {
-        "version": "3.3.1"
-    },
-    "zendframework/zend-eventmanager": {
-        "version": "3.2.1"
     }
 }
