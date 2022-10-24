@@ -89,7 +89,7 @@ class ServiceDiscord extends Command
               if ($message->interaction) {
                 if ($message->interaction->type == 2) {
                     $nomCmd = $message->interaction->name; 
-                    $nosCommandes = ['creer','maj','inscription','desinscription']; 
+                    $nosCommandes = ['creer','maj','inscription','desinscription','site']; 
                     if (in_array($nomCmd,$nosCommandes)) {
                         // Durée proportionelle à la taille du message : 1s pour 15 lettres
                         $duree = intval(strlen($message->content) / 15);
@@ -140,9 +140,9 @@ class ServiceDiscord extends Command
         $this->client->registerCommand('desinscription', function (Interaction $interaction, Choices $choices) {
             $this->commandeParticiper($interaction, $choices, false);
         });
-        // Affichage des personnes inscrites à une séance
-        $this->client->registerCommand('qui', function (Interaction $interaction, Choices $choices) {
-            $this->commandeQui($interaction);
+        // Mettre à jour mon compte sur le site depuis Discord
+        $this->client->registerCommand('email', function (Interaction $interaction, Choices $choices) {
+            $this->commandeEmail($interaction, $choices);
         });
     }
 
@@ -392,6 +392,7 @@ class ServiceDiscord extends Command
 
             $texte  = "Vous n'étiez pas enregistré sur le site, ou bien votre identifiant Discord n'a pas été mis à jour.\n ";
             $texte .= "L'utilisateur ".$nom." a été créé pour vous.";
+            $texte .= " Pour mettre à jour votre email sur le site (afin de recevoir la newsletter, notamment), utilisez la commande /site et renseignez le paramètre email. ";
             $texte .= "Contactez myosotis.arae@gmail.com pour :\n";
             $texte .= "- supprimer ce nouveau compte si vous en aviez déjà un (mentionnez votre nom et votre identifiant sur discord)";
             $texte .= "\nou\n- obtenir le mot de passe de ce nouveau compte afin d'être en mesure de vous y connecter.";
@@ -447,6 +448,59 @@ class ServiceDiscord extends Command
         $this->updatePinnedMessage($interaction);
 
         $interaction->reply($txt);
+    }
+
+    /*
+     * Mettre à jour, sur le site, les champs fournis en paramètre.
+     */
+    private function commandeEmail(Interaction $interaction, Choices $choices) {
+        // Partir du principe qu'on va faire la sauvegarde de cet utilisateur.
+        $sauvegarder = true;
+        // Ce paramètre indiquera, dans le message final, si le compte a été créé ou juste mis à jour.
+        $action = "créé.";
+        // Identifier l'auteur de la demande et le retrouver sur le site
+        $auteur  = $interaction->member->user;
+        $userSite = BDD::getUser($this->manager,$auteur->id);
+        if ($userSite)
+        {
+            // Il existe sur le site. Mettre à jour l'email.
+            $action = "mis à jour.";
+            // Est-ce que l'email a bien été saisi ?
+            if ($choices->email) {
+                if (strlen($choices->email)>3) {
+                    $userSite->email = $choices->email;
+                }
+                else $sauvegarder = false;
+            }
+            else $sauvegarder = false;
+            if ($sauvegarder == false) { 
+                $interaction->reply("Votre compte sur le site a été trouvé, mais pour le mettre à jour, vous devez saisir le paramètre : email.");
+                return;
+            }
+        }
+        else
+        {
+            // Cet utilisateur Discord n'a pas encore de compte sur le site.
+            $msg = "";
+            $userSite = new User();
+            $nom = $auteur->username.$auteur->discriminator;
+            $user->setNom($nom);
+            $user->setUserId($auteur->id);
+            $email = "myosotis.arae@gmail.com";
+            if ($choices->email) {
+                if (strlen($choices->email)>3) {
+                    $email = $choices->email;
+                }
+                else $msg = "Vous n'avez pas saisi d'email. Vous pouvez mettre cela à jour en retapant la commande /email. Grâce à cette adresse, nous pourrons vous envoyer la newsletter mensuelle et vous informer des actus de l'asso. ";
+            }
+            $user->setEmail($email);
+        }
+        if ($sauvegarder)
+        {
+            BDD:save($this->manager,$userSite);
+            $msg .= "Votre compte sur le site (".$user->getNom().") a été ".$action;
+            $interaction->reply($msg);
+        }
     }
 
     /*

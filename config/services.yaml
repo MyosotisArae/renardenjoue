@@ -56,6 +56,12 @@ services:
            $token: '%env(TOKEN)%'
            $botId: '%env(BOT_ID)%'
 
+    # Mise à jour ou création du compte sur le site
+    App\Command\CommandeEmail:
+       arguments:
+           $token: '%env(TOKEN)%'
+           $botId: '%env(BOT_ID)%'
+
     # Affichage des noms des inscrits
     App\Command\CommandeQui:
        arguments:
