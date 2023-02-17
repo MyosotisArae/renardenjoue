@@ -4,28 +4,12 @@
     --couleur_facebook : #183153;
     --couleur_discord  : #5666E2;
 }
-
 body
 {
   overflow-x : hidden;
   overflow-y : hidden;
-  background-image : url(images/fond.png);
-/*
-  margin : 0px;
-  padding : 0px;
-  background-repeat : no-repeat;
-  background-attachment: fixed;
-  background-position: center center;
-  -webkit-background-size : cover;
-  -moz-background-size : cover;
-  -o-background-size : cover;
-*/
-  background-size : cover;
+  vertical-align : top;
 }
-html { font-size : 1.4vw; }
-@media (max-width: 768px)  { html {font-size: 7vw;  } }
-@media (max-width: 992px)  { html {font-size: 3vw;  } }
-@media (max-width: 1200px) { html {font-size: 1.5vw;} }
 
 /* Styles pour empecher bootstrap d'appliquer ses couleurs */
 .OurFont
@@ -60,6 +44,29 @@ a.barreDEmenu:hover
 {
   color : black;
 }
+
+/* ascenseur */
+
+::-webkit-scrollbar {
+  width: 0.7em;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 1 0 5px white;
+  border-radius: 0.5em;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--couleur_base);
+  border-radius: 0.5em;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--couleur_base);
+}
+::-webkit-scrollbar-track:hover
+{
+  box-shadow: inset 0 0 15px var(--couleur_base); /*428bca; */
+  border-radius: 0.5em;
+}
+
 
 /* Pour avoir une fonte plus petite et placée à droite : se connecter/mon compte + les liens discord et facebook */
 .menuAdroite
