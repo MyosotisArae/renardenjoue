@@ -4,10 +4,6 @@
     --couleur_facebook : #183153;
     --couleur_discord  : #5666E2;
 }
-html
-{
-  font-size : 1.4vw;
-}
 
 body
 {
@@ -26,30 +22,11 @@ body
 */
   background-size : cover;
 }
-@media (max-width: 768px)
-{
-  html{font-size: 7vw;}
-  body
-  {
-    background-image : url("images/fondVertical.png");
-  }
-}
-@media (max-width: 992px)
-{
-  html{font-size: 3vw;}
-  body
-  {
-    background-image : url("images/fondVertical.png");
-  }
-}
-@media (max-width: 1200px)
-{
-  html{font-size: 1.5vw;}
-  body
-  {
-    background-image : url("images/fond.png");
-  }
-}
+html { font-size : 1.4vw; }
+@media (max-width: 768px)  { html {font-size: 7vw;  } }
+@media (max-width: 992px)  { html {font-size: 3vw;  } }
+@media (max-width: 1200px) { html {font-size: 1.5vw;} }
+
 /* Styles pour empecher bootstrap d'appliquer ses couleurs */
 .OurFont
 {
@@ -67,7 +44,7 @@ btn
 a
 {
   border : none!important;
-  color : #000;
+  color : black;
   font-style : italic;
 }
 a:hover
@@ -76,8 +53,8 @@ a:hover
 }
 .barreDEmenu
 {
-  font-weight : bold;:
-  color : var(--couleur_fond);
+  font-weight : bold;
+  color : white;
 }
 a.barreDEmenu:hover
 {
@@ -108,10 +85,6 @@ a.barreDEmenu:hover
   color : white;
 }
 .fondBleu { background: var(--couleur_base); }
-.fondBlanc
-{
-  background : white;
-}
 * { box-sizing: border-box; }
 w-max { width : 100vw; }
 .tresLarge
@@ -153,7 +126,7 @@ img.fond
 {
   position : absolute;
   top : 1em;
-  left : -1em;
+  left :-1em;
   width : 110%;
   z-index : -100;
 }
@@ -209,10 +182,12 @@ img.moyenneImage
 {
   color : red;
 }
+/*
 .blanc
 {
   color : white;
 }
+*/
 .enAbsolu
 {
   position : absolute;
@@ -225,7 +200,6 @@ img.moyenneImage
 {
   color:#000;
   border:3px solid var(--couleur_base);
-  border-radius : 0.1em;
   width : 100%;
   height : auto;
   background : transparent;/*IVORY*/
@@ -249,7 +223,6 @@ a.bouton
   color : white;
   font-size : 1.2vw;
   padding : 0.4em;
-  border-radius : 0.2em;
 }
 /* Pas de soulignement au survol, pour que �a ait l'air d'un bouton */
 a.bouton:hover
