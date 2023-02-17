@@ -4,7 +4,7 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ContactController extends ParentController
+class FaqController extends ParentController
 {
   /**
    * @Route("/faq", name="faq")
