@@ -71,7 +71,7 @@
                        id : {{evt.id}},
                        allDay : false,
                        textColor : '#FFFFFF',
-                       {% if evt.capacite > 0 %}backgroundColor: '#ff0000',{% endif %}
+                       {% if evt.capacite > 0 %}backgroundColor: 'var(--couleur_base)',{% endif %}
                        title : "{{evt.titre|raw}}",
                        start : "{{evt.dateDebut|date('Y-m-d')}} {{evt.heureDebut|date('H:i')}}"
                        {% if evt.aUneDateDeFin %},end : "{{evt.dateFin|date('Y-m-d')}}"
@@ -118,7 +118,7 @@
 {% endblock %}
 
 {% block laPage %}
-<div class='container-fluid fondOpaque' id='partieBlanche' style='width : 95%;height : 100vh; overflow-y : auto; margin-bottom : 25vh;'>
+<div class='container-fluid fondOpaque OurFont' id='partieBlanche' style='width : 95%;height : 100vh; overflow-y : auto; margin-bottom : 25vh;'>
   <div class='row' style='height : 100%;'>
     <div class='col-12' id='monCalendrier' style='height : 90%;'>
     </div>

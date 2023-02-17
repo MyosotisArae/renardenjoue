@@ -10,7 +10,7 @@
 h3
 {
   color:#000;
-  border-bottom:3px solid #428bca;
+  border-bottom:3px solid var(--couleur_base); /*428bca;*/
 }
 .bouton
 {
@@ -19,7 +19,7 @@ h3
 
 #monCalendrier { overflow-y: hidden; }
 .fc-content-skeleton
-{ max-height : 1px; margin-top: 0.5em; background-color: #428bca; }
+{ max-height : 1px; margin-top: 0.5em; background-color: var(--couleur_base); }
 .fc-widget-content
 {
   max-height : 2em;

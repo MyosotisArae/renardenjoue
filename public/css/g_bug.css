@@ -7,12 +7,10 @@
 html
 {
   font-size : 1.4vw;
+  orientation : portrait;
 }
-
 body
 {
-  overflow-x : hidden;
-  overflow-y : hidden;
   background-image : url(images/fond.png);
 /*
   margin : 0px;
@@ -34,7 +32,7 @@ body
     background-image : url("images/fondVertical.png");
   }
 }
-@media (max-width: 992px)
+@media (max-width: 992px) 
 {
   html{font-size: 3vw;}
   body
@@ -45,15 +43,11 @@ body
 @media (max-width: 1200px)
 {
   html{font-size: 1.5vw;}
-  body
-  {
-    background-image : url("images/fond.png");
-  }
 }
 /* Styles pour empecher bootstrap d'appliquer ses couleurs */
 .OurFont
 {
-  font-family : 'Reem Kufi';
+  font-family : 'Reem Kufi'!important;
 }
 btn
 {
@@ -76,7 +70,7 @@ a:hover
 }
 .barreDEmenu
 {
-  font-weight : bold;:
+  font-weight : bold;
   color : var(--couleur_fond);
 }
 a.barreDEmenu:hover
@@ -91,7 +85,6 @@ a.barreDEmenu:hover
   text-align : right;
 }
 /* fin override bootstrap */
-
 .retracter { padding : 20px; }
 .fondVert { background : lightgreen; }
 .fondJaune { background : yellow; }
@@ -127,6 +120,16 @@ w-max { width : 100vw; }
   width : 50vw;
   height : 50vh;
 }
+/*
+.logo
+{
+  height : 3em;
+  width : auto;
+  position : absolute;
+  top : 0;
+  left : 0;
+}
+*/
 .navbar
 {
   padding : 0;
@@ -149,6 +152,18 @@ select.nav-link
   font-size : 2vw;
   padding-right : 1.7em;
 }
+body
+{
+  overflow-x : hidden;
+  overflow-y : hidden;
+}
+/*
+body.fond
+{
+  background-image : url('/images/fond.png');
+  background-repeat : repeat;
+}
+*/
 img.fond
 {
   position : absolute;
@@ -160,6 +175,7 @@ img.fond
 [data-icon]:before {
   font-family: icons; /* BYO icon font, mapped smartly */
   content: attr(data-icon);
+  speak: none; /* Not to be trusted, but hey. */
 }
 fieldset legend
 {
@@ -191,7 +207,6 @@ img.moyenneImage
   width : 15vw;
   height: auto;
 }
-
 .divScroll
 {
   position : fixed;
@@ -242,7 +257,6 @@ img.moyenneImage
   text-align : center;
   vertical-align : center;
 }
-
 /* Lien sous forme de bouton (mettre bg-primary en plus, pour la couleur de fond) */
 a.bouton
 {
@@ -273,13 +287,13 @@ a.bouton:hover
 .liens, .burger
 {
   font-size : 2vw;
-  color : white;
+  color : white; 
   padding-bottom : 0.8em;
   opacity : 0.5;
 }
 .liens:hover
 {
-  color : white;
+  color : white; 
   padding-bottom : 0.8em;
   opacity : 0.7;
 }
@@ -293,17 +307,19 @@ a.bouton:hover
 a.dropdown-item
 {
   font-size : 1.5vw;
-  color : white;
+  color : white; 
 }
-
 .burgerMenu a.dropdown-item
 {
   font-size : 3vw;
 }
 
-.cadreBleu
+.cadreBleu *
 {
-    border : 3px solid black;
+    /*
+    {# border: 5px solid var(--couleur_base); #}
+    {# border-radius : 1em; #}*/
+    border : 3px solid black !important;
     padding : 3px;
     width : 100%;
 }
@@ -315,4 +331,3 @@ a.dropdown-item
   background-size : cover;
   background-repeat: no-repeat;
 }
-

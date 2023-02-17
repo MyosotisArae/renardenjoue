@@ -21,66 +21,84 @@
     <br>
   </div>
 
-  <div class="col-12 col-md-7 container" style="box-sizing: border-box;">{# colonne 1 #}
-    <div class="row encadrer cadreBleu">
-      <div class="col-11">
-        <br>
-        <h1><a href="jeux">Nos jeux</a></h1>
-      </div>
-      <div class="col-1">
-      </div>
-      <div class="col-11">
-        <br><br>
-        <h1><a href="https://discord.com/channels/886954892076404768/886957613110153226">Notre forum</a></h1>
-      </div>
-      <div class="col-1">
-      </div>
-      <div class="col-11">
-        <br><br>
-        <h1><a href="contact">Infos et contact</a></h1>
-      </div>
-      <div class="col-1">
-      </div>
-      <div class="col-11">
-        <br><br>
-        <h1><a href="calendrier">{{"évènements à venir"|capitalize}}</a></h1>
-        <br>
-      </div>
-    </div>{# row encadrée #}
-    
-  </div>{# colonne 1 #}
-
-  <div class="col-12 col-md-1">
-    <h1>&nbsp;</h1>
-  </div>
-  <div class="col-12 col-md-4 encadrer cadreBleu">{# colonne 2 #}
+  <div class="col-8 col-md-7 container" style="box-sizing: border-box;">{# colonne 1 #}
     <div class="row">
-      <div class="col-md-12 col-6">
-        <u>Prochains évènements :</u><br>
+
+      <table>
+        <tr>
+          <td> <img src="{{img_path}}logo.gif" alt="Le Renard Enjoué"> </td>
+          <td>
+            <table>
+              <tr>
+                <td> <h1 class="OurFont">Bienvenue chez</h1> </td>
+              </tr>
+              <tr>
+                <td> <h1 class="OurFont">Le Renard Enjoué</h1> </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table> {# fin : titre du message #}
+
+      <table>
+        <tr>
+          <td> Vous voulez jouer ? Vous êtes au bon endroit. </td>
+        </tr>
+        <tr>
+          <td> Consultez l'agenda pour trouver les dates des prochaines parties organisées.</td>
+        </tr>
+        <tr>
+          <td> Vous pouvez vous y inscrire ici ou depuis <a href="https://discord.com/channels/886954892076404768/886957613110153226">notre forum.</a> </td>
+        </tr>
+        <tr>
+          <td> On n'attend plus que vous ! </td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+
+  <div class="col-4"> {# Colonne de droite #}
+
+    <div class="row"> {# ligne pour les prochains evts #}
+
+      <div class="cadreBleu">
+        <i class="fas fa-calendar-alt fa-2x"></i>&nbsp;Nos prochains évènements :<br>
+        <ul>
         {% if nextEvts|length > 0 %}
           {% for evt in nextEvts %}
-          <li>Le {{evt.date}} :</li>
+          <li>Le {{evt.date}} :
           {% set titre = evt.titre %}
           {% if evt.capacite > 0 %}
             {% set titre = "Aprèm-jeux de l'asso" %}
           {% endif %}
-          <div style='margin-left : 2.5em;'><a href='afficherEvt{{evt.id}}'>{{titre}}</a></div>
+          {#<div style='margin-left : 2.5em;'><a href='afficherEvt{{evt.id}}'>{{titre}}</a></div></li>#}
+          <a href='afficherEvt{{evt.id}}'>{{titre}}</a></li>
           {% endfor %}
-        {% else %}
-          Rien n'est prévu dans les prochains mois.
-          <br><br>
+    {% else %}
+      <br>Rien n'est prévu dans les prochains mois.<br>
         {% endif %}
-        <br><br>
-      </div>
-      <div class="col-md-12 col-6">
-        <u>Ajouts récents :</u><br>
+        </ul>
+      </div> {# Fin du cadre des evts #}
+    </div> {# Fin de la row des evts #}
+
+    <div class="row"> {# On saute une ligne entre les deux cadres #}
+      <br>
+    </div>
+
+    <div class="row">
+      <div class="cadreBleu">{# derniers jeux #}
+        <i class="fas fa-dice fa-2x"></i>&nbsp;Les nouveaux jeux de notre collection :<br>
+        <ul>
         {% for jeu in lastGames %}
         <li><a href="choisirJeu{{jeu.id}}">{{jeu.nomComplet}}</a></li>
         {% endfor %}
+        </ul>
         <br>
         Venez les tester !<br>
-      </div>
-    </div>
-  </div>{# colonne 2 #}
+      </div> {# cadre : derniers jeux #}
+    </div>{# row : derniers jeux #}
+
+  </div> {# fin : Colonne de droite #}
 
 {% endblock %} {# Fin du block laPage #}

@@ -17,7 +17,7 @@
 <div class="col-1">
   <br>
 </div>
-<div class="col-5 enBleu">
+<div class="col-5 enBleu OurFont">
     {% if app.user %}
         <div class="checkbox mb-3">Heureux de vous voir, {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
     {% else %}
@@ -34,7 +34,7 @@
 <div class="col-1">
 </div>
 
-<div class="col-3 enBleu centrer" style='height : 100%;'>
+<div class="col-3 enBleu centrer OurFont" style='height : 100%;'>
   <form method="POST" action="newUser">
     <br>
     <a href="newUser" class="bouton bg-primary">

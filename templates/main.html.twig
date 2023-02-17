@@ -2,12 +2,12 @@
 <html class="w-100">
 <head>
 {% block entete %}
-  <link rel='shortcut icon' sizes='32x32' href='/images/favicon_32x32.ico' type='image/x-icon'/>
-  <link rel='shortcut icon' sizes='16x16' href='/images/favicon_16x16.ico' type='image/x-icon'/>
-  <link rel='icon' href='/images/favicon.png' type='image/png'/>
+  <link rel='shortcut icon' sizes='32x32' href='/images/favicon_32x32.ico' type='image/x-icon'>
+  <link rel='shortcut icon' sizes='16x16' href='/images/favicon_16x16.ico' type='image/x-icon'>
+  <link rel='shortcut icon' sizes='100x105' href='/images/favicon.png'>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="{{ BScss_path }}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{BScss_path }}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="{{css_path}}general.css">
   
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -15,6 +15,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
   <script src="{{ BSjs_path }}" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <!-- script src="https://kit.fontawesome.com/a076d05399.js"></script -->
   <script src="https://kit.fontawesome.com/ac0e3984ff.js"></script>
   
 
@@ -34,24 +35,72 @@
 {% endblock %}
 </head>
 
-  <body class="w-max">
+<body class="w-max">
+
     {% include '_alert.html.twig' %}
 {% block corps %}
   {% set isAdministrateur = false %}
 
+  <table style="width : 100%; height : 1.5em; background-color : var(--couleur_base);">
+    <tr>
+      <td style="width : 4%;">
+      </td>
+      <td>
+              <a class="barreDEmenu" href="accueil">Accueil</a>
+      </td>
+      <td>
+              <a class="barreDEmenu" href="calendrier">Agenda</a>
+      </td>
+      <td>
+              <a class="barreDEmenu" href="jeux">Jeux</a>
+      </td>
+      <td>
+              <a class="barreDEmenu" href="faq">FAQ</a>
+      </td>
+      <td class="w-max">
+                  <table class="w-max">
+                    <tr class="w-max">
+                      <td class="w-max menuAdroite" colspan="3">
+                        {% if 'memberConnected' in session|keys %}
+                          <a class="barreDEmenu menuAdroite" href="compte">Mon compte&nbsp;<i class="fas fa-user"></i></a>
+                        {% else %}
+                          <a class="barreDEmenu menuAdroite" href="login">Connexion&nbsp;<i class="fas fa-sign-in-alt"></i></a>
+                        {% endif %}
+                      </td>
+                    </tr>
+                    <tr>
+                            <td>
+                              <a class="barreDEmenu" href="https://discord.com/channels/886954892076404768/886957613110153226">
+                                &nbsp;<i class="fab fa-discord" style="color:var(--couleur_discord);"></i>
+                              </a>
+                            </td>
+                            <td>
+                              &nbsp;
+                            </td>
+                            <td>
+                              <a class="barreDEmenu" href="https://www.facebook.com/lerenardenjoue">
+                                <i class="fab fa-facebook" style="color:var(--couleur_facebook);"></i>
+                              </a>
+                            </td>
+                    </tr>
+                  </table>
+      </td>
+    </tr>
+  </table>
+
+{#
     <header class="row w-max" id="blocBarreMenu">
       <div class="col-12 container-fluid w-max">
         <nav class="navbar navbar-expand-sm navbar-dark bg-primary w-max">
             <div class="navbar-nav col-12">
-                <li class="nav-item" style="width:10px;"><img src="{{img_path}}logo.gif" class="logo">&nbsp;</li>
                 <li class="nav-item{{ ongletActif("ACC") }}" title="Page d'accueil">
-                  <a class="nav-link visible-block" href="accueil"><i class="fas fa-home">&nbsp;</i>Accueil</a>
+              <a class="nav-link visible-block" href="accueil">Accueil</a>
                 </li>
                 <li class="nav-item{{ ongletActif("CAL") }}" title="Calendrier des évènements">
-                  <a class="nav-link" href="calendrier"><i class="fas fa-calendar-alt">&nbsp;</i>Agenda</a>
+                  <a class="nav-link" href="calendrier">Agenda</a>
                 </li>
                 <li class="nav-item{{ ongletActif("JEU") }}" title="Liste de nos jeux">
-                  <a class="nav-link" href="jeux"><i class="fas fa-dice">&nbsp;</i>Jeux</a>
+                  <a class="nav-link" href="jeux">Jeux</a>
                 </li>
                 {% if isAdministrateur %}
                 <li class="nav-item">
@@ -62,42 +111,17 @@
                   </select>
                 </li>
                 {% endif %}
-                <li class="nav-item{{ ongletActif("CNX") }}">
-                {% if 'memberConnected' in session|keys %}
-                  <a class="nav-link" href="compte"><i class="fas fa-address-card">&nbsp;</i>Mon compte</a>
-                {% else %}
-                  <a class="nav-link" href="login"><i class="fas fa-sign-in-alt">&nbsp;</i>Se connecter</a>
-                {% endif %}
+                <li class="nav-item{{ ongletActif("FAQ") }}" title="Questions les plus fréquentes">
+                  <a class="nav-link" href="faq">FAQ</a>
                 </li>
-                <li class="nav-item{{ ongletActif("CTC") }}" title="Pour nous trouver ou nous envoyer un message">
-                  <a class="nav-link" href="contact"><i class="fas fa-comment">&nbsp;</i>Contact</a>
-                </li>
-                <li class="nav-item" title="Liens vers d'autres pages">
-                  <div class="btn-group">{# Nécessaire pour que les    sous-menus soient alignés avec le menu Liens #}
-                    <button type="button" class="btn btn-default dropdown-toggle liens" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-link">&nbsp;</i>Liens</button>
-                    <ul class="dropdown-menu bg-primary">
-                      <a class="dropdown-item" href="https://www.bussysaintgeorges.fr/education/petite-enfance/la-ludotheque/" title="Ludothèque de Bussy, gratuite, pour les enfants de 0 à 12 ans, pour le moment ...">Ludothèque de Bussy</a>
-                      <a class="dropdown-item" href="http://www.lavalleedesjeux.com/" title="Ludothèque ouverte à tous, sur inscription (3O€)">Ludothèque de Bailly Romainvilliers</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="https://www.facebook.com/lerenardenjoue" title="Nos annonces en images sur Facebook">Notre page Facebook</a>
-                      <a class="dropdown-item" href="https://discord.com/channels/886954892076404768/886957613110153226" title="Discutez avec les autres membres de l'asso">Notre forum Discord</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="https://ludiworld.com/newshop/84-jeux-de-societe" title="Votre boutique de jeux, ici, à Bussy !">Ludiworld</a>
-                      <a class="dropdown-item" href="http://www.ludhainaut.fr/" title="Association de joueurs à Onnaing (Nord) - Se réunit le deuxième dimanche de chaque mois">Lud'Hainaut</a>
-                      <a class="dropdown-item" href="https://www.ludinord.fr/" title="Organisation sous l'égide de la Fédéjeux">LudiNord</a>
-                    </ul>
-                  </div>
+                <li class="nav-item">
                 </li>
             </div>
 
-          {#</div>#}
         </nav>
       </div>
     </header>
-
-    <img class="fond container-fluid d-none d-lg-block enAbsolu" style="top:3em; background-size : cover;" src="{{img_path}}fond.png">
-    <img class="fond container-fluid d-lg-none enAbsolu" style="top:3em; background-size : cover;" src="{{img_path}}fondVertical.png">
-
+#}
     <div class="row retracter" id="mainRow">
           {% block laPage %}
           {% endblock %}
@@ -106,5 +130,6 @@
 {% endblock %}
 {% block piedDePage %}
 {% endblock %}
-  </body>
+</body>
+
 </html>

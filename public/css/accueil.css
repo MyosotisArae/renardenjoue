@@ -5,7 +5,7 @@ img.petiteImage
 }
 h1, h1 a
 {
-  color : #428bca; /* couleur bg-primary */
+  color : var(--couleur_base); /* couleur bg-primary */
   text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
   text-align : center;
   width : 100%;

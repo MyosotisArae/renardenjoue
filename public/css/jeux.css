@@ -3,7 +3,7 @@
   height : 3em;
   width : auto;
   border : 2px dashed black;
-  background : #FDFCE9;
+  background : var(--couleur_fond);
   padding : 0.1em;
 }
 div.grandeImage
@@ -20,7 +20,7 @@ div.grandeImage
 .h-100 { height: 100%; }
 h1
 {
-  color : #FDFCE9;
+  color : var(--couleur_fond);
   text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
   text-align : center;
   width : 100%;
@@ -28,16 +28,12 @@ h1
 }
 h2
 {
-  /*
-  color : #FDFCE9;
-  text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
-  */
   text-align : center;
   font-size : 1.5em;
 }
 h3
 {
-  color :#428bca; /* couleur bg-primary */
+  color : var(--couleur_base); /*428bca;*/ /* couleur bg-primary */
   text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
   text-align : left;
   font-size : 1.2em;
@@ -45,7 +41,7 @@ h3
 }
 label
 {
-  color:#428bca; /* couleur bg-primary */
+  color : var(--couleur_base); /*428bca;*/ /* couleur bg-primary */
   text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
   text-align : right;
   width : 100%;
@@ -61,18 +57,18 @@ input
   font-size : 1.5em;
   width : 100%;
   vertical-align : bottom;
-  border : 2px solid #5bc0de;
+  border : 2px solid var(--couleur_base); /*5bc0de;*/
   border-radius : 0.6em;
-  background : #FDFCE9;
+  background : var(--couleur_fond);
 }
 select
 {
   font-size : 1.5em;
   width : 100%;
   vertical-align : bottom;
-  border : 2px solid #5bc0de;
+  border : 2px solid var(--couleur_base); /*5bc0de;*/
   border-radius : 0.6em;
-  background : #FDFCE9;
+  background : var(--couleur_fond);
 }
 .listeJeux
 {
@@ -91,15 +87,15 @@ select
   border-radius: 0.5em;
 }
 ::-webkit-scrollbar-thumb {
-  background: #428bca; 
+  background: var(--couleur_base); 
   border-radius: 0.5em;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #5bc0de; 
+  background: var(--couleur_base); 
 }
 ::-webkit-scrollbar-track:hover
 {
-  box-shadow: inset 0 0 15px #428bca; 
+  box-shadow: inset 0 0 15px var(--couleur_base); /*428bca; */
   border-radius: 0.5em;
 }
 .jeSuisInvisible
@@ -116,7 +112,7 @@ select
 .souligneBleu
 {
   display: inline-block;
-  border-bottom: 2px solid #5bc0de;
+  border-bottom: 2px solid var(--couleur_base); /*5bc0de;*/
 }
 .enLigne
 {
@@ -191,9 +187,9 @@ a.fonte10  { font-family : Artistic-CE; }
   top : -1em;
   left : 3em;
   box-sizing: border-box;
-  border: 2px solid #428bca;
+  border: 2px solid var(--couleur_base); /*428bca;*/
   border-radius : 0.5em;
-  background : #FDFCE9;
+  background : var(--couleur_fond);
   visibility : hidden;
   z-index : 6000;
   padding : 0.5em;
@@ -247,7 +243,7 @@ img.imageCarree3
   left : 1em;
   font-family : "Comic Sans MS";
   font-size : 2em;
-  color : #FDFCE9;
+  color : var(--couleur_base);
   text-shadow : 1px 0px black, -1px 0px black, 0px 1px black, 0px -1px black;
 }
 .texteCarre2
@@ -259,7 +255,7 @@ img.imageCarree3
 {
   width : 100%;
   font-size : 1.2em;
-  color : #FDFCE9;
+  color : var(--couleur_fond);
   text-shadow : 1px 0px black, -1px 0px black, 0px 1px black, 0px -1px black;
   padding-left : 1em;
   padding-right : 1em;

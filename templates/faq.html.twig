@@ -5,19 +5,15 @@
   <link rel="stylesheet" href="{{css_path}}jeux.css">
   <link rel="stylesheet" href="{{css_path}}toolTip.css">
   <style>
-    .dropdown {
-      position: relative;
-      display: inline-block;
+    .divCachee {
+      display : none;
     }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      z-index: 1;
+    .toggle {
+      display : block;
     }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
+    .toggle:hover+.divCachee {
+      display : flex;
+      flex-direction : column-reverse;
     }
   </style>
 {% endblock %}
@@ -29,46 +25,69 @@
 
 {% block laPage %}
 
-      <div class='col-12 fondOpaque ascenseur text-justify'>
-        <div class='row text-justify'>
+      <div class="col-12 ascenseur container" style="box-sizing: border-box;">{# colonne 1 #}
+        <div class="row encadrer cadreBleu fondOpaque OurFont">
           <div class='col-12'>
-            <h1>Quelques réponses à vos questions :</h1>
-            <div class="dropdown">
-              <a href="#">Que propose l'association du Renard Enjoué ?</a>
-              <div href="#">
-                Notre association réunit des joueurs et aspirants joueurs autour de tables de jeux. Nos membres vous invitent chez eux pour jouer.
-              </div>
-            </div>
-            <div class="dropdown">
-              <a href="#">Je ne connais aucun jeu. Je peux venir quand même ?</a>
-              <div href="#">
+            <h1 style="color:var(--couleur_base);">Quelques réponses à vos questions :</h1>
+          </div>
+
+          <div class='col-6'>
+
+              <a href="#" class="toggle">Je ne connais aucun jeu. Je peux venir quand même ?</a>
+              <div class="divCachee">
                 Bien évidemment !<br>
                 Quel que soit le type de jeu proposé, toutes les règles vous seront expliquées en détail avant de commencer. Il n'y a aucun prérequis pour participer à une séance de jeux. Vérifiez simplement que le profil visé vous correspond (voir ci-dessous).
               </div>
-            </div>
-            <div class="dropdown">
-              <a href="#">Quel est le public visé ?</a>
-              <div href="#">
-                Chaque séance de jeu vise un public spécifique, et vous pouvez demander (par mail ou, mieux, sur le forum) l'ajout d'une date correspondant à votre profil (jeux d'ambiance, découverte de petits jeux, d'un gros jeu de stratégie ou d'un jeu spécifique par exemple).<br>
-                Pour ne gâcher la partie de personne, nous sommes soucieux de ne pas mixer des joueurs débutants avec des experts. Donc, nous précisons le profil de joueur requis pour chaque partie organisée. Nous organisons des parties pour :
-<li>les débutants : ceux qui jouent peu ou qui ne connaissent que les jeux classiques, comme le tarôt, mais qui veulent découvrir les jeux de société modernes</li>
-<li>les experts : ils ont déjà joué à des jeux de plusieurs heures, connaissent les Colons de Catane et sont prêts à digérer une demie-heure d'explication de règles</li>
-<li>les joueurs "intermédiaires", les connaisseurs et les curieux : prêts à découvrir de nouveaux jeux, sur une ou deux heures, voire plus si affinité</li>
+
+              <a href="#" class="toggle">Quel est le public visé ?</a>
+              <div class="divCachee">
+                Chaque séance de jeu vise un public spécifique. Pour ne gâcher la partie de personne, nous sommes soucieux de ne pas mixer des joueurs débutants avec des experts. Donc, nous précisons le profil de joueur requis pour chaque partie organisée. Nous organisons des parties pour tous :<li>les débutants : peu coutumiers des jeux, à part les classiques, comme le tarôt</li><li>les experts : ont déjà joué à des jeux de plusieurs heures et sont prêts à digérer une demie-heure d'explication de règles</li <li>les joueurs "intermédiaires" et les curieux : prêts à découvrir de nouveaux jeux de durée moyenne</li>
               </div>
-            </div>
-            <div class="dropdown">
-              <a href="#">Où se situent vos locaux ?</a>
-              <div href="#">
-                Nous n'en avons pas (encore), mais nous mettons la pression sur la mairie pour en obtenir un.<br>
-                En attendant, nous jouons les uns chez les autres : nos membres proposent des séances de jeux et vous invitent chez eux pour jouer.<br>
-                La plupart de ces séances se déroulent au :<br>
-                <div class='custom-control custom-checkbox'>
-                  <b>4 boulevard Pierre Mendès France<br>
-                  77600 Bussy Saint Georges<br></b>
-                </div>
-                <img src="{{ img_path }}planQuartier.png" style='width : 100%;'>
+
+              <a href="#" class="toggle">Comment vous joindre ?</a>
+              <div class="divCachee">
+                Vous avez d'autres questions ? Laissez-moi un message :<br>myosotis.arae@gmail.com
               </div>
-            </div>
+
+          </div>
+
+          <div class='col-6'>
+
+              <a href="#" class="toggle">Que propose l'association du Renard Enjoué ?</a>
+              <div class="divCachee">
+                    <p>Notre association réunit des joueurs et aspirants joueurs autour de tables de jeux. Nos membres vous invitent chez eux pour jouer.</p>
+              </div>
+
+              <a href="#" class="toggle">De quand date l'association du Renard Enjoué ?</a>
+              <div class="divCachee">
+                    <p>L'association a été fondée en 2019.<br>
+                       Son objectif est de vous aider à trouver des joueurs près de chez vous, pour jouer plus souvent, plus facilement. Vous pourrez aussi y découvrir nombre de jeux intéressants, qui vous seront présentés par leurs propriétaires lors de nos séances de jeux. Tout le monde peut créer sa propre séance, grâce aux commandes slash gérées par notre bot sur Discord.</p>
+              </div>
+
+              <a href="https://www.youtube.com/embed/svgnDivZn10">Présentation de l'asso en vidéo <i>(redirection vers youtube)</i></a>
+
+          </div>
+
+          <div class='col-12'>
+              <a href="#" class="toggle">Où se situent vos locaux ?</a>
+              <div class="divCachee">
+                <table>
+                  <tr>
+                    <td style="width : 70%; vertical-align : text-bottom;">
+                      Nous n'en avons pas (encore), mais nous mettons la pression sur la mairie pour en obtenir un.<br>
+                      En attendant, nous jouons les uns chez les autres : nos membres proposent des séances de jeux et vous invitent chez eux pour jouer.<br><br>
+                      Quand l'adresse n'est pas mentionnée, c'est que ça se déroule au siège de l'asso :<br>
+                      <b>4 boulevard Pierre Mendès France<br>
+                      77600 Bussy Saint Georges<br></b>
+                    </td>
+                    <td>
+                      <img src="{{ img_path }}planQuartier.png" style='width : 100%;'>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+          </div>
         </div>
       </div>
 
