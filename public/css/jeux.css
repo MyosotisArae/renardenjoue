@@ -58,7 +58,6 @@ input
   width : 100%;
   vertical-align : bottom;
   border : 2px solid var(--couleur_base); /*5bc0de;*/
-  border-radius : 0.6em;
   background : var(--couleur_fond);
 }
 select
@@ -67,7 +66,6 @@ select
   width : 100%;
   vertical-align : bottom;
   border : 2px solid var(--couleur_base); /*5bc0de;*/
-  border-radius : 0.6em;
   background : var(--couleur_fond);
 }
 .listeJeux
@@ -169,10 +167,10 @@ a.fonte10  { font-family : Artistic-CE; }
   left : 3em;
   box-sizing: border-box;
   border: 2px solid var(--couleur_base); /*428bca;*/
-  border-radius : 0.5em;
   background : var(--couleur_fond);
+  opacity : 1;
   visibility : hidden;
-  z-index : 6000;
+  z-index : 2;
   padding : 0.5em;
 }
 .camembert:hover .legendeCamembert { visibility : visible; }

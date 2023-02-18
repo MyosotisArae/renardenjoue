@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block laPage %}
-      <div class='col-12 OurFont'>{# Bloc Filtrage des jeux #}
+      <div class='col-12'>{# Bloc Filtrage des jeux #}
         <div class='fondOpaque cadreBleu'>
           <form  method='POST' action='jeux?operation=recherche'>
               <table class='w-100'>
@@ -79,7 +79,7 @@
                     </a>
                   </td>
                   <td>
-                    <input type='submit' class='cadreBleu fondBleu bouton OurFont' href='jeux?operation=recherche' title='Rechercher les jeux correspondants à ces critères' value='Chercher'>
+                    <input type='submit' class='cadreBleu fondBleu bouton' href='jeux?operation=recherche' title='Rechercher les jeux correspondants à ces critères' value='Chercher'>
                   </td>
                 </tr>
               </table>
@@ -91,7 +91,7 @@
         <br>
       </div>
 
-      <div class='col-12 OurFont'>{# Bloc Liste des jeux #}
+      <div class='col-12'>{# Bloc Liste des jeux #}
         <div class='listeJeux cadreBleu h-30'>
 
 {% set classeCouleur = random(12) %}
@@ -120,7 +120,7 @@
         <br>
       </div>
 
-      <div id="blocDetailJeu" class='col-12 OurFont' style='padding-top : 1em;'>{# Bloc Titre #}
+      <div id="blocDetailJeu" class='col-12' style='padding-top : 1em;'>{# Bloc Titre #}
         <div class='fondOpaque cadreBleu'>
           <div class='row'>
             <div class='col-12'>&nbsp;</div>
@@ -143,7 +143,7 @@
         <br>
       </div>
 
-      <div class='col-md-4 col-12 camembert OurFont'>{# Bloc Nom, image et durée #}
+      <div class='col-md-4 col-12 camembert'>{# Bloc Nom, image et durée #}
         <div id='divImg'>
           {% if (session.jeuChoisi.nbImg > 1) %}
             {% set nomFichier = session.jeuChoisi.img %}
@@ -272,7 +272,7 @@
         </div>
       </div>{# Bloc Nom, image et durée #}
 
-      <div class="col-md-8 col-12 OurFont' style='z-index : -1; height:auto;">{# Bloc But et principe #}
+      <div class="col-md-8 col-12' style='z-index : -1; height:auto;">{# Bloc But et principe #}
         <div class="fondOpaque cadreBleu enRelatif" style="height:auto;">
           <div class="enLigne">
             <h3 class="enLigne"><label>But :</label></h3>
@@ -286,7 +286,7 @@
         <br><br>
       </div>{# Bloc But et principe #}
 
-      <div class='col-12 OurFont'>
+      <div class='col-12'>
         <br><br><br>
   {% set currentPath = path(app.request.attributes.get('_route'),
                        app.request.attributes.get('_route_params')) %}

@@ -39,6 +39,7 @@ a:hover
 }
 .barreDEmenu
 {
+  font-size : 1.2em;
   font-weight : bold;
   color : white;
 }
@@ -218,7 +219,7 @@ img.moyenneImage
 .fondOpaque
 {
   background : transparent;/*IVORY*/
-  opacity : 0.9;
+  opacity : 1;
 }
 .centrer
 {
@@ -237,6 +238,9 @@ a.bouton
 a.bouton:hover
 {
   text-decoration : none;
+  background : transparent!important;
+  color : var(--couleur_base)!important;
+  border : 2px solid var(--couleur_base)!important;
 }
 /* Pour mettre un ascenseur vertical dans une div */
 .ascenseur
