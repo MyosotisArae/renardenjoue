@@ -1,5 +1,5 @@
 :root {
-    --burger_closed : -10em;
+    --burger_closed : -12em;
     --burger_opened : 10em;
     /*
     --burger_closed : -150px;
@@ -8,14 +8,13 @@
 }
 /* Sidenav menu */
 .sidenav {
-  height: 100%;
   width: var(--burger_opened );
   position: fixed;
   z-index: 1;
   top: 0;
   right: var(--burger_closed);
-  color: var(--couleur_base);
-  background-color: var(--couleur_fond);
+  color: white;
+  background-color: var(--couleur_base);
   padding-top: 60px;
   transition: right 0.5s ease;
 }
@@ -42,5 +41,4 @@
   position: absolute;
   top: 0;
   right: 1px;
-  color : red;
 }

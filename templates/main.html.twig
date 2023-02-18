@@ -44,19 +44,19 @@
   <div id="blocBarreMenu"></div><!-- Necessaire pour la page Jeux -->
 
   <div id="mySidenav" class="sidenav cadreBleu">
-    <a id="closeBtn" href="#" class="close"><i class="fa fa-window-close"></i></a>
+    <a id="closeBtn" href="#" class="close barreDEmenu"><i class="fa fa-window-close"></i></a>
     <ul>
-      <li><a href="accueil">Accueil</a></li>
-      <li><a href="calendrier">Agenda</a></li>
-      <li><a href="jeux">Jeux</a></li>
-      <li><a href="faq">FAQ</a></li>
+      <li><a style="font-weight : bold;color : white;" href="accueil">Accueil</a></li>
+      <li><a style="font-weight : bold;color : white;" href="calendrier">Agenda</a></li>
+      <li><a style="font-weight : bold;color : white;" href="jeux">Jeux</a></li>
+      <li><a style="font-weight : bold;color : white;" href="faq">FAQ</a></li>
       {% if 'memberConnected' in session|keys %}
-        <li><a href="compte">Mon compte</a></li>
+        <li><a style="font-weight : bold;" href="compte">Mon compte</a></li>
       {% else %}
-        <li><a href="login">Connexion</a></li>
+        <li><a style="font-weight : bold;" href="login">Connexion</a></li>
       {% endif %}
-      <li><a href="https://discord.com/channels/886954892076404768/886957613110153226">Forum Discord</a></li>
-      <li><a href="https://www.facebook.com/lerenardenjoue">Page Facebook</a></li>
+      <li><a style="font-weight : bold;" href="https://discord.com/channels/886954892076404768/886957613110153226">Forum Discord</a></li>
+      <li><a style="font-weight : bold;" href="https://www.facebook.com/lerenardenjoue">Page Facebook</a></li>
     </ul>
   </div>
   
