@@ -1,0 +1,46 @@
+:root {
+    --burger_closed : -10em;
+    --burger_opened : 10em;
+    /*
+    --burger_closed : -150px;
+    --burger_opened : 150px;
+    */
+}
+/* Sidenav menu */
+.sidenav {
+  height: 100%;
+  width: var(--burger_opened );
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: var(--burger_closed);
+  color: var(--couleur_base);
+  background-color: var(--couleur_fond);
+  padding-top: 60px;
+  transition: right 0.5s ease;
+}
+
+/* Sidenav menu links */
+.sidenav a {
+  padding: 3px 3px 3px 10px;
+  display: block;
+  transition: 0.3s;
+}
+.sidenav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Active class */
+.sidenav.active {
+  right: 0px;
+}
+
+/* Close btn */
+.sidenav .close {
+  position: absolute;
+  top: 0;
+  right: 1px;
+  color : red;
+}

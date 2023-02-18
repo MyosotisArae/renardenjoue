@@ -9,6 +9,7 @@ body
   overflow-x : hidden;
   overflow-y : hidden;
   vertical-align : top;
+  font-family : 'Reem Kufi';
 }
 
 /* Styles pour empecher bootstrap d'appliquer ses couleurs */
@@ -16,14 +17,15 @@ body
 {
   font-family : 'Reem Kufi';
 }
-btn
+.btn
 {
-  font-family : 'Reem Kufi'!important;
   background-color : var(--couleur_base)!important;
+  border-color : var(--couleur_base)!important;
+  border-radius : 0px!important;
 }
 .bg-primary, .btn-primary {
-  font-family : 'Reem Kufi'!important;
   background-color : var(--couleur_base)!important;
+  border-color : var(--couleur_base)!important;
 }
 a
 {
