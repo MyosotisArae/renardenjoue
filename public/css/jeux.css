@@ -79,25 +79,6 @@ select
   background : black;
   z-index : 3000;
 }
-::-webkit-scrollbar {
-  width: 0.7em;
-}
-::-webkit-scrollbar-track {
-  box-shadow: inset 1 0 5px white; 
-  border-radius: 0.5em;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--couleur_base); 
-  border-radius: 0.5em;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--couleur_base); 
-}
-::-webkit-scrollbar-track:hover
-{
-  box-shadow: inset 0 0 15px var(--couleur_base); /*428bca; */
-  border-radius: 0.5em;
-}
 .jeSuisInvisible
 {
   position : absolute;
