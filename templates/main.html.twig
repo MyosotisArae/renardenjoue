@@ -40,7 +40,16 @@
 {% block corps %}
   {% set isAdministrateur = false %}
 
-  <table style="width : 100%; height:15em; background-color : var(--couleur_base);" id="blocBarreMenu">
+
+  <table class="burgerMenu" style="width : 100%; background-color : var(--couleur_base);" id="blocBarreMenu">
+    <tr class="w-max">
+      <td class="w-max menuAdroite">
+        <a class="barreDEmenu menuAdroite" href="#"><i class="fa fa-align-justify fa-2x"></i></a>
+      </td>
+    </tr>
+  </table>
+
+  <table class="grandEcran" style="width : 100%; height:1.5em; background-color : var(--couleur_base);" id="blocBarreMenu">
     <tr>
       <td style="width : 5%;">
       </td>
@@ -87,6 +96,8 @@
 
 
 <style>
+.burgerMenu { display : table; }
+.grandEcran  { display : none; }
 .imageDEfond
 {
   margin : 0px;
@@ -107,6 +118,8 @@ html { font-size : 2vw; }
     background-image : url({{img_path}}fond.png);
     overflow-y : hidden;
   }
+  .burgerMenu { display : none; }
+  .grandEcran  { display : table; }
 }
 </style>
 
