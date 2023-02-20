@@ -10,6 +10,7 @@ body
   overflow-y : hidden;
   vertical-align : top;
   font-family : 'Reem Kufi';
+  word-spacing : 0.5em;
 }
 
 /* Styles pour empecher bootstrap d'appliquer ses couleurs */
@@ -46,6 +47,27 @@ a:hover
 a.barreDEmenu:hover
 {
   color : black;
+}
+
+/* Lien en blanc sans modification de la police (menu burger) */
+.lienBlanc
+{
+  color : white;
+}
+.lienBlanc:hover
+{
+  color : black;
+}
+/* Lien en noir sans modification de la police (liens dans la page FAQ) */
+.lienNoir
+{
+  color : black;
+  font-weight : normal;
+}
+.lienNoir:hover
+{
+  color : var(--couleur_base);
+  font-weight : bold;
 }
 
 /* ascenseur */
@@ -302,3 +324,8 @@ a.dropdown-item
   background-repeat: no-repeat;
 }
 
+/* td contenant un icone Renard : &#x1F98A; */
+td.fox
+{
+  vertical-align : top;
+}

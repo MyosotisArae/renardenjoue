@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html class="w-100">
+<html class="w-100" lang="fr">
 <head>
+  <title>Le Renard Enjoué</title>
 {% block entete %}
   <link rel='shortcut icon' sizes='32x32' href='/images/favicon_32x32.ico' type='image/x-icon'>
   <link rel='shortcut icon' sizes='16x16' href='/images/favicon_16x16.ico' type='image/x-icon'>
@@ -33,6 +34,37 @@
   </script>
 
 {% endblock %}
+
+
+<style>
+.burgerMenu { display : table; }
+.grandEcran  { display : none; }
+.imageDEfond
+{
+  margin : 0px;
+  width : 100vw;
+  height : 110vh;
+  vertical-align : top;
+  background-image : url(/images/fondVertical.png);
+  overflow-x : hidden;
+  overflow-y : scroll;
+}
+html { font-size : 2vw; }
+
+@media (min-width : 800px)
+{
+  html { font-size : 1.4vw; }
+  .imageDEfond
+  {
+    background-image : url(/images/fond.png);
+    overflow-y : hidden;
+  }
+  .burgerMenu { display : none; }
+  .grandEcran  { display : table; }
+}
+</style>
+
+
 </head>
 
 <body class="w-max">
@@ -116,33 +148,6 @@
   </table>
 
 
-<style>
-.burgerMenu { display : table; }
-.grandEcran  { display : none; }
-.imageDEfond
-{
-  margin : 0px;
-  width : 100vw;
-  height : 110vh;
-  vertical-align : top;
-  background-image : url({{img_path}}fondVertical.png);
-  overflow-x : hidden;
-  overflow-y : scroll;
-}
-html { font-size : 2vw; }
-
-@media (min-width : 800px)
-{
-  html { font-size : 1.4vw; }
-  .imageDEfond
-  {
-    background-image : url({{img_path}}fond.png);
-    overflow-y : hidden;
-  }
-  .burgerMenu { display : none; }
-  .grandEcran  { display : table; }
-}
-</style>
 
 
     <div class="row retracter imageDEfond" id="mainRow">

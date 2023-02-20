@@ -1,10 +1,6 @@
 :root {
     --burger_closed : -12em;
     --burger_opened : 10em;
-    /*
-    --burger_closed : -150px;
-    --burger_opened : 150px;
-    */
 }
 /* Sidenav menu */
 .sidenav {
@@ -21,7 +17,7 @@
 
 /* Sidenav menu links */
 .sidenav a {
-  padding: 3px 3px 3px 10px;
+  padding: 3px;
   display: block;
   transition: 0.3s;
 }

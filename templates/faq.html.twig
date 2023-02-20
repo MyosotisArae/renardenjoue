@@ -4,19 +4,8 @@
   {{ parent() }}
   <link rel="stylesheet" href="{{css_path}}jeux.css">
   <link rel="stylesheet" href="{{css_path}}toolTip.css">
-  <style>
-    .divCachee {
-      display : none;
-    }
-    .toggle {
-      display : block;
-    }
-    .toggle:hover+.divCachee {
-      display : inline-block;
-      border: 2px dashed var(--couleur_base);
-      margin-left : 2em;
-    }
-  </style>
+  <link rel="stylesheet" href="{{css_path}}faq.css">
+  <script src="{{js_path}}faq.js"></script>
 {% endblock %}
 
 {% block corps %}
@@ -26,52 +15,82 @@
 
 {% block laPage %}
 
-      <div class="col-12 ascenseur container" style="box-sizing: border-box;">{# colonne 1 #}
-        <div class="row encadrer cadreBleu fondOpaque OurFont">
-          <div class='col-12'>
-            <h1 style="color:var(--couleur_base);">Quelques réponses à vos questions :</h1>
-          </div>
+    <div class="col-12 ascenseur container" style="box-sizing: border-box;">{# colonne 1 #}
+      <div class="row encadrer cadreBleu fondOpaque OurFont">
+        <div class='col-12'>
+          <h1 style="color:var(--couleur_base);">Quelques réponses à vos questions :</h1>
+        </div>
 
-          <div class='col-lg-6 col-md-12'>
+        <div class='col-lg-6 col-md-12'> <!-- colonne 1 -->
+          <div class="row"> <!-- colonne 1 -->
 
-              <a href="#" class="toggle">Je ne connais aucun jeu. Je peux venir quand même ?</a>
-              <div class="divCachee">
-                Bien évidemment !<br>
-                Quel que soit le type de jeu proposé, toutes les règles vous seront expliquées en détail avant de commencer. Il n'y a aucun prérequis pour participer à une séance de jeux. Vérifiez simplement que le profil visé vous correspond (voir ci-dessous).
+            <div class='col-12'>
+              <div class="row">
+                <a href="#" class="toggle" onclick="openDiv('div01')">Je ne connais aucun jeu. Je peux venir quand même ?</a>
+                <div class="divFAQ" id="div01">
+                  <button onclick="closeAllDivs()" class="close fa fa-window-close"></button>
+                  Bien évidemment !<br>
+                  Quel que soit le type de jeu proposé, toutes les règles vous seront expliquées en détail avant de commencer. Il n'y a aucun prérequis pour participer à une séance de jeux. Vérifiez simplement que le profil visé vous correspond (voir ci-dessous).
+                </div>
               </div>
+            </div>
 
-              <a href="#" class="toggle">Quel est le public visé ?</a>
-              <div class="divCachee">
-                Chaque séance de jeu vise un public spécifique. Pour ne gâcher la partie de personne, nous sommes soucieux de ne pas mixer des joueurs débutants avec des experts. Donc, nous précisons le profil de joueur requis pour chaque partie organisée. Nous organisons des parties pour tous :<li>les débutants : peu coutumiers des jeux, à part les classiques, comme la belote ou le 1000 bornes</li><li>les experts : ont déjà joué à des jeux de plusieurs heures et sont prêts à digérer une demie-heure d'explication de règles</li><li>les joueurs "intermédiaires" et les curieux : prêts à découvrir de nouveaux jeux de durée moyenne</li>
+            <div class='col-12'>
+              <div class="row">
+                <a href="#" class="toggle" onclick="openDiv('div02')">Quel est le public visé ?</a>
+                <div class="divFAQ" id="div02">
+                  <button onclick="closeAllDivs()" class="close fa fa-window-close"></button>
+                  Chaque séance de jeu vise un public spécifique. Pour ne gâcher la partie de personne, nous sommes soucieux de ne pas mixer des joueurs débutants avec des experts. Donc, nous précisons le profil de joueur requis pour chaque partie organisée. Nous organisons des parties pour tous :<br>
+                <table>
+                  <tr>
+                    <td class="fox">&#x1F98A;</td>
+                    <td>Les débutants : peu coutumiers des jeux, à part les classiques, comme la belote ou le 1000 bornes
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="fox">&#x1F98A;</td>
+                    <td>Les experts : ont déjà joué à des jeux de plusieurs heures et sont prêts à digérer une demie-heure d'explication de règles
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="fox">&#x1F98A;</td>
+                    <td>les joueurs "intermédiaires" et les curieux : prêts à découvrir de nouveaux jeux de durée moyenne
+                    </td>
+                  </tr>
+                </table>
+                </div>
               </div>
+            </div>
 
-              <a href="#" class="toggle">Comment vous joindre ?</a>
-              <div class="divCachee">
-                Vous avez d'autres questions ? Laissez-moi un message :<br>myosotis.arae@gmail.com
+            <div class='col-12'>
+              <div class="row">
+                <a href="#" onclick="openDiv('div03')">Comment vous joindre ?</a>
+                <div class="divFAQ" id="div03">
+                  <button onclick="closeAllDivs()" class="close fa fa-window-close"></button>
+                  Nous sommes toujours ravis d'avoir de vos nouvelles. Vous pouvez nous contacter :<br>
+                <table>
+                  <tr>
+                    <td class="fox">&#x1F98A;</td>
+                    <td style="height : 0.8em;" class="lienBlanc"><a class="lienBlanc" href="https://chat.whatsapp.com/LqthdgBiMbzKReFSF2vnon">avec What'sApp</a></td>
+                  </tr>
+                  <tr>
+                    <td class="fox">&#x1F98A;</td>
+                    <td style="height : 0.8em;" class="lienBlanc"><a class="lienBlanc" href="https://discord.com/channels/886954892076404768/886957613110153226">sur Discord</a> </td>
+                  </tr>
+                  <tr>
+                    <td class="fox">&#x1F98A;</td>
+                    <td style="height : 0.8em;" class="lienBlanc"><a class="lienBlanc" href="mailto:myosotis.arae@gmail.com" target="_blank">ou par mail : myosotis.arae@gmail.com</a></td>
+                  </tr>
+                </table>
+                </div>
               </div>
+            </div>
 
-          </div>
-
-          <div class='col-lg-6 col-md-12'>
-
-              <a href="#" class="toggle">Que propose l'association du Renard Enjoué ?</a>
-              <div class="divCachee">
-                    <p>Notre association réunit des joueurs et aspirants joueurs autour de tables de jeux. Nos membres vous invitent chez eux pour jouer.</p>
-              </div>
-
-              <a href="#" class="toggle">De quand date l'association du Renard Enjoué ?</a>
-              <div class="divCachee">
-                    <p>L'association a été fondée en 2019.<br>
-                       Son objectif est de vous aider à trouver des joueurs près de chez vous, pour jouer plus souvent, plus facilement. Vous pourrez aussi y découvrir nombre de jeux intéressants, qui vous seront présentés par leurs propriétaires lors de nos séances de jeux. Tout le monde peut créer sa propre séance, grâce aux commandes slash gérées par notre bot sur Discord.</p>
-              </div>
-
-              <a href="https://www.youtube.com/embed/svgnDivZn10">Présentation de l'asso en vidéo <i>(</i><i class="fa fa-exclamation-triangle" style="color:red"></i><i>&nbsp;redirection vers youtube)</i></a>
-
-          </div>
-
-          <div class='col-12'>
-              <a href="#" class="toggle">Où se situent vos locaux ?</a>
-              <div class="divCachee">
+            <div class='col-12'>
+              <div class="row">
+                <a href="#" class="toggle" onclick="openDiv('div06')">Où se situent vos locaux ?</a>
+                <div class="divFAQ" id="div06">
+                  <button onclick="closeAllDivs()" class="close fa fa-window-close"></button>
                 <table>
                   <tr>
                     <td style="width : 70%; vertical-align : text-bottom;">
@@ -82,13 +101,55 @@
                       77600 Bussy Saint Georges<br></b>
                     </td>
                     <td>
-                      <img src="{{ img_path }}planQuartier.png" style='width : 100%;'>
+                      <img src="{{ img_path }}planQuartier.png" style='width : 100%;' alt="Plan du quartier de la gare">
                     </td>
                   </tr>
                 </table>
+                </div>
               </div>
+            </div>
 
-          </div>
+          </div> <!-- row de la colonne 1 -->
+        </div> <!-- colonne 1 -->
+
+        <div class='col-lg-6 col-md-12'> <!-- colonne 2 -->
+          <div class='row'> <!-- colonne 2 -->
+
+            <div class='col-12'>
+              <div class="row">
+                <span class="lienNoir" onclick="openDiv('div04')">Que propose l'association du Renard Enjoué ?</span>
+                <div class="divFAQ" id="div04">
+                  <button onclick="closeAllDivs()" class="close fa fa-window-close"></button>
+                  Notre association réunit des joueurs et aspirants joueurs autour de tables de jeux. Nos membres vous invitent chez eux pour jouer. Vous pouvez aussi venir avec vos jeux.<br>Tout ça s'organise facilement grâce au forum.
+                </div>
+              </div>
+            </div>
+
+            <div class='col-12'>
+              <div class="row">
+                <a href="#" class="toggle" onclick="openDiv('div05')">De quand date l'association du Renard Enjoué ?</a>
+                <div class="divFAQ" id="div05">
+                  <button onclick="closeAllDivs()" class="close fa fa-window-close"></button>
+                  L'association a été fondée en 2019.<br>Son objectif est de vous aider à trouver des joueurs près de chez vous, pour jouer plus souvent, plus facilement. Vous pourrez aussi y découvrir nombre de jeux intéressants, qui vous seront présentés par leurs propriétaires lors de nos séances de jeux.<br>Tout le monde peut créer sa propre séance, grâce aux commandes slash gérées par notre bot sur Discord.
+                </div>
+              </div>
+            </div>
+
+            <div class='col-12'>
+              <div class="row">
+                <a href="#" class="toggle" onclick="openDiv('div07')">Présentation de l'asso en vidéo</a>
+                  <div class="divFAQ" id="div07">
+                    <button onclick="closeAllDivs()" class="close fa fa-window-close"></button>
+                    <iframe src="https://www.youtube.com/embed/svgnDivZn10">
+                    </iframe>
+                  </div>
+              </div>
+            </div>
+
+          </div> <!-- row de la colonne 2 -->
+        </div> <!-- colonne 2 -->
+
+
         </div>
       </div>
 

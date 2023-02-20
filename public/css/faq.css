@@ -1,0 +1,56 @@
+:root {
+    --div_closed : 10vw;
+    --div_opened : 80vw;
+}
+/*
+    .divCachee {
+      display : none;
+    }
+    .toggle {
+      display : block;
+    }
+    .toggle:hover+.divCachee {
+      display : inline-block;
+      border: 2px dashed var(--couleur_base);
+      margin-left : 2em;
+    }
+.toggle {
+  display : block;
+}
+*/
+.divFAQ {
+  width: var(--div_opened );
+  position: fixed;
+  z-index: 1;
+  left: var(--div_closed);
+  color: white;
+  background-color: var(--couleur_base);
+  border : 2px solid black;
+  padding: 3em 2em 2em 2em;
+  display: block;
+  opacity : 0;
+  transition: 0.5s ease;
+}
+.divFAQ a {
+  padding: 3em 2em 2em 2em;
+  display: block;
+  transition: 3s;
+}
+.divFAQ ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.activer {
+  opacity : 1;
+  transition: 0.5s ease;
+}
+
+/* Close btn */
+.close {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  color : white;
+}
