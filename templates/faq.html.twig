@@ -16,7 +16,7 @@
 {% block laPage %}
 
     <div class="col-12 ascenseur container" style="box-sizing: border-box;">{# colonne 1 #}
-      <div class="row encadrer cadreBleu fondOpaque OurFont">
+      <div class="row encadrer cadreBleu fondOpaque">
         <div class='col-12'>
           <h1 style="color:var(--couleur_base);">Quelques réponses à vos questions :</h1>
         </div>
@@ -27,8 +27,8 @@
 
               <tr><td>
                 <a href="#" onclick="openDiv('div01')">Je ne connais aucun jeu. Je peux venir quand même ?</a>
-                <div class="divFAQ" id="div01">
-                  <button onclick="closeAllDivs()" class="close fa fa-window-close"></button>
+                <div class="divFAQ" id="div01" onload="ranger('div01')">
+                  <button onclick="closeDivs()" class="close fa fa-window-close"></button>
                   Bien évidemment !<br>
                   Quel que soit le type de jeu proposé, toutes les règles vous seront expliquées en détail avant de commencer. Il n'y a aucun prérequis pour participer à une séance de jeux. Vérifiez simplement que le profil visé vous correspond (voir ci-dessous).
                 </div>
@@ -36,8 +36,8 @@
 
               <tr><td>
                 <a href="#" onclick="openDiv('div02')">Quel est le public visé ?</a>
-                <div class="divFAQ" id="div02">
-                  <button onclick="closeAllDivs()" class="close fa fa-window-close"></button>
+                <div class="divFAQ" id="div02" onload="ranger('div02')">
+                  <button onclick="closeDivs()" class="close fa fa-window-close"></button>
                   Chaque séance de jeu vise un public spécifique. Pour ne gâcher la partie de personne, nous sommes soucieux de ne pas mixer des joueurs débutants avec des experts. Donc, nous précisons le profil de joueur requis pour chaque partie organisée. Nous organisons des parties pour tous :<br>
                 <table>
                   <tr>
@@ -61,8 +61,8 @@
 
               <tr><td>
                 <a href="#" onclick="openDiv('div03')">Comment vous joindre ?</a>
-                <div class="divFAQ" id="div03">
-                  <button onclick="closeAllDivs()" class="close fa fa-window-close"></button>
+                <div class="divFAQ" id="div03" onload="ranger('div03')">
+                  <button onclick="closeDivs()" class="close fa fa-window-close"></button>
                   Nous sommes toujours ravis d'avoir de vos nouvelles. Vous pouvez nous contacter :<br>
                 <table>
                   <tr>
@@ -83,8 +83,8 @@
 
               <tr><td>
                 <a href="#" class="toggle" onclick="openDiv('div06')">Où se situent vos locaux ?</a>
-                <div class="divFAQ" id="div06">
-                  <button onclick="closeAllDivs()" class="close fa fa-window-close"></button>
+                <div class="divFAQ" id="div06" onload="ranger('div06')">
+                  <button onclick="closeDivs()" class="close fa fa-window-close"></button>
                 <table>
                   <tr>
                     <td style="width : 70%; vertical-align : text-bottom;">
@@ -108,28 +108,29 @@
 
         <div class='col-lg-6 col-md-12'> <!-- colonne 2 -->
           <div class='row'> <!-- colonne 2 -->
+            <table>
 
               <tr><td>
                 <a href="#" onclick="openDiv('div04')">Que propose l'association du Renard Enjoué ?</a>
-                <div class="divFAQ" id="div04">
-                  <button onclick="closeAllDivs()" class="close fa fa-window-close"></button>
+                <div class="divFAQ colonneDroite " id="div04" onload="ranger('div04')">
+                  <button onclick="closeDivs()" class="close fa fa-window-close"></button>
                   Notre association réunit des joueurs et aspirants joueurs autour de tables de jeux. Nos membres vous invitent chez eux pour jouer. Vous pouvez aussi venir avec vos jeux.<br>Tout ça s'organise facilement grâce au forum.
                 </div>
               </td></tr>
 
               <tr><td>
                 <a href="#" onclick="openDiv('div05')">De quand date l'association du Renard Enjoué ?</a>
-                <div class="divFAQ" id="div05">
-                  <button onclick="closeAllDivs()" class="close fa fa-window-close"></button>
+                <div class="divFAQ colonneDroite " id="div05" onload="ranger('div05')">
+                  <button onclick="closeDivs()" class="close fa fa-window-close"></button>
                   L'association a été fondée en 2019.<br>Son objectif est de vous aider à trouver des joueurs près de chez vous, pour jouer plus souvent, plus facilement. Vous pourrez aussi y découvrir nombre de jeux intéressants, qui vous seront présentés par leurs propriétaires lors de nos séances de jeux.<br>Tout le monde peut créer sa propre séance, grâce aux commandes slash gérées par notre bot sur Discord.
                 </div>
               </td></tr>
 
               <tr><td>
                 <a href="#" onclick="openDiv('div07')">Présentation de l'asso en vidéo</a>
-                  <div class="divFAQ" id="div07">
-                    <button onclick="closeAllDivs()" class="close fa fa-window-close"></button>
-                    <iframe src="https://www.youtube.com/embed/svgnDivZn10"></iframe>
+                  <div class="divFAQ colonneDroite " id="div07" onload="ranger('div07')">
+                    <button onclick="closeDivs()" class="close fa fa-window-close"></button>
+                    <iframe style="width : 70vw; height : 50vw;" src="https://www.youtube.com/embed/svgnDivZn10"></iframe>
                   </div>
               </td></tr>
 

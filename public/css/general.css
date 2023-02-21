@@ -9,14 +9,15 @@ body
   overflow-x : hidden;
   overflow-y : hidden;
   vertical-align : top;
-  font-family : 'Reem Kufi';
-  word-spacing : 0.5em;
+  font-family : 'Rubik';
+  /* word-spacing : 0.5em;*/
 }
 
 /* Styles pour empecher bootstrap d'appliquer ses couleurs */
 .OurFont
 {
   font-family : 'Reem Kufi';
+  font-family : 'Rubik';
 }
 .btn
 {

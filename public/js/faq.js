@@ -1,20 +1,20 @@
-function closeAllDivs() {
-  // Fermer toutes les divs
-  for (let num=1;num<7;num++) {
-    var uneDiv = document.getElementById("div0"+num);
-    uneDiv.classList.remove("activer");
-  }
+function ranger(nomDiv) {
+  var laDiv = document.getElementById(nomDiv);
+//  laDiv.style.marginTop = "300vh";
 }
 
 function openDiv(nomDiv) {
-  closeAllDivs();
-
   var laDiv = document.getElementById(nomDiv);
   laDiv.classList.add("activer");
+//  laDiv.style.marginTop = "0vh";
 }
 
-function closeDiv(nomDiv) {
-  var laDiv = document.getElementById(nomDiv);
-  laDiv.classList.remove("activer");
+function closeDivs() {
+  for (let num=7;num--;num>0) {
+    var nomDiv = "div0"+num;
+    var laDiv = document.getElementById(nomDiv);
+    laDiv.classList.remove("activer");
+//    rangerDiv(nomDiv);
+  }
 }
 
