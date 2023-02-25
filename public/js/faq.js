@@ -1,20 +1,28 @@
 function ranger(nomDiv) {
   var laDiv = document.getElementById(nomDiv);
-//  laDiv.style.marginTop = "300vh";
 }
 
 function openDiv(nomDiv) {
   var laDiv = document.getElementById(nomDiv);
-  laDiv.classList.add("activer");
-//  laDiv.style.marginTop = "0vh";
+  var mainDiv = document.getElementById("mainDivFaq");
+  if (laDiv != null) {
+    mainDiv.innerHTML = laDiv.innerHTML;
+    mainDiv.classList.add("activer");
+  }
 }
 
 function closeDivs() {
+  var mainDiv = document.getElementById("mainDivFaq");
+  mainDiv.classList.remove("activer");
+    /*
   for (let num=7;num--;num>0) {
     var nomDiv = "div0"+num;
     var laDiv = document.getElementById(nomDiv);
-    laDiv.classList.remove("activer");
-//    rangerDiv(nomDiv);
+    if (laDiv != null) {
+      laDiv.classList.remove("activer");
+      //rangerDiv(nomDiv);
+    }
   }
+  */
 }
 
