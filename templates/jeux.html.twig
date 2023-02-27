@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block laPage %}
-      <div class='col-12'>{# Bloc Filtrage des jeux #}
+      <div class='col-3'>{# Bloc Filtrage des jeux #}
         <div class='fondOpaque cadreBleu'>
           <form  method='POST' action='jeux?operation=recherche'>
               <table class='w-100'>
@@ -26,6 +26,8 @@
                       <input type='text' name='jeuTitre'><div class='tool-tip right'>Nom&nbsp;complet&nbsp;ou&nbsp;partiel</div>
                     </a>
                   </td>
+                </tr>
+                <tr>
                   <td>
                     <label>Niveau</label>
                   </td>
@@ -42,6 +44,8 @@
                       <div class='tool-tip left'>Difficulté&nbsp;recherchée</div>
                     </a>
                   </td>
+                </tr>
+                <tr>
                   <td>
                     <label>Durée</label>
                   </td>
@@ -59,6 +63,8 @@
                       </div>
                     </a>
                   </td>
+                </tr>
+                <tr>
                   <td>
                     <label>Nombre</label>
                   </td>
@@ -78,8 +84,9 @@
                       <div class='tool-tip left'>Nombre&nbsp;de&nbsp;joueurs</div>
                     </a>
                   </td>
-                  <td>
-                    <!-- <input type='submit' class='cadreBleu fondBleu bouton' href='jeux?operation=recherche' title='Rechercher les jeux correspondants à ces critères' value='Chercher'> -->
+                </tr>
+                <tr>
+                  <td colspan="2">
                     <a class='bouton' href='jeux?operation=recherche' title='Rechercher les jeux correspondants à ces critères'>Chercher</a>
                   </td>
                 </tr>
@@ -88,11 +95,8 @@
         </div>
       </div>{# Bloc Filtrage des jeux #}
 
-      <div class='col-12'>
-        <br>
-      </div>
 
-      <div class='col-12'>{# Bloc Liste des jeux #}
+      <div class='col-9'>{# Bloc Liste des jeux #}
         <div class='listeJeux cadreBleu h-30'>
 
 {% set classeCouleur = random(12) %}
