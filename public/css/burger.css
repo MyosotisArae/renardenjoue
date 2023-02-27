@@ -43,16 +43,7 @@
 {
   font-size : 2em;
 }
-/* 2 choix pour les liens dans le burger menu - 1 est à éliminer */
-a.burgerClair
-{
-  font-weight : bold;
-  color : var(--couleur_claire);
-}
-a.burgerClair:hover
-{
-  color : var(--couleur_fond);
-}
+/* Liens dans le burger menu */
 a.burgerSombre
 {
   font-weight : bold;

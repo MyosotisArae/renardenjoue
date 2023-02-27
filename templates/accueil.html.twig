@@ -69,7 +69,7 @@
 
     <div class="row"> {# ligne pour les prochains evts #}
 
-      <div class="cadreBleu">
+      <div class="cadreBleu fondOpaque">
         <i class="fas fa-calendar-alt fa-2x"></i>&nbsp;Nos prochains évènements :<br>
         <ul>
         {% if nextEvts|length > 0 %}
@@ -94,7 +94,7 @@
     </div>
 
     <div class="row">
-      <div class="cadreBleu">{# derniers jeux #}
+      <div class="cadreBleu fondOpaque">{# derniers jeux #}
         <i class="fas fa-dice fa-2x"></i>&nbsp;Les nouveaux jeux de notre collection :<br>
         <ul>
         {% for jeu in lastGames %}

@@ -2,15 +2,15 @@
 {
   width : 100vw;
   height : 90vh;
-  background : IVORY;
+  background : var(--couleur_base);
   padding-left : 1.2em;
   padding-right : 1em;
   padding-top : 0.4em;
 }
 h3
 {
-  color:#000;
-  border-bottom:3px solid var(--couleur_base); /*428bca;*/
+  color : var(--couleur_base);
+  border-bottom : 3px solid var(--couleur_base);
 }
 .bouton
 {

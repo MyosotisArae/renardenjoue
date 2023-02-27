@@ -11,6 +11,7 @@ body
   overflow-y : hidden;
   vertical-align : top;
   font-family : 'Verdana';
+  font-weight : normal;
   color : var(--couleur_fond);
   /* word-spacing : 0.5em;*/
 }
@@ -23,12 +24,12 @@ body
 .btn
 {
   background-color : var(--couleur_fond)!important;
-  border-color : var(--couleur_fond)!important;
+  border-color : var(--couleur_base)!important;
   border-radius : 0px!important;
 }
 .bg-primary, .btn-primary {
   background-color : var(--couleur_fond)!important;
-  border-color : var(--couleur_fond)!important;
+  border-color : var(--couleur_base)!important;
 }
 a
 {
@@ -69,7 +70,7 @@ a.barreDEmenu:hover
 .lienNoir:hover
 {
   color : var(--couleur_base);
-  font-weight : bold;
+  font-weight : normal;
 }
 
 /* ascenseur */
@@ -231,13 +232,13 @@ img.moyenneImage
 }
 .enBleu
 {
-  color:#000;
-  border:3px solid var(--couleur_base);
+  color : var(--couleur_base);
+  border :3px solid var(--couleur_base);
   width : 100%;
   height : auto;
   background : transparent;/*IVORY*/
   padding : 0.5em;
-  vertical-align: middle;
+  vertical-align : middle;
 }
 .fondOpaque
 {
@@ -253,18 +254,20 @@ img.moyenneImage
 /* Lien sous forme de bouton (mettre bg-primary en plus, pour la couleur de fond) */
 a.bouton
 {
-  color : var(--couleur_claire);
   font-size : 1.2vw;
   padding : 0.4em;
+  color: var(--couleur_claire);
+  background : var(--couleur_fond);
+  border : 2px solid var(--couleur_base);
 }
 /* Pas de soulignement au survol, pour que �a ait l'air d'un bouton */
 a.bouton:hover
 {
   text-decoration : none;
-  background : transparent;
   /* color : var(--couleur_base)!important; */
-  color : var(--couleur_base);
-  border : 2px solid var(--couleur_base);
+  color: var(--couleur_fond);
+  background : var(--couleur_base);
+  border : 2px solid var(--couleur_fond);
 }
 /* Pour mettre un ascenseur vertical dans une div */
 .ascenseur
@@ -331,4 +334,14 @@ a.dropdown-item
 td.fox
 {
   vertical-align : top;
+}
+
+/* imput pour les pages Jeux, Login et Compte */
+input
+{
+  font-size : 1.5em;
+  width : 100%;
+  vertical-align : bottom;
+  border : 2px solid var(--couleur_fond); /*5bc0de;*/
+  background : var(--couleur_claire);
 }
