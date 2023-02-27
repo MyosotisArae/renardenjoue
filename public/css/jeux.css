@@ -2,7 +2,8 @@
 {
   height : 3em;
   width : auto;
-  border : 2px dashed black;
+  border : 2px dashed var(--couleur_fond);
+  color: var(--couleur_claire);
   background : var(--couleur_fond);
   padding : 0.1em;
 }
@@ -21,7 +22,7 @@ div.grandeImage
 h1
 {
   color : var(--couleur_fond);
-  text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
+  text-shadow : 1px 0px 1px var(--couleur_fond), -1px 0px 1px var(--couleur_fond), 0px 1px 1px var(--couleur_fond), 0px -1px 1px var(--couleur_fond);
   text-align : center;
   width : 100%;
   font-size : 2em;
@@ -34,7 +35,7 @@ h2
 h3
 {
   color : var(--couleur_base); /*428bca;*/ /* couleur bg-primary */
-  text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
+  text-shadow : 1px 0px 1px var(--couleur_fond), -1px 0px 1px var(--couleur_fond), 0px 1px 1px var(--couleur_fond), 0px -1px 1px var(--couleur_fond);
   text-align : left;
   font-size : 1.2em;
   padding-left: 1em;
@@ -42,7 +43,7 @@ h3
 label
 {
   color : var(--couleur_base); /*428bca;*/ /* couleur bg-primary */
-  text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
+  text-shadow : 1px 0px 1px var(--couleur_fond), -1px 0px 1px var(--couleur_fond), 0px 1px 1px var(--couleur_fond), 0px -1px 1px var(--couleur_fond);
   text-align : right;
   width : 100%;
   font-size : 1.2em;
@@ -74,7 +75,7 @@ select
   overflow-x : hidden;
   overflow-y : scroll;
   padding : 0.1em;
-  background : black;
+  background : var(--couleur_fond);
   z-index : 3000;
 }
 .jeSuisInvisible
@@ -113,7 +114,7 @@ select
 a.confetti
 {
   padding-right : 0.1em;
-  text-shadow : 1px 0px 1px black, -1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
+  text-shadow : 1px 0px 1px var(--couleur_fond), -1px 0px 1px var(--couleur_fond), 0px 1px 1px var(--couleur_fond), 0px -1px 1px var(--couleur_fond);
 }
 a.couleur0 { color : yellow;}
 a.couleur1 { color : deeppink;}
@@ -220,10 +221,10 @@ img.imageCarree3
   position : relative;
   top : 0.8em;
   left : 1em;
-  font-family : "Comic Sans MS";
+   /* font-family : "Comic Sans MS"; */
   font-size : 2em;
   color : var(--couleur_base);
-  text-shadow : 1px 0px black, -1px 0px black, 0px 1px black, 0px -1px black;
+  text-shadow : 1px 0px var(--couleur_fond), -1px 0px var(--couleur_fond), 0px 1px var(--couleur_fond), 0px -1px var(--couleur_fond);
 }
 .texteCarre2
 {
@@ -235,7 +236,7 @@ img.imageCarree3
   width : 100%;
   font-size : 1.2em;
   color : var(--couleur_fond);
-  text-shadow : 1px 0px black, -1px 0px black, 0px 1px black, 0px -1px black;
+  text-shadow : 1px 0px var(--couleur_fond), -1px 0px var(--couleur_fond), 0px 1px var(--couleur_fond), 0px -1px var(--couleur_fond);
   padding-left : 1em;
   padding-right : 1em;
   float : right;

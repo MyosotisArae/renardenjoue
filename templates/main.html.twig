@@ -78,17 +78,17 @@ html { font-size : 2vw; }
   <div id="mySidenav" class="sidenav cadreBleu">
     <a id="closeBtn" href="#" class="close barreDEmenu"><i class="fa fa-window-close"></i></a>
     <ul>
-      <li><a style="font-weight : bold;color : white;" href="accueil">Accueil</a></li>
-      <li><a style="font-weight : bold;color : white;" href="calendrier">Agenda</a></li>
-      <li><a style="font-weight : bold;color : white;" href="jeux">Jeux</a></li>
-      <li><a style="font-weight : bold;color : white;" href="faq">FAQ</a></li>
+      <li><a class="burgerClair" href="accueil">Accueil</a></li>
+      <li><a class="burgerClair" href="calendrier">Agenda</a></li>
+      <li><a class="burgerClair" href="jeux">Jeux</a></li>
+      <li><a class="burgerClair" href="faq">FAQ</a></li>
       {% if 'memberConnected' in session|keys %}
-        <li><a style="font-weight : bold;" href="compte">Mon compte</a></li>
+        <li><a class="burgerSombre" href="compte">Mon compte</a></li>
       {% else %}
-        <li><a style="font-weight : bold;" href="login">Connexion</a></li>
+        <li><a class="burgerSombre" href="login">Connexion</a></li>
       {% endif %}
-      <li><a style="font-weight : bold;" href="https://discord.com/channels/886954892076404768/886957613110153226">Forum Discord</a></li>
-      <li><a style="font-weight : bold;" href="https://www.facebook.com/lerenardenjoue">Page Facebook</a></li>
+      <li><a class="burgerSombre" href="https://discord.com/channels/886954892076404768/886957613110153226">Forum Discord</a></li>
+      <li><a class="burgerSombre" href="https://www.facebook.com/lerenardenjoue">Page Facebook</a></li>
     </ul>
   </div>
   

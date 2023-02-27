@@ -38,3 +38,22 @@
   top: 0;
   right: 1px;
 }
+/* 2 choix pour les liens dans le burger menu - 1 est à éliminer */
+a.burgerClair
+{
+  font-weight : bold;
+  color : var(--couleur_claire);
+}
+a.burgerClair:hover
+{
+  color : var(--couleur_fond);
+}
+a.burgerSombre
+{
+  font-weight : bold;
+  color : var(--couleur_fond);
+}
+a.burgerSombre:hover
+{
+  color : var(--couleur_claire);
+}
