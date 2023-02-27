@@ -4,7 +4,7 @@
   width : auto;
   border : 2px dashed var(--couleur_fond);
   color: var(--couleur_claire);
-  background : var(--couleur_fond);
+  background : var(--couleur_claire);
   padding : 0.1em;
 }
 div.grandeImage
@@ -58,16 +58,16 @@ input
   font-size : 1.5em;
   width : 100%;
   vertical-align : bottom;
-  border : 2px solid var(--couleur_base); /*5bc0de;*/
-  background : var(--couleur_fond);
+  border : 2px solid var(--couleur_fond); /*5bc0de;*/
+  background : var(--couleur_claire);
 }
 select
 {
   font-size : 1.5em;
   width : 100%;
   vertical-align : bottom;
-  border : 2px solid var(--couleur_base); /*5bc0de;*/
-  background : var(--couleur_fond);
+  border : 2px solid var(--couleur_fond); /*5bc0de;*/
+  background : var(--couleur_claire);
 }
 .listeJeux
 {
@@ -168,7 +168,7 @@ a.fonte10  { font-family : Artistic-CE; }
   left : 3em;
   box-sizing: border-box;
   border: 2px solid var(--couleur_base); /*428bca;*/
-  background : var(--couleur_fond);
+  background : var(--couleur_claire);
   opacity : 1;
   visibility : hidden;
   z-index : 2;

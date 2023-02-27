@@ -11,7 +11,7 @@
   left: var(--burger_closed);
   color: white;
   background-color: var(--couleur_base);
-  padding-top: 60px;
+  padding-top: 1em;
   transition: left 0.5s ease;
 }
 
@@ -36,7 +36,7 @@
 .sidenav .close {
   position: absolute;
   top: 0;
-  left : 1px;
+  right: 1px;
 }
 /* Pour afficher en plus gros les icones Discord et Facebook en mode vertical : si parent=burgerSize, grossir la fonte */
 .burgerSize .barreDEmenu
