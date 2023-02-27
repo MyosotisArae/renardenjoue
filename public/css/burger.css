@@ -6,13 +6,13 @@
 .sidenav {
   width: var(--burger_opened );
   position: fixed;
-  z-index: 1;
+  z-index: 10;
   top: 0;
-  right: var(--burger_closed);
+  left: var(--burger_closed);
   color: white;
   background-color: var(--couleur_base);
   padding-top: 60px;
-  transition: right 0.5s ease;
+  transition: left 0.5s ease;
 }
 
 /* Sidenav menu links */
@@ -29,14 +29,19 @@
 
 /* Active class */
 .sidenav.active {
-  right: 0px;
+  left : 0px;
 }
 
 /* Close btn */
 .sidenav .close {
   position: absolute;
   top: 0;
-  right: 1px;
+  left : 1px;
+}
+/* Pour afficher en plus gros les icones Discord et Facebook en mode vertical : si parent=burgerSize, grossir la fonte */
+.burgerSize .barreDEmenu
+{
+  font-size : 2em;
 }
 /* 2 choix pour les liens dans le burger menu - 1 est à éliminer */
 a.burgerClair

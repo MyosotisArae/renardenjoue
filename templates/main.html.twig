@@ -87,16 +87,17 @@ html { font-size : 2vw; }
       {% else %}
         <li><a class="burgerSombre" href="login">Connexion</a></li>
       {% endif %}
-      <li><a class="burgerSombre" href="https://discord.com/channels/886954892076404768/886957613110153226">Forum Discord</a></li>
-      <li><a class="burgerSombre" href="https://www.facebook.com/lerenardenjoue">Page Facebook</a></li>
     </ul>
   </div>
   
 
   <table class="burgerMenu" style="width : 100%; background-color : var(--couleur_base);">
     <tr class="w-max">
-      <td class="w-max menuAdroite">
-        <a class="barreDEmenu menuAdroite" href="#" id="openBtn"><i class="fa fa-align-justify fa-2x"></i><span></span></a>
+      <td class="w-max menuAgauche">
+        <a class="barreDEmenu menuAgauche" href="#" id="openBtn"><i class="fa fa-align-justify fa-2x"></i><span></span></a>
+      </td>
+      <td class="w-max burgerSize menuAdroite">
+        {% include 'discord_facebook.html.twig' %}
       </td>
     </tr>
   </table>
@@ -132,14 +133,7 @@ html { font-size : 2vw; }
                     </tr>
                     <tr>
                             <td>
-                              <a class="barreDEmenu" href="https://discord.com/channels/886954892076404768/886957613110153226">
-                                &nbsp;<i class="fab fa-discord" style="color:var(--couleur_discord);"></i>
-                              </a>
-                              &nbsp;&nbsp;&nbsp;
-                              <a class="barreDEmenu" href="https://www.facebook.com/lerenardenjoue">
-                                <i class="fab fa-facebook" style="color:var(--couleur_facebook);"></i>
-                              </a>
-                              &nbsp;
+                              {% include 'discord_facebook.html.twig' %}
                             </td>
                     </tr>
                   </table>
