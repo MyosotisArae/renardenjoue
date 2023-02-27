@@ -19,8 +19,10 @@
               <table class='w-100'>
                 <tr>
                   <td>
-                    <label>Titre</label>
+                    <label>Titre :</label>
                   </td>
+                </tr>
+                <tr>
                   <td style='position:relative;'>
                     <a href='#' style='position:relative;'>
                       <input type='text' name='jeuTitre'><div class='tool-tip right'>Nom&nbsp;complet&nbsp;ou&nbsp;partiel</div>
@@ -29,8 +31,10 @@
                 </tr>
                 <tr>
                   <td>
-                    <label>Niveau</label>
+                    <label>Niveau :</label>
                   </td>
+                </tr>
+                <tr>
                   <td>
                     <a href='#' style='position:relative;'>
             					<select name='jeuNiveau'>
@@ -47,8 +51,10 @@
                 </tr>
                 <tr>
                   <td>
-                    <label>Durée</label>
+                    <label>Durée :</label>
                   </td>
+                </tr>
+                <tr>
                   <td>
                     <a href='#' style='position:relative;'>
           						<select name='jeuDuree'>
@@ -66,8 +72,10 @@
                 </tr>
                 <tr>
                   <td>
-                    <label>Nombre</label>
+                    <label>Nombre :</label>
                   </td>
+                </tr>
+                <tr>
                   <td>
                     <a href='#' style='position:relative;'>
             					<select name='jeuNb'>
@@ -86,8 +94,8 @@
                   </td>
                 </tr>
                 <tr>
-                  <td colspan="2">
-                    <a class='bouton' href='jeux?operation=recherche' title='Rechercher les jeux correspondants à ces critères'>Chercher</a>
+                  <td>
+                    <br><input type='submit' class='cadreBleu fondBleu bouton OurFont' href='jeux?operation=recherche' title='Rechercher les jeux correspondants à ces critères' value='Chercher'>
                   </td>
                 </tr>
               </table>
@@ -97,25 +105,10 @@
 
 
       <div class='col-9'>{# Bloc Liste des jeux #}
-        <div class='listeJeux cadreBleu h-30'>
+        <div class='fondOpaque cadreBleu' style='columns:30vw 2; height : 80vh; overflow-y : visible;'>
 
-{% set classeCouleur = random(12) %}
-{% set classeTaille  = random(6)  %}
-{% set classFonte    = random(10) %}
 {% for jeu in listeJeux %}
-                <a href='choisirJeu{{jeu.id}}' class='confetti couleur{{classeCouleur}} taille{{classeTaille}} fonte{{classFonte}}' onclick=''>{{jeu.nom}}</a>
-  {% set classeCouleur = classeCouleur + 1 %}
-  {% set classeTaille = classeTaille + 1 %}
-  {% set classFonte = classFonte + 1 %}
-  {% if classeCouleur > 12 %}
-    {% set classeCouleur = 0 %}
-  {% endif %}
-  {% if classeTaille > 6 %}
-    {% set classeTaille = 0 %}
-  {% endif %}
-  {% if classFonte > 10 %}
-    {% set classFonte = 0 %}
-  {% endif %}
+                <a href='choisirJeu{{jeu.id}}' onclick=''>{{jeu.nom}}</a><br>
 {% endfor %}
 
         </div>

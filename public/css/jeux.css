@@ -44,9 +44,11 @@ label
 {
   color : var(--couleur_base); /*428bca;*/ /* couleur bg-primary */
   text-shadow : 1px 0px 1px var(--couleur_fond), -1px 0px 1px var(--couleur_fond), 0px 1px 1px var(--couleur_fond), 0px -1px 1px var(--couleur_fond);
-  text-align : right;
-  width : 100%;
+  text-align : left;
+  width : 80%;
   font-size : 1.2em;
+ margin-top : 0.5em;
+  margin-bottom : 0px;
 }
 .gauche
 {
