@@ -38,7 +38,7 @@ class CommandeEmail extends Command
     // Parce que c'est une commande, il faut implémenter execute :
     public function execute(InputInterface $input, OutputInterface $output): int {
         $commands = $this->client->getCommands();
-        // Suppression de cette commande
+        // Suppression de cette commande dans les messages Discord
         foreach ($commands as $cmd) {
             if ($cmd->name == "email") {
                 $this->client->deleteCommand($cmd);

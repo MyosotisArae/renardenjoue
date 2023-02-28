@@ -47,8 +47,9 @@ class ServiceDiscord extends Command
     private $evt;
     private $idParties;
     private $idAnnonces;
+    private $idVotes;
 
-    public function __construct(string $token, string $botId, string $idParties, string $idAnnonces, ContainerInterface $container) {
+    public function __construct(string $token, string $botId, string $idParties, string $idAnnonces, string $idVotes, ContainerInterface $container) {
         parent::__construct();
         $this->botId = $botId;
 	    $this->discord = new Discord([
@@ -67,6 +68,7 @@ class ServiceDiscord extends Command
         // Canaux sur lesquels le bot écrit
         $this->idParties = $idParties;
         $this->idAnnonces = $idAnnonces;
+        $this->idVotes = $idVotes;
         // Pour accéder à la base de données :
         $this->manager = $container->get('doctrine')->getManager();
         // Pour gérer les messages qu'envoie le bot :
@@ -89,7 +91,7 @@ class ServiceDiscord extends Command
               if ($message->interaction) {
                 if ($message->interaction->type == 2) {
                     $nomCmd = $message->interaction->name; 
-                    $nosCommandes = ['creer','maj','inscription','desinscription','site']; 
+                    $nosCommandes = ['creer','maj','inscription','desinscription','email','mes_jeux']; 
                     if (in_array($nomCmd,$nosCommandes)) {
                         // Durée proportionelle à la taille du message : 1s pour 15 lettres
                         $duree = intval(strlen($message->content) / 15);
@@ -101,6 +103,15 @@ class ServiceDiscord extends Command
                 }
               }
             });
+
+            $discord->on('email', function($message,$discord) {
+              if ($message->interaction) {
+                if ($message->interactioni->data) {
+                    $this->commandeEmail($message->interaction, $message->interaction->data);
+                }
+              }
+            });
+
 
                 /*
             $discord->on(EVENT::INTERACTION_CREATE, function($interaction){
@@ -124,6 +135,10 @@ class ServiceDiscord extends Command
      * Cette fonction réagit aux commandes slash.
      */
     public function slashOn() {
+        // Ajout d'une séance de jeux
+        $this->client->registerCommand('lister_jeux', function (Interaction $interaction, Choices $choices) {
+            $this->commandeListerJeux($interaction, $choices, false);
+        });
         // Ajout d'une séance de jeux
         $this->client->registerCommand('creer', function (Interaction $interaction, Choices $choices) {
             $this->commandeCreer($interaction, $choices, false);
@@ -392,7 +407,7 @@ class ServiceDiscord extends Command
 
             $texte  = "Vous n'étiez pas enregistré sur le site, ou bien votre identifiant Discord n'a pas été mis à jour.\n ";
             $texte .= "L'utilisateur ".$nom." a été créé pour vous.";
-            $texte .= " Pour mettre à jour votre email sur le site (afin de recevoir la newsletter, notamment), utilisez la commande /site et renseignez le paramètre email. ";
+            $texte .= " Pour mettre à jour votre email sur le site (afin de recevoir la newsletter, notamment), utilisez la commande /email et renseignez le paramètre email. ";
             $texte .= "Contactez myosotis.arae@gmail.com pour :\n";
             $texte .= "- supprimer ce nouveau compte si vous en aviez déjà un (mentionnez votre nom et votre identifiant sur discord)";
             $texte .= "\nou\n- obtenir le mot de passe de ce nouveau compte afin d'être en mesure de vous y connecter.";
@@ -501,6 +516,54 @@ class ServiceDiscord extends Command
             $msg .= "Votre compte sur le site (".$user->getNom().") a été ".$action;
             $interaction->reply($msg);
         }
+    }
+
+    /*
+     * Cette commande liste les jeux de la base selon certains critères et avec un nombre de lignes limité.
+     */
+    private function commandeListerJeux(Interaction $interaction, Choices $choices) {
+        //$this->channelMesJeux= $interaction->guild->channels->get('id',$this->idParties);
+        //$auteur  = $interaction->member->user;
+        // Ce paramètre indiquera si un champ a été renseigné parmi ceux figurant dans la table ludotheque :
+        $champRenseigne = 0;
+        // Paramètre nom_du_jeu
+        $nomJeu = $choices->nom_du_jeu;
+        if (strlen($nomJeu) == 0) {
+            $nomJeu = "%";
+        } else {
+            $champRenseigne = 1;
+            $nomJeu = "%"+$nomJeu+"%";
+        }
+        // Nombre de joueurs
+        $nbMin = intval($choices->nombre_min);
+        if ($nbMin > 0) { $champRenseigne = 1; }
+        $nbMax = intval($choices->nombre_max);
+        if ($nbMax == 0) { $nbMax = 50; }
+        else { $champRenseigne = 1; }
+        // Si des champs de la table ludotheque sont renseignés, lancer une requete sur cette table.
+        // Créer un jeu qui va servir de
+        // Créer un salon appartenant à cette personne.
+        /*
+        $newChannel = $interaction->guild->channels->create([
+             'category'  => $this->channelMesJeux,
+             'parent_id' => $this->channelMesJeux->id,
+             'owner_id'  => $auteur->id,
+             'name'      => $nomAuteur,
+             'type'      => Channel::TYPE_TEXT,
+             'topic'     => "Les jeux auxquels j'ai envie de jouer",
+             'nsfw'      => false
+             'permissionOverwrites' => [
+                                {
+                                    id : $auteur->id,
+                                    allow : 523328
+                                }, {
+                                    id : $interaction->guild->defaultRole->id,
+                                    allow : 1024
+                                }
+                            ]
+         ]);
+        $interaction->guild->channels->save($newChannel)->done(function (Channel $channel) use ($interaction) {
+         */
     }
 
     /*

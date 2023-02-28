@@ -31,6 +31,7 @@ services:
            $botId: '%env(BOT_ID)%'
            $idParties: '%env(ID_PARTIES)%'
            $idAnnonces: '%env(ID_ANNONCES)%'
+           $idVotes: '%env(ID_VOTES)%'
 
     # Création d'une date app:creer
     App\Command\CommandeCreer:
@@ -56,13 +57,19 @@ services:
            $token: '%env(TOKEN)%'
            $botId: '%env(BOT_ID)%'
 
-    # Mise à jour ou création du compte sur le site
+    # Lister des jeux sur Discord app:lister_jeux
+    App\Command\CommandeListerJeux:
+       arguments:
+           $token: '%env(TOKEN)%'
+           $botId: '%env(BOT_ID)%'
+
+    # Mise à jour ou création du compte sur le site app:email
     App\Command\CommandeEmail:
        arguments:
            $token: '%env(TOKEN)%'
            $botId: '%env(BOT_ID)%'
 
-    # Affichage des noms des inscrits
+    # Affichage des noms des inscrits app:qui
     App\Command\CommandeQui:
        arguments:
            $token: '%env(TOKEN)%'

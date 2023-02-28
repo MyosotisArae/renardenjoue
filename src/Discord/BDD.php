@@ -97,5 +97,15 @@ class BDD
                      ->getByDiscordId($userId);
         return $idUser;
     }
+
+    /*
+     * Retourne une liste de jeux correspondant aux critères indiqués dans l'objet jeu fourni.
+     */
+    public static function getJeux($em, $jeu)
+    {
+        $t = $em->getRepository('App:Ludotheque')
+                ->getListeJeux($jeu);
+        return $t;
+    }
 }
 ?>
