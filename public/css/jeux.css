@@ -17,6 +17,7 @@ div.grandeImage
 .h-20 { height: 20%; }
 .h-30 { height: 27vh; }
 .h-70 { height: 72vh; }
+.h-80 { height: 80vh; }
 .h-99 { height: 99vh; }
 .h-100 { height: 100%; }
 h1
@@ -65,12 +66,16 @@ select
 }
 .listeJeux
 {
-  height : 60vh;
+  z-index : 4;
+  /*
+  -webkit-columns-count: 2;
+  -moz-columns-count: 2;
+  column-count: 2;
+  */
+  max-height : 80vh;
   overflow-x : hidden;
   overflow-y : scroll;
-  padding : 0.1em;
-  background : var(--couleur_fond);
-  z-index : 8;
+  height : 98%;
 }
 .jeSuisInvisible
 {

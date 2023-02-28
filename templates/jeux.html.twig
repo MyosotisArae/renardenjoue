@@ -14,7 +14,7 @@
 
 {% block laPage %}
       <div class='col-3'>{# Bloc Filtrage des jeux #}
-        <div class='fondOpaque cadreBleu'>
+        <div class='fondOpaque cadreBleu h-80'>
           <form  method='POST' action='jeux?operation=recherche'>
               <table class='w-100'>
                 <tr>
@@ -95,7 +95,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <br><input type='submit' class='cadreBleu fondBleu bouton OurFont' href='jeux?operation=recherche' title='Rechercher les jeux correspondants à ces critères' value='Chercher'>
+                    <br><input type='submit' class='cadreBleu fondBleu bouton' href='jeux?operation=recherche' title='Rechercher les jeux correspondants à ces critères' value='Chercher'>
                   </td>
                 </tr>
               </table>
@@ -105,12 +105,30 @@
 
 
       <div class='col-9'>{# Bloc Liste des jeux #}
-        <div class='fondOpaque cadreBleu' style='columns:30vw 2; height : 80vh; overflow-y : visible;'>
+        <div class='fondOpaque cadreBleu h-80'>
+          <div table class='listeJeux'>
+            <table>
 
+{% set nombreDeJeux = listeJeux|length %}
+{% set moitie = nombreDeJeux/2 %}
+{% set numeroJeu = 0 %}
 {% for jeu in listeJeux %}
-                <a href='choisirJeu{{jeu.id}}' onclick=''>{{jeu.nom}}</a><br>
+  {% set numeroJeu = numeroJeu + 1 %}
+  {% if numeroJeu > moitie %}
+  {%   set moitie = nombreDeJeux+1 %}
+  {% endif %} 
+  {% if numeroJeu % 2 == 1 %}
+  <tr>
+  {% endif %} 
+
+                <td><a href='choisirJeu{{jeu.id}}' onclick=''>{{jeu.nom}}</a></td>
+  {% if numeroJeu % 2 == 0 %}
+  </tr>
+  {% endif %} 
 {% endfor %}
 
+            </table>
+          </div>
         </div>
       </div>{# Bloc Liste des jeux #}
 
