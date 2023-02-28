@@ -33,7 +33,7 @@
 }
 
 /* Close btn */
-.sidenav .close {
+.fermerBurger {
   position: absolute;
   top: 0;
   right: 1px;
