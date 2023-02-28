@@ -4,5 +4,5 @@ Allow:/accueil
 Allow:/calendrier
 Allow:/jeux
 Allow:/login
-Allow:/contact
+Allow:/faq
 Allow:/infos
