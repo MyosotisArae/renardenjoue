@@ -44,12 +44,14 @@
   font-size : 2em;
 }
 /* Liens dans le burger menu */
-a.burgerSombre
+a.burgerColor
 {
+  font-size : 2em;
   font-weight : bold;
-  color : var(--couleur_fond);
-}
-a.burgerSombre:hover
-{
   color : var(--couleur_claire);
+}
+a.burgerColor:hover
+{
+  color : var(--couleur_fond);
+  text-shadow : 1px 0px 1px var(--couleur_claire), -1px 0px 1px var(--couleur_claire), 0px 1px 1px var(--couleur_claire), 0px -1px 1px var(--couleur_claire);
 }

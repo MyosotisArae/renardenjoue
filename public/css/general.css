@@ -108,6 +108,11 @@ a.barreDEmenu:hover
   text-align : right;
 }
 /* fin override bootstrap */
+/* styles avec contours */
+.barreDEmenu, .burgerColor, .fondRouge, .confetti, .texteCarre1, h1, h2, h3, label
+{
+  text-shadow : 1px 0px 1px var(--couleur_fond), -1px 0px 1px var(--couleur_fond), 0px 1px 1px var(--couleur_fond), 0px -1px 1px var(--couleur_fond);
+}
 
 .retracter { padding : 20px; }
 .fondVert { background : lightgreen; }
@@ -117,7 +122,6 @@ a.barreDEmenu:hover
 {
   background : red;
   color : lightblue;
-  text-shadow : 1px 0px 1px var(--couleur_fond), -1px 0px 1px var(--couleur_fond), 0px 1px 1px var(--couleur_fond), 0px -1px 1px var(--couleur_fond);
 }
 .fondNoir
 {
