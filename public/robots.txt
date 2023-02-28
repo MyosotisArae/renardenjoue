@@ -6,3 +6,4 @@ Allow:/jeux
 Allow:/login
 Allow:/faq
 Allow:/infos
+
