@@ -21,8 +21,10 @@
     <br>
   </div>
 
-  <div class="col-lg-8 col-sm-12 container" style="box-sizing: border-box; padding-right : 5em;">{# colonne 1 #}
-    <div class="row">
+  <table>{# colonne 1 #}
+    <tr>
+      <td>
+  <div class="container" style="box-sizing: border-box; padding-right : 5em;">{# colonne 1 #}
 
       <table>
         <tr>
@@ -30,10 +32,10 @@
           <td>
             <table>
               <tr>
-                <td> <h1 class="OurFont">Bienvenue chez</h1> </td>
+                <td> <h1>Bienvenue chez</h1> </td>
               </tr>
               <tr>
-                <td> <h1 class="OurFont">Le Renard Enjoué</h1> </td>
+                <td> <h1>Le Renard Enjoué</h1> </td>
               </tr>
             </table>
           </td>
@@ -62,12 +64,11 @@
         </tr>
       </table>
 
-    </div>
-  </div>
+  </div>{# colonne 1 #}
+      </td>{# colonne 1 #}
 
-  <div class="col-lg-4 col-sm-12"> {# Colonne de droite #}
-
-    <div class="row"> {# ligne pour les prochains evts #}
+      <td>{# colonne 2 #}
+  <div"> {# Colonne 2 #}
 
       <div class="cadreBleu fondOpaque">
         <i class="fas fa-calendar-alt fa-2x"></i>&nbsp;Nos prochains évènements :<br>
@@ -87,13 +88,11 @@
         {% endif %}
         </ul>
       </div> {# Fin du cadre des evts #}
-    </div> {# Fin de la row des evts #}
 
-    <div class="row"> {# On saute une ligne entre les deux cadres #}
+    <div> {# On saute une ligne entre les deux cadres #}
       <br>
     </div>
 
-    <div class="row">
       <div class="cadreBleu fondOpaque">{# derniers jeux #}
         <i class="fas fa-dice fa-2x"></i>&nbsp;Les nouveaux jeux de notre collection :<br>
         <ul>
@@ -104,8 +103,10 @@
         <br>
         Venez les tester !<br>
       </div> {# cadre : derniers jeux #}
-    </div>{# row : derniers jeux #}
 
-  </div> {# fin : Colonne de droite #}
+  </div> {# fin : Colonne 2 #}
+      </td>{# colonne 2 #}
+    </tr>
+  </table>
 
 {% endblock %} {# Fin du block laPage #}
