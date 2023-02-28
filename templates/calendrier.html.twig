@@ -3,7 +3,7 @@
 {% block entete %}
   {{ parent() }}
 
-    <link href='{{ css_path }}/calendrier.css' rel='stylesheet' />
+    <link href='{{ css_path }}calendrier.css' rel='stylesheet' />
     <link href='{{ fc_path }}core/main.css' rel='stylesheet' />
     <link href='{{ fc_path }}bootstrap/main.css' rel='stylesheet' />
     <link href='{{ fc_path }}daygrid/main.css' rel='stylesheet' />
@@ -118,7 +118,7 @@
 {% endblock %}
 
 {% block laPage %}
-<div class='container-fluid fondOpaque OurFont' id='partieBlanche' style='width : 95%;height : 100vh; overflow-y : auto; margin-bottom : 25vh;'>
+<div class='container-fluid' id='partieBlanche' style='width : 95%;height : 100vh; overflow-y : auto; margin-bottom : 25vh;'>
   <div class='row' style='height : 100%;'>
     <div class='col-12' id='monCalendrier' style='height : 90%;'>
     </div>

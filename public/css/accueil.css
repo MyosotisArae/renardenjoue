@@ -5,7 +5,7 @@ img.petiteImage
 }
 h1, h1 a
 {
-  color : var(--couleur_base); /* couleur bg-primary */
+  color : var(--couleur_base);
   text-align : center;
   width : 100%;
   font-size : 4vw;

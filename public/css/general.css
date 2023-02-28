@@ -50,6 +50,8 @@ a:hover
 a.barreDEmenu:hover
 {
   color : var(--couleur_fond);
+  text-shadow : 1px 0px 1px var(--couleur_claire), -1px 0px 1px var(--couleur_claire), 0px 1px 1px var(--couleur_claire), 0px -1px 1px var(--couleur_claire);
+  text-decoration : none;
 }
 
 /* Lien en blanc sans modification de la police (menu burger) */
@@ -112,6 +114,11 @@ a.barreDEmenu:hover
 .barreDEmenu, .burgerColor, .fondRouge, .confetti, .texteCarre1, h1, h2, h3, label
 {
   text-shadow : 1px 0px 1px var(--couleur_fond), -1px 0px 1px var(--couleur_fond), 0px 1px 1px var(--couleur_fond), 0px -1px 1px var(--couleur_fond);
+}
+
+h1, h2, h3
+{
+  color : var(--couleur_base);
 }
 
 .retracter { padding : 20px; }
