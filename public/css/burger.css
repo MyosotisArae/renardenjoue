@@ -41,7 +41,7 @@
 /* Pour afficher en plus gros les icones Discord et Facebook en mode vertical : si parent=burgerSize, grossir la fonte */
 .burgerSize .barreDEmenu
 {
-  font-size : 2em;
+  font-size : 2.5em;
 }
 /* Liens dans le burger menu */
 a.burgerColor
