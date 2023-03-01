@@ -69,7 +69,7 @@
                        id : {{evt.id}},
                        allDay : false,
                        textColor : '#FFFFFF',
-                       {% if evt.capacite > 0 %}backgroundColor: 'var(--couleur_base)',{% endif %}
+                       {% if evt.capacite > 0 %}backgroundColor: 'var(--couleur_base)',{% else %}backgroundColor: 'var(--couleur_fond)',{% endif %}
                        title : "{{evt.titre|raw}}",
                        start : "{{evt.dateDebut|date('Y-m-d')}} {{evt.heureDebut|date('H:i')}}"
                        {% if evt.aUneDateDeFin %},end : "{{evt.dateFin|date('Y-m-d')}}"
