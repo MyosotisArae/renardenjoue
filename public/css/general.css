@@ -9,11 +9,16 @@ body
 {
   overflow-x : hidden;
   overflow-y : hidden;
-  vertical-align : top;
+  vertical-align : top
   font-family : 'Verdana';
   font-weight : normal;
   color : var(--couleur_fond);
   /* word-spacing : 0.5em;*/
+}
+::selection
+{
+  color : var(--couleur_claire);
+  background-color : var(--couleur_fond)!important;
 }
 
 /* Styles pour empecher bootstrap d'appliquer ses couleurs */
