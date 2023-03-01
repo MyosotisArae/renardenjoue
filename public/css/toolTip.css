@@ -42,7 +42,7 @@
 	height: 0px;
 	width: 0px;
 	border: 6px solid transparent;
-    border-top-color: var(--couleur_base);/* rgba( 66, 139, 202, .95);*/
+    border-top-color: var(--couleur_base);
 }
 
 /* default heights, width and margin w/o Javscript */
@@ -71,7 +71,7 @@
 	margin-top: -6px;
 	bottom: auto;
 	border-top-color: transparent;	
-    border-right-color: var(--couleur_base);/* rgba( 66, 139, 202, .95);*/
+    border-right-color: var(--couleur_base);
 }
 
 /* tool tip position left : La fenetre tooltip est a gauche */
@@ -91,7 +91,7 @@
 	margin-top: -6px;
 	bottom: auto;
 	border-top-color: transparent;	
-    border-left-color: var(--couleur_base); /*rgba( 66, 139, 202, .95);*/
+    border-left-color: var(--couleur_base);
 }
 
 /* tool tip position bottom */
