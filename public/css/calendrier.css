@@ -24,21 +24,6 @@ h3
 {
   max-height : 2em;
 }
-/*
-.fc-widget-content
-{ height : 98%; position : absolute; }
-*/
-.fc-today /* page du jour sur le calendrier */
-{
-/*  background-color : var(--couleur_claire);*/
-}
-/* Ceci est la couleur de fond des cases du calendrier. Cela désactive l'alternance de couleur par colonne.
-.fc-bgevent-skeleton td
-{
-  background-color : var(--couleur_fond);
-  opacity : 0.03;
-}
-*/
 /* Aspect d'un cadre avec événement */
 .fc-day-grid-event
 {
@@ -74,15 +59,10 @@ h3
 td.fc-today
 {
   background-color : var(--couleur_base)!important;
-  border-top : 4px solid var(--couleur_fond); /* Couleur du trait au-dessus du jour actuel */
 }
 .fc-day-top.fc-today
 {
   background-color : transparent!important;             /* Cacher le fond, qui fait la moitié de la hauteur d'une case du calendrier et dépasse sur les côtés */
-  /* Couleur du trait au-dessus du jour actuel */
-  /* Je supprime parce que ça ne marche pas sur un jour du mois en cours
-  border-top : 4px solid var(--couleur_fond)!important;
-  */
 }
 /* Griser les numéros des jours passés */
 .fc-day-top.fc-past
