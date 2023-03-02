@@ -19,7 +19,11 @@ h3
 
 #monCalendrier { overflow-y: hidden; }
 .fc-content-skeleton
-{ max-height : 1px; margin-top: 0.5em; background-color: var(--couleur_base); }
+{
+  max-height : 1px;
+  margin-top: 0.5em;
+  background-color: var(--couleur_base); 
+}
 .fc-widget-content
 {
   max-height : 2em;
@@ -27,7 +31,7 @@ h3
 /* Aspect d'un cadre avec événement */
 .fc-day-grid-event
 {
-  border : 1px solid var(--couleur_fond);
+  border : 1px solid var(--couleur_fond)!important;
   border-radius : 0px!important;
 }
 /* Couleur du texte des evts */
@@ -78,7 +82,7 @@ td.fc-today
 }
 .fc-day-top.fc-today
 {
-  background-color : transparent;             /* Cacher le fond, qui fait la moitié de la hauteur d'une case du calendrier et dépasse sur les côtés */
+  background-color : transparent!important;             /* Cacher le fond, qui fait la moitié de la hauteur d'une case du calendrier et dépasse sur les côtés */
 }
 /* Griser les numéros des jours passés */
 .fc-day-top.fc-past
