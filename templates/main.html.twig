@@ -8,6 +8,9 @@
   <link rel='shortcut icon' sizes='100x105' href='/images/favicon.png'>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="{{BScss_path }}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
   <link rel="stylesheet" href="{{css_path}}general.css">
   <link rel="stylesheet" href="{{css_path}}burger.css">
   
@@ -44,11 +47,15 @@
   overflow-x : hidden;
   overflow-y : scroll;
 }
+
 html { font-size : 1.8vw; }
 
-@media (min-width : 800px)
+.fa-discord, .fa-facebook { font-size : 6vw; }
+
+@media (min-width : 600px)
 {
   html { font-size : 1.2vw; }
+  .fa-discord, .fa-facebook { font-size : 3vw; }
   .imageDEfond
   {
     background-image : url(/images/fond.png);

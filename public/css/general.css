@@ -5,6 +5,7 @@
     --couleur_facebook : #0D8CF1;
     --couleur_discord  : #5465F4;
 }
+$primary : #F75F00;
 body
 {
   overflow-x : hidden;
@@ -62,7 +63,7 @@ a:hover
 .barreDEmenu
 {
   /* font-size : 1.2em;*/
-  font-size : 3vw;
+  font-size : 2.4vw;
   font-weight : bold;
   color : var(--couleur_claire);
 }
@@ -121,13 +122,13 @@ a.barreDEmenu:hover
 .menuAgauche
 {
   /* font-size : 85%;*/
-  font-size : 2.5vw;
+  font-size : 2vw;
   text-align : left;
 }
 .menuAdroite
 {
   /* font-size : 85%;*/
-  font-size : 2.5vw;
+  font-size : 1.6vw;
   text-align : right;
 }
 /* fin override bootstrap */
