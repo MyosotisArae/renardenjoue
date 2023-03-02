@@ -34,6 +34,8 @@ body
   border-radius : 0px!important;
 }
 .bg-primary, .btn-primary {
+  font-style : italic;
+  color: var(--couleur_claire)!important;
   background-color : var(--couleur_fond)!important;
   border-color : var(--couleur_base)!important;
 }
@@ -250,22 +252,20 @@ img.moyenneImage
 }
 
 /* Lien sous forme de bouton (mettre bg-primary en plus, pour la couleur de fond) */
-a.bouton
+.bouton
 {
   font-size : 1.2vw;
   padding : 0.4em;
-  color: var(--couleur_claire);
+  color: var(--couleur_claire)!important;
   background : var(--couleur_fond);
   border : 2px solid var(--couleur_base);
 }
 /* Pas de soulignement au survol, pour que �a ait l'air d'un bouton */
-a.bouton:hover
+button:hover, .bouton:hover
 {
   text-decoration : none;
-  /* color : var(--couleur_base)!important; */
-  color: var(--couleur_fond);
-  background : var(--couleur_base);
-  border : 2px solid var(--couleur_fond);
+  border : 2px solid var(--couleur_fond)!important;
+  background-color : var(--couleur_base)!important;
 }
 /* Pour mettre un ascenseur vertical dans une div */
 .ascenseur
