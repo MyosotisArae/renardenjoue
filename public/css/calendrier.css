@@ -99,10 +99,10 @@ td.fc-today
 /* Traits de bordure */
 .fc-bgevent-skeleton, .fc-bgevent-skeleton td, .fc-day-header, .fc-widget-header
 {
-  border : 1px solid var(--couleur_fond);
+  border : 1px solid var(--couleur_fond)!important;
 }
 /* Traits de bordure de la première ligne */
 .fc-head-container
 {
-  border : 1px solid transparent;
+  border : 1px solid transparent!important;
 }
