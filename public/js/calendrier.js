@@ -1,3 +1,4 @@
+/*
 function detailEvt(tableau)
 {
   document.getElementById('titreEvt').innerHTML = "<h3>" + tableau["titre"] + "</h3>";
@@ -9,3 +10,12 @@ function detailEvt(tableau)
   page.scrollTop = 0;
   page.scrollTop += 1000;
 }
+*/
+
+
+// Bouton fermer
+function fermerDetail()
+{
+    window.location.href = "calendrier";
+}
+

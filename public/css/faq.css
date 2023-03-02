@@ -72,14 +72,6 @@
   transition: 0.5s ease;
 }
 
-/* Close btn */
-.close {
-  position: absolute;
-  top: 1px;
-  right: 3px;
-  color: var(--couleur_claire);
-  z-index : 10;
-}
 /* Titre de divFaq */
 .divFaqTitre {
   position: absolute;

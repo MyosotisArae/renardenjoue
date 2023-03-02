@@ -3,19 +3,21 @@
 {% block entete %}
   {{ parent() }}
 
-    <link href='{{ css_path }}calendrier.css' rel='stylesheet' />
     <link href='{{ fc_path }}core/main.css' rel='stylesheet' />
     <link href='{{ fc_path }}bootstrap/main.css' rel='stylesheet' />
     <link href='{{ fc_path }}daygrid/main.css' rel='stylesheet' />
     <link href='{{ fc_path }}list/main.css' rel='stylesheet' />
-
-    <script src='{{ js_path }}/calendrier.js'></script>
+    <link href='{{ css_path }}calendrier.css' rel='stylesheet' />
 
     <script src='{{ fc_path }}core/main.js'></script>
     <script src='{{ fc_path }}bootstrap/main.js'></script>
     <script src='{{ fc_path }}daygrid/main.js'></script>
     <script src='{{ fc_path }}list/main.js'></script>
+
+
     <script>
+
+
       {% set unEvt = null %}
 
       var listeDesc =
