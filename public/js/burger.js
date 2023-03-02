@@ -14,3 +14,18 @@ function openNav() {
 function closeNav() {
   sidenav.classList.remove("active");
 }
+
+
+/* Bouton de redirection vers login / Mon compte dans evtDetail */
+function ouvrirLogin()
+{
+    window.location.href = "login";
+}
+function inscription(numeroSeance)
+{
+    window.location.href = "inscription"+numeroSeance;
+}
+function desinscription(numeroSeance)
+{
+    window.location.href = "desinscription"+numeroSeance;
+}
