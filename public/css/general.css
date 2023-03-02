@@ -252,7 +252,7 @@ img.moyenneImage
 }
 
 /* Lien sous forme de bouton (mettre bg-primary en plus, pour la couleur de fond) */
-.bouton
+button, .bouton
 {
   font-size : 1.2vw;
   padding : 0.4em;
@@ -260,7 +260,7 @@ img.moyenneImage
   background : var(--couleur_fond);
   border : 2px solid var(--couleur_base);
 }
-/* Pas de soulignement au survol, pour que �a ait l'air d'un bouton */
+/* Pas de soulignement au survol, pour que ca ait l'air d'un bouton */
 button:hover, .bouton:hover
 {
   text-decoration : none;
