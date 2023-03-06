@@ -47,9 +47,9 @@ class ServiceDiscord extends Command
     private $evt;
     private $idParties;
     private $idAnnonces;
-    private $idVotes;
+//    private $idVotes;
 
-    public function __construct(string $token, string $botId, string $idParties, string $idAnnonces, string $idVotes, ContainerInterface $container) {
+    public function __construct(string $token, string $botId, string $idParties, string $idAnnonces, ContainerInterface $container) {
         parent::__construct();
         $this->botId = $botId;
 	    $this->discord = new Discord([
@@ -68,7 +68,7 @@ class ServiceDiscord extends Command
         // Canaux sur lesquels le bot écrit
         $this->idParties = $idParties;
         $this->idAnnonces = $idAnnonces;
-        $this->idVotes = $idVotes;
+//        $this->idVotes = $idVotes;
         // Pour accéder à la base de données :
         $this->manager = $container->get('doctrine')->getManager();
         // Pour gérer les messages qu'envoie le bot :
