@@ -171,7 +171,7 @@ class CalendrierController extends ParentController
     $combien = $this->combienDeParticipants($num);
     $capacite = $evt->getCapacite();
     $nbPlacesDispo = $capacite - $combien;
-    $chiffreEnLettres = ['','','deux','trois','quatre','cinq','six','sept','huit'];
+    $chiffreEnLettres = ['','','deux','trois','quatre','cinq','six','sept','huit','neuf'];
 
     if ($nbPlacesDispo < 0)
     {
@@ -187,7 +187,10 @@ class CalendrierController extends ParentController
     }
     else
     {
-      $surcharge = "Il reste ".$chiffreEnLettres[$nbPlacesDispo]." places.";
+        $nombreAafficher = '';
+        if ($nbPlacesDispo > 9) { $nombreAafficher = $nbPlacesDispo; }
+        else { $nombreAafficher = $chiffreEnLettres[$nbPlacesDispo]; }
+        $surcharge = "Il reste ".$nombreAafficher." places.";
     }
 
     if ($evt->getCapacite() > 0)
