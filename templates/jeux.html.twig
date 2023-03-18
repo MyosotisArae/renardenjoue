@@ -86,8 +86,7 @@
           <div class='ascenseur fondOpaque cadreBleu h-70'>
             <div class='row'>{# row bloc Detail jeu #}
 
-      <div id="blocDetailJeu" class='col-12' style='padding-top : 1em;'>{# Bloc Titre #}
-        <div class='fondOpaque cadreBleu'>
+      <div id="blocDetailJeu" class='col-12'>{# Bloc Titre #}
           <div class='row'>
             <div class='col-12'>&nbsp;</div>
             <div class='col-md-6 col-sm-7 col-12' style='margin-top:-0.5em'><h2 id='divTitre'>{{session.jeuChoisi.nom}}</h2>
@@ -99,10 +98,10 @@
               </div>
             </div>
             <div class='col-md-2 col-sm-1 col-5 float-right' style='margin-top:-0.9em; padding-bottom : 0.3em;' id='divNiv'>
-              <img class='mini float-right' src='{{ img_path }}pictoNiv{{session.jeuChoisi.dominance}}.gif'>
+              <img class='mini float-right' src='{{ img_path }}pictoNiv{{session.jeuChoisi.dominance}}.gif' alt='difficulté'>
             </div>
           </div>
-        </div>
+          <hr>
       </div>{# Bloc Titre #}
 
       <div class='col-12'>
@@ -128,7 +127,7 @@
               {% for n in 0..derniereImage %}
               <div class="carousel-item{{active}}">
                 {% set active = '' %}
-                <img class='d-block w-100 grandeImage img-fluid cadreBleu' src='{{img_path}}imagesJeux/{{racineNomFichier}}{{"%02d"|format(n)}}i{{"%02d"|format(session.jeuChoisi.nbImg)}}.jpg' alt=''> 
+                <img id='imageDuJeu' class='d-block w-100 grandeImage img-fluid cadreBleu' src='{{img_path}}imagesJeux/{{racineNomFichier}}{{"%02d"|format(n)}}i{{"%02d"|format(session.jeuChoisi.nbImg)}}.jpg' alt=''> 
               </div>
               {% endfor %}
             </div>
@@ -162,7 +161,7 @@
                   <table>
                     <tr>
                       <td>
-                        <img class='rectangle' src='{{ img_path }}legendeVert.gif'>&nbsp;
+                        <img class='rectangle' src='{{ img_path }}legendeVert.gif' alt='en vert : durée minimale'>&nbsp;
                       </td>
                       <td id='legMin'>
                         durée minimale{{session.jeuChoisi.dureemin|duree}}
@@ -170,7 +169,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <img class='rectangle' src='{{ img_path }}legendeRouge.gif'>&nbsp;
+                        <img class='rectangle' src='{{ img_path }}legendeRouge.gif' alt='en rouge : durée maximale'>&nbsp;
                       </td>
                       <td id='legMax'>
                         durée maximale{{session.jeuChoisi.dureemax|duree}}
@@ -181,24 +180,24 @@
                   <div id='legNiv_A'>Niveau de difficulté : {{session.jeuChoisi.difficulte}}</div>
                   <table>
                     <tr>
-                      <td rowspan=3><img id='legNiv_B' class='mini' src='{{ img_path }}pictoNiv{{session.jeuChoisi.dominance}}.gif'></td>
+                      <td rowspan=3><img id='legNiv_B' class='mini' src='{{ img_path }}pictoNiv{{session.jeuChoisi.dominance}}.gif' alt='type de jeu'></td>
                       <td rowspan=3><div class='texteInvisible'>blabla</div></td>
-                      <td><img class='bonhomme' src='{{ img_path }}niveau_enfant.gif'></td>
+                      <td><img class='bonhomme' src='{{ img_path }}niveau_enfant.gif' alt=''></td>
                       <td>5-8 ans</td>
                       <td class='texteInvisible' rowspan=3 id='legNiv_C' style='background-image:url({{ img_path }}fleches{{session.jeuChoisi.dominance}}.gif);'>blabla</td>
-                      <td><img class='rectangle' src='{{ img_path }}niveauRouge.gif'></td>
+                      <td><img class='rectangle' src='{{ img_path }}niveauRouge.gif' alt=''></td>
                       <td>trop dur</td>
                     </tr>
                     <tr>
-                      <td><img class='bonhomme' src='{{ img_path }}niveau_preado.gif'></td>
+                      <td><img class='bonhomme' src='{{ img_path }}niveau_preado.gif' alt=''></td>
                       <td>9-13 ans</td>
-                      <td><img class='rectangle' src='{{ img_path }}niveauOrange.gif'></td>
+                      <td><img class='rectangle' src='{{ img_path }}niveauOrange.gif' alt=''></td>
                       <td>compliqué</td>
                     </tr>
                     <tr>
-                      <td><img class='bonhomme' src='{{ img_path }}niveau_grand.gif'></td>
+                      <td><img class='bonhomme' src='{{ img_path }}niveau_grand.gif' alt=''></td>
                       <td>14 ans et plus</td>
-                      <td><img class='rectangle' src='{{ img_path }}niveauVert.gif'></td>
+                      <td><img class='rectangle' src='{{ img_path }}niveauVert.gif' alt=''></td>
                       <td>facile</td>
                     </tr>
                   </table>
@@ -209,14 +208,14 @@
               </div>
               <div class='col-12 inline' id='divNiveau'>
                 <label class='gauche' style='font-size : 1.4em;'>Complexité&nbsp;:&nbsp;{{session.jeuChoisi.dominance}}/5</label>
-                <img class='mini enAbsolu' style='right : 2em;top : 0;' src='{{ img_path }}pictoNiv{{session.jeuChoisi.dominance}}.gif'>
+                <img class='mini enAbsolu' style='right : 2em;top : 0;' src='{{ img_path }}pictoNiv{{session.jeuChoisi.dominance}}.gif' alt=''>
               </div>
               <div class='col-12'>
                 <br>
               </div>
               <div class='col-12 inline' id='divTxtNbJoueurs'>
                 <label class='gauche' style='font-size : 1.4em;'>{{session.jeuChoisi.nbJoueurs}}</label>
-                <img class='mini enAbsolu' style='right : 2em;top : 0;' src='{{ img_path }}{{session.jeuChoisi.imgNbJoueurs}}'>
+                <img class='mini enAbsolu' style='right : 2em;top : 0;' src='{{ img_path }}{{session.jeuChoisi.imgNbJoueurs}}' alt=''>
               </div>
               <div class='col-12'>
                 <br>

@@ -38,6 +38,12 @@ h3
   font-size : 1.2em;
   padding-left: 1em;
 }
+hr
+{
+  color : var(--couleur_fond);
+  border : 2px solid var(--couleur_fond);
+  margin : 0;
+}
 label
 {
   color : var(--couleur_base);

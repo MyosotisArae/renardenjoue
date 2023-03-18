@@ -1,6 +1,7 @@
 function atteindreBarreMenu()
 {
-	window.location.href = "#blocBarreMenu";
+  window.location.href = "#blocBarreMenu";
+  document.getElementById("mainRow").scrollTop = 0;
 }
 
 function dureehm(enMinutes)
