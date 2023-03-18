@@ -16,8 +16,7 @@ div.grandeImage
 }
 .h-20 { height: 20%; }
 .h-30 { height: 27vh; }
-.h-70 { height: 72vh; }
-.h-80 { height: 80vh; }
+.h-70 { height: 70vh; }
 .h-99 { height: 99vh; }
 .h-100 { height: 100%; }
 h1
@@ -34,45 +33,44 @@ h2
 }
 h3
 {
-  color : var(--couleur_base); /*428bca;*/ /* couleur bg-primary */
+  color : var(--couleur_base);
   text-align : left;
   font-size : 1.2em;
   padding-left: 1em;
 }
 label
 {
-  color : var(--couleur_base); /*428bca;*/ /* couleur bg-primary */
+  color : var(--couleur_base);
   text-align : left;
-  width : 80%;
-  font-size : 1.2em;
- margin-top : 0.5em;
-  margin-bottom : 0px;
+  width : auto;
+  font-size : 1em;
+  margin-top : 0.5em;
+  margin-bottom : 0.5em;
+}
+input
+{
+  height : 2em;
+  width : auto;
+  min-width : 2em;
+  font-size : 1em;
+}
+.droite
+{
+  float : right;
 }
 .gauche
 {
   text-align : left;
 }
-.margeAdroite { padding-right : 2.5em; }
+.margeAdroite { padding-right : 1.5em; }
 select
 {
-  font-size : 1.5em;
-  width : 100%;
+  font-size : 1em;
+  height : 2em;
+  width : auto;
   vertical-align : bottom;
-  border : 2px solid var(--couleur_fond); /*5bc0de;*/
+  border : 2px solid var(--couleur_fond);
   background : var(--couleur_claire);
-}
-.listeJeux
-{
-  z-index : 4;
-  /*
-  -webkit-columns-count: 2;
-  -moz-columns-count: 2;
-  column-count: 2;
-  */
-  max-height : 80vh;
-  overflow-x : hidden;
-  overflow-y : scroll;
-  height : 98%;
 }
 .jeSuisInvisible
 {

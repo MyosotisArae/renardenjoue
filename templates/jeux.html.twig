@@ -13,31 +13,19 @@
 {% endblock %}
 
 {% block laPage %}
-      <div class='col-3'>{# Bloc Filtrage des jeux #}
-        <div class='h-80'>
-          <form  method='POST' action='jeux?operation=recherche'>
-              <table class='w-100 cadreBleu fondOpaque h-80'>
-                <tr>
-                  <td>
+      <div class='container-fluid'>
+        <div class="row">{# row principale #}
+
+          <div class="margeInterieure">{# Bloc Filtrage des jeux #}
+          <div class="cadreBleu fondOpaque">
+          <form  method='POST' action='jeux?operation=recherche' class='w-100'>
                     <label>Titre :</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td style='position:relative;'>
-                    <a href='#' style='position:relative;'>
-                      <input type='text' name='jeuTitre'><div class='tool-tip right'>Nom&nbsp;complet&nbsp;ou&nbsp;partiel</div>
+                    <a href='#' style='position:relative;'>{# Les balises a sont nécessaires aux tool-tips #}
+                      <input type='text' name='jeuTitre' class='margeAdroite'><div class='tool-tip right'>Nom&nbsp;complet&nbsp;ou&nbsp;partiel</div>
                     </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label>Niveau :</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
+                    <label>&nbsp;&nbsp;Niveau :</label>
                     <a href='#' style='position:relative;'>
-            					<select name='jeuNiveau'>
+            					<select name='jeuNiveau' class='margeAdroite'>
             						<option value='0'></option>
         	    					<option value='1' class='fondVert' alt='Parties courtes, règles simples'>famille - enfants</option>
         			    			<option value='2' class='fondJaune'>abordable</option>
@@ -47,17 +35,9 @@
       	    	  			</select>
                       <div class='tool-tip right'>Difficulté&nbsp;recherchée</div>
                     </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label>Durée :</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
+                    <label>&nbsp;&nbsp;Durée :</label>
                     <a href='#' style='position:relative;'>
-          						<select name='jeuDuree'>
+          						<select name='jeuDuree' class='margeAdroite'>
           							<option value='0'></option>
         								<option value='1'>20mn ou moins</option>
   		    							<option value='2'>20 à 45mn</option>
@@ -65,19 +45,11 @@
       		    					<option value='4'>1h30 à 3h</option>
       			    				<option value='5'>3h ou plus</option>
     					    		</select>
-                      <div class='tool-tip right'>Durée&nbsp;d'une&nbsp;partie
+                      <div class='tool-tip left'>Durée&nbsp;d'une&nbsp;partie
                       </div>
                     </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label>Nombre :</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href='#' style='position:relative;'>
+                    <label>&nbsp;&nbsp;Nombre :</label>
+                    <a href='#' style='position:relative;' class='margeAdroite'>
             					<select name='jeuNb'>
         	    					<option value='0'></option>
       				    			<option value='1'>1 joueur</option>
@@ -89,52 +61,30 @@
       					      	<option value='7'>7 joueurs</option>
           				  		<option value='8'>8 joueurs et plus</option>
           					  </select>
-                      <div class='tool-tip right'>Nombre&nbsp;de&nbsp;joueurs</div>
+                      <div class='tool-tip left'>Nombre&nbsp;de&nbsp;joueurs</div>
                     </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <br><button type='submit' class='btn-primary bouton w-100' title='Rechercher les jeux correspondants à ces critères'>Chercher</button>
-                  </td>
-                </tr>
-              </table>
+                    <button type='submit' class='btn-primary bouton droite' title='Rechercher les jeux correspondants à ces critères'>&nbsp;Chercher&nbsp;</button>
           </form>
-        </div>
-      </div>{# Bloc Filtrage des jeux #}
+          </div>
+          </div>{# Bloc Filtrage des jeux #}
 
 
-      <div class='col-9'>{# Bloc Liste des jeux #}
-        <div class='fondOpaque cadreBleu h-80'>
-          <div table class='listeJeux'>
-            <table>
+          <div class="col-2 margeInterieure h-70">{# Bloc Liste des jeux #}
+          <div class='fondOpaque cadreBleu ascenseur h-70'>{# Bloc Liste des jeux #}
 
 {% set nombreDeJeux = listeJeux|length %}
-{% set moitie = nombreDeJeux/2 %}
-{% set numeroJeu = 0 %}
 {% for jeu in listeJeux %}
-  {% set numeroJeu = numeroJeu + 1 %}
-  {% if numeroJeu > moitie %}
-  {%   set moitie = nombreDeJeux+1 %}
-  {% endif %} 
-  {% if numeroJeu % 2 == 1 %}
-  <tr>
-  {% endif %} 
 
-                <td><a href='choisirJeu{{jeu.id}}' onclick=''>{{jeu.nom}}</a></td>
-  {% if numeroJeu % 2 == 0 %}
-  </tr>
-  {% endif %} 
+                <a href='choisirJeu{{jeu.id}}' onclick=''>{{jeu.nom}}</a><br>
 {% endfor %}
 
-            </table>
           </div>
-        </div>
-      </div>{# Bloc Liste des jeux #}
+          </div>{# Bloc Liste des jeux #}
 
-      <div class='col-12'>
-        <br>
-      </div>
+
+          <div class="col-10 margeInterieure h-70">{# Bloc Detail jeu #}
+          <div class='ascenseur fondOpaque cadreBleu h-70'>
+            <div class='row'>{# row bloc Detail jeu #}
 
       <div id="blocDetailJeu" class='col-12' style='padding-top : 1em;'>{# Bloc Titre #}
         <div class='fondOpaque cadreBleu'>
@@ -178,7 +128,7 @@
               {% for n in 0..derniereImage %}
               <div class="carousel-item{{active}}">
                 {% set active = '' %}
-                <img id='imageDuJeu' class='d-block w-100 grandeImage img-fluid cadreBleu' src='{{img_path}}imagesJeux/{{racineNomFichier}}{{"%02d"|format(n)}}i{{"%02d"|format(session.jeuChoisi.nbImg)}}.jpg'> 
+                <img class='d-block w-100 grandeImage img-fluid cadreBleu' src='{{img_path}}imagesJeux/{{racineNomFichier}}{{"%02d"|format(n)}}i{{"%02d"|format(session.jeuChoisi.nbImg)}}.jpg' alt=''> 
               </div>
               {% endfor %}
             </div>
@@ -193,7 +143,7 @@
           </a>
           </div>
           {% else %}
-          <img id='imageDuJeu' class='grandeImage img-fluid cadreBleu' src='{{ img_path }}imagesJeux/{{session.jeuChoisi.img}}.jpg'>
+          <img id='imageDuJeu' class='grandeImage img-fluid cadreBleu' src='{{ img_path }}imagesJeux/{{session.jeuChoisi.img}}.jpg' alt=''>
           {% endif%}
         </div>
         <br>
@@ -301,6 +251,14 @@
         </div>
         <br><br>
       </div>{# Bloc But et principe #}
+
+            </div>{# row bloc Detail jeu #}
+          </div>
+          </div>{# Bloc Detail jeu #}
+
+
+        </div>{# row principale #}
+      </div>
 
       <div class='col-12'>
         <br><br><br>

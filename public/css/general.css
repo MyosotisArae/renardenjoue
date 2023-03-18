@@ -258,7 +258,7 @@ img.moyenneImage
 }
 .fondOpaque
 {
-  background : var(--couleur_claire); /*transparent;*/ /*IVORY*/
+  background : var(--couleur_claire);
   opacity : 1;
 }
 .centrer
@@ -289,10 +289,12 @@ button:hover, .bouton:hover
   width : 95vw;
   height: 85vh;
   padding-left : 1em;
+  /*
   margin-top : 1.8em;
   margin-bottom : 1.2em;
   margin-left : 1em;
   margin-right : 1em;
+  */
   overflow-x : hidden;
   overflow-y : auto;
 }
@@ -327,10 +329,16 @@ a.dropdown-item
 {
   font-size : 3vw;
 }
+.margeInterieure
+{
+    margin : 0px;
+    padding : 3px;
+    width : 100%;
+}
 
 .cadreBleu
 {
-    margin : 3px;
+    margin : 0px;
     border : 3px solid var(--couleur_fond);
     padding : 3px;
     width : 100%;
