@@ -1,3 +1,13 @@
+/* v Passer devant les styles bleus de bootstrap */
+.fondOpaque a
+{
+  color : var(--couleur_fond)!important;
+}
+.fondOpaque select
+{
+  color : var(--couleur_fond);
+}
+/* ^ Passer devant les styles bleus de bootstrap */
 .mini
 {
   height : 3em;
@@ -7,7 +17,7 @@
   background : var(--couleur_claire);
   padding : 0.1em;
 }
-div.grandeImage
+.grandeImage
 {
   width : 100%;
   max-width : 100%;

@@ -2,6 +2,17 @@
 
 {% block entete %}
   {{ parent() }}
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  <script src="{{ BSjs_path }}" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
   <link rel='stylesheet' href='{{css_path}}jeux.css'>
   <link rel='stylesheet' href='{{css_path}}toolTip.css'>
   <script src='{{js_path}}jeux.js'></script>
@@ -13,7 +24,7 @@
 {% endblock %}
 
 {% block laPage %}
-      <div class='container-fluid'>
+      <div class='container-fluid' style="overflow-y : none;">
         <div class="row">{# row principale #}
 
           <div class="margeInterieure">{# Bloc Filtrage des jeux #}
@@ -21,7 +32,7 @@
           <form  method='POST' action='jeux?operation=recherche' class='w-100'>
                     <label>Titre :</label>
                     <a href='#' style='position:relative;'>{# Les balises a sont nécessaires aux tool-tips #}
-                      <input type='text' name='jeuTitre' class='margeAdroite'><div class='tool-tip right'>Nom&nbsp;complet&nbsp;ou&nbsp;partiel</div>
+                      <input type='text' name='jeuTitre' class='margeAdroite' style="min-width : 25em;"><div class='tool-tip right'>Nom&nbsp;complet&nbsp;ou&nbsp;partiel</div>
                     </a>
                     <label>&nbsp;&nbsp;Niveau :</label>
                     <a href='#' style='position:relative;'>
@@ -63,7 +74,7 @@
           					  </select>
                       <div class='tool-tip left'>Nombre&nbsp;de&nbsp;joueurs</div>
                     </a>
-                    <button type='submit' class='btn-primary bouton droite' title='Rechercher les jeux correspondants à ces critères'>&nbsp;Chercher&nbsp;</button>
+                    <button type='submit' class='btn-primary bouton droite' style="height:2.2em" title='Rechercher les jeux correspondants à ces critères'>&nbsp;Chercher&nbsp;</button>
           </form>
           </div>
           </div>{# Bloc Filtrage des jeux #}
@@ -89,7 +100,7 @@
       <div id="blocDetailJeu" class='col-12'>{# Bloc Titre #}
           <div class='row'>
             <div class='col-12'>&nbsp;</div>
-            <div class='col-md-6 col-sm-7 col-12' style='margin-top:-0.5em'><h2 id='divTitre'>{{session.jeuChoisi.nom}}</h2>
+            <div class='col-md-6 col-sm-7 col-12' style='margin-top:-2em'><h2 id='divTitre'>{{session.jeuChoisi.nom}}</h2>
             </div>
             <div class='col-md-4 col-sm-4 col-7' style='margin-top:-0.5em'>
               <div class='row'>
@@ -117,17 +128,17 @@
             {% set active = ' active' %}
           <div id="demo" class="carousel slide carousel-fade" data-ride="carousel">
             <!-- Indicateurs -->
-            <ul class="carousel-indicators">
+            <ol class="carousel-indicators">
               <li data-target="#demo" data-slide-to="0" class="active"></li>
               {% for n in 1..derniereImage %}
               <li data-target="#demo" data-slide-to="{{n}}"></li>
               {% endfor %}
-            </ul>
+            </ol>
             <div class="carousel-inner">
               {% for n in 0..derniereImage %}
               <div class="carousel-item{{active}}">
                 {% set active = '' %}
-                <img id='imageDuJeu' class='d-block w-100 grandeImage img-fluid cadreBleu' src='{{img_path}}imagesJeux/{{racineNomFichier}}{{"%02d"|format(n)}}i{{"%02d"|format(session.jeuChoisi.nbImg)}}.jpg' alt=''> 
+                <img class='d-block w-100 grandeImage img-fluid cadreBleu' src='{{img_path}}imagesJeux/{{racineNomFichier}}{{"%02d"|format(n)}}i{{"%02d"|format(session.jeuChoisi.nbImg)}}.jpg' alt=''> 
               </div>
               {% endfor %}
             </div>
