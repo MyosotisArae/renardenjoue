@@ -42,7 +42,7 @@
 	height: 0px;
 	width: 0px;
 	border: 6px solid transparent;
-    border-top-color: var(--couleur_base);
+    border-top-color: var(--couleur_fond);
 }
 
 /* default heights, width and margin w/o Javscript */
@@ -60,7 +60,7 @@
 	top: 35%;
 	right: auto;
 	left: 105%; /* Distance entre la partie gauche du composant qui precede et la fleche du tooltip */
-	margin-top: -20px;
+/*	margin-top: -20px;*/
 	margin-right: auto;	
 	margin-left: auto;
 }
@@ -71,7 +71,7 @@
 	margin-top: -6px;
 	bottom: auto;
 	border-top-color: transparent;	
-    border-right-color: var(--couleur_base);
+    border-right-color: var(--couleur_fond);
 }
 
 /* tool tip position left : La fenetre tooltip est a gauche */
@@ -80,7 +80,7 @@
 	top: 40%;
 	left: auto;
 	right: 105%; /* Distance entre la partie droite du composant qui precede et la fleche du tooltip */
-	margin-top: -20px;	
+/*	margin-top: -20px;	*/
 	margin-left: auto;	
 }
 
@@ -91,7 +91,7 @@
 	margin-top: -6px;
 	bottom: auto;
 	border-top-color: transparent;	
-    border-left-color: var(--couleur_base);
+    border-left-color: var(--couleur_fond);
 }
 
 /* tool tip position bottom */

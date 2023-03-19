@@ -29,29 +29,29 @@
 
           <div class="margeInterieure">{# Bloc Filtrage des jeux #}
           <div class="cadreBleu fondOpaque">
-          <form  method='POST' action='jeux?operation=recherche' class='w-100'>
+          <form  method='POST' action='jeux?operation=recherche' class='w-100' style="text-align:left;" >
                     <label>Titre :</label>
                     <a href='#' style='position:relative;'>{# Les balises a sont nécessaires aux tool-tips #}
-                      <input type='text' name='jeuTitre' class='margeAdroite' style="min-width : 25em;"><div class='tool-tip right'>Nom&nbsp;complet&nbsp;ou&nbsp;partiel</div>
+                      <input type='text' name='jeuTitre' style="width:20vw;"><div class='tool-tip right'>Nom&nbsp;complet&nbsp;ou&nbsp;partiel</div>
                     </a>
-                    <label>&nbsp;&nbsp;Niveau :</label>
+                    <label style="width:7vw;text-align:right;" class="labelAvecMargeGauche">Niveau :</label>
                     <a href='#' style='position:relative;'>
-            					<select name='jeuNiveau' class='margeAdroite'>
-            						<option value='0'></option>
+            					<select name='jeuNiveau' style="width:10vw;">
+            						<option value='0' selected="selected">tous</option>
         	    					<option value='1' class='fondVert' alt='Parties courtes, règles simples'>famille - enfants</option>
         			    			<option value='2' class='fondJaune'>abordable</option>
-      	  				    	<option value='3' class='fondOrange'>confirmés</option>
-    			  						<option value='4' class='fondRouge'>connaisseurs</option>
-          	  					<option value='5' class='fondNoir'>experts</option>
+        	  				    	<option value='3' class='fondOrange'>confirmés</option>
+   			  						<option value='4' class='fondRouge'>connaisseurs</option>
+            	  					<option value='5' class='fondNoir'>experts</option>
       	    	  			</select>
                       <div class='tool-tip right'>Difficulté&nbsp;recherchée</div>
                     </a>
-                    <label>&nbsp;&nbsp;Durée :</label>
+                    <label style="width:7vw;text-align:right;" class="labelAvecMargeGauche">Durée :</label>
                     <a href='#' style='position:relative;'>
-          						<select name='jeuDuree' class='margeAdroite'>
-          							<option value='0'></option>
-        								<option value='1'>20mn ou moins</option>
-  		    							<option value='2'>20 à 45mn</option>
+          						<select name='jeuDuree' style="width:10vw;">
+            						<option value='0' selected="selected">toutes</option>
+        							<option value='1'>20mn ou moins</option>
+  		    						<option value='2'>20 à 45mn</option>
       	    						<option value='3'>jusqu'à 1h30</option>
       		    					<option value='4'>1h30 à 3h</option>
       			    				<option value='5'>3h ou plus</option>
@@ -59,22 +59,23 @@
                       <div class='tool-tip left'>Durée&nbsp;d'une&nbsp;partie
                       </div>
                     </a>
-                    <label>&nbsp;&nbsp;Nombre :</label>
-                    <a href='#' style='position:relative;' class='margeAdroite'>
-            					<select name='jeuNb'>
-        	    					<option value='0'></option>
+                    <label style="width:7vw;text-align:right;" class="labelAvecMargeGauche">Nombre :</label>
+                    <a href='#' style='position:relative;'>
+            					<select name='jeuNb' style="width:10vw;">
+            						<option value='0' selected="selected">1 à 10 joueurs</option>
       				    			<option value='1'>1 joueur</option>
- 			  					    	<option value='2'>2 joueurs</option>
+ 			  					    <option value='2'>2 joueurs</option>
             						<option value='3'>3 joueurs</option>
             						<option value='4'>4 joueurs</option>
-      	      					<option value='5'>5 joueurs</option>
-						      			<option value='6'>6 joueurs</option>
-      					      	<option value='7'>7 joueurs</option>
-          				  		<option value='8'>8 joueurs et plus</option>
+      	      						<option value='5'>5 joueurs</option>
+						   			<option value='6'>6 joueurs</option>
+      					        	<option value='7'>7 joueurs</option>
+          				  		    <option value='8'>8 joueurs et plus</option>
           					  </select>
                       <div class='tool-tip left'>Nombre&nbsp;de&nbsp;joueurs</div>
                     </a>
-                    <button type='submit' class='btn-primary bouton droite' style="height:2.2em" title='Rechercher les jeux correspondants à ces critères'>&nbsp;Chercher&nbsp;</button>
+                    <!-- <button type='submit' class='btn-primary bouton droite' style="height:80%;" title='Rechercher les jeux correspondants à ces critères'>&nbsp;Chercher&nbsp;</button> -->
+                    <input type='submit' style="width:9vw;" class='bouton droite' title='Rechercher les jeux correspondants à ces critères' value="&nbsp;Chercher&nbsp;">
           </form>
           </div>
           </div>{# Bloc Filtrage des jeux #}

@@ -54,6 +54,12 @@ hr
   border : 2px solid var(--couleur_fond);
   margin : 0;
 }
+.bouton
+{
+  height : 2.2em;
+  font-size : 1.2em;
+  min-width : 6em;
+}
 label
 {
   color : var(--couleur_base);
@@ -62,6 +68,10 @@ label
   font-size : 1em;
   margin-top : 0.5em;
   margin-bottom : 0.5em;
+}
+.labelAvecMargeGauche
+{
+  padding-left : 2vw;
 }
 input
 {
@@ -78,7 +88,6 @@ input
 {
   text-align : left;
 }
-.margeAdroite { padding-right : 1.5em; }
 select
 {
   font-size : 1em;
