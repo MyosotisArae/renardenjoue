@@ -73,12 +73,18 @@ label
 {
   padding-left : 2vw;
 }
-input
+input, input[type="submit"]
 {
+  padding : 0;
   height : 2em;
-  width : auto;
+  width : 20%;
   min-width : 2em;
   font-size : 1em;
+}
+/* Texte explicatif de l'input Titre du jeu */
+::placeholder
+{
+  color : var(--couleur_fond);
 }
 .droite
 {
@@ -92,7 +98,7 @@ select
 {
   font-size : 1em;
   height : 2em;
-  width : auto;
+  width : 20%;
   vertical-align : bottom;
   border : 2px solid var(--couleur_fond);
   background : var(--couleur_claire);
@@ -111,7 +117,7 @@ select
 .souligneBleu
 {
   display: inline-block;
-  border-bottom: 2px solid var(--couleur_base); /*5bc0de;*/
+  border-bottom: 2px solid var(--couleur_base);
 }
 .enLigne
 {
@@ -185,7 +191,7 @@ a.fonte10  { font-family : Artistic-CE; }
   top : -1em;
   left : 3em;
   box-sizing: border-box;
-  border: 2px solid var(--couleur_base); /*428bca;*/
+  border: 2px solid var(--couleur_base);
   background : var(--couleur_claire);
   opacity : 1;
   visibility : hidden;

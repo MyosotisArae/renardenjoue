@@ -13,6 +13,8 @@
   <script src="{{ BSjs_path }}" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
   <link rel='stylesheet' href='{{css_path}}jeux.css'>
   <link rel='stylesheet' href='{{css_path}}toolTip.css'>
   <script src='{{js_path}}jeux.js'></script>
@@ -30,14 +32,14 @@
           <div class="margeInterieure">{# Bloc Filtrage des jeux #}
           <div class="cadreBleu fondOpaque">
           <form  method='POST' action='jeux?operation=recherche' class='w-100' style="text-align:left;" >
-                    <label>Titre :</label>
+
                     <a href='#' style='position:relative;'>{# Les balises a sont nécessaires aux tool-tips #}
-                      <input type='text' name='jeuTitre' style="width:20vw;"><div class='tool-tip right'>Nom&nbsp;complet&nbsp;ou&nbsp;partiel</div>
+                      <input type='text' name='jeuTitre' style="width:20vw;" placeholder="Nom d'un jeu ou titre partiel"><div class='tool-tip right'>Nom&nbsp;complet&nbsp;ou&nbsp;partiel</div>
                     </a>
-                    <label style="width:7vw;text-align:right;" class="labelAvecMargeGauche">Niveau :</label>
-                    <a href='#' style='position:relative;'>
-            					<select name='jeuNiveau' style="width:10vw;">
-            						<option value='0' selected="selected">tous</option>
+
+                    <a href='#' style='position:relative;' class="labelAvecMargeGauche">
+            					<select name='jeuNiveau'>
+            						<option value='0' selected="selected":>tous les niveaux</option>
         	    					<option value='1' class='fondVert' alt='Parties courtes, règles simples'>famille - enfants</option>
         			    			<option value='2' class='fondJaune'>abordable</option>
         	  				    	<option value='3' class='fondOrange'>confirmés</option>
@@ -46,10 +48,10 @@
       	    	  			</select>
                       <div class='tool-tip right'>Difficulté&nbsp;recherchée</div>
                     </a>
-                    <label style="width:7vw;text-align:right;" class="labelAvecMargeGauche">Durée :</label>
-                    <a href='#' style='position:relative;'>
-          						<select name='jeuDuree' style="width:10vw;">
-            						<option value='0' selected="selected">toutes</option>
+
+                    <a href='#' style='position:relative;' class="labelAvecMargeGauche">
+          						<select name='jeuDuree'>
+            						<option value='0' selected="selected">durée indifférente</option>
         							<option value='1'>20mn ou moins</option>
   		    						<option value='2'>20 à 45mn</option>
       	    						<option value='3'>jusqu'à 1h30</option>
@@ -59,10 +61,10 @@
                       <div class='tool-tip left'>Durée&nbsp;d'une&nbsp;partie
                       </div>
                     </a>
-                    <label style="width:7vw;text-align:right;" class="labelAvecMargeGauche">Nombre :</label>
-                    <a href='#' style='position:relative;'>
-            					<select name='jeuNb' style="width:10vw;">
-            						<option value='0' selected="selected">1 à 10 joueurs</option>
+
+                    <a href='#' style='position:relative;' class="labelAvecMargeGauche">
+            					<select name='jeuNb'>
+            						<option value='0' selected="selected">1 joueur et plus</option>
       				    			<option value='1'>1 joueur</option>
  			  					    <option value='2'>2 joueurs</option>
             						<option value='3'>3 joueurs</option>
@@ -74,6 +76,7 @@
           					  </select>
                       <div class='tool-tip left'>Nombre&nbsp;de&nbsp;joueurs</div>
                     </a>
+
                     <!-- <button type='submit' class='btn-primary bouton droite' style="height:80%;" title='Rechercher les jeux correspondants à ces critères'>&nbsp;Chercher&nbsp;</button> -->
                     <input type='submit' style="width:9vw;" class='bouton droite' title='Rechercher les jeux correspondants à ces critères' value="&nbsp;Chercher&nbsp;">
           </form>
