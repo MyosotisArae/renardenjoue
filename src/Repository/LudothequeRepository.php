@@ -63,8 +63,8 @@ class LudothequeRepository extends ServiceEntityRepository
             }
             if ($this->postIsSet('jeuNb'))
             {
-              if ($_POST['jeuNb'] > 2) { $qb->andWhere('j.nbjmin <= :nb'); }
-              if ($_POST['jeuNb'] < 8) { $qb->andWhere('j.nbjmax >= :nb'); }
+              $qb->andWhere('j.nbjmin <= :nb');
+              $qb->andWhere('j.nbjmax >= :nb'); 
               $qb->setParameter('nb', $_POST['jeuNb']);
             }
   
