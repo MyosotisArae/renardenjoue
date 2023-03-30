@@ -22,3 +22,11 @@ function dureehm(enMinutes)
   }
   return resultat;
 }
+
+function choisirJeu(idJeu)
+{
+    var formulaire = document.getElementById("formLister");
+	var urlToCall = "choisirJeu"+idJeu;
+	formulaire.action = urlToCall;
+	formulaire.submit();
+}

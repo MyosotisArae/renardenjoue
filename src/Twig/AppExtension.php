@@ -16,6 +16,7 @@ class AppExtension extends AbstractExtension
     public function getFilters()
     {
         return [
+          new TwigFilter('ifSelected', [$this, 'selectedOrNot']),
           new TwigFilter('duree', [$this, 'duree']),
           new TwigFilter('dureehm', [$this, 'dureehm']),
           new TwigFilter('retourChariot', [$this, 'retourChariot']),
@@ -27,6 +28,16 @@ class AppExtension extends AbstractExtension
         return [
             new TwigFunction('ongletActif', [$this, 'getOngletActif']),
         ];
+    }
+
+    /**
+     * Cette fonction affiche "selected='selected'" si la valeur du post est la même que celle fournie, et "" sinon.
+     */
+    public function selectedOrNot(string $valeurPost="", string $valeurOption="")
+    {
+        if ($valeurPost == null) { return ""; }
+        if ($valeurPost == $valeurOption) { return " selected='selected' "; }
+        return "";
     }
 
     /**

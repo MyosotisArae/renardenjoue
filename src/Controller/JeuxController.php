@@ -27,21 +27,48 @@ class JeuxController extends ParentController
       $_SESSION["jeuChoisi"] = $this->getJeuAuHasard($listeJeux);
     }
 
-	return $this->render('/jeux.html.twig',["session" => $_SESSION,"listeJeux" => $listeJeux]);
+    $jeuTitre = "";
+    $jeuNiveau = "0";
+    $jeuDuree = "0";
+    $jeuNb = "0";
+    if (isset($_POST)) 
+    {
+        if ($util->estRenseignePOST("jeuTitre")) { $jeuTitre = $_POST["jeuTitre"]; }
+        if ($util->estRenseignePOST("jeuNiveau")) { $jeuNiveau = $_POST["jeuNiveau"]; }
+        if ($util->estRenseignePOST("jeuDuree")) { $jeuDuree = $_POST["jeuDuree"]; }
+        if ($util->estRenseignePOST("jeuNb")) { $jeuNb = $_POST["jeuNb"]; }
+    }
+
+    /* Remettre les critères saisis dans le formulaire de recherche */
+    return $this->render('/jeux.html.twig',["session" => $_SESSION,"listeJeux" => $listeJeux,"jeuTitre" => $jeuTitre,"jeuNiveau" => $jeuNiveau,"jeuDuree" => $jeuDuree,"jeuNb" => $jeuNb]);
   }
 
-	/**
-	 * Sélection d'un leu dans la liste confetti.
-	 * @Route("/choisirJeu{idJeu}", name="choisirJeu", requirements={"idJeu" = "\d+"})
-	 */
-	public function choisirJeu($idJeu)
-	{
-      $_SESSION["ongletActif"] = "JEU";
-	  $listeJeux = $this->getJeux();
-	  $_SESSION["jeuChoisi"] = $this->getJeuById($idJeu,$listeJeux);
-  
-	  return $this->render('/jeux.html.twig',["session" => $_SESSION,"listeJeux" => $listeJeux]);
-	}
+  /**
+   * Sélection d'un jeu dans la liste.
+   * @Route("/choisirJeu{idJeu}", name="choisirJeu", requirements={"idJeu" = "\d+"})
+   */
+  public function choisirJeu($idJeu)
+  {
+    $_SESSION["ongletActif"] = "JEU";
+    $listeJeux = $this->getJeux();
+    $_SESSION["jeuChoisi"] = $this->getJeuById($idJeu,$listeJeux);
+
+    $jeuTitre = "";
+    $jeuNiveau = "0";
+    $jeuDuree = "0";
+    $jeuNb = "0";
+    if (isset($_POST)) 
+    {
+        $util = $this->get("utilitaires");
+        if ($util->estRenseignePOST("jeuTitre")) { $jeuTitre = $_POST["jeuTitre"]; }
+        if ($util->estRenseignePOST("jeuNiveau")) { $jeuNiveau = $_POST["jeuNiveau"]; }
+        if ($util->estRenseignePOST("jeuDuree")) { $jeuDuree = $_POST["jeuDuree"]; }
+        if ($util->estRenseignePOST("jeuNb")) { $jeuNb = $_POST["jeuNb"]; }
+    }
+
+    /* Remettre les critères saisis dans le formulaire de recherche */
+    return $this->render('/jeux.html.twig',["session" => $_SESSION,"listeJeux" => $listeJeux,"jeuTitre" => $jeuTitre,"jeuNiveau" => $jeuNiveau,"jeuDuree" => $jeuDuree,"jeuNb" => $jeuNb]);
+  }
   
   private function getJeux()
   {
