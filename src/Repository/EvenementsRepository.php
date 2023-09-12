@@ -32,12 +32,12 @@ class EvenementsRepository extends ServiceEntityRepository
     {
       $dateDebut = new DateTime();
       $dateFin = new DateTime();
-      // Intervalles de 3 et 6 mois
+      // Intervalles de 3 et 11 mois
       $troisMois = new DateInterval("P3M"); // P:date, Y=ans, M=mois, D=jours, W=semaines, T:heure, H=heures, M=minutes, S=secondes
-      $septMois = new DateInterval("P7M");
+      $onzeMois = new DateInterval("P11M");
       // Calculer les dates il y a 3 mois et dans 7 mois
       $dateDebut = $dateDebut->sub($troisMois);
-      $dateFin = $dateFin->add($septMois);
+      $dateFin = $dateFin->add($onzeMois);
       // Ces deux dates doivent commencer le 1
       $dateDebut = new DateTime($dateDebut->format('Y-m-1'));
       $dateFin = new DateTime($dateFin->format('Y-m-1'));
@@ -122,8 +122,8 @@ class EvenementsRepository extends ServiceEntityRepository
       public function getNextDate(): string
       {
         $today = new Datetime("now"); // new Datetime(date('Y-M-d'));
-        $septMois = new DateInterval("P7M");
-        $dateFin = $today->add($septMois);
+        $onzeMois = new DateInterval("P11M");
+        $dateFin = $today->add($onzeMois);
 
         // Recuperer le 1er evenement qui debute après $today
         $qb = $this->createQueryBuilder('e')
