@@ -18,7 +18,7 @@
     <div class="col-12 ascenseur container" style="box-sizing: border-box;">{# colonne 1 #}
       <div class="row encadrer cadreBleu fondOpaque">
         <div class='col-12'>
-          <div id="mainDivFaq" class="mainDivFAQ"></div>
+          <div id="mainDivFaq" class="mainDivFAQ" style="overflow:auto"></div>
           <h1 style="color:var(--couleur_base);">Quelques réponses à vos questions :</h1>
         </div>
 
@@ -31,8 +31,9 @@
                 <div class="divFAQ" id="div01" onload="ranger('div01')">
                   <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
                   <h2>Je ne connais aucun jeu. Je peux venir quand même ?</h2><br>
-                  Bien évidemment !<br>
-                  Quel que soit le type de jeu proposé, toutes les règles vous seront expliquées en détail avant de commencer. Il n'y a aucun prérequis pour participer à une séance de jeux. Vérifiez simplement que le profil visé vous correspond (voir la question : <a href="#" onclick="openDiv('div02')"> "Quel est le public visé ?"</a>).
+                  Bien évidemment !<br><br>
+                  Quel que soit le type de jeu proposé, toutes les règles vous seront expliquées en détail avant de commencer. Il n'y a aucun prérequis pour participer à une séance de jeux.<br>
+                  Veillez simplement à choisir un jeu qui vous correspond, tant en termes de complexité que de durée (voir la question : <a href="#" onclick="openDiv('div02')"> "Quel est le public visé ?"</a>).
                 </div>
               </td></tr>
 
@@ -41,7 +42,7 @@
                 <div class="divFAQ" id="div02" onload="ranger('div02')">
                   <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
                   <h2>Public visé :</h2><br>
-                  Chaque séance de jeu vise un public spécifique. Pour ne gâcher la partie de personne, nous sommes soucieux de ne pas mixer des joueurs novices avec des experts. Donc, nous précisons le profil de joueur requis pour chaque partie organisée. Nous organisons des parties pour tous :<br>
+                  Nous organisons des parties pour tous :<br>
                 <table>
                   <tr>
                     <td class="fox">&#x1F98A;</td>
@@ -59,6 +60,9 @@
                     </td>
                   </tr>
                 </table>
+                <br>Lors des séances extérieures (salle M. Koehl, salle LCL ou médiathèque), plusieurs jeux sont disponibles, et nous vous conseillons pour que vous en choisissiez un qui vous convient.
+                <br>Les jeux que nous proposons à la médiathèque sont de durée moyenne à courte, parce qu'il est impossible de déborder sur les horaires. Dans les deux autres salles, on peut. Il est donc possible de jouer à des jeux qui prennent 2 ou 3h. Mais, pas d'inquiétude ! Nous apportons aussi des jeux plus petits.
+                 <br>On vous fera un topo sur les jeux disponibles à votre arrivée, ce qui vous permettra de vous décider.
                 </div>
               </td></tr>
 
@@ -95,18 +99,41 @@
                   <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
                 <table>
                   <tr>
-                    <td style="width : 70%; vertical-align : text-bottom;">
+                    <td style="width : 20%; vertical-align : text-bottom;">
+                      <br><br>Tous les mardis<br>
+                      19h30 - 23h30<br>
+                      <br>Membres uniquement<br><br>
+                      <b>Salle LCL<br>
+                      4 rue Konrad Adenauer<br></b>
+                    </td>
+                    <td style="width:40%">
                       <h2>Nos locaux</h2><br>
-                      Une séance tout public se déroulera le deuxième lundi de chaque mois, à la salle des fêtes.
+                      <img src="{{ img_path }}plan_RER_LCL.png" style='width : 100%;' alt="Plan Salle LCL">
+                    </td>
+                    <td style="width:40%">
+                      <img src="{{ img_path }}porte_LCL.png" style='width : 100%;' alt="Porte Salle LCL">
+                    </td>
+                  </tr>
+                </table>
+                <b>Attention</b>, l'accès n'est pas situé dans cette rue mais côté Grand Place (l'esplanade avec les grandes statues).<br><br>
+                <table>
+                  <tr>
+                    <td style="width : 35%">
+                      <img src="{{ img_path }}salle_M_Koehl.png" style='width : 100%;' alt="Salle des fêtes">
+                    </td>
+                    <td style="width : 40%">
+                      <img src="{{ img_path }}plan_Koehl.png" style='width : 100%;' alt="Plan Salle des fêtes">
+                    </td>
+                    <td style="width : 25%">
+                      Le 2<sup>e</sup> lundi de chaque mois<br>
+                      19h - 23h<br><br>
+                      Séance tout public<br>
 					  <b><br>Salle Maurice Koehl
 					  <br>Cour de la Rivière
-					  <br>Face à la mairie de Bussy Saint Georges</b>
-                    </td>
-                    <td style="width : 30%">
-                      <img src="{{ img_path }}salle_M_Koehl.png" style='width : 100%;' alt="Salle des fêtes">
                     </td>
                   <tr>
 				</table>
+			    C'est situé en face de la mairie de Bussy Saint Georges.</b><br><br>
 				<br>
 				<table>
                   <tr>
@@ -138,7 +165,24 @@
                 <div class="divFAQ" id="div05" onload="ranger('div05')">
                   <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
                       <h2>Que propose l'association du Renard Enjoué ?</h2><br>
-                  Notre association réunit des joueurs et aspirants joueurs autour de tables de jeux. Nos membres vous invitent chez eux pour jouer. De plus, une soirée tout public se déroule à la salle des fêtes chaque mois, et l'association participe aux soirées ludothèque (avant chaque vacance scolaire). Vous pouvez aussi venir avec vos jeux.<br>Tout ça s'organise facilement grâce au forum.
+                  Notre association réunit des joueurs et aspirants joueurs autour de tables de jeux.<br>
+                  Vous pouvez venir jouer dans différentes salles municipales :
+                  <table>
+                   <tr>
+                     <td class="fox">&#x1F98A;</td>
+                     <td><a href="#" onclick="openDiv('div04')">La salle des fêtes</a> : le 2<sup>ème</sup> lundi de chaque mois (même en juillet-août)</td>
+                   </tr>
+                   <tr>
+                     <td class="fox">&#x1F98A;</td>
+                    <td><a href="#" onClick="openDiv('div04')">La salle LCL</a> : tous les mardis, mais pas pendant les vacances scolaires (réservé aux membres de l'association)</td>
+                   </tr>
+                   <tr>
+                     <td class="fox">&#x1F98A;</td>
+                    <td>La médiathèque : le samedi soir situé juste avant les vacances scolaires</td>
+                   </tr>
+                  </table>
+                  Ces salles sont parfois indisponibles en raison de réunions municipales ou autres évènements. Retrouvez toutes les dates sur <a href="calendrier">le planning</a>.<br><br>
+                  Nos membres vous invitent aussi chez eux pour jouer. Dans ce cas, il faut s'inscrire, depuis ce site, ou depuis le forum Discord.
                 </div>
               </td></tr>
 
@@ -147,7 +191,9 @@
                 <div class="divFAQ" id="div06" onload="ranger('div06')">
                   <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
                       <h2>De quand date l'association du Renard Enjoué ?</h2><br>
-                  L'association a été fondée en 2019.<br>Son objectif est de vous aider à trouver des joueurs près de chez vous, pour jouer plus souvent, plus facilement. Vous pourrez aussi y découvrir nombre de jeux intéressants, qui vous seront présentés par leurs propriétaires lors de nos séances de jeux.<br>Tout le monde peut créer sa propre séance, grâce aux commandes slash gérées par notre bot sur Discord.
+                  L'association a été fondée en 2019.<br>Son objectif est de vous aider à trouver des joueurs près de chez vous, pour jouer plus souvent, plus facilement. Vous pourrez aussi y découvrir nombre de jeux intéressants, qui vous seront présentés par leurs propriétaires lors de nos séances de jeux.<br>
+                  Nous sommes présents à chaque soirée ludothèque (salle Victor Hugo, à la médiathèque) et disposons de plusieurs salles sur Bussy Saint-Georges. Retrouvez-les <a href="#" openDiv('div04')">ici</a>.<br>
+                  En plus, tout membre peut créer sa propre séance, grâce aux commandes slash gérées par notre bot sur Discord, et inviter des joueurs chez lui.
                 </div>
               </td></tr>
 
