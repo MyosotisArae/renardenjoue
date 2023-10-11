@@ -30,10 +30,19 @@
                 <a href="#" onclick="openDiv('div01')">Je ne connais aucun jeu. Je peux venir quand même ?</a>
                 <div class="divFAQ" id="div01" onload="ranger('div01')">
                   <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
+                  <table>
+                    <tr>
+                      <td style="width : 80%;">
                   <h2>Je ne connais aucun jeu. Je peux venir quand même ?</h2><br>
                   Bien évidemment !<br><br>
                   Quel que soit le type de jeu proposé, toutes les règles vous seront expliquées en détail avant de commencer. Il n'y a aucun prérequis pour participer à une séance de jeux.<br>
                   Veillez simplement à choisir un jeu qui vous correspond, tant en termes de complexité que de durée (voir la question : <a href="#" onclick="openDiv('div02')"> "Quel est le public visé ?"</a>).
+                      </td>
+                      <td style="width : 20%;">
+                        <img src="{{ img_path }}renardeau_de.png" style="width:100%;" alt="Alors c'est ça les jeux des humains ? Bizarre ...">
+                      </td>
+                    </tr>
+                  </table>
                 </div>
               </td></tr>
 
@@ -87,9 +96,10 @@
                   </tr>
                   <tr>
                     <td class="fox">&#x1F98A;</td>
-                    <td style="height : 0.8em;" class="lienBlanc"><a class="lienBlanc" href="mailto:myosotis.arae@gmail.com?subject=Bonjour,%20le%20Renard%20Enjoué">ou par mail : myosotis.arae@gmail.com</a></td>
+                    <td style="height : 0.8em;" class="lienBlanc"><a class="lienBlanc" href="mailto:renardenjoue@gmail.com?subject=Bonjour,%20le%20Renard%20Enjoué">ou par mail : renardenjoue@gmail.com</a></td>
                   </tr>
                 </table>
+                <img src="{{ img_path }}renard_courrier.png" style='height : 30%;' alt="Le renard lit toujours son courrier.">
                 </div>
               </td></tr>
 
@@ -192,7 +202,7 @@
                   <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
                       <h2>De quand date l'association du Renard Enjoué ?</h2><br>
                   L'association a été fondée en 2019.<br>Son objectif est de vous aider à trouver des joueurs près de chez vous, pour jouer plus souvent, plus facilement. Vous pourrez aussi y découvrir nombre de jeux intéressants, qui vous seront présentés par leurs propriétaires lors de nos séances de jeux.<br>
-                  Nous sommes présents à chaque soirée ludothèque (salle Victor Hugo, à la médiathèque) et disposons de plusieurs salles sur Bussy Saint-Georges. Retrouvez-les <a href="#" openDiv('div04')">ici</a>.<br>
+                  Nous sommes présents à chaque soirée ludothèque (salle Victor Hugo, à la médiathèque) et disposons de plusieurs salles sur Bussy Saint-Georges. Retrouvez-les <a href="#" onclick="openDiv('div04')">ici</a>.<br>
                   En plus, tout membre peut créer sa propre séance, grâce aux commandes slash gérées par notre bot sur Discord, et inviter des joueurs chez lui.
                 </div>
               </td></tr>
