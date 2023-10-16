@@ -17,7 +17,6 @@ class UserDisplayType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom',           TextType::class,     ['label' => "Nom d'utilisateur", 'attr' => array('readonly' => true)])
             ->add('plainPassword', PasswordType::class, ['label' => 'Mot de passe'])
             ->add('email',         EmailType::class,    ['label' => 'Adresse mail', 'required' => false])
             ->add('userId',        TextType::class,     ['label' => "Identifiant Discord"])

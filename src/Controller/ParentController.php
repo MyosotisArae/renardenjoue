@@ -21,11 +21,39 @@ class ParentController extends AbstractController
       ]);
   }
 
+  // Fonction pour contrôler le rôle admin : user.roles = 8
   public function isAdmin()
   {
     $joueur = $this->getUser();
     if ($joueur == null) return false;
     if ($joueur->getRoles() != 8) return false;
+    return true;
+  }
+
+  // Fonction pour contrôler le rôle RGPD : user.roles = 1
+  public function isRoleRGPD()
+  {
+    $joueur = $this->getUser();
+    if ($joueur == null) return false;
+    if ($joueur->getRoles() != 1) return false;
+    return true;
+  }
+
+  // Fonction pour contrôler le rôle comptabilité : user.roles = 2
+  public function isRoleCompta()
+  {
+    $joueur = $this->getUser();
+    if ($joueur == null) return false;
+    if ($joueur->getRoles() != 2) return false;
+    return true;
+  }
+
+  // Fonction pour contrôler le rôle newsletter : user.roles = 4
+  public function isRoleNewsletter()
+  {
+    $joueur = $this->getUser();
+    if ($joueur == null) return false;
+    if ($joueur->getRoles() != 4) return false;
     return true;
   }
 

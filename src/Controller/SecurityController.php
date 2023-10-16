@@ -82,7 +82,41 @@ class SecurityController extends ParentController
     }
     
     /**
-     * L'utilisateur est connecté.
+     * L'utilisateur est connecté et met à jour son profil
+     * @Route("/majUser", name="majUser")
+     */
+    public function majUser(Request $request, UserPasswordEncoderInterface $encoder)
+    {
+        $_SESSION["ongletActif"] = "CNX";
+
+        $message = '';
+        $user = $this->getUser();
+        if ($user == null) {
+          return $this->redirectToRoute('login');
+        }
+
+        if ($request->isMethod('POST'))
+        {
+          $user = $this->getDisplayedUser($user);
+          if ($this->updateUser($user, $encoder))
+          {
+            $this->setSss('msgAlert', "Les modifications ont bien été enregistrées.");
+            $_SESSION["memberConnected"] = $user;
+          }
+          else
+          {
+            $this->setSss('msgAlert', "Une erreur s'est produite. Vos modifications n'ont pas été prises en compte.");
+          }
+        }
+        $formulaire = $this->createForm(UserDisplayType::class, $user);
+        $formulaire->handleRequest($request);
+
+        return $this->render('security/connecte.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView(), 'message' => '']);
+    }
+
+    
+    /**
+     * L'utilisateur est connecté et ouvre son profil depuis une autre page.
      * @Route("/compte", name="compte")
      */
     public function connecte(Request $request, UserPasswordEncoderInterface $encoder)
@@ -96,10 +130,11 @@ class SecurityController extends ParentController
         }
         $formulaire = $this->createForm(UserDisplayType::class, $user);
         $formulaire->handleRequest($request);
-
+/*
         if ($request->isMethod('POST'))
         {
-          $user = $formulaire->getData();
+          //$user = $formulaire->getData();
+          $user = $this->getDisplayedUser($user);
           if ($this->updateUser($user, $encoder))
           {
             $this->setSss('msgAlert', "Les modifications ont bien été enregistrées.");
@@ -110,7 +145,7 @@ class SecurityController extends ParentController
             $this->setSss('msgAlert', "Une erreur s'est produite. Vos modifications n'ont pas été prises en compte.");
           }
         }
-
+ */
         return $this->render('security/connecte.html.twig', ["session" => $_SESSION,'formulaire' => $formulaire->createView(), 'message' => '']);
     }
 
@@ -329,10 +364,31 @@ class SecurityController extends ParentController
       // Identifiant Discord
       $idDiscord = $user->getUserId();
       if (strlen($idDiscord) > 10) $userEnBase->setUserId($idDiscord);
+      // Nb de joueurs
+      $nb = $user->getNbJoueurs();
+      $userEnBase->setNbJoueurs($nb);
+
       $em = $this->getDoctrine()->getManager();
       $em->flush();
       $this->setUser($userEnBase);
       $this->setSss('msgAlert', "Votre compte a été mis à jour.");
       return true;
     }
+
+    // Met à jour $User selon les champs obtenus dans le formulaire du profil
+    /**
+     * @return User
+     */
+    private function getDisplayedUser(User $user)
+    {
+        if ($user)
+        {
+            $user->setPlainPassword($_POST["user_display_plainPassword"]);
+            $user->setUserId($_POST["user_display_userId"]);
+            $user->setEmail($_POST["user_display_email"]);
+            $user->setNbJoueurs($_POST["user_display_nbJoueurs"]);
+        }
+        return $user;
+    }
+
 }
