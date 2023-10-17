@@ -26,6 +26,36 @@
 {% endblock %}
 
 
+{# Si un rôle spécial est connecté, l'affichage peut être différent. #}
+{% set isAdmin = false %}
+{% set isRoleRGPD = false %}
+{% set isRoleCompta = false %}
+{% set isRoleNewsletter = false %}
+{% set role = 0 %}
+{% set largeurFenetre = 7 %}
+{% set pourcentBoutons = 50 %}
+{% set isUser = false %}
+{% if 'memberConnected' in session|keys %}
+{%   set isUser = true %}
+{%   set role = session.memberConnected.roles %}
+{%   if role > 0 %}
+{%     if role >= 8 %}
+{%       set isAdmin = true %}
+{%     endif %}
+{%     if role == 1 %}
+{%       set isRoleRGPD = true %}
+{%     endif %}
+{%     if role == 2 %}
+{%       set isRoleCompta = true %}
+{%     endif %}
+{%     if role == 4 %}
+{%       set isRoleNewsletter = true %}
+{%     endif %}
+{%     set largeurFenetre = 10 %}
+{%     set pourcentBoutons = 14 %}
+{%   endif %}
+{% endif %}
+
 <style>
 .burgerMenu { display : table; }
 .grandEcran  { display : none; }
@@ -140,6 +170,7 @@ html { font-size : 1.8vw; }
 
     <div class="row retracter imageDEfond" id="mainRow">
           {% block laPage %}
+
           {% endblock %}
 
       <div style="font-size : 10em;"> {# div pour tout pousser vers le haut #}

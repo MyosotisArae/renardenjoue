@@ -35,16 +35,22 @@ class UserRepository extends ServiceEntityRepository
       /**
         * @return Users[]
         */
-        public function getUsers(): array
-        {  
-          $qb = $this->createQueryBuilder('u')
-                     ->orderBy('u.dateDentree', 'DESC');
+      public function getUsers(): array
+      {  
+        $qb = $this->createQueryBuilder('u')
+                   ->orderBy('u.dateDentree', 'DESC');
     
-          return $qb
-            ->getQuery()
-            ->getResult()
-          ;    
-        }
+        return $qb
+          ->getQuery()
+          ->getResult();    
+      }
+
+    // Indique si ce User est associé à un Inscrit
+    public function isInscrit():bool
+    {
+        if ($this->getInscrit() == null) return false;
+        return true;
+    }
 
       /********************************************************* DISCORD *********************************************************/
 

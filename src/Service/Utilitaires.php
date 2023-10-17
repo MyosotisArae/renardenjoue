@@ -5,6 +5,21 @@ use \DateTime;
 
 class Utilitaires
 {
+
+    /**
+     * Calcul de l'année du forum (année associative en cours) en fonction de la date
+     * @return int
+     */
+	public function getAnnee()
+	{
+		$annee = date("Y");
+		// L'année associative va de septembre à aout.
+		// Si on est avant septembre, il faut donc revenir à l'année précédente.
+		$mois = date("n");
+		if ($mois < 9) { $annee -= 1; }
+		return $annee;
+	}
+
     /**
       Retourne True si la variable de session portant ce nom existe et est renseignée.
       S'utilise comme ceci dans les Controlleurs :

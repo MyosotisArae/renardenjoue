@@ -1,0 +1,93 @@
+{% extends 'main.html.twig' %}
+
+{% block entete %}
+  {{ parent() }}
+
+  <style>
+    h3
+    {
+      font-size : 1em;
+    }
+    div.parite0
+    {
+      background-color : var(--couleur_fond);
+      color : var(--couleur_base);
+    }
+    div.parite1
+    {
+      background-color : var(--couleur_base);
+      color : var(--couleur_fond);
+    }
+  </style>
+{% endblock %}
+
+{% block corps %}
+  {{ parent() }}
+{% endblock %}
+
+{% block laPage %}
+
+<div class="row w-100">
+  <div class="col-12" style="text-align : center;">
+    <h2>Année associative {{ annee }}-{{ annee+1 }}</h2>
+  </div>
+</div>
+
+<div class="row w-100">
+      <div class="col-3">
+	    <h3>Nom</h3>
+      </div>
+      <div class="col-3">
+	    <h3>Prénom</h3>
+      </div>
+      <div class="col-4">
+	    <h3>Email</h3>
+      </div>
+      <div class="col-2">
+{% if isRoleRGPD %}
+	    <h3>RGPD<br>rempli ?</h3>
+{% endif %}
+{% if isRoleCompta %}
+	    <h3>Cotisation<br>réglée ?</h3>
+{% endif %}
+{% if isRoleNewsletter %}
+	    <h3>Newsletter<br>demandée ?</h3>
+{% endif %}
+      </div>
+</div>
+<div class="row w-100">
+  <div class="col-12 ascenseur container">
+  {% set isOdd = 1 %}
+  {% for user in liste %}
+      {% set isOdd = 1-isOdd %}
+      <div class="row parite{{ isOdd }}">
+        <div class="col-3">
+	    {{user.vraiNom}}
+        </div>
+        <div class="col-3">
+	    {{user.vraiPrenom}}
+        </div>
+        <div class="col-4">
+{% if isRoleRGPD %}
+	      {{user.inscrit.mailRGPD ?: user.email}}
+{% else %}
+	      {{user.email}}
+{% endif %}
+        </div>
+        <div class="col-2">
+{% if isRoleRGPD %}
+	      {{user.inscrit ? user.inscrit.RGPD==1?'oui':'non' : 'non'}}
+{% endif %}
+{% if isRoleCompta %}
+	      {{user.inscrit ? user.inscrit.cotisation==1?'oui':'non' : 'non'}}
+{% endif %}
+{% if isRoleNewsletter %}
+	      {{user.inscrit ? user.inscrit.newsletter==1?'oui':'non' : 'non'}}
+{% endif %}
+        </div>
+      </div>
+  {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

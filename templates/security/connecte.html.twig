@@ -32,35 +32,6 @@
 <div class="col-1">
   <br>
 </div>
-{# Si un rôle spécial est connecté, l'affichage sera différent. #}
-{% set isAdmin = false %}
-{% set isRoleRGPD = false %}
-{% set isRoleCompta = false %}
-{% set isRoleNewsletter = false %}
-{% set role = 0 %}
-{% set largeurFenetre = 7 %}
-{% set pourcentBoutons = 50 %}
-{% set isUser = false %}
-{% if 'memberConnected' in session|keys %}
-{%   set isUser = true %}
-{%   set role = session.memberConnected.roles %}
-{%   if role > 0 %}
-{%     if role >= 8 %}
-{%       set isAdmin = true %}
-{%     endif %}
-{%     if role == 1 %}
-{%       set isRoleRGPD = true %}
-{%     endif %}
-{%     if role == 2 %}
-{%       set isRoleCompta = true %}
-{%     endif %}
-{%     if role == 4 %}
-{%       set isRoleNewsletter = true %}
-{%     endif %}
-{%     set largeurFenetre = 10 %}
-{%     set pourcentBoutons = 14 %}
-{%   endif %}
-{% endif %}
 <div class="col-md-{{largeurFenetre}} col-11 enBleu OurFont">
 
   {% if isUser %}
@@ -91,14 +62,14 @@
         {% endif %}
         {% if isRoleCompta %}
         <td style='width : 16%;'>
-          <form method='post' action='compta'>
+          <form method='post' action='Compta'>
             <button class='btn-primary btn float-right' type='submit'>Comptabilité</button>
           </form>
         </td>
         {% endif %}
         {% if isRoleNewsletter %}
         <td style='width : 30%;'>
-          <form method='post' action='newsletter'>
+          <form method='post' action='Newsletter'>
             <button class='btn-primary btn float-right' type='submit'>Gestion des adhérents</button>
           </form>
         </td>
@@ -214,7 +185,7 @@
 
 
   {% else %}
-    <meta http-equiv= "refresh" content="0; login" />
+    <meta http-equiv="refresh" content="5; login" />
   {% endif %}
 
 </div>

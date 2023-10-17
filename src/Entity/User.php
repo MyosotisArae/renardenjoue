@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use DateTime;
+use App\Entity\Inscrit;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -22,7 +23,15 @@ class User implements UserInterface
         $this->dateDentree = new DateTime();
         // identifiant Discord
         $this->userId = '';
+        //$this->inscrit = null;
+        $this->isInscrit = false;
+        $this->vraiNom = "inconnu";
+        $this->vraiPrenom = "inconnu";
     }
+
+    private bool $isInscrit = false;
+    private Inscrit $inscrit;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -82,9 +91,29 @@ class User implements UserInterface
      */
     private $userId;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="vraiNom", type="string", nullable=true)
+     */
+    private $vraiNom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="vraiPrenom", type="string", nullable=true)
+     */
+    private $vraiPrenom;
+
     /******************************************/
     /************* Getteurs *******************/
     /******************************************/
+    public function getInscrit(): ?Inscrit
+    {
+        if ($this->isInscrit) return $this->inscrit;
+        return null;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -169,9 +198,39 @@ class User implements UserInterface
         return $this->userId;
     }
 
+    // Vaut "inconnu" s'il n'est pas renseigné
+    public function getVraiNom(): ?string
+    {
+        return $this->noms($this->vraiNom);
+    }
+
+    // Vaut "inconnu" s'il n'est pas renseigné
+    public function getVraiPrenom(): ?string
+    {
+        return $this->noms($this->vraiPrenom);
+    }
+
+    private function noms(string $unNom)
+    {
+        if ($unNom)
+        {
+            if (strlen($unNom) > 0) return $unNom;
+        }
+        // Si le nom est null ou vide, retourner ceci :
+        return "inconnu";
+    }
+
     /******************************************/
     /************* Setteurs *******************/
     /******************************************/
+    public function setInscrit(Inscrit $inscrit): self
+    {
+        $this->inscrit= $inscrit;
+        $this->isInscrit= true;
+
+        return $this;
+    }
+
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
@@ -217,6 +276,20 @@ class User implements UserInterface
     public function setUserId(string $u): self
     {
         $this->userId= $u;
+
+        return $this;
+    }
+
+    public function setVraiNom(string $vraiNom): self
+    {
+        $this->vraiNom= $vraiNom;
+
+        return $this;
+    }
+
+    public function setVraiPrenom(string $vraiPrenom): self
+    {
+        $this->vraiPrenom= $vraiPrenom;
 
         return $this;
     }
