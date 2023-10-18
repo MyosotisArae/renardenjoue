@@ -232,7 +232,7 @@ class User implements UserInterface
         return $this->noms($this->vraiPrenom);
     }
 
-    private function noms(string $unNom)
+    private function noms(?string $unNom)
     {
         if ($unNom)
         {
