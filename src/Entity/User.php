@@ -105,6 +105,10 @@ class User implements UserInterface
      */
     private $vraiPrenom;
 
+    private bool $RGPD;
+    private bool $Compta;
+    private bool $Newsletter;
+
     /******************************************/
     /************* Getteurs *******************/
     /******************************************/
@@ -112,6 +116,24 @@ class User implements UserInterface
     {
         if ($this->isInscrit) return $this->inscrit;
         return null;
+    }
+
+    public function getRGPD(): int
+    {
+        if ($this->isInscrit) { return $this->getInscrit()->getRGPD(); }
+        return 0; 
+    }
+
+    public function getCompta(): int
+    {
+        if ($this->isInscrit) { return $this->getInscrit()->getRegle(); }
+        return 0; 
+    }
+
+    public function getNewsletter(): int
+    {
+        if ($this->isInscrit) { return $this->getInscrit()->getNewsletter(); }
+        return 0; 
     }
 
     public function getId(): ?int

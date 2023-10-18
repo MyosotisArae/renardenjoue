@@ -79,7 +79,7 @@
 	      {{user.inscrit ? user.inscrit.RGPD==1?'oui':'non' : 'non'}}
 {% endif %}
 {% if isRoleCompta %}
-	      {{user.inscrit ? user.inscrit.cotisation==1?'oui':'non' : 'non'}}
+	      {{user.inscrit ? user.inscrit.regle==1?'oui:'~user.inscrit.cotisation~"€":'non' : 'non'}}
 {% endif %}
 {% if isRoleNewsletter %}
 	      {{user.inscrit ? user.inscrit.newsletter==1?'oui':'non' : 'non'}}
