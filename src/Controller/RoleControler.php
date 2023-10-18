@@ -9,46 +9,31 @@ use Symfony\Component\Routing\Annotation\Route;
 class RoleControler extends ParentController
 {
   /**
-   * @Route("/RGPD", name="RGPD")
+   * @Route("/Admin{code}", name="AdminRoles", requirements={"code" = "\d+"})
    */
-  public function RGPD(Request $request)
+  public function AdminRoles(Request $request, int $code)
   {
-    if (!$this->isRoleRGPD()) {
-      return $this->redirectToRoute('login');
-    }
-    return $this->listing($request);
-  }
-
-  /**
-   * @Route("/Compta", name="Compta")
-   */
-  public function Compta(Request $request)
-  {
-    if (!$this->isRoleCompta()) {
-      return $this->redirectToRoute('login');
-    }
-    return $this->listing($request);
-  }
-
-  /**
-   * @Route("/Newsletter", name="Newsletter")
-   */
-  public function Newsletter(Request $request)
-  {
-    if (!$this->isRoleNewsletter()) {
-      return $this->redirectToRoute('login');
-    }
-    return $this->listing($request);
-  }
-
-  private function listing(Request $request)
-  {
+      $joueur = $this->getUser();
+      // Pour accéder à l'écran de ce rôle, l'utilisateur :
+      // - doit être connecté
+      if ($joueur == null) {
+          $this->setSss("Utilisateur non connecté");
+          return $this->redirectToRoute('login');
+      }
+      // - doit demander l'écran correspondant à son rôle
+      // RGPD = 1
+      // Compta = 2
+      // Newsletter = 4
+      if ($joueur->getRoles() != $code) {
+          $this->setSss("Code utilisé : ".$joueur->getRoles()."; code requis : ".$code);
+          return $this->redirectToRoute('login');
+      }
       $util = $this->get("utilitaires");
       $annee = $util->getAnnee();
       $liste = $this->getUsers($annee);
       return $this->render('gerer_liste_inscrits.html.twig', ["session" => $_SESSION, "liste" => $liste, "annee" => $annee]);
   }
-    
+
   // On veut lister les utilisateurs et déterminer s'ils sont inscrits pour l'annee demandée.
   private function getUsers(int $annee)
   {
