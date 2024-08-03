@@ -26,66 +26,94 @@
 {% endblock %}
 
 {% block laPage %}
-      <div class='container-fluid' style="overflow-y : none;">
+      {# Bloc Recherche de jeu : en ligne sur grand écran, vertical sinon #}
+      <div class='container-fluid' style="overflow-y : hidden;">
         <div class="row">{# row principale #}
+          <div class="col-12">
 
-          <div class="margeInterieure">{# Bloc Filtrage des jeux #}
-          <div class="cadreBleu fondOpaque">
-          <form id="formLister" method='POST' action='jeux?operation=recherche' class='w-100' style="text-align:left;" >
+            <div class="margeInterieure">{# Bloc Filtrage des jeux #}
+            <div class="cadreBleu fondOpaque"> {# L'encadré #}
+              <form id="formLister" method='POST' action='jeux?operation=recherche' class='w-100' style="text-align:left;" >
 
-                    <a href='#' style='position:relative;'>{# Les balises a sont nécessaires aux tool-tips #}
-                      <input value="{{jeuTitre}}" type='text' name='jeuTitre' style="width:20vw;" placeholder="Nom d'un jeu ou titre partiel"><div class='tool-tip right'>Nom&nbsp;complet&nbsp;ou&nbsp;partiel</div>
-                    </a>
+                {# champs pour la recherche : en mode grand écran, 10 colonnes, bouton chercher ; 2 colonnes ; et tout en colonne en petit écran #}
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-12 col-md-10">
+                      <div class="container-fluid">
+                        <div class="row"> {# div pour les champs de recherche où chaque champ prendra 3 colonnes #}
 
-                    <a href='#' style='position:relative;' class="labelAvecMargeGauche">
-            					<select name='jeuNiveau'>
-            						<option value='0' {{jeuNiveau|ifSelected("0")}}>tous les niveaux</option>
-        	    					<option value='1' {{jeuNiveau|ifSelected("1")}} class='fondVert' alt='Parties courtes, règles simples'>famille - enfants</option>
-        			    			<option value='2' {{jeuNiveau|ifSelected("2")}} class='fondJaune'>abordable</option>
-        	  				    	<option value='3' {{jeuNiveau|ifSelected("3")}} class='fondOrange'>confirmés</option>
-   			  						<option value='4' {{jeuNiveau|ifSelected("4")}} class='fondRouge'>connaisseurs</option>
-            	  					<option value='5' {{jeuNiveau|ifSelected("5")}} class='fondNoir'>experts</option>
-      	    	  			</select>
-                      <div class='tool-tip right'>Difficulté&nbsp;recherchée</div>
-                    </a>
+                          <div class="col-12 col-md-3">
+                            <a href='#'> {# Les balises a sont nécessaires aux tool-tips #}
+                              <input value="" type='text' name='jeuTitre' placeholder="Nom d'un jeu ou titre partiel" class="w-100" style="display:inline-block">
+                              <div class='tool-tip right'>Nom&nbsp;complet&nbsp;ou&nbsp;partiel</div>
+                            </a>
+                          </div>
 
-                    <a href='#' style='position:relative;' class="labelAvecMargeGauche">
-          						<select name='jeuDuree'>
-            						<option value='0' {{jeuDuree|ifSelected("0")}}>durée indifférente</option>
-        							<option value='1' {{jeuDuree|ifSelected("1")}}>20mn ou moins</option>
-  		    						<option value='2' {{jeuDuree|ifSelected("2")}}>20 à 45mn</option>
-      	    						<option value='3' {{jeuDuree|ifSelected("3")}}>jusqu'à 1h30</option>
-      		    					<option value='4' {{jeuDuree|ifSelected("4")}}>1h30 à 3h</option>
-      			    				<option value='5' {{jeuDuree|ifSelected("5")}}>3h ou plus</option>
-    					    		</select>
-                      <div class='tool-tip left'>Durée&nbsp;d'une&nbsp;partie
-                      </div>
-                    </a>
+                          <div class="col-12 col-md-3">
+                            <a href='#'>
+                                <select name='jeuNiveau' class="w-100">
+                                    <option value='0' {{jeuNiveau|ifSelected("0")}}>tous les niveaux</option>
+                                    <option value='1' {{jeuNiveau|ifSelected("1")}} class='fondVert' alt='Parties courtes, règles simples'>famille - enfants</option>
+                                    <option value='2' {{jeuNiveau|ifSelected("2")}} class='fondJaune'>abordable</option>
+                                      <option value='3' {{jeuNiveau|ifSelected("3")}} class='fondOrange'>confirmés</option>
+                                         <option value='4' {{jeuNiveau|ifSelected("4")}} class='fondRouge'>connaisseurs</option>
+                                      <option value='5' {{jeuNiveau|ifSelected("5")}} class='fondNoir'>experts</option>
+                                  </select>
+                                <div class='tool-tip right'>Difficulté&nbsp;recherchée</div>
+                            </a>
+                          </div>
 
-                    <a href='#' style='position:relative;' class="labelAvecMargeGauche">
-            					<select name='jeuNb'>
-            						<option value='0' {{jeuNb|ifSelected("0")}}>1 joueur et plus</option>
-      				    			<option value='1' {{jeuNb|ifSelected("1")}}>1 joueur</option>
- 			  					    <option value='2' {{jeuNb|ifSelected("2")}}>2 joueurs</option>
-            						<option value='3' {{jeuNb|ifSelected("3")}}>3 joueurs</option>
-            						<option value='4' {{jeuNb|ifSelected("4")}}>4 joueurs</option>
-      	      						<option value='5' {{jeuNb|ifSelected("5")}}>5 joueurs</option>
-						   			<option value='6' {{jeuNb|ifSelected("6")}}>6 joueurs</option>
-      					        	<option value='7' {{jeuNb|ifSelected("7")}}>7 joueurs</option>
-          				  		    <option value='8' {{jeuNb|ifSelected("8")}}>8 joueurs et plus</option>
-          					  </select>
-                      <div class='tool-tip left'>Nombre&nbsp;de&nbsp;joueurs</div>
-                    </a>
+                          <div class="col-12 col-md-3">
+                            <a href='#'>
+                                  <select name='jeuDuree' class="w-100">
+                                    <option value='0' {{jeuDuree|ifSelected("0")}}>durée indifférente</option>
+                                    <option value='1' {{jeuDuree|ifSelected("1")}}>20mn ou moins</option>
+                                      <option value='2' {{jeuDuree|ifSelected("2")}}>20 à 45mn</option>
+                                      <option value='3' {{jeuDuree|ifSelected("3")}}>jusqu'à 1h30</option>
+                                      <option value='4' {{jeuDuree|ifSelected("4")}}>1h30 à 3h</option>
+                                      <option value='5' {{jeuDuree|ifSelected("5")}}>3h ou plus</option>
+                                </select>
+                                <div class='tool-tip left'>Durée&nbsp;d'une&nbsp;partie </div>
+                            </a>
+                          </div>
 
-                    <!-- <button type='submit' class='btn-primary bouton droite' style="height:80%;" title='Rechercher les jeux correspondants à ces critères'>&nbsp;Chercher&nbsp;</button> -->
-                    <input type='submit' style="width:9vw;" class='bouton droite' title='Rechercher les jeux correspondants à ces critères' value="&nbsp;Chercher&nbsp;">
-          </form>
-          </div>
-          </div>{# Bloc Filtrage des jeux #}
+                           <div class="col-12 col-md-3">
+                            <a href='#'>
+                              <select name='jeuNb' class="w-100">
+                                    <option value='0' {{jeuNb|ifSelected("0")}}>1 joueur et plus</option>
+                                      <option value='1' {{jeuNb|ifSelected("1")}}>1 joueur</option>
+                                       <option value='2' {{jeuNb|ifSelected("2")}}>2 joueurs</option>
+                                    <option value='3' {{jeuNb|ifSelected("3")}}>3 joueurs</option>
+                                    <option value='4' {{jeuNb|ifSelected("4")}}>4 joueurs</option>
+                                        <option value='5' {{jeuNb|ifSelected("5")}}>5 joueurs</option>
+                                       <option value='6' {{jeuNb|ifSelected("6")}}>6 joueurs</option>
+                                      <option value='7' {{jeuNb|ifSelected("7")}}>7 joueurs</option>
+                                        <option value='8' {{jeuNb|ifSelected("8")}}>8 joueurs et plus</option>
+                                </select>
+                              <div class='tool-tip left'>Nombre&nbsp;de&nbsp;joueurs</div>
+                             </a>
+                          </div>
+
+                        </div> {# row #}
+                      </div> {# container #}
+                    </div> {# colonne - partie gauche #}
+
+                    <div class="col-12 col-md-2"> {# div pour le bouton Chercher #}
+                      <!-- <button type='submit' class='btn-primary bouton droite' style="height:80%;" title='Rechercher les jeux correspondants à ces critères'>&nbsp;Chercher&nbsp;</button> -->
+                      <input type='submit' class='bouton droite w-100' title='Rechercher les jeux correspondants à ces critères' value="&nbsp;Chercher&nbsp;">
+                    </div>
+                  </div> {# row #}
+                </div> {# container #}
+              </form>
+            </div> {# cadre #}
+            </div> {# marge #}
+          </div> {# col-12 #}
+        </div> {# row #}
+      </div>{# container - Bloc Filtrage des jeux #}
 
 
-          <div class="col-2 margeInterieure h-70">{# Bloc Liste des jeux #}
-          <div class='fondOpaque cadreBleu ascenseur h-70'>{# Bloc Liste des jeux #}
+      <div class="col-2 margeInterieure h-70">{# Bloc Liste des jeux #}
+        <div class='fondOpaque cadreBleu ascenseur h-70'>{# Bloc Liste des jeux #}
 
 {% set nombreDeJeux = listeJeux|length %}
 {% for jeu in listeJeux %}
@@ -286,4 +314,7 @@
   {% endif %}
       </div>
       
+{% endblock %}
+
+{% block laPage2 %}
 {% endblock %}
