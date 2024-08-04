@@ -35,158 +35,119 @@
 <div class="col-md-{{largeurFenetre}} col-11 enBleu OurFont">
 
   {% if isUser %}
-    <table class='w-100'> 
+    <div class="container-fluid">
+      <div class="row">
 
-      <tr>
-        <td style='width : 50%;'>
-          <h1 class="h3 mb-3 font-weight-normal">Compte de {{ session.memberConnected.nom }} :</h1>
-        </td>
-        <td style='width : {{pourcentBoutons}}%;'>
-          <form method='post' action='logout'>
-            <button class='btn-primary btn float-right' type='submit'>Déconnexion</button>
-          </form>
-        </td>
-        {% if isAdmin %}
-        <td style='width : 16%;'>
-          <form method='post' action='gestion'>
-            <button class='btn-primary btn float-right' type='submit'>Administrateur</button>
-          </form>
-        </td>
-        {% endif %}
-        {% if isRoleRGPD %}
-        <td style='width : 10%;'>
-          <form method='post' action='Admin1'>
-            <button class='btn-primary btn float-right' type='submit'>RGPD</button>
-          </form>
-        </td>
-        {% endif %}
-        {% if isRoleCompta %}
-        <td style='width : 16%;'>
-          <form method='post' action='Admin2'>
-            <button class='btn-primary btn float-right' type='submit'>Comptabilité</button>
-          </form>
-        </td>
-        {% endif %}
-        {% if isRoleNewsletter %}
-        <td style='width : 30%;'>
-          <form method='post' action='Admin4'>
-            <button class='btn-primary btn float-right' type='submit'>Gestion des adhérents</button>
-          </form>
-        </td>
-        {% endif %}
-      </tr>
-    </table>   
+        <div class="col-12 col-md-6"> {# Titre #}
+          <h1 class="h3 mb-3 font-weight-normal">Compte de {{ session.memberConnected.nom }}</h1>
+        </div>
+        <div class="col-12 col-md-6"> {# Boutons #}
+          <div class="container-fluid"> {# Dans ce container, toutes les cases auront la même taille #}
+            <div class="row">
+              <div class="col">
+                <form method='post' action='logout'>
+                  <button class='btn-primary btn float-right' type='submit'>Déconnexion</button>
+                </form>
+              </div>
+              {% if isAdmin %}
+              <div class="col">
+                <form method='post' action='gestion'>
+                  <button class='btn-primary btn float-right' type='submit'>Administrateur</button>
+                </form>
+              </div>
+              {% endif %}
+              {% if isRoleRGPD %}
+              <div class="col">
+                <form method='post' action='Admin1'>
+                  <button class='btn-primary btn float-right' type='submit'>RGPD</button>
+                </form>
+              </div>
+              {% endif %}
+              {% if isRoleCompta %}
+              <div class="col">
+                <form method='post' action='Admin2'>
+                  <button class='btn-primary btn float-right' type='submit'>Comptabilité</button>
+                </form>
+              </div>
+              {% endif %}
+              {% if isRoleNewsletter %}
+              <div class="col">
+                <form method='post' action='Admin4'>
+                  <button class='btn-primary btn float-right' type='submit'>Gestion des adhérents</button>
+                </form>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div> {# Bloc des boutons #}
 
-<br>
-<form action="majUser" method="post">
-  <table>
-    <tr>
-      <td>
-  	    <h3>Mot de passe :</h3>
-      </td>
-      <td>
-        <a href="#" style='position:relative;'>
-  	    <input type="password" name="user_display_plainPassword" id="user_display_plainPassword" required="required" value="{{field_value(formulaire.plainPassword)}}">
-        <div class='tool-tip right'>Vous&nbsp;pouvez&nbsp;le&nbsp;changer.</div>
-        </a>
-      </td>
-      <td style='width : 5%;'>
-        &nbsp;
-      </td>
-      <td>
-  	    <h3>Identifiant Discord :</h3>
-      </td>
-      <td>
-        <a href="#" style='position:relative;'>
-  	    <input type="text" name="user_display_userId" id="user_display_userId" value="{{field_value(formulaire.userId)}}">
-        <div class='tool-tip left'>code&nbsp;de&nbsp;18&nbsp;chiffres</div>
-        </a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-      </td>
-      <td>
-      </td>
-      <td>
-      </td>
-      <td colspan=2>
-        <h4>Dans Discord, cliquez (avec le bouton droit de la souris) sur votre nom, puis sur Copier l'identifiant de l'utilisateur.</h4>
-      </td>
-    <tr>
-      <td>
-  	    <br>
-      </td>
-      <td>
-      </td>
-      <td>
-      </td>
-      <td>
-      </td>
-      <td>
-      </td>
-      <td>
-      </td>
-    </tr>
-    <tr>
-      <td colspan=2>
-  	    <h3>Adresse mail :</h3>
-      </td>
-      <td>
-      </td>
-      <td colspan=2>
-  	    <h3>Nombre de joueurs pour votre prochaine inscription :</h3>
-      </td>
-    </tr>
-    <tr>
-      <td colspan=2>
-        <a href="#" style='position:relative;'>
-  	    <input type="email" name="user_display_email" id="user_display_email" value="{{field_value(formulaire.email)}}">
-        <div class='tool-tip right'>adresse&nbsp;pour&nbsp;votre&nbsp;newsletter</div>
-        </a>
-      </td>
-      <td>
-      </td>
-      <td colspan=2>
-        <a href="#" style='position:relative;'>
-        <select name="user_display_nbJoueurs" id="user_display_nbJoueurs">
-          <option value=1 {{field_value(formulaire.nbJoueurs)|ifSelected("1")}}>Je viendrai seul</option>
-          <option value=2 {{field_value(formulaire.nbJoueurs)|ifSelected("2")}}>On sera deux</option>
-          <option value=3 {{field_value(formulaire.nbJoueurs)|ifSelected("3")}}>Je viens avec 2 amis</option>
-          <option value=4 {{field_value(formulaire.nbJoueurs)|ifSelected("4")}}>On vient à 4 en tout</option>
-          <option value=5 {{field_value(formulaire.nbJoueurs)|ifSelected("5")}}>J'amène 4 autres joueurs</option>
-          <option value=6 {{field_value(formulaire.nbJoueurs)|ifSelected("6")}}>Nous serons 6 !</option>
-        </select>
-        <div class='tool-tip left'>Ne&nbsp;sert&nbsp;que&nbsp;sur&nbsp;ce&nbsp;site,&nbsp;pas&nbsp;sur&nbsp;Discord.</div>
-        </a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-      </td>
-      <td>
-      </td>
-      <td>
-      </td>
-      <td colspan=2>
-        <h4>Utile en cas d'inscription à une partie chez un joueur.</h4>
-      </td>
-    <tr>
-      <td>
-      </td>
-      <td colspan=3 style="text-align:center"">
-  	    <button type="submit">Enregistrer les modifications</button>
-      </td>
-      <td>
-      </td>
-    </tr>
-  </table>
-</form>
+        <div class="col-12"> {# Le formulaire #}
+          <br>
+          <form action="majUser" method="post">
+          <div class="container-fluid">
+            <div class="row">
 
+              <div class="col-12 col-md-23">
+  	            <h3>Mot de passe :</h3>
+              </div>
+              <div class="col-12 col-md-43">
+                <a href="#" style='position:relative;'>
+                  <input type="password" name="user_display_plainPassword" id="user_display_plainPassword" required="required" value="{{field_value(formulaire.plainPassword)}}">
+                  <div class='tool-tip right'>Vous&nbsp;pouvez&nbsp;le&nbsp;changer.</div>
+                </a>
+              </div>
+              <div class="col-12 col-md-2">
+  	            <h3>Identifiant Discord :</h3>
+              </div>
+              <div class="col-6 col-md-4">
+                <a href="#" style='position:relative;'>
+                  <input type="text" name="user_display_userId" id="user_display_userId" value="{{field_value(formulaire.userId)}}">
+                  <div class='tool-tip left'>code&nbsp;de&nbsp;18&nbsp;chiffres</div>
+                </a>
+              </div>
+              <div class="col-12 col-md-6 offset-md-6">
+                <h4>Dans Discord, cliquez (avec le bouton droit de la souris) sur votre nom, puis sur Copier l'identifiant de l'utilisateur.</h4>
+              </div>
+              <div class="col-12">
+  	            <h3>Adresse mail :</h3>
+                <a href="#" style='position:relative;'>
+                  <input type="email" name="user_display_email" id="user_display_email" value="{{field_value(formulaire.email)}}">
+                  <div class='tool-tip right'>adresse&nbsp;pour&nbsp;votre&nbsp;newsletter</div>
+                </a>
+                <br>
+              </div>
+              <div class="col-12">
+                  <h3>Nombre de joueurs pour votre prochaine inscription :</h3>
+                  <a href="#">
+                    <select name="user_display_nbJoueurs" id="user_display_nbJoueurs">
+                      <option value=1 {{field_value(formulaire.nbJoueurs)|ifSelected("1")}}>Je viendrai seul</option>
+                      <option value=2 {{field_value(formulaire.nbJoueurs)|ifSelected("2")}}>On sera deux</option>
+                      <option value=3 {{field_value(formulaire.nbJoueurs)|ifSelected("3")}}>Je viens avec 2 amis</option>
+                      <option value=4 {{field_value(formulaire.nbJoueurs)|ifSelected("4")}}>On vient à 4 en tout</option>
+                      <option value=5 {{field_value(formulaire.nbJoueurs)|ifSelected("5")}}>J'amène 4 autres joueurs</option>
+                      <option value=6 {{field_value(formulaire.nbJoueurs)|ifSelected("6")}}>Nous serons 6 !</option>
+                     </select>
+   	                <div class='tool-tip left'>Ne&nbsp;sert&nbsp;que&nbsp;sur&nbsp;ce&nbsp;site,&nbsp;pas&nbsp;sur&nbsp;Discord.</div>
+                    <h4>Utilei seulement en cas d'inscription à une partie chez un joueur.</h4>
+   	              </a>
+                  <br>
+              </div>
+              <div class="col-12">
+                <button type="submit" class='btn-primary btn float-right'>
+                  Enregistrer les modifications
+                </button>
+              </div>
 
-  {% else %}
-    <meta http-equiv="refresh" content="5; login" />
-  {% endif %}
+            </div> {# formulaire - row #}
+          </div> {# formulaire - container #}
+          </form>
+        </div> {# formulaire - col-12 #}
+
+      </div> {# row globale #}
+    </div> {# container global #}
+    {% else %}
+      <meta http-equiv="refresh" content="5; login" />
+    {% endif %}
 
 </div>
 

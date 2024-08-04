@@ -57,7 +57,7 @@
   height : 0vh;
   z-index: 2;
   color: var(--couleur_fond);
-  background-color: var(--couleur_base);
+  background-color: #DEAA87; /* var(--couleur_claire);*/
   border : 2px solid black;
   padding: 3em 2em 2em 2em;
   display: block;
