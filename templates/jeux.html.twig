@@ -280,9 +280,18 @@
 
                 <div class="col-md-8 col-12' style='z-index : -1; height:auto;">{# Bloc But et principe #}
                   <div class="fondOpaque cadreBleu enRelatif" style="height:auto;">
-                    <div class="enLigne">
-                      <h3 class="enLigne"><label>But :</label></h3>
-                        <span class="enLigne" style="font-weight : bold;" id="divBut">{{session.jeuChoisi.but}}</span>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-2 col-md-1" style="padding:0">
+                          <h3>
+                            <label>But :</label><span>&nbsp;</span>
+                         </h3>
+                        </div>
+                        <div class="col-10 col-md-11" style="margin-top : 1.3em">
+                          {# Ne pas utiliser la classe enLigne : sur téléphone, le titre peut occuper plusieurs lignes. #}
+                          <span id="divBut" style="font-weight : bold;">{{session.jeuChoisi.but}}</span>
+                        </div>
+                      </div>
                     </div>
                     <h3><label style="text-align : left;">Principe :</label></h3>
                     <div class="sousFenetre text-justify" id="divPpe">
