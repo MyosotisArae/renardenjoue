@@ -17,7 +17,7 @@
 <div class="col-1">
   <br>
 </div>
-<div class="col-5 enBleu fondOpaque">
+<div class="col-12 col-md-5 enBleu fondOpaque">
     {% if app.user %}
         <div class="checkbox mb-3">Heureux de vous voir, {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
     {% else %}
@@ -33,15 +33,15 @@
 </div>
 
 <div class="col-1">
+  <br>
 </div>
 
-<div class="col-3 enBleu centrer fondOpaque" style='height : 100%;'>
+<div class="col-12 col-md-3 enBleu centrer fondOpaque" style='height : auto;'>
   <form method="POST" action="newUser">
-    <br>
-    <a href="newUser" class="bouton">
+    <buttoni type="submit"  class="btn-primary btn">
         Créez votre compte
+    </button>
     </a>
-    <br>
     <br>
   </form>
 </div>
