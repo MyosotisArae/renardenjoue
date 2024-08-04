@@ -18,151 +18,184 @@
     <div class="col-12 ascenseur container" style="box-sizing: border-box;">{# colonne 1 #}
       <div class="row encadrer cadreBleu fondOpaque">
         <div class='col-12'>
-          <div id="mainDivFaq" class="mainDivFAQ" style="overflow:auto"></div>
+          <div id="mainDivFaq" class="mainDivFAQ w-100" style="overflow:auto"></div>
           <h1 style="color:var(--couleur_base);">Quelques réponses à vos questions :</h1>
         </div>
 
-        <div class='col-lg-6 col-md-12'> <!-- colonne 1 -->
+        <div class='col-md-6 col-12'> <!-- colonne 1 -->
           <div class="row"> <!-- colonne 1 -->
             <table>
+              <tr>
+                <td>
+                  <a href="#" onclick="openDiv('div01')">Je ne connais aucun jeu. Je peux venir quand même ?</a>
+                  <div class="divFAQ" id="div01" onload="ranger('div01')">
+                          <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-12">
+                          <h2>Je ne connais aucun jeu. Je peux venir quand même ?</h2><br>
+                        </div>
+                        <div class="col-12 col-md-9">
+                          Bien évidemment !<br><br>
+                          Quel que soit le type de jeu proposé, toutes les règles vous seront expliquées en détail avant de commencer. Il n'y a aucun prérequis pour participer à une séance de jeux.<br>
+                          Veillez simplement à choisir un jeu qui vous correspond, tant en termes de complexité que de durée (voir la question : <a href="#" onclick="openDiv('div02')"> "Quel est le public visé ?"</a>).
+                        </div>
+                        <div class="col-12 col-md-3">
+                          <img src="{{ img_path }}renardeau_de.png" style="width:100%;" alt="Alors c'est ça les jeux des humains ? Bizarre ...">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
 
-              <tr><td>
-                <a href="#" onclick="openDiv('div01')">Je ne connais aucun jeu. Je peux venir quand même ?</a>
-                <div class="divFAQ" id="div01" onload="ranger('div01')">
-                  <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
+              <tr>
+                <td>
+                  <a href="#" onclick="openDiv('div02')">Quel est le public visé ?</a>
+                  <div class="divFAQ" id="div02" onload="ranger('div02')">
+                    <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
+                    <h2>Public visé :</h2><br>
+                    Nous organisons des parties pour tous :<br>
                   <table>
                     <tr>
-                      <td style="width : 80%;">
-                  <h2>Je ne connais aucun jeu. Je peux venir quand même ?</h2><br>
-                  Bien évidemment !<br><br>
-                  Quel que soit le type de jeu proposé, toutes les règles vous seront expliquées en détail avant de commencer. Il n'y a aucun prérequis pour participer à une séance de jeux.<br>
-                  Veillez simplement à choisir un jeu qui vous correspond, tant en termes de complexité que de durée (voir la question : <a href="#" onclick="openDiv('div02')"> "Quel est le public visé ?"</a>).
+                      <td class="fox">&#x1F98A;</td>
+                      <td>Les débutants, peu coutumiers des jeux, à part les classiques, comme la belote ou le 1000 bornes
                       </td>
-                      <td style="width : 20%;">
-                        <img src="{{ img_path }}renardeau_de.png" style="width:100%;" alt="Alors c'est ça les jeux des humains ? Bizarre ...">
+                    </tr>
+                    <tr>
+                      <td class="fox">&#x1F98A;</td>
+                      <td>Les joueurs confirmés, qui ont déjà joué à des jeux de plusieurs heures et sont prêts à digérer une demie-heure d'explication de règles
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="fox">&#x1F98A;</td>
+                      <td>les curieux et profils "intermédiaires", prêts à découvrir de nouveaux jeux de durée moyenne
                       </td>
                     </tr>
                   </table>
-                </div>
-              </td></tr>
+                  <br>Lors des séances extérieures (salle M. Koehl, salle LCL ou médiathèque), plusieurs jeux sont disponibles, et nous vous conseillons pour que vous en choisissiez un qui vous convient.
+                  <br>Les jeux que nous proposons à la médiathèque sont de durée moyenne à courte, parce qu'il est impossible de déborder sur les horaires. Dans les deux autres salles, on peut. Il est donc possible de jouer à des jeux qui prennent 2 ou 3h. Mais, pas d'inquiétude ! Nous apportons aussi des jeux plus petits.
+                   <br>On vous fera un topo sur les jeux disponibles à votre arrivée, ce qui vous permettra de vous décider.
+                  </div>
+                </td>
+              </tr>
 
-              <tr><td>
-                <a href="#" onclick="openDiv('div02')">Quel est le public visé ?</a>
-                <div class="divFAQ" id="div02" onload="ranger('div02')">
-                  <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
-                  <h2>Public visé :</h2><br>
-                  Nous organisons des parties pour tous :<br>
-                <table>
-                  <tr>
-                    <td class="fox">&#x1F98A;</td>
-                    <td>Les débutants, peu coutumiers des jeux, à part les classiques, comme la belote ou le 1000 bornes
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="fox">&#x1F98A;</td>
-                    <td>Les joueurs confirmés, qui ont déjà joué à des jeux de plusieurs heures et sont prêts à digérer une demie-heure d'explication de règles
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="fox">&#x1F98A;</td>
-                    <td>les curieux et profils "intermédiaires", prêts à découvrir de nouveaux jeux de durée moyenne
-                    </td>
-                  </tr>
-                </table>
-                <br>Lors des séances extérieures (salle M. Koehl, salle LCL ou médiathèque), plusieurs jeux sont disponibles, et nous vous conseillons pour que vous en choisissiez un qui vous convient.
-                <br>Les jeux que nous proposons à la médiathèque sont de durée moyenne à courte, parce qu'il est impossible de déborder sur les horaires. Dans les deux autres salles, on peut. Il est donc possible de jouer à des jeux qui prennent 2 ou 3h. Mais, pas d'inquiétude ! Nous apportons aussi des jeux plus petits.
-                 <br>On vous fera un topo sur les jeux disponibles à votre arrivée, ce qui vous permettra de vous décider.
-                </div>
-              </td></tr>
-
-              <tr><td>
-                <a href="#" onclick="openDiv('div03')">Comment vous joindre ?</a>
-                <div class="divFAQ" id="div03" onload="ranger('div03')">
-                  <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
-                  <h2>Comment nous joindre :</h2><br>
-                  Nous sommes toujours ravis d'avoir de vos nouvelles. Vous pouvez nous contacter :<br>
-                <table>
-                  <tr>
-                    <td class="fox">&#x1F98A;</td>
-                    <td style="height : 0.8em;" class="lienBlanc"><a class="lienBlanc" href="https://chat.whatsapp.com/LqthdgBiMbzKReFSF2vnon">avec WhatsApp</a></td>
-                  </tr>
-                  <tr>
-                    <td class="fox">&#x1F98A;</td>
-                    <td style="height : 0.8em;" class="lienBlanc"><a class="lienBlanc" href="https://discord.gg/jqnJa4WG7X">sur Discord</a></td>
-                  </tr>
-                  <tr>
-                    <td class="fox">&#x1F98A;</td>
-                    <td style="height : 0.8em;" class="lienBlanc"><a class="lienBlanc" href="https://www.facebook.com/lerenardenjoue">sur Facebook</a></td>
-                  </tr>
-                  <tr>
-                    <td class="fox">&#x1F98A;</td>
-                    <td style="height : 0.8em;" class="lienBlanc"><a class="lienBlanc" href="mailto:renardenjoue@gmail.com?subject=Bonjour,%20le%20Renard%20Enjoué">ou par mail : renardenjoue@gmail.com</a></td>
-                  </tr>
-                </table>
-                <img src="{{ img_path }}renard_courrier.png" style='height : 30%;' alt="Le renard lit toujours son courrier.">
-                </div>
-              </td></tr>
-
-              <tr><td>
-                <a href="#" class="toggle" onclick="openDiv('div04')">Où se situent vos locaux ?</a>
-                <div class="divFAQ" id="div04" onload="ranger('div04')">
-                  <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
-                <table>
-                  <tr>
-                    <td style="width : 20%; vertical-align : text-bottom;">
-                      <br><br>Tous les mardis<br>
-                      19h30 - 23h30<br>
-                      <br>Membres uniquement<br><br>
-                      <b>Salle LCL<br>
-                      4 rue Konrad Adenauer<br></b>
-                    </td>
-                    <td style="width:40%">
-                      <h2>Nos locaux</h2><br>
-                      <img src="{{ img_path }}plan_RER_LCL.png" style='width : 100%;' alt="Plan Salle LCL">
-                    </td>
-                    <td style="width:40%">
-                      <img src="{{ img_path }}porte_LCL.png" style='width : 100%;' alt="Porte Salle LCL">
-                    </td>
-                  </tr>
-                </table>
-                <b>Attention</b>, l'accès n'est pas situé dans cette rue mais côté Grand Place (l'esplanade avec les grandes statues).<br><br>
-                <table>
-                  <tr>
-                    <td style="width : 35%">
-                      <img src="{{ img_path }}salle_M_Koehl.png" style='width : 100%;' alt="Salle des fêtes">
-                    </td>
-                    <td style="width : 40%">
-                      <img src="{{ img_path }}plan_Koehl.png" style='width : 100%;' alt="Plan Salle des fêtes">
-                    </td>
-                    <td style="width : 25%">
-                      Le 2<sup>e</sup> lundi de chaque mois<br>
-                      19h - 23h<br><br>
-                      Séance tout public<br>
-					  <b><br>Salle Maurice Koehl
-					  <br>Cour de la Rivière
-                    </td>
-                  <tr>
-				</table>
-			    C'est situé en face de la mairie de Bussy Saint Georges.</b><br><br>
-				<br>
-				<table>
-                  <tr>
-                    <td style="width : 20%">
-                      <img src="{{ img_path }}planQuartier.png" style='width : 80%;' alt="Plan du quartier de la gare">
-                    </td>
-                    <td style="width : 80%; vertical-align : text-bottom;">
-                      Les autres séances sont organisées par nos membres, chez eux. Le forum discord vous permettra d'en créer aussi si vous le souhaitez (tapez juste "/creer" dans n'importe quel message du forum et renseignez les paramètres demandés en les séparant d'une tabulation).<br>
-                      Des séances continueront d'être organisées à la demande au siège de l'asso.<br>
-                      <b><br>Siège de l'association
-					  <br>4 boulevard Pierre Mendès France
-                      <br>77600 Bussy Saint Georges</b>
-                    </td>
-                  </tr>
-                </table>
-                </div>
-              </td></tr>
-
-            </table>
+              <tr>
+                <td>
+                  <a href="#" onclick="openDiv('div03')">Comment vous joindre ?</a>
+                  <div class="divFAQ" id="div03" onload="ranger('div03')">
+                    <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
+                    <h2>Comment nous joindre :</h2><br>
+                    Nous sommes toujours ravis d'avoir de vos nouvelles :<br>
+                  <table>
+                    <tr>
+                      <td class="fox">&#x1F98A;</td>
+                      <td style="height : 0.8em;" class="lienBlanc"><a class="lienBlanc" href="https://chat.whatsapp.com/LqthdgBiMbzKReFSF2vnon">sur WhatsApp</a></td>
+                    </tr>
+                    <tr>
+                      <td class="fox">&#x1F98A;</td>
+                      <td style="height : 0.8em;" class="lienBlanc"><a class="lienBlanc" href="https://discord.gg/jqnJa4WG7X">sur Discord</a></td>
+                    </tr>
+                    <tr>
+                      <td class="fox">&#x1F98A;</td>
+                      <td style="height : 0.8em;" class="lienBlanc"><a class="lienBlanc" href="https://www.facebook.com/lerenardenjoue">sur Facebook</a></td>
+                    </tr>
+                    <tr>
+                      <td class="fox">&#x1F98A;</td>
+                      <td style="height : 0.8em;" class="lienBlanc"><a class="lienBlanc" href="mailto:renardenjoue@gmail.com?subject=Bonjour,%20le%20Renard%20Enjoué">ou par mail : renardenjoue@gmail.com</a></td>
+                    </tr>
+                  </table>
+                  <img src="{{ img_path }}renard_courrier.png" style='height : 30%;' alt="Le renard lit toujours son courrier.">
+                  </div>
+                </td></tr>
+  
+                <tr><td>
+                  <a href="#" class="toggle" onclick="openDiv('div04')">Où se situent vos locaux ?</a>
+                  <div class="divFAQ" id="div04" onload="ranger('div04')" style="padding : 0">
+                    <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
+                    <div class="container-fluid" style="padding : 0">
+                      <div class="row gx-md-5" style="padding : 0">
+                        <div class="col-12 col-md-8" style="padding : 0">
+                          <div class="container-fluid" style="padding : 0">
+                            <div class="row" style="padding : 0">
+                              <div class="col-12 col-md-3" style="padding : 0"> {# Laisser vide le début de la colonne (sur grand écran) #}
+                              </div>
+                              <div class="col-12 col-md-3" style="padding : 0"> {# Titre : sur 2 lignes sur téléphone, sur une ligne sur grand écran #}
+                                <h2>Nos locaux : </h2><br> {# Titre - Partie 1 #}
+                              </div>
+                              <div class="col-12 col-md-3" style="padding : 0"> {# Titre : sur 2 lignes sur téléphone, sur une ligne sur grand écran #}
+                                <h2>La salle LCL</h2><br> {# Titre - Partie 2 #}
+                              </div>
+                              <div class="col-12 col-md-3" style="padding : 0"> {# Laisser vide le reste de la colonne (sur grand écran) #}
+                              </div>
+                              <div class="col-12 col-md-5"> {# bloc horaires + adresse, en colonne sur grand écran, en ligne sur téléphone #}
+                                <div class="container-fluid" style="padding : 0">
+                                  Tous les mardis<br>
+                                  19h30 - 23h30<br>
+                                  <b>Salle LCL<br>
+                                  4 rue Konrad Adenauer<br></b>
+                                  Membres uniquement
+                                </div>
+                              </div>
+                              <div class="col-12 col-md-7" style="padding : 0;text-align:center;"> {# plan LCL #}
+                                <img src="{{ img_path }}plan_RER_LCL.png" alt="Plan Salle LCL" style="width:90%"><br><br>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-4" style="padding : 0">
+                          <img src="{{ img_path }}porte_LCL.png" alt="Porte Salle LCL" class="w-100">
+                        </div>
+                        <div class="col-12" style="padding : 0">
+                          <b>Attention</b>, l'accès n'est pas situé dans cette rue mais côté Grand Place (l'esplanade avec les grandes statues).<br><br>
+                        </div>
+                        <div class="col-12" style="padding : 0">
+                          <div class="container-fluid" style="padding : 0">
+                            <div class="row" style="padding : 0">
+                              <div class="col-12 col-md-3" style="padding : 0"> {# Laisser vide le début de la colonne (sur grand écran) #}
+                              </div>
+                              <div class="col-12 col-md-3" style="padding : 0"> {# Titre : sur 2 lignes sur téléphone, sur une ligne sur grand écran #}
+                                <h2>Nos locaux : </h2><br> {# Titre - Partie 1 #}
+                              </div>
+                              <div class="col-12 col-md-3"> {# Titre : sur 2 lignes sur téléphone, sur une ligne sur grand écran #}
+                                <h2>La salle des fêtes</h2><br> {# Titre - Partie 2 #}
+                              </div>
+                              <div class="col-12 col-md-3" style="padding : 0"> {# Laisser vide le reste de la colonne (sur grand écran) #}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-5"> {# plan :  carré + zoom rond #}
+                          <img src="{{ img_path }}plan_Koehl.png" style='width : 100%;' alt="Plan Salle des fêtes">
+                        </div>
+                        <div class="col-12 col-md-4"> {# photo de l'entrée de la salle des fêtes #}
+                          <img src="{{ img_path }}salle_M_Koehl.png" style='width : 100%;' alt="Salle des fêtes">
+                        </div>
+                        <div class="col-12 col-md-3"> {# horaires + adresse #}
+                                Le 2<sup>e</sup> lundi de chaque mois<br>
+                                19h - 23h<br><br>
+                                <b><br>Salle Maurice Koehl
+                                <br>Cour de la Rivière</b>
+                                <br>Séance tout public<br>
+                        </div>
+                        <div class="col-12">
+                          C'est situé en face de la mairie de Bussy Saint Georges.<br><br>
+                        </div>
+                        <div class="col-12">
+                          D'autres séances pourront être organisées par nos membres, chez eux.
+                        </div>
+                        <div class="col-12 col-md-6">
+                          <br>Des séances continueront d'être organisées à la demande au siège de l'asso.<br>
+                          <b><br>Siège de l'association :
+                          <br>4 bd Pierre Mendès France
+                          <br>Bussy Saint Georges</b>
+                        </div>
+                        <div class="col-12 col-md-6">
+                          <img src="{{ img_path }}planQuartier.png" style='width : 100%;' alt="Plan du quartier de la gare">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
           </div> <!-- row de la colonne 1 -->
         </div> <!-- colonne 1 -->
 
