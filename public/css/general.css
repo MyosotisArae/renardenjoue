@@ -369,6 +369,7 @@ input
 }
 /* Close btn de la fenêtre d'une FAQ et du détail d'un evt */
 .boutonFermer{
+  font-size : 1.5em;
   text-decoration : none!important;
   position: absolute;
   top: 1px;

@@ -34,6 +34,7 @@
 
 /* Close btn */
 .fermerBurger {
+  font-size : 1.5em;
   position: absolute;
   top: 0;
   right: 1px;

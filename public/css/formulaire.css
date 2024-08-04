@@ -1,0 +1,26 @@
+ input 
+  {
+    font-size : 1em;
+    background-color : white;
+    width : auto;
+    vertical-align : baseline;
+  }
+  h3
+  {
+    font-size : 1em;
+  }
+  h4
+  {
+    font-size : 0.6vw;
+    color : black;
+  }
+  td
+  {
+    vertical-align : top;
+    color : black;
+  }
+  h4 label 
+  {
+    color : var(--couleur_fond);
+    text-shadow : none;
+  }
