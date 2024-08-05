@@ -38,12 +38,12 @@
     <div class="container-fluid">
       <div class="row">
 
-        <div class="col-12 col-md-6"> {# Titre #}
+        <div class="col-12 col-md-6 m-0 p-0"> {# Titre #}
           <h1 class="h3 mb-3 font-weight-normal">Compte de {{ session.memberConnected.nom }}</h1>
         </div>
-        <div class="col-12 col-md-6"> {# Boutons #}
+        <div class="col-12 col-md-6 m-0 p-0"> {# Boutons #}
           <div class="container-fluid"> {# Dans ce container, toutes les cases auront la même taille #}
-            <div class="row">
+            <div class="row gx-1">
               <div class="col">
                 <form method='post' action='logout'>
                   <button class='btn-primary btn float-right' type='submit'>Déconnexion</button>
@@ -87,38 +87,30 @@
           <div class="container-fluid">
             <div class="row">
 
-              <div class="col-12 col-md-23">
+              <div class="col-12 col-md-auto">
   	            <h3>Mot de passe :</h3>
               </div>
-              <div class="col-12 col-md-43">
-                <a href="#" style='position:relative;'>
+              <div class="col-12 col-md-3 mb-4 mb-md-0">
                   <input type="password" name="user_display_plainPassword" id="user_display_plainPassword" required="required" value="{{field_value(formulaire.plainPassword)}}">
-                  <div class='tool-tip right'>Vous&nbsp;pouvez&nbsp;le&nbsp;changer.</div>
-                </a>
               </div>
-              <div class="col-12 col-md-2">
+              <div class="col-0 col-md-1">
+              </div>
+              <div class="col-12 col-md-auto">
   	            <h3>Identifiant Discord :</h3>
               </div>
-              <div class="col-6 col-md-4">
-                <a href="#" style='position:relative;'>
-                  <input type="text" name="user_display_userId" id="user_display_userId" value="{{field_value(formulaire.userId)}}">
-                  <div class='tool-tip left'>code&nbsp;de&nbsp;18&nbsp;chiffres</div>
-                </a>
+              <div class="col-12 col-md-4 mb-4 mb-md-2">
+                  <input type="text" size="19" name="user_display_userId" id="user_display_userId" value="{{field_value(formulaire.userId)}}">
+                  <h4>Code de 18 chiffres que vous trouverez dans Discord :<li>cliquez (bouton droit) sur votre nom</li><li>puis sur Copier l'identifiant de l'utilisateur</li></h4>
               </div>
-              <div class="col-12 col-md-6 offset-md-6">
-                <h4>Dans Discord, cliquez (avec le bouton droit de la souris) sur votre nom, puis sur Copier l'identifiant de l'utilisateur.</h4>
-              </div>
-              <div class="col-12">
+              <div class="col-12 col-md-5 mb-4">
   	            <h3>Adresse mail :</h3>
                 <a href="#" style='position:relative;'>
                   <input type="email" name="user_display_email" id="user_display_email" value="{{field_value(formulaire.email)}}">
                   <div class='tool-tip right'>adresse&nbsp;pour&nbsp;votre&nbsp;newsletter</div>
                 </a>
-                <br>
               </div>
-              <div class="col-12">
+              <div class="col-12 mb-4">
                   <h3>Nombre de joueurs pour votre prochaine inscription :</h3>
-                  <a href="#">
                     <select name="user_display_nbJoueurs" id="user_display_nbJoueurs">
                       <option value=1 {{field_value(formulaire.nbJoueurs)|ifSelected("1")}}>Je viendrai seul</option>
                       <option value=2 {{field_value(formulaire.nbJoueurs)|ifSelected("2")}}>On sera deux</option>
@@ -127,10 +119,8 @@
                       <option value=5 {{field_value(formulaire.nbJoueurs)|ifSelected("5")}}>J'amène 4 autres joueurs</option>
                       <option value=6 {{field_value(formulaire.nbJoueurs)|ifSelected("6")}}>Nous serons 6 !</option>
                      </select>
-   	                <div class='tool-tip left'>Ne&nbsp;sert&nbsp;que&nbsp;sur&nbsp;ce&nbsp;site,&nbsp;pas&nbsp;sur&nbsp;Discord.</div>
-                    <h4>Utilei seulement en cas d'inscription à une partie chez un joueur.</h4>
-   	              </a>
-                  <br>
+   	                <div class='tool-tip right'>Ne&nbsp;sert&nbsp;que&nbsp;sur&nbsp;ce&nbsp;site,&nbsp;pas&nbsp;sur&nbsp;Discord.</div>
+                    <h4>Utile seulement:<li>en cas d'inscription à une partie chez un joueur</li><li>et uniquement sur le site</li></h4>
               </div>
               <div class="col-12">
                 <button type="submit" class='btn-primary btn float-right'>

@@ -25,7 +25,7 @@
         <div class='col-md-6 col-12'> <!-- colonne 1 -->
           <div class="row" style="padding : 0"> <!-- colonne 1 -->
             <div class="col-12">
-              <a class="fox" href="#" onclick="openDiv('div01')">&#x1F98A;Je ne connais aucun jeu. Je peux venir quand même ?</a>
+              <a class="fox" href="#" onclick="openDiv('div01')">{{ tiretRenard | raw }}Je ne connais aucun jeu. Je peux venir quand même ?</a>
               <div class="divFAQ" id="div01" onload="ranger('div01')">
                 <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
                 <div class="container-fluid" style="padding : 0">
@@ -47,64 +47,37 @@
             </div>
 
             <div class="col-12">
-              <a class="fox" href="#" onclick="openDiv('div02')">&#x1F98A;Quel est le public visé ?</a>
+              <a class="fox" href="#" onclick="openDiv('div02')">{{ tiretRenard | raw }}Quel est le public visé ?</a>
               <div class="divFAQ" id="div02" onload="ranger('div02')" style="padding:0">
                 <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
                 <h2>Public visé :</h2><br>
-                Nous organisons des parties pour tous :<br>
-                <table>
-                  <tr>
-                    <td class="fox">&#x1F98A;</td>
-                    <td>Les débutants, peu coutumiers des jeux, à part les classiques, comme la belote ou le 1000 bornes
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="fox">&#x1F98A;</td>
-                    <td>Les joueurs confirmés, qui ont déjà joué à des jeux de plusieurs heures et sont prêts à digérer une demie-heure d'explication de règles
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="fox">&#x1F98A;</td>
-                    <td>les curieux et profils "intermédiaires", prêts à découvrir de nouveaux jeux de durée moyenne
-                    </td>
-                  </tr>
-                </table>
-                <br>Lors des séances extérieures (salle M. Koehl, salle LCL ou médiathèque), plusieurs jeux sont disponibles, et nous vous conseillons pour que vous en choisissiez un qui vous convient.
-                <br>Les jeux que nous proposons à la médiathèque sont de durée moyenne à courte, parce qu'il est impossible de déborder sur les horaires. Dans les deux autres salles, on peut. Il est donc possible de jouer à des jeux qui prennent 2 ou 3h. Mais, pas d'inquiétude ! Nous apportons aussi des jeux plus petits.
+                Nous organisons des parties pour tous :
+                    {{ tiretRenard | raw }}Les débutants, peu coutumiers des jeux, à part les classiques, comme la belote ou le 1000 bornes
+                    {{ tiretRenard | raw }}Les joueurs confirmés, qui ont déjà joué à des jeux de plusieurs heures et sont prêts à digérer une demie-heure d'explication de règles
+                    {{ tiretRenard | raw }}les curieux et profils "intermédiaires", prêts à découvrir de nouveaux jeux de durée moyenne
+                <br><br>Lors des séances extérieures (salle M. Koehl, salle LCL ou médiathèque), plusieurs jeux sont disponibles, et nous vous conseillons pour que vous en choisissiez un qui vous convient.
+                <br>Les jeux que nous proposons à la médiathèque sont de durée moyenne à courte, parce qu'il est impossible de déborder sur les horaires. Dans les deux autres salles, on peut. Il est donc possible de jouer à des jeux qui prennent 2 ou 3h. 
+                <br>Mais, pas d'inquiétude ! Nous apportons aussi des jeux plus légers.
                 <br>On vous fera un topo sur les jeux disponibles à votre arrivée, ce qui vous permettra de vous décider.
               </div>
             </div>
 
             <div class="col-12">
-              <a class="fox" href="#" onclick="openDiv('div03')">&#x1F98A;Comment vous joindre ?</a>
+              <a class="fox" href="#" onclick="openDiv('div03')">{{ tiretRenard | raw }}Comment vous joindre ?</a>
               <div class="divFAQ" id="div03" onload="ranger('div03')">
                 <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
                 <h2>Comment nous joindre :</h2><br>
                 Nous sommes toujours ravis d'avoir de vos nouvelles :<br>
-                <table>
-                  <tr>
-                    <td class="fox">&#x1F98A;</td>
-                    <td style="height : 0.8em;" class="lienBlanc"><a class="lienBlanc" href="https://chat.whatsapp.com/LqthdgBiMbzKReFSF2vnon">sur WhatsApp</a></td>
-                  </tr>
-                  <tr>
-                    <td class="fox">&#x1F98A;</td>
-                    <td style="height : 0.8em;" class="lienBlanc"><a class="lienBlanc" href="https://discord.gg/jqnJa4WG7X">sur Discord</a></td>
-                  </tr>
-                  <tr>
-                    <td class="fox">&#x1F98A;</td>
-                    <td style="height : 0.8em;" class="lienBlanc"><a class="lienBlanc" href="https://www.facebook.com/lerenardenjoue">sur Facebook</a></td>
-                  </tr>
-                  <tr>
-                    <td class="fox">&#x1F98A;</td>
-                    <td style="height : 0.8em;" class="lienBlanc"><a class="lienBlanc" href="mailto:renardenjoue@gmail.com?subject=Bonjour,%20le%20Renard%20Enjoué">ou par mail : renardenjoue@gmail.com</a></td>
-                  </tr>
-                </table>
-                <img src="{{ img_path }}renard_courrier.png" style='height : 30%;' alt="Le renard lit toujours son courrier.">
+                <a class="lienBlanc" href="https://chat.whatsapp.com/LqthdgBiMbzKReFSF2vnon">{{ tiretRenard | raw }}sur WhatsApp</a>
+                <a class="lienBlanc" href="https://discord.gg/jqnJa4WG7X">{{ tiretRenard | raw }}sur Discord</a>
+                <a class="lienBlanc" href="https://www.facebook.com/lerenardenjoue">{{ tiretRenard | raw }}sur Facebook</a>
+                <a class="lienBlanc" href="mailto:renardenjoue@gmail.com?subject=Bonjour,%20le%20Renard%20Enjoué">{{ tiretRenard | raw }}ou par mail : renardenjoue@gmail.com</a>
+                <br><img src="{{ img_path }}renard_courrier.png" style='height : 30%;' alt="Le renard lit toujours son courrier.">
               </div>
             </div>
   
             <div class="col-12">
-              <a class="fox" href="#" class="toggle" onclick="openDiv('div04')">&#x1F98A;Où se situent vos locaux ?</a>
+              <a class="fox" href="#" class="toggle" onclick="openDiv('div04')">{{ tiretRenard | raw }}Où se situent vos locaux ?</a>
               <div class="divFAQ" id="div04" onload="ranger('div04')" style="padding : 0">
                 <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
                 <div class="container-fluid" style="padding : 0">
@@ -197,7 +170,7 @@
         <div class='col-12 col-md-6'> <!-- colonne 2 -->
           <div class='row'> <!-- colonne 2 -->
             <div class='col-12'>
-                <a class="fox" href="#" onclick="openDiv('div05')">&#x1F98A;Que propose l'association du Renard Enjoué ?</a>
+                <a class="fox" href="#" onclick="openDiv('div05')">{{ tiretRenard | raw }}Que propose l'association du Renard Enjoué ?</a>
                 <div class="divFAQ" id="div05" onload="ranger('div05')">
                   <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
                   <div class="container-fluid" style="padding:0">
@@ -208,20 +181,9 @@
                       <div class="col-12" style="padding:0">
                         Notre association réunit des joueurs et aspirants joueurs autour de tables de jeux.<br>
                         Vous pouvez venir jouer dans différentes salles municipales :
-                        <table>
-                          <tr>
-                            <td class="fox">&#x1F98A;</td>
-                            <td><a href="#" onclick="openDiv('div04')">La salle des fêtes</a> : le 2<sup>ème</sup> lundi de chaque mois (même en juillet-août)</td>
-                          </tr>
-                          <tr>
-                            <td class="fox">&#x1F98A;</td>
-                           <td><a href="#" onClick="openDiv('div04')">La salle LCL</a> : tous les mardis, même pendant les vacances scolaires et juillet-août (réservé aux membres de l'association)</td>
-                          </tr>
-                          <tr>
-                            <td class="fox">&#x1F98A;</td>
-                           <td>La médiathèque : le samedi soir situé juste avant les vacances scolaires</td>
-                          </tr>
-                        </table>
+                            <a href="#" onclick="openDiv('div04')">{{ tiretRenard | raw }}<b>La salle des fêtes</b></a> : le 2<sup>ème</sup> lundi de chaque mois (même en juillet-août)
+                           <a href="#" onClick="openDiv('div04')">{{ tiretRenard | raw }}<b>La salle LCL</b></a> : tous les mardis, même pendant les vacances scolaires et juillet-août (réservé aux membres de l'association)
+                           {{ tiretRenard | raw }}<b><i>La médiathèque :</i></b> le samedi soir situé juste avant les vacances scolaires
                       </div>
                       <div class="col-12 col-md-8" style="padding:0">
                         Dans de rares cas, ces dates peuvent être décalées en raison d'événements municipaux.<br>
@@ -240,7 +202,7 @@
 
             <div class='col-12'>
 
-                <a class="fox" href="#" onclick="openDiv('div06')">&#x1F98A;De quand date l'association du Renard Enjoué ?</a>
+                <a class="fox" href="#" onclick="openDiv('div06')">{{ tiretRenard | raw }}De quand date l'association du Renard Enjoué ?</a>
                 <div class="divFAQ" id="div06" onload="ranger('div06')">
                   <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
                       <h2>De quand date l'association du Renard Enjoué ?</h2><br>
@@ -253,12 +215,11 @@
 
             <div class='col-12'>
 
-                <a class="fox" href="#" onclick="openDiv('div07')">&#x1F98A;Présentation en vidéo</a>
+                <a class="fox" href="#" onclick="openDiv('div07')">{{ tiretRenard | raw }}Présentation en vidéo</a>
                   <div class="divFAQ" id="div07" onload="ranger('div07')">
                     <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
-                      <h2>Présentation de l'association :</h2>
+                      <h2>Présentation de l'association en images (vidéo muette) :</h2>
                       <br>
-                      Aperçu des activités de l'association en une minute (vidéo muette) :
                       <br>C'est <a href='https://www.youtube.com/watch?v=mU6UaUXCmbw&list=UUwnkUbU7Wf0mVMhj39XhHJQ'><i>ici</i> (redirection sur youtube)</a>
                   </div>
 
@@ -266,18 +227,16 @@
 
             <div class='col-12'>
 
-                <a class="fox" href="#" onclick="openDiv('div08')">&#x1F98A;Documents à télécharger</a>
+                <a class="fox" href="#" onclick="openDiv('div08')">{{ tiretRenard | raw }}Documents à télécharger</a>
                   <div class="divFAQ" id="div08" onload="ranger('div08')">
                     <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
-                      <h2>Vous pouvez visualiser et télécharger les documents suivants :</h2><br>
-                      <table>
-                        <tr><td class="fox">&#x1F98A;<a href='doc/formulaire_inscription_2024.pdf'>Le formulaire d'inscription pour l'année 2024-2025</a></td></tr>
-                        <tr><td class="fox">&#x1F98A;<a href='doc/formulaire_RGPD.pdf'>Le formulaire RGPD, pour les boutiques partenaires</a></td></tr>
-                        <tr><td class="fox">&#x1F98A;<a href='doc/Règlement intérieur 2024.pdf'>Le règlement complet de l'association</a></td></tr>
-                        <tr><td class="fox">&#x1F98A;<a href='doc/discord_commandes_slash.pdf'>Le guide des commandes slash de notre forum discord</a></td></tr>
-                        <tr><td class="fox">&#x1F98A;<a href='doc/Flyer Le Renard Enjoué.pdf'>Notre flyer</a></td></tr>
-                      </table>
-                      <br>N'imprimez un document que si c'est nécessaire. Vous pourrez toujours les consulter sur ce site.
+                      <h2>Vous pouvez visualiser et télécharger les documents suivants :</h2>
+                        {{ tiretRenard | raw }}<a href='doc/formulaire_inscription_2024.pdf'>Le formulaire d'inscription pour l'année 2024-2025</a>
+                        {{ tiretRenard | raw }}<a href='doc/formulaire_RGPD.pdf'>Le formulaire RGPD, pour les boutiques partenaires</a>
+                        {{ tiretRenard | raw }}<a href='doc/Règlement intérieur 2024.pdf'>Le règlement complet de l'association</a>
+                        {{ tiretRenard | raw }}<a href='doc/discord_commandes_slash.pdf'>Le guide des commandes slash de notre forum discord</a>
+                        {{ tiretRenard | raw }}<a href='doc/Flyer Le Renard Enjoué.pdf'>Notre flyer</a>
+                      <br><br>N'imprimez un document que si c'est nécessaire. <br>Vous pourrez toujours les consulter sur ce site.
                   </div>
 
             </div>

@@ -93,6 +93,8 @@ html { font-size : 4vw; }
 
 <body class="w-max">
 
+    <!-- Constante pour afficher les tirets en forme de renard -->
+    {% set tiretRenard = "<br>&#x1F98A;&nbsp;&#8226;&nbsp;" %}
     {% include '_alert.html.twig' %}
 {% block corps %}
   {% set isAdministrateur = false %}

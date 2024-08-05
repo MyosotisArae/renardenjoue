@@ -54,17 +54,17 @@
 
 
       <div class="cadreBleu fondOpaque">
-        <i class="fas fa-calendar-alt fa-2x"></i>&nbsp;Nos prochains évènements :<br>
+        <i class="fas fa-calendar-alt fa-2x"></i>&nbsp;Nos prochains évènements :
         <ul>
         {% if nextEvts|length > 0 %}
           {% for evt in nextEvts %}
-          <li>Le {{evt.date}} :
+          {{ tiretRenard | raw }}Le {{evt.date}} :
           {% set titre = evt.titre %}
           {% if evt.capacite > 0 %}
             {% set titre = "Aprèm-jeux de l'asso" %}
           {% endif %}
           {#<div style='margin-left : 2.5em;'><a href='afficherEvt{{evt.id}}'>{{titre}}</a></div></li>#}
-          <a href='afficherEvt{{evt.id}}'>{{titre}}</a></li>
+          <a href='afficherEvt{{evt.id}}'>{{titre}}</a>
           {% endfor %}
         {% else %}
           <br>Rien n'est prévu dans les prochains mois.<br>
@@ -77,10 +77,10 @@
       </div>
 
       <div class="cadreBleu fondOpaque">{# derniers jeux #}
-        <i class="fas fa-dice fa-2x"></i>&nbsp;Les nouveaux jeux de notre collection :<br>
+        <i class="fas fa-dice fa-2x"></i>&nbsp;Les nouveaux jeux de notre collection :
         <ul>
         {% for jeu in lastGames %}
-          <li><a href="choisirJeu{{jeu.id}}">{{jeu.nomComplet}}</a></li>
+          {{ tiretRenard | raw }}<a href="choisirJeu{{jeu.id}}">{{jeu.nomComplet}}</a>
         {% endfor %}
         </ul>
         <br>
