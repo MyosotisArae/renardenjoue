@@ -68,16 +68,16 @@
             {% elseif cas == 222 %}
               Vous devez vous connecter pour vous inscrire.<br><br>
               {#<a href='login' class='bouton bg-primary'>Page de connexion</a>#}
-              <button onclick='ouvrirLogin()' class='bouton btn-primary'>Page de connexion</button>
+              <button onclick='ouvrirLogin()' class='btn-primary btn float-right'>Page de connexion</button>
             {% elseif cas == 211 %}
               Vous êtes déjà inscrit.<br><br>
               {#<a href='desinscription{{evt.id}}' class='bouton bg-primary'>Désinscription</a>#}
-              <button onclick='desinscription({{evt.id}})' class='bouton btn-primary'>Désinscription</button>
+              <button onclick='desinscription({{evt.id}})' class='btn-primary btn float-right'>Désinscription</button>
             {% elseif cas == 2124 %}
               Inscriptions ouvertes jusqu'au {{limite|date('d/m/Y')}} au soir.<br>
               Venez jouer !<br><br>
               {#<a href='inscription{{evt.id}}' class='bouton bg-primary'>Inscription</a>#}
-              <button onclick='inscription({{evt.id}})' class='bouton btn-primary'>Inscription</button>
+              <button onclick='inscription({{evt.id}})' class='btn-primary btn float-right'>Inscription</button>
             {% endif %}
 
           {% endif %}

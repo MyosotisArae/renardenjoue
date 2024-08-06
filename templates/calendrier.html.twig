@@ -46,7 +46,7 @@
           plugins: [ 'dayGrid', 'bootstrap', 'list' ],
           height : 'parent',
           buttonText : {
-                         today : 'Revenir en '+ceMoisCi,
+                         today : 'Revenir en ' + ceMoisCi,
                          dayGridMonth : "mois",
                          list : "liste"
                        },
@@ -56,9 +56,9 @@
           locale : "fr",
           noEventsMessage : "Aucun évènement de prévu pour l'instant.",
           header : {
-                     center : 'title',
-                     right : 'today prev next',
-                     left :  ''
+                     center : '',
+                     right :  'title',
+                     left : 'today prev next'
                    },
           businessHours: { daysOfWeek : [2,4,6] },
           eventLimit : false,
@@ -118,7 +118,7 @@
 {% endblock %}
 
 {% block laPage %}
-<div class='container-fluid' id='partieBlanche' style='width : 95%;height : 100vh; overflow-y : auto; margin-bottom : 25vh;'>
+<div class='container-fluid' id='partieBlanche' style='width : 95%;height : 100vh; overflow-y : hidden; margin-bottom : 25vh;'>
   <div class='row' style='height : 100%;'>
     <div class='col-12' id='monCalendrier' style='height : 90%;'>
     </div>
