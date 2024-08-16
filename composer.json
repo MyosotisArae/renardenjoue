@@ -11,6 +11,7 @@
         "doctrine/doctrine-bundle": "^2.3",
         "doctrine/doctrine-migrations-bundle": "^3.1",
         "doctrine/orm": "^2",
+        "more-cores/discord-message-builder": "^4.0",
         "sensio/framework-extra-bundle": "^5.4",
         "symfony/console": "5.3.*",
         "symfony/dotenv": "5.3.*",
@@ -24,7 +25,7 @@
         "symfony/twig-bundle": "5.3.*",
         "symfony/validator": "5.3.*",
         "symfony/yaml": "5.3.*",
-        "team-reflex/discord-php": "^6.0",
+        "team-reflex/discord-php": "^7.3",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
         "wrep/daemonizable-command": "^3.1"

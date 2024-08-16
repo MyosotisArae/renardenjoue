@@ -10,6 +10,10 @@ use Discord\Factory\Factory;
 use Discord\WebSockets\Event;
 use Discord\Parts\Guild\Guild;
 
+use Discord\Builders\Components\ActionRow;
+use Discord\Builders\Components\Button;
+use Discord\Builders\MessageBuilder;
+
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Console\Command\Command;
 
@@ -75,6 +79,7 @@ class ServiceDiscord extends Command
         $this->messages = new MessagesBot($botId, $this->discord, $this->manager);
         // Evenement à mémoriser pour la fonction formaterEvt
         $this->evt = null;
+        // DEBUG : $this->annoncerSeancePrivee("Coucou Discord","url");
     }
 
     /*
@@ -761,30 +766,30 @@ class ServiceDiscord extends Command
                  'name'      => $dateAffichee->format('Y m d')." ".$this->evt->getTitre(),
                  'type'      => Channel::TYPE_TEXT,
                  'topic'     => "",
-                 'nsfw'      => false
+                 'nsfw'      => false,
+                 permissionOverwrites: [
+                   {
+                     id: interaction.guild.id,
+                     deny: ["VIEW_CHANNEL"],
+                   },
+                 ],
              ]);
-             $interaction->guild->channels->save($newChannel)->done(function (Channel $channel) use ($interaction) {
+            // $user = $interaction->member->user;
+            //$user->->getPrivateChannel()->done(function (Channel $channel) {
+    // ...
+//});
+            $interaction->guild->channels->save($newChannel)->done(function (Channel $channel) use ($interaction) {
                         // Ajoute, dans le canal annonces, un message suivi d'un bouton pour aller dans le salon privé.
-                        // - Construction du bouton
                         $url = "https://discord.com/channels/".$channel->guild_id.'/'.$channel->id;
-                        // $btnVersSalon = Button::new(Button::STYLE_SUCCESS)
-                        //                ->setLabel("Retrouvez ce salon dans ESPACE PRIVÉ")
-                        //                ->setUrl($url);
-                        // - Construction du conteneur du bouton
-                        // $row = ActionRow::new()->addComponent($btnVersSalon);
-                        // - Construction du message
                         $auteur  = $interaction->member->user;
                         $texte = $auteur->username." a ajouté : ".$this->evt->getTitre().".";
-                        // $messageAnnonce = MessageBuilder::new()
-                        //                   ->setContent($texte.$url);
-                        //                   ->setContent($texte)
-                        //                   ->addComponent($row);
-                        // - Envoi du message
-                        // $this->channelAnnonces->sendMessage($messageAnnonce);
+                        // Envoi du message
+                        $this->channelAnnonces->sendMessage($this->annoncerSeancePrivee($texte,$url));
 
-                        $texte = $auteur->username." a ajouté : ".$this->evt->getTitre()." dans ESPACE PRIVE.";
-                        $url = "\nSalon créé ici : https://discord.com/channels/".$channel->guild_id.'/'.$channel->id;
-                        $this->channelAnnonces->sendMessage($texte.$url);
+                        // Ancien mode d'envoi du message :
+                        //$texte = $auteur->username." a ajouté : ".$this->evt->getTitre()." dans ESPACE PRIVE.";
+                        //$url = "\nSalon créé ici : https://discord.com/channels/".$channel->guild_id.'/'.$channel->id;
+                        //$this->channelAnnonces->sendMessage($texte.$url);
 
                         // Épingler un message pour décrire la séance de jeu proposée.
                         $this->evt->setChannelId(strval($channel->id)); 
@@ -843,6 +848,20 @@ class ServiceDiscord extends Command
         // Incorrect command usage; e.g. invalid options
         // or missing arguments
         // return Command::INVALID
+    }
+
+    // Ajoute, dans le canal annonces, un message suivi d'un bouton pour aller dans le salon privé.
+    public function annoncerSeancePrivee($texte,$url) {
+      // - Construction du bouton
+      $btnVersSalon = Button::new(Button::STYLE_LINK)
+                      ->setLabel("Retrouvez ce salon dans ESPACE PRIVÉ")
+                      ->setUrl($url);
+      // - Construction du conteneur du bouton
+      $row = ActionRow::new()->addComponent($btnVersSalon);
+      // - Construction du message
+      return MessageBuilder::new()
+             ->setContent($texte)
+             ->addComponent($row);
     }
 }
 ?>
