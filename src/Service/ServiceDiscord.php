@@ -767,17 +767,19 @@ class ServiceDiscord extends Command
                  'type'      => Channel::TYPE_TEXT,
                  'topic'     => "",
                  'nsfw'      => false,
-                 permissionOverwrites: [
+                 /*
+                 permissionOverwrites => [
                    {
                      id: interaction.guild.id,
                      deny: ["VIEW_CHANNEL"],
                    },
+                   {
+                     id: interaction.guild.user,
+                     allow: ["VIEW_CHANNEL"],
+                   },
                  ],
+                 */
              ]);
-            // $user = $interaction->member->user;
-            //$user->->getPrivateChannel()->done(function (Channel $channel) {
-    // ...
-//});
             $interaction->guild->channels->save($newChannel)->done(function (Channel $channel) use ($interaction) {
                         // Ajoute, dans le canal annonces, un message suivi d'un bouton pour aller dans le salon privé.
                         $url = "https://discord.com/channels/".$channel->guild_id.'/'.$channel->id;
@@ -806,7 +808,7 @@ class ServiceDiscord extends Command
                  $s = $pluriel[count($pluriel)-2];
                  $remarques .= "\n Valeur".$s." par défaut ajoutée".$s." : ".$parDefaut.".";
             }
-            $interaction->reply("L'événement du ".$dateAffichee->format('d/m/Y')." été créé. Modif de 12h45".$remarques);
+            $interaction->reply("L'événement du ".$dateAffichee->format('d/m/Y')." été créé.".$remarques);
             return;
         }
 
