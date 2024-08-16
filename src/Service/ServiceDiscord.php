@@ -764,11 +764,29 @@ class ServiceDiscord extends Command
                  'nsfw'      => false
              ]);
              $interaction->guild->channels->save($newChannel)->done(function (Channel $channel) use ($interaction) {
+                        // Ajoute, dans le canal annonces, un message suivi d'un bouton pour aller dans le salon privé.
+                        // - Construction du bouton
+                        $url = "https://discord.com/channels/".$channel->guild_id.'/'.$channel->id;
+                        // $btnVersSalon = Button::new(Button::STYLE_SUCCESS)
+                        //                ->setLabel("Retrouvez ce salon dans ESPACE PRIVÉ")
+                        //                ->setUrl($url);
+                        // - Construction du conteneur du bouton
+                        // $row = ActionRow::new()->addComponent($btnVersSalon);
+                        // - Construction du message
                         $auteur  = $interaction->member->user;
-                        $texte = $auteur->username." a ajouté : ".$this->evt->getTitre()." dans le salon PARTIES.";
-                        $url = "\nInscription et détails ici : https://discord.com/channels/".$channel->guild_id.'/'.$channel->id;
+                        $texte = $auteur->username." a ajouté : ".$this->evt->getTitre().".";
+                        // $messageAnnonce = MessageBuilder::new()
+                        //                   ->setContent($texte.$url);
+                        //                   ->setContent($texte)
+                        //                   ->addComponent($row);
+                        // - Envoi du message
+                        // $this->channelAnnonces->sendMessage($messageAnnonce);
+
+                        $texte = $auteur->username." a ajouté : ".$this->evt->getTitre()." dans ESPACE PRIVE.";
+                        $url = "\nSalon créé ici : https://discord.com/channels/".$channel->guild_id.'/'.$channel->id;
                         $this->channelAnnonces->sendMessage($texte.$url);
 
+                        // Épingler un message pour décrire la séance de jeu proposée.
                         $this->evt->setChannelId(strval($channel->id)); 
                         BDD::save($this->manager,$this->evt);
                         $texte = $this->formaterEvt($interaction);
@@ -783,7 +801,7 @@ class ServiceDiscord extends Command
                  $s = $pluriel[count($pluriel)-2];
                  $remarques .= "\n Valeur".$s." par défaut ajoutée".$s." : ".$parDefaut.".";
             }
-            $interaction->reply("Evénement du ".$dateAffichee->format('d/m/Y')." créé.".$remarques);
+            $interaction->reply("L'événement du ".$dateAffichee->format('d/m/Y')." été créé. Modif de 12h45".$remarques);
             return;
         }
 
