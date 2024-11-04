@@ -97,10 +97,8 @@
                           </div>
                           <div class="col-12 col-md-5"> {# bloc horaires + adresse, en colonne sur grand écran, en ligne sur téléphone #}
                             <div class="container-fluid" style="padding : 0">
-                              Tous les mardis<br>
-                              19h30 - 23h30<br>
-                              Et tous les samedis<br>
-                              14h15 - 17h50<br>
+                              Tous les mardis : 19h30 - 23h30<br>
+                              Et tous les samedis : 14h15 - 17h50<br>
                               <b>Salle LCL<br>
                               4 rue Konrad Adenauer<br></b>
                               Membres uniquement
@@ -142,7 +140,7 @@
                     </div>
                     <div class="col-12 col-md-3"> {# horaires + adresse #}
                       Le 2<sup>e</sup> lundi de chaque mois<br>
-                      19h - 23h<br><br>
+                      19h - 23h30<br><br>
                       <b><br>Salle Maurice Koehl
                       <br>Cour de la Rivière</b>
                       <br>Séance tout public<br>
@@ -190,10 +188,10 @@
                       <div class="col-12 col-md-8" style="padding:0">
                         Dans de rares cas, ces dates peuvent être décalées en raison d'événements municipaux.<br>
                         Vérifiez les sur <a href="calendrier">le planning du site</a>, sur <a href="https://www.facebook.com/lerenardenjoue²">Facebook</a> ou sur <a href="https://discord.gg/jqnJa4WG7X">Discord</a>.<br><br>
-                        Nos membres vous invitent aussi chez eux pour jouer. Dans ce cas, il faut s'inscrire, depuis ce site, ou depuis le forum Discord.<br><br>
-                        Les soirées jeux du lundi et celles à la médiathèque sont gratuites et ouvertes à tous.<br>
-                        Les autres séances sont réservées aux membres. Venez demander votre bulletin d'adhésion : un seul formulaire par foyer, tarif libre :  0 à 10€ à l'année (de septembre à août).
-                      </div>
+                        Nos membres vous invitent aussi chez eux pour jouer. Dans ce cas, il est possible d'utiliser les outils de création et d'inscription de l'asso (sur ce site, ou sur le forum Discord).<br><br>
+                        Les soirées jeux du lundi et celles qui se passent à la médiathèque sont gratuites et ouvertes à tous.<br>
+                        Les autres séances sont réservées aux membres. Venez demander votre bulletin d'adhésion : il suffit d'un seul formulaire par foyer, et le tarif est libre :  <b>de 0 à 10€ à l'année</b> (de septembre à août).
+                          </div>
                       <div class="col-12 col-md-4" style="padding:0">
                          <img src="{{ img_path }}renards_dominos.gif" style='width : 100%;' alt="Jeu de plateau">
                       </div>
@@ -217,12 +215,13 @@
 
             <div class='col-12'>
 
-                <a class="fox" href="#" onclick="openDiv('div07')">{{ tiretRenard | raw }}Présentation en vidéo</a>
+                <a class="fox" href="#" onclick="openDiv('div07')">{{ tiretRenard | raw }}Présentation de l'association</a>
                   <div class="divFAQ" id="div07" onload="ranger('div07')">
                     <button onclick="closeDivs()" class="boutonFermer fa fa-window-close"></button>
-                      <h2>Présentation de l'association en images (vidéo muette) :</h2>
-                      <br>
-                      <br>C'est <a href='https://www.youtube.com/watch?v=mU6UaUXCmbw&list=UUwnkUbU7Wf0mVMhj39XhHJQ'><i>ici</i> (redirection sur youtube)</a>
+                      <h2>Présentation de l'association :</h2>
+                        {{ tiretRenard | raw }}<a href='doc/presentation_courte.pdf'>Une présentation rapide de l'association</a>
+                        {{ tiretRenard | raw }}<a href='doc/presentation_Le_Renard_Enjoue.pdf'>Une présentation complète de l'association</a>
+                        {{ tiretRenard | raw }}<a href='https://www.youtube.com/watch?v=mU6UaUXCmbw&list=UUwnkUbU7Wf0mVMhj39XhHJQ'>présentation en vidéo (la vidéo est muette ; vous serez redirigé sur youtube)</a>
                   </div>
 
             </div>
@@ -236,8 +235,6 @@
                         {{ tiretRenard | raw }}<a href='doc/formulaire_inscription_2024.pdf'>Le formulaire d'inscription pour l'année 2024-2025</a>
                         {{ tiretRenard | raw }}<a href='doc/formulaire_RGPD.pdf'>Le formulaire RGPD, pour les boutiques partenaires</a>
                         {{ tiretRenard | raw }}<a href='doc/Règlement intérieur 2024.pdf'>Le règlement complet de l'association</a>
-                        {{ tiretRenard | raw }}<a href='doc/presentation_courte.pdf'>Une présentation rapide de l'association
-                        {{ tiretRenard | raw }}<a href='doc/presentation_Le_Renard_Enjoue.pdf'>Une présentation complète de l'association
 </a>
                         {{ tiretRenard | raw }}<a href='doc/discord_commandes_slash.pdf'>Le guide des commandes slash de notre forum discord</a>
                         {{ tiretRenard | raw }}<a href='doc/Flyer Le Renard Enjoué.pdf'>Notre flyer</a>
