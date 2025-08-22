@@ -57,11 +57,22 @@
 		margin-left : 3vw;
 		font-size : 1vw;
 	}
-	span, div {
+	.sousPrgph {
 		margin-left : 4vw;
+		width : 70%;
+		margin-top : 0px;
+		margin-bottom : 0px;
 	}
 	h1,h2,h3 {
 		text-shadow: 2px 0px 2px #552200, -2px 0px 2px #552200, 0px 2px 2px #552200, 0px -2px 2px #552200;
+	}
+	.cacher {
+		display : none;
+	}
+	.popupCachee:hover + .cacher {
+		display : block;
+		color : #FFFFFF;
+		background-color : #000000;
 	}
 </style>
 
@@ -77,8 +88,8 @@
 			<image src="https://renardenjoue.araetech.eu/images/Logo2025.png" style="width:100%">
 		</td>
 		<td style="width:90%">
-			<h1>Instructions</h1>
-			<h2>pour le formulaire d'inscription du</h2>
+			<h1>Informations complémentaires pour</h1>
+			<h1>le formulaire d'inscription du</h1>
 			<h1>Renard Enjoué</h1>
 		</td>
 	</tr>
@@ -87,23 +98,30 @@
 <h3>
 	Pourquoi s'inscrire ?
 </h3>
-<p>
+<p class="sousPrgph">
 	Adhérer à l'association vous donne accès :
 	<li>aux salles réservées au membres (4h de jeu, 2 fois par semaine)</li>
 	<li>au WhatsApp du Renard Enjoué (si vous cochez la case correspondante)</li>
 	<li>aux salons réservés aux membres dans Discord</li>
 	<li>aux réductions chez nos boutiques partenaires (cocher pour cela la case RGPD)</li>
 </p>
+<p class="sousPrgph">
+	<br><u><b>Pas besoin</b></u> d'être inscrit pour aller aux soirées mensuelles. Elles sont ouvertes au public.
+</p>
 
 <h3>
 	Combien coûte l'inscription ?
 </h3>
-<p>
-	La cotisation est libre (tarif conseillé : entre 0 et 10€) et compte pour <b>l'ensemble de votre foyer</b> (même adresse).<br>
-	Les sommes récoltées nous permettent de régler l'assurance, d'acheter des jeux et d'organiser des événements.<br>
+<p class="sousPrgph">
+	La cotisation annuelle est libre. Nous ne proposons pas de tarif mensuel ou à la séance. <br>
+	Les sommes récoltées nous permettent de régler l'assurance, d'acheter des jeux et d'organiser des événements. Nous n'avons aucun employé : toutes les fonctions sont bénévoles. C'est pourquoi nous ne demandons qu'une faible participation.<br>
+	Votre adhésion compte pour <b>l'ensemble de votre foyer</b> (même adresse).<br><br>
 	Cependant, afin de pouvoir dénombrer nos adhérents, nous vous demanderons :
 	<li>soit une inscription par personne (et les autres membres du foyer s'inscriront pour 0€).</li>
-	<li>soit une seule inscription répartie entre plusieurs personnes (exemple : 5€ pour deux personnes), afin de vous simplifier les démarches.</li>
+	<li>soit une seule inscription répartie entre plusieurs personnes, afin de vous simplifier les démarches.</li>
+</p>
+<p class="sousPrgph">
+	Exemple : 5€ pour 2 personnes / 3.33€ pour 3 personnes
 </p>
 
 <h3>
@@ -112,39 +130,39 @@
 <p>
 	L'association ne communiquera pas vos coordonnées à des tiers sans votre consentement.<br>
 </p>
-	<li>Autorisation RGPD</li>
-<span>
-	Si vous cochez la case "oui" à cette question, vous pourrez bénéficier des réductions chez les boutiques partenaires. Elles recevront votre nom et votre adresse mail afin de pouvoir vous identifier lors de vos paiements.<br>
-</span>
-	<li>Autorisation de diffusion des photos</li>
-<span>
-	Pour actualiser notre communication, nous prenons régulièrement des photos (ou vidéos) des parties. Si vous souhaitez ne pas y figurer, signalez le (pour chaque personne concernée) lors de votre inscription.
-</span>
-	<li>Le groupe WhatsApp</li>
-<span>
-	<div>Nous y discutons notamment des événements à venir. Si vous cochez la réponse "oui", vous pourrez voir ces discussions et y participer. Mais votre numéro de téléphone sera alors visible de tous les membres du groupe.<br>
-	Sachez que, de toute façon, les mêmes informations seront diffusées sur Discord.</div>
-</span>
+	<li><b>Autorisation RGPD</b></li>
+<p class="sousPrgph">
+	Si vous cochez la case "oui" à cette question, vous pourrez bénéficier des réductions chez les boutiques partenaires. Elles recevront votre nom et votre adresse mail afin de pouvoir vous identifier lors de vos paiements.<br><br>
+</p>
+	<li><b>Autorisation de diffusion des photos</b></li>
+<p class="sousPrgph">
+	Pour actualiser notre communication, nous prenons régulièrement des photos (ou vidéos) des parties. Si vous souhaitez ne pas y figurer, signalez le (pour chaque personne concernée) lors de votre inscription.<br><br>
+</p>
+	<li><b>Le groupe WhatsApp</b></li>
+<p class="sousPrgph">
+	Nous y discutons notamment des événements à venir. Si vous cochez la réponse "oui", vous pourrez voir ces discussions et y participer. Mais votre numéro de téléphone sera alors visible de tous les membres du groupe.<br>
+	Sachez que, de toute façon, les mêmes informations seront diffusées sur Discord, et que ce forum ne divulgue aucune information personnelle.
+</p>
 	
 <h3>
 	La newsletter
 </h3>
-<span>
-	<div>Elle est envoyée par mail chaque mois aux adhérents qui l'ont demandée lors de leur inscription. Elle rappelle les principaux événements qui ont eu lieu ou qui vont avoir lieu dans l'association.<br>
+<p class="sousPrgph">
+	Elle est envoyée par mail chaque mois aux adhérents qui l'ont demandée lors de leur inscription. Elle rappelle les principaux événements qui ont eu lieu ou qui vont avoir lieu dans l'association.<br>
 	Elle est plus synthétique que ce que vous pourrez lire sur WhatsApp ou Discord, mais vous tiendra informé de l'essentiel.<br>
-	Dites nous si vous voulez la recevoir ou pas.</div>
+	Dites nous si vous voulez la recevoir ou pas.
 	
-</span>
+</p>
 
 
 <h3>
 	Le règlement
 </h3>
-<span>
-	<div>Avant de passer au paiement, il vous sera demandé d'accepter le règlement de l'association. Prenez le temps de le lire avant de cocher la case.<br>
-	Une fois l'inscription finalisée, vous êtes supposé le connaître, et donc le respecter.</div>
+<p class="sousPrgph">
+	Avant de passer au paiement, il vous sera demandé d'accepter le règlement de l'association. Prenez le temps de le lire avant de cocher la case.<br>
+	Une fois l'inscription finalisée, vous êtes supposé le connaître, et donc le respecter.
 	
-</span>
+</p>
 
 <table>
 
