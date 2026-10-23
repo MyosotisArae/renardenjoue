@@ -227,7 +227,9 @@ class Evenements
         $this->dateDebut = date_create_from_format('d-m-Y',$dateDebut);
         $this->dateDebut->setTime(23,59,59,0);
         if ($this->limite == null) {
+            /* Désactivation de la ligne ci-dessous et ajout d'un jour à la date limite, si elle n'est pas mentionnée. */
             $this->limite = $this->dateDebut;
+            $this->limite = date('d-m-Y', strtotime('+1 day', $this->dateDebut));
         }
 
         return $this;
